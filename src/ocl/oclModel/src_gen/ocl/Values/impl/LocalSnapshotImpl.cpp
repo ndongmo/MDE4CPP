@@ -31,6 +31,10 @@
 
 #include <exception> // used in Persistence
 
+#include "ocl/Values/ValuesFactory.hpp"
+
+
+
 #include "ocl/Values/LocalSnapshot.hpp"
 
 #include "ocl/Values/NameValueBinding.hpp"

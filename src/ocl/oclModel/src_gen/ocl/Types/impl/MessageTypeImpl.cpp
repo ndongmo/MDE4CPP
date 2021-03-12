@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +31,14 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EOperation.hpp"
 
@@ -76,13 +78,6 @@ MessageTypeImpl::~MessageTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-MessageTypeImpl::MessageTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:MessageTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 MessageTypeImpl::MessageTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :MessageTypeImpl()
 {
@@ -112,13 +107,10 @@ MessageTypeImpl& MessageTypeImpl::operator=(const MessageTypeImpl & obj)
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 	m_referredOperation  = obj.getReferredOperation();
@@ -200,21 +192,6 @@ void MessageTypeImpl::setReferredSignal(std::shared_ptr<uml::Signal> _referredSi
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> MessageTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -229,11 +206,6 @@ void MessageTypeImpl::setThisMessageTypePtr(std::weak_ptr<MessageType> thisMessa
 }
 std::shared_ptr<ecore::EObject> MessageTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -249,9 +221,9 @@ Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredOperation())); //4911
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredOperation())); //498
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredSignal())); //4912
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredSignal())); //499
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -260,9 +232,9 @@ bool MessageTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			return getReferredOperation() != nullptr; //4911
+			return getReferredOperation() != nullptr; //498
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			return getReferredSignal() != nullptr; //4912
+			return getReferredSignal() != nullptr; //499
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -275,7 +247,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EOperation> _referredOperation = std::dynamic_pointer_cast<ecore::EOperation>(_temp);
-			setReferredOperation(_referredOperation); //4911
+			setReferredOperation(_referredOperation); //498
 			return true;
 		}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
@@ -283,7 +255,7 @@ bool MessageTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _referredSignal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setReferredSignal(_referredSignal); //4912
+			setReferredSignal(_referredSignal); //499
 			return true;
 		}
 	}
@@ -392,9 +364,6 @@ void MessageTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

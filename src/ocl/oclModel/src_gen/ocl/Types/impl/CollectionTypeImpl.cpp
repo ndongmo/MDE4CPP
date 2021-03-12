@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,11 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
+
+
+
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -41,8 +45,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EDataType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -78,13 +80,6 @@ CollectionTypeImpl::~CollectionTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:CollectionTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :CollectionTypeImpl()
 {
@@ -114,14 +109,11 @@ CollectionTypeImpl& CollectionTypeImpl::operator=(const CollectionTypeImpl & obj
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 	m_instance  = obj.getInstance();
@@ -223,21 +215,6 @@ void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValu
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> CollectionTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -252,11 +229,6 @@ void CollectionTypeImpl::setThisCollectionTypePtr(std::weak_ptr<CollectionType> 
 }
 std::shared_ptr<ecore::EObject> CollectionTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -272,9 +244,9 @@ Any CollectionTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getElementType())); //2012
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getElementType())); //209
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //2013
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //2010
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
 }
@@ -283,9 +255,9 @@ bool CollectionTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE:
-			return getElementType() != nullptr; //2012
+			return getElementType() != nullptr; //209
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //2013
+			return getInstance() != nullptr; //2010
 	}
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -298,7 +270,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _elementType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setElementType(_elementType); //2012
+			setElementType(_elementType); //209
 			return true;
 		}
 		case ocl::Types::TypesPackage::COLLECTIONTYPE_ATTRIBUTE_INSTANCE:
@@ -306,7 +278,7 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::CollectionValue> _instance = std::dynamic_pointer_cast<ocl::Values::CollectionValue>(_temp);
-			setInstance(_instance); //2013
+			setInstance(_instance); //2010
 			return true;
 		}
 	}
@@ -425,9 +397,6 @@ void CollectionTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

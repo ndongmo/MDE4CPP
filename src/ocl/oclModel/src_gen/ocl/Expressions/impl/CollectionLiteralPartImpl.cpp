@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,13 +31,15 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/ETypedElement.hpp"
 
@@ -71,12 +72,6 @@ CollectionLiteralPartImpl::~CollectionLiteralPartImpl()
 #endif
 }
 
-//Additional constructor for the containments back reference
-CollectionLiteralPartImpl::CollectionLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:CollectionLiteralPartImpl()
-{
-	m_eContainer = par_eContainer;
-}
 
 
 CollectionLiteralPartImpl::CollectionLiteralPartImpl(const CollectionLiteralPartImpl & obj):CollectionLiteralPartImpl()
@@ -99,7 +94,6 @@ CollectionLiteralPartImpl& CollectionLiteralPartImpl::operator=(const Collection
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -108,8 +102,6 @@ CollectionLiteralPartImpl& CollectionLiteralPartImpl::operator=(const Collection
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
 
 
@@ -155,21 +147,6 @@ std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> CollectionLiteralPartImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -184,10 +161,6 @@ void CollectionLiteralPartImpl::setThisCollectionLiteralPartPtr(std::weak_ptr<Co
 }
 std::shared_ptr<ecore::EObject> CollectionLiteralPartImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
 	return nullptr;
 }
 
@@ -266,9 +239,6 @@ void CollectionLiteralPartImpl::save(std::shared_ptr<persistence::interfaces::XS
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

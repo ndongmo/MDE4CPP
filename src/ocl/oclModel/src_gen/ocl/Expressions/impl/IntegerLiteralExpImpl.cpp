@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,12 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -41,8 +46,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 
@@ -97,25 +100,18 @@ IntegerLiteralExpImpl::IntegerLiteralExpImpl(std::weak_ptr<ocl::Expressions::Cal
 }
 
 //Additional constructor for the containments back reference
-IntegerLiteralExpImpl::IntegerLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:IntegerLiteralExpImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 IntegerLiteralExpImpl::IntegerLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :IntegerLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -130,10 +126,10 @@ IntegerLiteralExpImpl::IntegerLiteralExpImpl(std::weak_ptr<ocl::Expressions::Col
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -202,7 +198,6 @@ IntegerLiteralExpImpl& IntegerLiteralExpImpl::operator=(const IntegerLiteralExpI
 	m_integerSymbol = obj.getIntegerSymbol();
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -213,8 +208,6 @@ IntegerLiteralExpImpl& IntegerLiteralExpImpl::operator=(const IntegerLiteralExpI
 	//copy references with no containment (soft copy)
 	
 	m_appliedElement  = obj.getAppliedElement();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -297,21 +290,6 @@ void IntegerLiteralExpImpl::setIntegerSymbol(int _integerSymbol)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> IntegerLiteralExpImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -327,11 +305,6 @@ void IntegerLiteralExpImpl::setThisIntegerLiteralExpPtr(std::weak_ptr<IntegerLit
 std::shared_ptr<ecore::EObject> IntegerLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -396,7 +369,7 @@ Any IntegerLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return eAny(getIntegerSymbol()); //3326
+			return eAny(getIntegerSymbol()); //3323
 	}
 	return NumericLiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -405,7 +378,7 @@ bool IntegerLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL:
-			return getIntegerSymbol() != 0; //3326
+			return getIntegerSymbol() != 0; //3323
 	}
 	return NumericLiteralExpImpl::internalEIsSet(featureID);
 }
@@ -417,7 +390,7 @@ bool IntegerLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _integerSymbol = newValue->get<int>();
-			setIntegerSymbol(_integerSymbol); //3326
+			setIntegerSymbol(_integerSymbol); //3323
 			return true;
 		}
 	}
@@ -503,9 +476,6 @@ void IntegerLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

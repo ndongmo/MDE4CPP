@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,10 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EAttribute.hpp"
@@ -39,8 +42,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/ETypedElement.hpp"
 
@@ -73,12 +74,6 @@ TupleLiteralPartImpl::~TupleLiteralPartImpl()
 #endif
 }
 
-//Additional constructor for the containments back reference
-TupleLiteralPartImpl::TupleLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:TupleLiteralPartImpl()
-{
-	m_eContainer = par_eContainer;
-}
 
 
 TupleLiteralPartImpl::TupleLiteralPartImpl(const TupleLiteralPartImpl & obj):TupleLiteralPartImpl()
@@ -101,7 +96,6 @@ TupleLiteralPartImpl& TupleLiteralPartImpl::operator=(const TupleLiteralPartImpl
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -110,8 +104,6 @@ TupleLiteralPartImpl& TupleLiteralPartImpl::operator=(const TupleLiteralPartImpl
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
 
 
@@ -180,21 +172,6 @@ void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attr
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> TupleLiteralPartImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -209,10 +186,6 @@ void TupleLiteralPartImpl::setThisTupleLiteralPartPtr(std::weak_ptr<TupleLiteral
 }
 std::shared_ptr<ecore::EObject> TupleLiteralPartImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
 	return nullptr;
 }
 
@@ -224,7 +197,7 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAttribute())); //8713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAttribute())); //8710
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,7 +206,7 @@ bool TupleLiteralPartImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return getAttribute() != nullptr; //8713
+			return getAttribute() != nullptr; //8710
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -246,7 +219,7 @@ bool TupleLiteralPartImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _attribute = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setAttribute(_attribute); //8713
+			setAttribute(_attribute); //8710
 			return true;
 		}
 	}
@@ -329,9 +302,6 @@ void TupleLiteralPartImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

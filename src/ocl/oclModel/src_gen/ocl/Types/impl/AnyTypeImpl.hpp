@@ -33,10 +33,6 @@ namespace ocl::Types
 			virtual void setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr);
 
 			//Additional constructors for the containments back reference
-			AnyTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-			//Additional constructors for the containments back reference
 			AnyTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 
@@ -70,8 +66,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

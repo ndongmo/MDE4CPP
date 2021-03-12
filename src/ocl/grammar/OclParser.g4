@@ -4,6 +4,11 @@ options {
 	tokenVocab = OclLexer;
 }
 
+@header {
+  #include "CSTNode.h"
+}
+
+
 // -------------------------
 // expressionInOclCS :  set up the initial environment of an  ocl expression.
 
@@ -36,6 +41,9 @@ oclExpressionCS
 	|	associationClassCallExpCS_B
 	|	oclExpressionCS iteratorExpCS
 	|	oclExpressionCS iterateExpCS
+	|	oclExpressionCS (STAR | SLASH) oclExpressionCS
+	|	oclExpressionCS (PLUS | MINUS) oclExpressionCS
+	|	LPAREN oclExpressionCS RPAREN
 	|	oclExpressionCS infixedExpCS
 	|	variableExpCS
 	|	literalExpCS
@@ -313,8 +321,8 @@ variableDeclarationListCS
 // operation names in access to redefined operations.
 
 operationCallExpCS_A
-	: 	simpleNameCS oclExpressionCS						// A
-	|	RARROW simpleNameCS LPAREN argumentsCS? RPAREN   // B
+//	: 	simpleNameCS oclExpressionCS						// A
+	:	RARROW simpleNameCS LPAREN argumentsCS? RPAREN   // B
 	|	DOT simpleNameCS LPAREN argumentsCS? RPAREN			// C
 	|	DOT simpleNameCS isMarkedPreCS LPAREN argumentsCS? RPAREN	// E
 	|	DOT pathNameCS COLONCOLON simpleNameCS LPAREN argumentsCS? RPAREN	// I
@@ -325,7 +333,7 @@ operationCallExpCS_B
 	: 	simpleNameCS LPAREN argumentsCS? RPAREN								// D
 	|	simpleNameCS isMarkedPreCS LPAREN argumentsCS? RPAREN	// F
 	|	pathNameCS LPAREN argumentsCS? RPAREN	// G
-	|	simpleNameCS oclExpressionCS	// H
+//	|	simpleNameCS oclExpressionCS	// H
 	;
 	
 // -------------------------
@@ -340,8 +348,7 @@ propertyCallExpCS_A
 	;
 	
 propertyCallExpCS_B
-	: 	simpleNameCS isMarkedPreCS?												// B
-	|	pathNameCS																// C
+	: 	simpleNameCS isMarkedPreCS?												// B														// C
 	;
 	
 // -------------------------
@@ -443,11 +450,7 @@ unaryLiteralExpCS
 // binaryLiteralExpCS : binary operators.
 
 binaryLiteralExpCS
-	:	STAR 	
-	|	SLASH
-	|	PLUS 	
-	|	MINUS
-	|	LT	 	
+	:	LT	 	
 	|	LTE		
 	|	GTE	
 	|	GT

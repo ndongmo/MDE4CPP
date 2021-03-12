@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +31,13 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -72,13 +73,6 @@ TemplateParameterTypeImpl::~TemplateParameterTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:TemplateParameterTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :TemplateParameterTypeImpl()
 {
@@ -108,14 +102,11 @@ TemplateParameterTypeImpl& TemplateParameterTypeImpl::operator=(const TemplatePa
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_specification = obj.getSpecification();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 
@@ -176,21 +167,6 @@ void TemplateParameterTypeImpl::setSpecification(std::string _specification)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> TemplateParameterTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -205,11 +181,6 @@ void TemplateParameterTypeImpl::setThisTemplateParameterTypePtr(std::weak_ptr<Te
 }
 std::shared_ptr<ecore::EObject> TemplateParameterTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -225,7 +196,7 @@ Any TemplateParameterTypeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //8311
+			return eAny(getSpecification()); //838
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -234,7 +205,7 @@ bool TemplateParameterTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != ""; //8311
+			return getSpecification() != ""; //838
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -246,7 +217,7 @@ bool TemplateParameterTypeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _specification = newValue->get<std::string>();
-			setSpecification(_specification); //8311
+			setSpecification(_specification); //838
 			return true;
 		}
 	}
@@ -324,9 +295,6 @@ void TemplateParameterTypeImpl::save(std::shared_ptr<persistence::interfaces::XS
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

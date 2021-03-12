@@ -11,7 +11,7 @@
 #include <ecore/EClassifier.hpp>
 #include <ecore/EClass.hpp>
 #include <ecore/EPackage.hpp>
-#include <ecore/EcoreFactory.hpp>
+#include <ecore/ecoreFactory.hpp>
 
 using namespace ocl;
 using namespace ocl::Expressions;

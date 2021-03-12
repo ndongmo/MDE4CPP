@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +31,13 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -72,13 +73,6 @@ AnyTypeImpl::~AnyTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:AnyTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :AnyTypeImpl()
 {
@@ -108,13 +102,10 @@ AnyTypeImpl& AnyTypeImpl::operator=(const AnyTypeImpl & obj)
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 
@@ -184,21 +175,6 @@ void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> AnyTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -213,11 +189,6 @@ void AnyTypeImpl::setThisAnyTypePtr(std::weak_ptr<AnyType> thisAnyTypePtr)
 }
 std::shared_ptr<ecore::EObject> AnyTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -233,7 +204,7 @@ Any AnyTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //111
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //18
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }
@@ -242,7 +213,7 @@ bool AnyTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //111
+			return getObject() != nullptr; //18
 	}
 	return ecore::EClassifierImpl::internalEIsSet(featureID);
 }
@@ -255,7 +226,7 @@ bool AnyTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _object = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setObject(_object); //111
+			setObject(_object); //18
 			return true;
 		}
 	}
@@ -339,9 +310,6 @@ void AnyTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

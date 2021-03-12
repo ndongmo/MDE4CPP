@@ -37,10 +37,6 @@ namespace ocl::Expressions
 
 
 			//Additional constructors for the containments back reference
-			IfExpImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-			//Additional constructors for the containments back reference
 			IfExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id);
 
 
@@ -119,8 +115,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

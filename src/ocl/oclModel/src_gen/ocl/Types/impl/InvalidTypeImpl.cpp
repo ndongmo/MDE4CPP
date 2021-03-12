@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +31,13 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -72,13 +73,6 @@ InvalidTypeImpl::~InvalidTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:InvalidTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :InvalidTypeImpl()
 {
@@ -108,13 +102,10 @@ InvalidTypeImpl& InvalidTypeImpl::operator=(const InvalidTypeImpl & obj)
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 
@@ -161,21 +152,6 @@ std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> InvalidTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -190,11 +166,6 @@ void InvalidTypeImpl::setThisInvalidTypePtr(std::weak_ptr<InvalidType> thisInval
 }
 std::shared_ptr<ecore::EObject> InvalidTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -277,9 +248,6 @@ void InvalidTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

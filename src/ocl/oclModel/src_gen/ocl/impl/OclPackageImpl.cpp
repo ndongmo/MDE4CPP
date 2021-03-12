@@ -22,7 +22,6 @@
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
-#include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -30,11 +29,7 @@
 
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclCS/impl/OclCSPackageImpl.hpp"
-
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
-
-#include "ocl/Utilities/impl/UtilitiesPackageImpl.hpp"
 
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
@@ -80,17 +75,9 @@ std::shared_ptr<Expressions::ExpressionsPackage> oclPackageImpl::getExpressions_
 {
 	return Expressions::ExpressionsPackage::eInstance();
 } 
-std::shared_ptr<OclCS::OclCSPackage> oclPackageImpl::getOclCS_Package() const
-{
-	return OclCS::OclCSPackage::eInstance();
-} 
 std::shared_ptr<Types::TypesPackage> oclPackageImpl::getTypes_Package() const
 {
 	return Types::TypesPackage::eInstance();
-} 
-std::shared_ptr<Utilities::UtilitiesPackage> oclPackageImpl::getUtilities_Package() const
-{
-	return Utilities::UtilitiesPackage::eInstance();
 } 
 std::shared_ptr<Values::ValuesPackage> oclPackageImpl::getValues_Package() const
 {

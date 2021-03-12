@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,12 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -43,8 +48,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 
@@ -99,25 +102,18 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp
 }
 
 //Additional constructor for the containments back reference
-PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:PropertyCallExpImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :PropertyCallExpImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -132,10 +128,10 @@ PropertyCallExpImpl::PropertyCallExpImpl(std::weak_ptr<ocl::Expressions::Collect
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -204,7 +200,6 @@ PropertyCallExpImpl& PropertyCallExpImpl::operator=(const PropertyCallExpImpl & 
 	m_isPre = obj.getIsPre();
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -214,8 +209,6 @@ PropertyCallExpImpl& PropertyCallExpImpl::operator=(const PropertyCallExpImpl & 
 	//copy references with no containment (soft copy)
 	
 	m_appliedElement  = obj.getAppliedElement();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -318,21 +311,6 @@ void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute>
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> PropertyCallExpImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -348,11 +326,6 @@ void PropertyCallExpImpl::setThisPropertyCallExpPtr(std::weak_ptr<PropertyCallEx
 std::shared_ptr<ecore::EObject> PropertyCallExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -417,7 +390,7 @@ Any PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredProperty())); //7129
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredProperty())); //7126
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,7 +399,7 @@ bool PropertyCallExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return getReferredProperty() != nullptr; //7129
+			return getReferredProperty() != nullptr; //7126
 	}
 	return NavigationCallExpImpl::internalEIsSet(featureID);
 }
@@ -439,7 +412,7 @@ bool PropertyCallExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EAttribute> _referredProperty = std::dynamic_pointer_cast<ecore::EAttribute>(_temp);
-			setReferredProperty(_referredProperty); //7129
+			setReferredProperty(_referredProperty); //7126
 			return true;
 		}
 	}
@@ -537,9 +510,6 @@ void PropertyCallExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

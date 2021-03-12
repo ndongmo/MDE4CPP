@@ -32,10 +32,6 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<CollectionItem> getThisCollectionItemPtr() const;
 			virtual void setThisCollectionItemPtr(std::weak_ptr<CollectionItem> thisCollectionItemPtr);
 
-			//Additional constructors for the containments back reference
-			CollectionItemImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
 
 
 		public:
@@ -66,8 +62,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

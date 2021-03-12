@@ -30,6 +30,13 @@
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+
+
+
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"

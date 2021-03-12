@@ -30,6 +30,10 @@
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+
+
+
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes

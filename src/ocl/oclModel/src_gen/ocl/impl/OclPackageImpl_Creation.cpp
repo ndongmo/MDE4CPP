@@ -22,7 +22,6 @@
 
 //depending model packages
 #include "ecore/ecorePackage.hpp"
-#include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -31,11 +30,7 @@
 
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclCS/impl/OclCSPackageImpl.hpp"
-
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
-
-#include "ocl/Utilities/impl/UtilitiesPackageImpl.hpp"
 
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
  
@@ -58,11 +53,7 @@ void oclPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 
 	std::dynamic_pointer_cast<ocl::Expressions::ExpressionsPackageImpl>(getExpressions_Package())->createPackageContents(getExpressions_Package());
 
-	std::dynamic_pointer_cast<ocl::OclCS::OclCSPackageImpl>(getOclCS_Package())->createPackageContents(getOclCS_Package());
-
 	std::dynamic_pointer_cast<ocl::Types::TypesPackageImpl>(getTypes_Package())->createPackageContents(getTypes_Package());
-
-	std::dynamic_pointer_cast<ocl::Utilities::UtilitiesPackageImpl>(getUtilities_Package())->createPackageContents(getUtilities_Package());
 
 	std::dynamic_pointer_cast<ocl::Values::ValuesPackageImpl>(getValues_Package())->createPackageContents(getValues_Package());
 

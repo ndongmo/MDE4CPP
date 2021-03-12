@@ -32,10 +32,6 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<ExpressionInOcl> getThisExpressionInOclPtr() const;
 			virtual void setThisExpressionInOclPtr(std::weak_ptr<ExpressionInOcl> thisExpressionInOclPtr);
 
-			//Additional constructors for the containments back reference
-			ExpressionInOclImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
 
 
 		public:
@@ -82,8 +78,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

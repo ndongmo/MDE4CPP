@@ -8,11 +8,10 @@
 #ifndef CSTNODE_H
 #define CSTNODE_H
 
-#include "Utilities/Environment.h"
-#include "OclCS/OclAnalyserErrorListener.h"
+#include "../Utilities/Environment.h"
+#include "OclAnalyserErrorListener.h"
 
 #include <memory>
-#include <ParserRuleContext.h>
 #include <ocl/Expressions/OclExpression.hpp>
 
 using namespace Utilities;

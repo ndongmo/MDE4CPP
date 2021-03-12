@@ -3,14 +3,14 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ocl" nsURI="http://ocl4cpp/ocl" nsPrefix="ocl">
   <eSubpackages name="Expressions" nsURI="http://ocl4cpp/ocl/expressions.ecore" nsPrefix="ocl.expressions">
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExp" eSuperTypes="#//Expressions/PrimitiveLiteralExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanSymbol" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="booleanSymbol" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PrimitiveLiteralExp" abstract="true"
         eSuperTypes="#//Expressions/LiteralExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="symbol" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LiteralExp" abstract="true" eSuperTypes="#//Expressions/OclExpression"/>
-    <eClassifiers xsi:type="ecore:EClass" name="OclExpression" abstract="true" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//ETypedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="OclExpression" abstract="true" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="appliedElement" eType="#//Expressions/CallExp"
           eOpposite="#//Expressions/CallExp/source"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="loopBodyOwner" eType="#//Expressions/LoopExp"
@@ -49,7 +49,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalExp" eSuperTypes="#//Expressions/NumericLiteralExp">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="unlimitedNaturalSymbol"
-          eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//UnlimitedNatural"/>
+          eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//UnlimitedNatural"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralExp" abstract="true"
         eSuperTypes="#//Expressions/PrimitiveLiteralExp"/>
@@ -71,11 +71,11 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="variable" ordered="false"
           lowerBound="1" eType="#//Expressions/Variable" containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//ETypedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="initExpression" ordered="false"
           eType="#//Expressions/OclExpression" containment="true" eOpposite="#//Expressions/OclExpression/initializedElement"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="representedParameter"
-          ordered="false" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EParameter"/>
+          ordered="false" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EParameter"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="loopExp" eType="#//Expressions/LoopExp"
           eOpposite="#//Expressions/LoopExp/iterator"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="baseExp" eType="#//Expressions/IterateExp"
@@ -92,16 +92,16 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PropertyCallExp" eSuperTypes="#//Expressions/NavigationCallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" ordered="false"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EAttribute"/>
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NavigationCallExp" abstract="true"
         eSuperTypes="#//Expressions/FeatureCallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="qualifier" upperBound="-1"
           eType="#//Expressions/OclExpression" containment="true" eOpposite="#//Expressions/OclExpression/parentNav"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="navigationSource" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EAttribute"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="navigationSource" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="FeatureCallExp" abstract="true" eSuperTypes="#//Expressions/CallExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPre" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPre" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="VariableExp" eSuperTypes="#//Expressions/OclExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredVariable" ordered="false"
@@ -109,7 +109,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TypeExp" eSuperTypes="#//Expressions/OclExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredType" ordered="false"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EClassifier"/>
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LoopExp" abstract="true" eSuperTypes="#//Expressions/CallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="body" ordered="false"
@@ -119,19 +119,19 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IteratorExp" eSuperTypes="#//Expressions/LoopExp"/>
     <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExp" eSuperTypes="#//Expressions/PrimitiveLiteralExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringSymbol" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringSymbol" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExp" eSuperTypes="#//Expressions/NumericLiteralExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerSymbol" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="integerSymbol" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OperationCallExp" eSuperTypes="#//Expressions/FeatureCallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
           eType="#//Expressions/OclExpression" containment="true" eOpposite="#//Expressions/OclExpression/parentCall"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" ordered="false"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EOperation"/>
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExp" eSuperTypes="#//Expressions/NumericLiteralExp">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="realSymbol" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IterateExp" eSuperTypes="#//Expressions/LoopExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="result" ordered="false"
@@ -144,7 +144,7 @@
           eType="#//Expressions/CollectionLiteralPart" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPart" abstract="true"
-        eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//ETypedElement"/>
+        eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement"/>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionItem" eSuperTypes="#//Expressions/CollectionLiteralPart">
       <eStructuralFeatures xsi:type="ecore:EReference" name="item" ordered="false"
           lowerBound="1" eType="#//Expressions/OclExpression" containment="true"/>
@@ -160,7 +160,7 @@
           eType="#//Expressions/TupleLiteralPart" containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NullLiteralExp" eSuperTypes="#//Expressions/PrimitiveLiteralExp"/>
-    <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOcl" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//ETypedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOcl" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpression" ordered="false"
           lowerBound="1" eType="#//Expressions/OclExpression" containment="true" eOpposite="#//Expressions/OclExpression/topExpression"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="contextVariable" ordered="false"
@@ -171,14 +171,14 @@
           eType="#//Expressions/Variable" containment="true" eOpposite="#//Expressions/Variable/varOwner"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="InvalidLiteralExp" eSuperTypes="#//Expressions/LiteralExp"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralPart" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//ETypedElement">
+    <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralPart" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//ETypedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" ordered="false"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EAttribute"
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EAttribute"
           containment="true"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="AssociationClassCallExp" eSuperTypes="#//Expressions/NavigationCallExp">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredAssociationClass"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EReference"/>
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EReference"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StateExp" eSuperTypes="#//Expressions/OclExpression">
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredState" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//State"/>
@@ -197,21 +197,21 @@
   </eSubpackages>
   <eSubpackages name="Types" nsURI="http://ocl4cpp/ocl/types.ecore" nsPrefix="ocl.types">
     <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#//Types/CollectionType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="CollectionType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EDataType">
-      <eOperations name="kindOf" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+    <eClassifiers xsi:type="ecore:EClass" name="CollectionType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EDataType">
+      <eOperations name="kindOf" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    if(coll != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ecore::EClass> eclass = std::dynamic_pointer_cast&lt;ecore::EClass>(this->eClass());&#xA;        std::shared_ptr&lt;ecore::EClass> eclassOf = std::dynamic_pointer_cast&lt;ecore::EClass>(coll->eClass());&#xA;        return eclassOf->isSuperTypeOf(eclass);&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
         <eParameters name="coll" lowerBound="1" eType="#//Types/CollectionType"/>
       </eOperations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" ordered="false"
-          lowerBound="1" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EClassifier"
+          lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"
           containment="true"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="#//Values/CollectionValue"
           eOpposite="#//Values/CollectionValue/model"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EClassifier"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EDataType">
+    <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TupleType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EDataType">
       <eStructuralFeatures xsi:type="ecore:EReference" name="instance" eType="#//Values/TupleValue"
           eOpposite="#//Values/TupleValue/model"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
@@ -220,27 +220,27 @@
     <eClassifiers xsi:type="ecore:EClass" name="SetType" eSuperTypes="#//Types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="SequenceType" eSuperTypes="#//Types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="OrderedSetType" eSuperTypes="#//Types/CollectionType"/>
-    <eClassifiers xsi:type="ecore:EClass" name="InvalidType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EClassifier"/>
-    <eClassifiers xsi:type="ecore:EClass" name="TemplateParameterType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EClassifier">
+    <eClassifiers xsi:type="ecore:EClass" name="InvalidType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
+    <eClassifiers xsi:type="ecore:EClass" name="TemplateParameterType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EClassifier">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" ordered="false"
-          eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+          eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="AnyType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EClassifier">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EClassifier"
+    <eClassifiers xsi:type="ecore:EClass" name="AnyType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EClassifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"
           containment="true"/>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="MessageType" eSuperTypes="../../../ecore/ecore/model/ecore.ecore#//EClassifier">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EOperation"/>
+    <eClassifiers xsi:type="ecore:EClass" name="MessageType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EClassifier">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="referredOperation" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EOperation"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="referredSignal" eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Signal"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NameTypeBinding">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EClassifier"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClassifier"/>
     </eClassifiers>
   </eSubpackages>
   <eSubpackages name="Values" nsURI="http://ocl4cpp/ocl/values.ecore" nsPrefix="ocl.values">
     <eClassifiers xsi:type="ecore:EClass" name="BagTypeValue" eSuperTypes="#//Values/CollectionValue">
-      <eOperations name="addValue" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(m_elements->size());&#xA;m_elements->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
@@ -248,16 +248,16 @@
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NameValueBinding">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
           eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Element">
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="indexNr" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Integer"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="indexNr" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SequenceTypeValue" eSuperTypes="#//Values/CollectionValue">
-      <eOperations name="addValue" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(m_elements->size());&#xA;m_elements->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
@@ -268,12 +268,12 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;abstractDataTypes/Bag.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;#include &quot;ecore/EParameter.hpp&quot;&#xA;#include &quot;ecore/ETypedElement.hpp&quot;&#xA;#include &quot;ecore/ENamedElement.hpp&quot;&#xA;#include &quot;ecore/EAttribute.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
       </eAnnotations>
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="if(m_value != nullptr) {&#xA;        uml::NamedElement* uname = dynamic_cast&lt;uml::NamedElement*>(m_value.get());&#xA;        if(uname != nullptr) {&#xA;            uml::Operation* uope = dynamic_cast&lt;uml::Operation*>(m_value.get());&#xA;            if(uope != nullptr) {&#xA;                std::string result = &quot;&lt;Operation> &quot; + uope->getName() + &quot;(&quot;;&#xA;                Bag&lt;uml::Parameter>* ebag = dynamic_cast&lt;Bag&lt;uml::Parameter>*>(uope->getOwnedParameter().get());&#xA;                for(unsigned int i = 0; i &lt; ebag->size(); i++) {&#xA;                    if(i > 0) result += &quot;, &quot;;&#xA;                    result += ebag->at(i)->getName() + &quot; : &quot;;&#xA;                    if(ebag->at(i)->getType() != nullptr) {&#xA;                        if(ebag->at(i)->getUpper() > 1 || ebag->at(i)->getUpper() &lt; 0)&#xA;                            result += ebag->at(i)->getType()->getName()+ &quot; [&quot;&#xA;                                +  std::to_string(ebag->at(i)->getLower()) + &quot;..*]&quot;;&#xA;                        else&#xA;                            result += ebag->at(i)->getType()->getName()+ &quot; [&quot;&#xA;                                +  std::to_string(ebag->at(i)->getLower()) + &quot;..&quot; + std::to_string(ebag->at(i)->getUpper()) + &quot;]&quot;;&#xA;                    }&#xA;                    else&#xA;                        result += &quot;[Not set in Model]&quot;;&#xA;                }&#xA;                result += &quot;)&quot;;&#xA;                return result;&#xA;            }&#xA;            uml::Property* uprop = dynamic_cast&lt;uml::Property*>(m_value.get());&#xA;            if(uprop != nullptr) {&#xA;                if(uprop->getUpper() > 1 || uprop->getUpper() &lt; 0)&#xA;                    return &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;&#xA;                        +  std::to_string(uprop->getLower()) + &quot;..*]&quot;;&#xA;                else&#xA;                    return &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;&#xA;                        +  std::to_string(uprop->getLower()) + &quot;..&quot; + std::to_string(uprop->getUpper()) + &quot;]&quot;;&#xA;            }&#xA;            uml::TypedElement* utyped = dynamic_cast&lt;uml::TypedElement*>(m_value.get());&#xA;            if(utyped != nullptr) {&#xA;                return utyped->getName() + &quot; : &quot; + utyped->getType()->getName();&#xA;            }&#xA;            return uname->getName();&#xA;        }&#xA;&#xA;        ecore::EOperation* eope = dynamic_cast&lt;ecore::EOperation*>(m_value.get());&#xA;        if(eope != nullptr) {&#xA;            std::string result = eope->getName() + &quot;(&quot;;&#xA;            Bag&lt;ecore::EParameter>* ebag = dynamic_cast&lt;Bag&lt;ecore::EParameter>*>(eope->getEParameters().get());&#xA;            for(unsigned int i = 0; i &lt; ebag->size(); i++) {&#xA;                if(i > 0) result += &quot;, &quot;;&#xA;                result += ebag->at(i)->getName() + &quot; : &quot;;&#xA;                if(ebag->at(i)->getEType() != nullptr)&#xA;                    result += ebag->at(i)->getEType()->getName();&#xA;                else&#xA;                    result += &quot;[Not set in Model]&quot;;&#xA;            }&#xA;            result += &quot;)&quot;;&#xA;            return result;&#xA;        }&#xA;        ecore::EAttribute* eattr = dynamic_cast&lt;ecore::EAttribute*>(m_value.get());&#xA;        if(eattr != nullptr) {&#xA;            if(eattr->getUpperBound() > 1 || eattr->getUpperBound() &lt; 0)&#xA;                return &quot;&lt;EAttribute> &quot; + eattr->getName() + &quot; : &quot; + eattr->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eattr->getLowerBound()) + &quot;..*]&quot;;&#xA;            else&#xA;                return &quot;&lt;EAttribute> &quot; + eattr->getName() + &quot; : &quot; + eattr->getEType()->getName()+ &quot; [&quot;&#xA;                        +  std::to_string(eattr->getLowerBound()) + &quot;..&quot; + std::to_string(eattr->getUpperBound()) + &quot;]&quot;;&#xA;        }&#xA;        ecore::EReference* eref = dynamic_cast&lt;ecore::EReference*>(m_value.get());&#xA;        if(eref != nullptr) {&#xA;            if(eref->getUpperBound() > 1 || eref->getUpperBound() &lt; 0)&#xA;                return &quot;&lt;EReference> &quot; + eref->getName() + &quot; : &quot; + eref->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eref->getLowerBound()) + &quot;..*]&quot;;&#xA;            else&#xA;                return &quot;&lt;EReference> &quot; + eref->getName() + &quot; : &quot; + eref->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eref->getLowerBound()) + &quot;..&quot; + std::to_string(eref->getUpperBound()) + &quot;]&quot;;&#xA;        }&#xA;        ecore::ETypedElement* etyped = dynamic_cast&lt;ecore::ETypedElement*>(m_value.get());&#xA;        if(etyped != nullptr) {&#xA;            if(etyped->isMany())&#xA;                return etyped->getName() + &quot; : &quot; + etyped->getEType()->getName()+ &quot; [0..*]&quot;;&#xA;            else&#xA;                return etyped->getName() + &quot; : &quot; + etyped->getEType()->getName()+ &quot; [0..1]&quot;;&#xA;        }&#xA;        ecore::ENamedElement* ename = dynamic_cast&lt;ecore::ENamedElement*>(m_value.get());&#xA;        if(ename != nullptr) {&#xA;            return ename->getName();&#xA;        }&#xA;    }&#xA;    return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    if(otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID()) {&#xA;        std::shared_ptr&lt;ocl::Values::ObjectValue> otherObj = std::dynamic_pointer_cast&lt;ocl::Values::ObjectValue>(otherValue);&#xA;        return otherObj != nullptr &amp;&amp; otherObj->getValue().get() == this->getValue().get();&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
@@ -282,24 +282,24 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="history" upperBound="-1"
           eType="#//Values/LocalSnapshot"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1"
-          eType="ecore:EClass ../../../ecore/ecore/model/ecore.ecore#//EObject"/>
+          eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionValue" eSuperTypes="#//Values/StaticValue">
-      <eOperations name="addValue" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="std::string result = &quot;&quot;;&#xA;&#xA;Bag&lt;Element>::const_iterator endIt_elem = this->getElements()->end();&#xA;for (Bag&lt;Element>::const_iterator it_reference = this->getElements()->begin();&#xA;&#x9; it_reference != endIt_elem; ++it_reference)&#xA;{&#xA;       if(!result.empty()) {&#xA;            result += &quot;\n&quot;;&#xA;        }&#xA;&#x9;result += (*it_reference)->getValue()->toString();&#xA;}&#xA;return result;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="find" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="find" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="for (Bag&lt;ocl::Values::Element>::const_iterator it_elem = m_elements->begin(); it_elem != m_elements->end(); ++it_elem)&#xA;    {&#xA;        if ((*it_elem)->getValue()->equals(value)) {&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
-      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    if(otherValue != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ocl::Values::CollectionValue> otherBag = std::dynamic_pointer_cast&lt;ocl::Values::CollectionValue>(otherValue);&#xA;&#xA;&#x9;if(otherBag != nullptr &amp;&amp; otherBag->getModel() != nullptr &amp;&amp; &#xA;           this->getModel()->kindOf(otherBag->getModel()) &amp;&amp;&#xA;           otherBag->getElements()->size() == this->getElements()->size()) {&#xA;&#xA;           for(size_t i = 0; i &lt; this->getElements()->size(); i++) {&#xA;                auto item1 = this->getElements()->at(i)->getValue();&#xA;                auto item2 = otherBag->getElements()->at(i)->getValue();&#xA;                &#xA;                if(!item1->equals(item2)) {&#xA;                    return false;&#xA;                }&#xA;            }&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
@@ -311,7 +311,7 @@
           eType="#//Types/CollectionType" eOpposite="#//Types/CollectionType/instance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SetTypeValue" eSuperTypes="#//Values/CollectionValue">
-      <eOperations name="addValue" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(m_elements->size());&#xA;    m_elements->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
@@ -322,12 +322,12 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    return otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID();&#xA;   "/>
         </eAnnotations>
@@ -338,15 +338,15 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSyncOperation" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAsyncOperation" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSignal" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSyncOperation" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isAsyncOperation" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isSignal" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="returnMessage" eType="#//Values/OclMessageValue"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Values/ObjectValue"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Values/ObjectValue"/>
@@ -365,20 +365,20 @@
           eOpposite="#//Values/LocalSnapshot/succ"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" upperBound="-1"
           eType="#//Values/NameValueBinding"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPost" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPre" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPost" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPre" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="inputQ" ordered="false"
           upperBound="-1" eType="#//Values/OclMessageValue"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="outputQ" upperBound="-1"
           eType="#//Values/OclMessageValue"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TupleValue" eSuperTypes="#//Values/StaticValue">
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="std::string result = &quot;&quot;;&#xA;&#xA;Bag&lt;NameValueBinding>::const_iterator endIt_elem = this->getElements()->end();&#xA;for (Bag&lt;NameValueBinding>::const_iterator it_reference = this->getElements()->begin();&#xA;&#x9; it_reference != endIt_elem; ++it_reference)&#xA;{&#xA;       if(!result.empty()) {&#xA;            result += &quot;\n&quot;;&#xA;        }&#xA;&#x9;result += (*it_reference)->getName() + &quot; : &quot; + (*it_reference)->getValue()->toString();&#xA;}&#xA;return result;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    if(otherValue != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ocl::Values::TupleValue> otherBag = std::dynamic_pointer_cast&lt;ocl::Values::TupleValue>(otherValue);&#xA;&#xA;&#x9;if(otherBag != nullptr &amp;&amp; otherBag->getElements()->size() == this->getElements()->size()) {&#xA;&#xA;           for(size_t i = 0; i &lt; this->getElements()->size(); i++) {&#xA;                auto item1 = this->getElements()->at(i);&#xA;                auto item2 = otherBag->getElements()->at(i);&#xA;                &#xA;                if(item1->getName() != item2->getName() || !item1->getValue()->equals(item2->getValue())) {&#xA;                    return false;&#xA;                }&#xA;            }&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
@@ -393,12 +393,12 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
-      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String">
+      <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="return &quot;Undefined&quot;;"/>
         </eAnnotations>
       </eOperations>
-      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="    return otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID();&#xA;   "/>
         </eAnnotations>
@@ -406,7 +406,7 @@
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OrderedSetTypeValue" eSuperTypes="#//Values/CollectionValue">
-      <eOperations name="addValue" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean">
+      <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(m_elements->size());&#xA;    m_elements->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
@@ -491,7 +491,7 @@
           eType="#//Evaluations/OclExpEval"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" unique="false"
           upperBound="-1" eType="#//Evaluations/OclMessageArgEval"/>
-      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IfExpEval" eSuperTypes="#//Evaluations/OclExpEval">
       <eStructuralFeatures xsi:type="ecore:EReference" name="condition" lowerBound="1"
@@ -502,7 +502,7 @@
           eType="#//Evaluations/OclExpEval"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ModelPropertyCallExpEval" eSuperTypes="#//Evaluations/PropertyCallExpEval">
-      <eOperations name="atPre" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//Boolean"/>
+      <eOperations name="atPre" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LoopExpEval" eSuperTypes="#//Evaluations/PropertyCallExpEval">
       <eStructuralFeatures xsi:type="ecore:EReference" name="bodyEvals" lowerBound="1"
@@ -601,7 +601,7 @@
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
           <details key="body" value="for (Bag&lt;ocl::Values::NameValueBinding>::const_iterator it_attribute = m_bindings->begin(); it_attribute != m_bindings->end(); ++it_attribute)&#xA;    {&#xA;        if ((*it_attribute)->getName() == name) {&#xA;            return *it_attribute;&#xA;        }&#xA;    }&#xA;    return nullptr;"/>
         </eAnnotations>
-        <eParameters name="name" eType="ecore:EDataType ../../../ecore/types/model/types.ecore#//String"/>
+        <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
       </eOperations>
       <eOperations name="addAll" ordered="false" lowerBound="1">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -619,6 +619,4 @@
           eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/SimpleClassifiers/StringValue"/>
     </eClassifiers>
   </eSubpackages>
-  <eSubpackages name="OclCS"/>
-  <eSubpackages name="Utilities"/>
 </ecore:EPackage>

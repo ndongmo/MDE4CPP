@@ -8,7 +8,7 @@ repositories {
 }
 
 dependencies {
-    antlr 'org.antlr:antlr4:4.7' // use ANTLR version 4
+    antlr 'org.antlr:antlr4:4.9' // use ANTLR version 4
 }
 
 ext.ocl = [
@@ -40,7 +40,7 @@ generateGrammarSource {
 		copy {
 			from ocl.tmpBuildDir
 			into ocl.destinationDir
-			filter { line -> line.replaceAll(': public ocl::ParserRuleContext', ': public ocl::ParserRuleContext, public CSTNode') }
+			filter { line -> line.replaceAll(': public antlr4::ParserRuleContext', ': public antlr4::ParserRuleContext, public CSTNode') }
 		}
 	}
 	doLast {

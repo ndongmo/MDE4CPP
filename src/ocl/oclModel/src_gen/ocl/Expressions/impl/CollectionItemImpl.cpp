@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,11 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -39,8 +43,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/OclExpression.hpp"
 
@@ -73,12 +75,6 @@ CollectionItemImpl::~CollectionItemImpl()
 #endif
 }
 
-//Additional constructor for the containments back reference
-CollectionItemImpl::CollectionItemImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:CollectionItemImpl()
-{
-	m_eContainer = par_eContainer;
-}
 
 
 CollectionItemImpl::CollectionItemImpl(const CollectionItemImpl & obj):CollectionItemImpl()
@@ -101,7 +97,6 @@ CollectionItemImpl& CollectionItemImpl::operator=(const CollectionItemImpl & obj
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -110,8 +105,6 @@ CollectionItemImpl& CollectionItemImpl::operator=(const CollectionItemImpl & obj
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
 
 
@@ -180,21 +173,6 @@ void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> CollectionItemImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -209,10 +187,6 @@ void CollectionItemImpl::setThisCollectionItemPtr(std::weak_ptr<CollectionItem> 
 }
 std::shared_ptr<ecore::EObject> CollectionItemImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
 	return nullptr;
 }
 
@@ -224,7 +198,7 @@ Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getItem())); //1113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getItem())); //1110
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,7 +207,7 @@ bool CollectionItemImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			return getItem() != nullptr; //1113
+			return getItem() != nullptr; //1110
 	}
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
@@ -246,7 +220,7 @@ bool CollectionItemImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _item = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setItem(_item); //1113
+			setItem(_item); //1110
 			return true;
 		}
 	}
@@ -332,9 +306,6 @@ void CollectionItemImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

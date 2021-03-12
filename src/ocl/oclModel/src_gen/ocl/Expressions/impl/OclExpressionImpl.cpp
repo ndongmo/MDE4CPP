@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,12 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -41,8 +46,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/ETypedElement.hpp"
 
@@ -97,25 +100,18 @@ OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CallExp > p
 }
 
 //Additional constructor for the containments back reference
-OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:OclExpressionImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :OclExpressionImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -130,10 +126,10 @@ OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CollectionR
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -201,7 +197,6 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -211,8 +206,6 @@ OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 	//copy references with no containment (soft copy)
 	
 	m_appliedElement  = obj.getAppliedElement();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -472,21 +465,6 @@ void OclExpressionImpl::setTopExpression(std::shared_ptr<ocl::Expressions::Expre
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> OclExpressionImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -502,11 +480,6 @@ void OclExpressionImpl::setThisOclExpressionPtr(std::weak_ptr<OclExpression> thi
 std::shared_ptr<ecore::EObject> OclExpressionImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -571,29 +544,29 @@ Any OclExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedElement().lock())); //6013
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedElement().lock())); //6010
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getElseOwner().lock())); //6020
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getElseOwner().lock())); //6017
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirstOwner().lock())); //6022
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirstOwner().lock())); //6019
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIfOwner().lock())); //6019
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIfOwner().lock())); //6016
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInitializedElement().lock())); //6015
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInitializedElement().lock())); //6012
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //6024
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //6021
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLastOwner().lock())); //6023
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLastOwner().lock())); //6020
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLoopBodyOwner().lock())); //6014
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLoopBodyOwner().lock())); //6011
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParentCall().lock())); //6017
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParentCall().lock())); //6014
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParentNav().lock())); //6021
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParentNav().lock())); //6018
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getThenOwner().lock())); //6018
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getThenOwner().lock())); //6015
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTopExpression().lock())); //6016
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTopExpression().lock())); //6013
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -602,29 +575,29 @@ bool OclExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-			return getAppliedElement().lock() != nullptr; //6013
+			return getAppliedElement().lock() != nullptr; //6010
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-			return getElseOwner().lock() != nullptr; //6020
+			return getElseOwner().lock() != nullptr; //6017
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-			return getFirstOwner().lock() != nullptr; //6022
+			return getFirstOwner().lock() != nullptr; //6019
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-			return getIfOwner().lock() != nullptr; //6019
+			return getIfOwner().lock() != nullptr; //6016
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-			return getInitializedElement().lock() != nullptr; //6015
+			return getInitializedElement().lock() != nullptr; //6012
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //6024
+			return getInstance() != nullptr; //6021
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-			return getLastOwner().lock() != nullptr; //6023
+			return getLastOwner().lock() != nullptr; //6020
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-			return getLoopBodyOwner().lock() != nullptr; //6014
+			return getLoopBodyOwner().lock() != nullptr; //6011
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
-			return getParentCall().lock() != nullptr; //6017
+			return getParentCall().lock() != nullptr; //6014
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
-			return getParentNav().lock() != nullptr; //6021
+			return getParentNav().lock() != nullptr; //6018
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-			return getThenOwner().lock() != nullptr; //6018
+			return getThenOwner().lock() != nullptr; //6015
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
-			return getTopExpression().lock() != nullptr; //6016
+			return getTopExpression().lock() != nullptr; //6013
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -637,7 +610,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::CallExp> _appliedElement = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(_temp);
-			setAppliedElement(_appliedElement); //6013
+			setAppliedElement(_appliedElement); //6010
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
@@ -645,7 +618,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::IfExp> _elseOwner = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(_temp);
-			setElseOwner(_elseOwner); //6020
+			setElseOwner(_elseOwner); //6017
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
@@ -653,7 +626,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::CollectionRange> _firstOwner = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(_temp);
-			setFirstOwner(_firstOwner); //6022
+			setFirstOwner(_firstOwner); //6019
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
@@ -661,7 +634,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::IfExp> _ifOwner = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(_temp);
-			setIfOwner(_ifOwner); //6019
+			setIfOwner(_ifOwner); //6016
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
@@ -669,7 +642,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _initializedElement = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setInitializedElement(_initializedElement); //6015
+			setInitializedElement(_initializedElement); //6012
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
@@ -677,7 +650,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Evaluations::OclExpEval> _instance = std::dynamic_pointer_cast<ocl::Evaluations::OclExpEval>(_temp);
-			setInstance(_instance); //6024
+			setInstance(_instance); //6021
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
@@ -685,7 +658,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::CollectionRange> _lastOwner = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(_temp);
-			setLastOwner(_lastOwner); //6023
+			setLastOwner(_lastOwner); //6020
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
@@ -693,7 +666,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::LoopExp> _loopBodyOwner = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(_temp);
-			setLoopBodyOwner(_loopBodyOwner); //6014
+			setLoopBodyOwner(_loopBodyOwner); //6011
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
@@ -701,7 +674,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OperationCallExp> _parentCall = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(_temp);
-			setParentCall(_parentCall); //6017
+			setParentCall(_parentCall); //6014
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
@@ -709,7 +682,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::NavigationCallExp> _parentNav = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(_temp);
-			setParentNav(_parentNav); //6021
+			setParentNav(_parentNav); //6018
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
@@ -717,7 +690,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::IfExp> _thenOwner = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(_temp);
-			setThenOwner(_thenOwner); //6018
+			setThenOwner(_thenOwner); //6015
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
@@ -725,7 +698,7 @@ bool OclExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::ExpressionInOcl> _topExpression = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(_temp);
-			setTopExpression(_topExpression); //6016
+			setTopExpression(_topExpression); //6013
 			return true;
 		}
 	}
@@ -947,9 +920,6 @@ void OclExpressionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

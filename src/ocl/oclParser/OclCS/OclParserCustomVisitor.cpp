@@ -1,7 +1,7 @@
 #include "OclParserCustomVisitor.h"
 #include "CSTNode.h"
-#include "Utilities/OclReflection.h"
-#include "Utilities/EnvironmentFactory.h"
+#include "../Utilities/OclReflection.h"
+#include "../Utilities/EnvironmentFactory.h"
 
 #include <abstractDataTypes/Bag.hpp>
 #include <abstractDataTypes/Subset.hpp>
@@ -9,13 +9,13 @@
 #include <abstractDataTypes/Union.hpp>
 #include <abstractDataTypes/Any.hpp>
 
-#include <ecore/EcorePackage.hpp>
+#include <ecore/ecorePackage.hpp>
 #include <ecore/EClass.hpp>
 #include <ecore/EObject.hpp>
 #include <ecore/EEnum.hpp>
 #include <ecore/EStructuralFeature.hpp>
 #include <ecore/EEnumLiteral.hpp>
-#include <ecore/EcoreFactory.hpp>
+#include <ecore/ecoreFactory.hpp>
 #include <types/TypesFactory.hpp>
 #include <types/TypesPackage.hpp>
 
@@ -72,11 +72,10 @@
 #include <ocl/Values/TupleValue.hpp>
 #include <ocl/Values/UndefinedValue.hpp>
 
-
 #include <fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp>
 
-#include <uml/UmlFactory.hpp>
-#include <uml/UmlPackage.hpp>
+#include <uml/umlFactory.hpp>
+#include <uml/umlPackage.hpp>
 #include <uml/Enumeration.hpp>
 #include <uml/impl/EnumerationImpl.hpp>
 #include <uml/EnumerationLiteral.hpp>
@@ -746,19 +745,19 @@ antlrcpp::Any OclParserCustomVisitor::visitTypeCS(OclParser::TypeCSContext *ctx)
     else if(priCS != nullptr) {
         std::shared_ptr<ecore::EClassifier> ref = nullptr;
         if(priCS->OCLBOOLEAN() != nullptr) {
-            ref = ::types::TypesPackage::eInstance()->getBoolean_Class();
+            ref = ::types::typesPackage::eInstance()->getBoolean_Class();
         }
         else if(priCS->OCLSTRING() != nullptr) {
-            ref = ::types::TypesPackage::eInstance()->getString_Class();
+            ref = ::types::typesPackage::eInstance()->getString_Class();
         }
         else if(priCS->OCLREAL() != nullptr) {
-            ref = ::types::TypesPackage::eInstance()->getReal_Class();
+            ref = ::types::typesPackage::eInstance()->getReal_Class();
         }
         else if(priCS->OCLINTEGER() != nullptr) {
-            ref = ::types::TypesPackage::eInstance()->getInteger_Class();
+            ref = ::types::typesPackage::eInstance()->getInteger_Class();
         }
         else {
-            ref = ::types::TypesPackage::eInstance()->getUnlimitedNatural_Class();
+            ref = ::types::typesPackage::eInstance()->getUnlimitedNatural_Class();
         }
         std::shared_ptr<ObjectValue> objValue = ocl::Values::ValuesFactory::eInstance()->createObjectValue();
         std::shared_ptr<OclExpEval> typeEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createOclExpEval();
@@ -997,7 +996,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
                     return false;
                 }
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 boolValue->setValue(result);
                 infEval->setResultValue(boolValue);
                 infExpr->setEType(type);
@@ -1033,7 +1032,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
                     return false;
                 }
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 boolValue->setValue(result);
                 infEval->setResultValue(boolValue);
@@ -1060,7 +1059,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
                     return false;
                 }
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 boolValue->setValue(result);
                 infEval->setResultValue(boolValue);
@@ -1076,7 +1075,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
             if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr) {
                 int rightInt = retrieveInt(rightvalue);
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightInt);
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 infEval->setResultValue(boolValue);
                 return true;
@@ -1084,7 +1083,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
             else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftInt, rightReal->getValue());
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 infEval->setResultValue(boolValue);
                 return true;
@@ -1098,7 +1097,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
             if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::IntegerValue>(rightvalue) || std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue>(rightvalue) != nullptr) {
                 int rightInt = retrieveInt(rightvalue);
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightInt);
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 infEval->setResultValue(boolValue);
                 return true;
@@ -1106,7 +1105,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInfixedExpCS(OclParser::InfixedExpCSC
             else if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue)) {
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> rightReal = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(rightvalue);
                 std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = doOperation(binCS, leftReal->getValue(), rightReal->getValue());
-                std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+                std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
                 infExpr->setEType(type);
                 infEval->setResultValue(boolValue);
                 return true;
@@ -1244,14 +1243,14 @@ antlrcpp::Any OclParserCustomVisitor::visitEnumLiteralExpCS(OclParser::EnumLiter
             std::shared_ptr<Bag<ecore::EEnumLiteral>> literals = en->getELiterals();
             for (size_t i = 0; i < literals->size(); i++) {
                 if(literals->at(i)->getName() == simpleName) {
-                    std::shared_ptr<uml::EnumerationLiteral> new_literal = uml::UmlFactory::eInstance()->createEnumerationLiteral();
+                    std::shared_ptr<uml::EnumerationLiteral> new_literal = uml::umlFactory::eInstance()->createEnumerationLiteral();
                     new_literal->setName(literals->at(i)->getName());
                     literal = new_literal;
                     break;
                 }
             }
         }
-        else if (var->getEType()->getClassifierID() == uml::UmlPackage::ENUMERATION_CLASS) {
+        else if (var->getEType()->getClassifierID() == uml::umlPackage::ENUMERATION_CLASS) {
             std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(var->getValue());
             std::shared_ptr<uml::Enumeration> en = std::dynamic_pointer_cast<uml::Enumeration>(objValue->getValue());
             std::shared_ptr<Bag<uml::EnumerationLiteral>> literals = en->getOwnedLiteral();
@@ -1416,7 +1415,7 @@ antlrcpp::Any OclParserCustomVisitor::visitTupleLiteralExpCS(OclParser::TupleLit
             std::shared_ptr<TupleLiteralPart> part = ocl::Expressions::ExpressionsFactory::eInstance()->createTupleLiteralPart();
             std::shared_ptr<NameTypeBinding> nameType = ocl::Types::TypesFactory::eInstance()->createNameTypeBinding();
             std::shared_ptr<NameValueBinding> nameValue = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
-            std::shared_ptr<ecore::EAttribute> attr = ecore::EcoreFactory::eInstance()->createEAttribute();
+            std::shared_ptr<ecore::EAttribute> attr = ecore::ecoreFactory::eInstance()->createEAttribute();
 
             attr->setName(varExp->getName());
             nameType->setName(varExp->getName());
@@ -1448,7 +1447,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::Prim
     if(intCS != nullptr) {
         std::shared_ptr<IntegerLiteralExp> intExp = ocl::Expressions::ExpressionsFactory::eInstance()->createIntegerLiteralExp();
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getInteger_Class();
+        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getInteger_Class();
         std::shared_ptr<IntegerLiteralExpEval> intEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createIntegerLiteralExpEval();
         int symbol = std::atoi(intCS->INT()->getSymbol()->getText().c_str());
 
@@ -1462,7 +1461,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::Prim
     else if(unlimitedCS != nullptr) {
         std::shared_ptr<UnlimitedNaturalExp> unlExp = ocl::Expressions::ExpressionsFactory::eInstance()->createUnlimitedNaturalExp();
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> unlValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getUnlimitedNatural_Class();
+        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getUnlimitedNatural_Class();
         std::shared_ptr<UnlimitedNaturalLiteralExpEval> unEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createUnlimitedNaturalLiteralExpEval();
         int symbol = std::atoi(unlimitedCS->INT()->getSymbol()->getText().c_str());
 
@@ -1476,7 +1475,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::Prim
     else if(realCS != nullptr) {
         std::shared_ptr<RealLiteralExp> realExp = ocl::Expressions::ExpressionsFactory::eInstance()->createRealLiteralExp();
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getReal_Class();
+        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
         std::shared_ptr<RealLiteralExpEval> realEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createRealLiteralExpEval();
         double symbol = std::atof(realCS->REAL()->getSymbol()->getText().c_str());
 
@@ -1490,7 +1489,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPrimitiveLiteralExpCS(OclParser::Prim
     else if(stringCS != nullptr) {
         std::shared_ptr<StringLiteralExp> stringExp = ocl::Expressions::ExpressionsFactory::eInstance()->createStringLiteralExp();
         std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> stringValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
-        std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getString_Class();
+        std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getString_Class();
         std::shared_ptr<StringLiteralExpEval> stringEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createStringLiteralExpEval();
         string symbol = stringCS->STRING_LITERAL()->getSymbol()->getText();
 
@@ -1808,7 +1807,7 @@ antlrcpp::Any OclParserCustomVisitor::visitIfExpCS(OclParser::IfExpCSContext *ct
 
     if(visitOclExpressionCS(ifExprCS)) {
         std::shared_ptr<OclExpression> ifExpr = ifExprCS->getAST();
-        if(ifExpr->getEType()->getClassifierID() == ::types::TypesPackage::BOOLEAN_CLASS) {
+        if(ifExpr->getEType()->getClassifierID() == ::types::typesPackage::BOOLEAN_CLASS) {
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(ifExpr->getInstance()->getResultValue());
             if(value->isValue()) {
                 if(visitOclExpressionCS(thenExprCS)) {
@@ -2348,7 +2347,7 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
                 result = leftInt / rightInt;
             }
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> intValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getInteger_Class();
+            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getInteger_Class();
             std::shared_ptr<IntegerLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createIntegerLiteralExp();
             std::shared_ptr<IntegerLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createIntegerLiteralExpEval();
 
@@ -2376,7 +2375,7 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
                 result = leftInt / rightReal->getValue();
             }
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getReal_Class();
+            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
             std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
             std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
@@ -2410,7 +2409,7 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
                 result = leftReal->getValue() / rightInt;
             }
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getReal_Class();
+            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
             std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
             std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
@@ -2438,7 +2437,7 @@ bool OclParserCustomVisitor::arithmeticExpr(OclParser::OclExpressionCSContext *c
                 result = leftReal->getValue() / rightReal->getValue();
             }
             std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
-            std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getReal_Class();
+            std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getReal_Class();
             std::shared_ptr<RealLiteralExp> resultExpr = ExpressionsFactory::eInstance()->createRealLiteralExp();
             std::shared_ptr<RealLiteralExpEval> resultEval = EvaluationsFactory::eInstance()->createRealLiteralExpEval();
 
@@ -2490,7 +2489,7 @@ std::shared_ptr<BooleanLiteralExp> OclParserCustomVisitor::createBooleanLiteralE
 {
     std::shared_ptr<BooleanLiteralExp> boolExp = ocl::Expressions::ExpressionsFactory::eInstance()->createBooleanLiteralExp();
     std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> boolValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
-    std::shared_ptr<ecore::EClassifier> type = ::types::TypesPackage::eInstance()->getBoolean_Class();
+    std::shared_ptr<ecore::EClassifier> type = ::types::typesPackage::eInstance()->getBoolean_Class();
     std::shared_ptr<BooleanLiteralExpEval> boolEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createBooleanLiteralExpEval();
 
     boolValue->setValue(value);

@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,13 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -41,8 +47,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "uml/EnumerationLiteral.hpp"
 
@@ -99,25 +103,18 @@ EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp >
 }
 
 //Additional constructor for the containments back reference
-EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:EnumLiteralExpImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :EnumLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -132,10 +129,10 @@ EnumLiteralExpImpl::EnumLiteralExpImpl(std::weak_ptr<ocl::Expressions::Collectio
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -203,7 +200,6 @@ EnumLiteralExpImpl& EnumLiteralExpImpl::operator=(const EnumLiteralExpImpl & obj
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -213,8 +209,6 @@ EnumLiteralExpImpl& EnumLiteralExpImpl::operator=(const EnumLiteralExpImpl & obj
 	//copy references with no containment (soft copy)
 	
 	m_appliedElement  = obj.getAppliedElement();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -300,21 +294,6 @@ void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::Enumeration
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> EnumLiteralExpImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -330,11 +309,6 @@ void EnumLiteralExpImpl::setThisEnumLiteralExpPtr(std::weak_ptr<EnumLiteralExp> 
 std::shared_ptr<ecore::EObject> EnumLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -399,7 +373,7 @@ Any EnumLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredEnumLiteral())); //2325
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferredEnumLiteral())); //2322
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
 }
@@ -408,7 +382,7 @@ bool EnumLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL:
-			return getReferredEnumLiteral() != nullptr; //2325
+			return getReferredEnumLiteral() != nullptr; //2322
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
@@ -421,7 +395,7 @@ bool EnumLiteralExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
-			setReferredEnumLiteral(_referredEnumLiteral); //2325
+			setReferredEnumLiteral(_referredEnumLiteral); //2322
 			return true;
 		}
 	}
@@ -515,9 +489,6 @@ void EnumLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

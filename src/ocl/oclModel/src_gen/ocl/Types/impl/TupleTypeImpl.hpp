@@ -33,10 +33,6 @@ namespace ocl::Types
 			virtual void setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePtr);
 
 			//Additional constructors for the containments back reference
-			TupleTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-			//Additional constructors for the containments back reference
 			TupleTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 
@@ -74,8 +70,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

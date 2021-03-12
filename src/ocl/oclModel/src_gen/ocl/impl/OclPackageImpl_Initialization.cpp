@@ -25,15 +25,10 @@
 
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclCS/impl/OclCSPackageImpl.hpp"
-
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
-
-#include "ocl/Utilities/impl/UtilitiesPackageImpl.hpp"
 
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ecore/ecorePackage.hpp"
 #include "ecore/ecorePackage.hpp"
 #include "fUML/fUMLPackage.hpp"
 #include "types/typesPackage.hpp"
@@ -64,9 +59,7 @@ void oclPackageImpl::initializePackageContents()
 
 	std::dynamic_pointer_cast<ocl::Evaluations::EvaluationsPackageImpl>(getEvaluations_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<ocl::Expressions::ExpressionsPackageImpl>(getExpressions_Package())->initializePackageContents();
-	std::dynamic_pointer_cast<ocl::OclCS::OclCSPackageImpl>(getOclCS_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<ocl::Types::TypesPackageImpl>(getTypes_Package())->initializePackageContents();
-	std::dynamic_pointer_cast<ocl::Utilities::UtilitiesPackageImpl>(getUtilities_Package())->initializePackageContents();
 	std::dynamic_pointer_cast<ocl::Values::ValuesPackageImpl>(getValues_Package())->initializePackageContents();
 }
 

@@ -37,19 +37,9 @@ namespace ocl
 		class ExpressionsPackage;
 	}
 
-	namespace OclCS 
-	{
-		class OclCSPackage;
-	}
-
 	namespace Types 
 	{
 		class TypesPackage;
-	}
-
-	namespace Utilities 
-	{
-		class UtilitiesPackage;
 	}
 
 	namespace Values 
@@ -86,9 +76,7 @@ namespace ocl
 
 			virtual std::shared_ptr<Evaluations::EvaluationsPackage> getEvaluations_Package() const = 0;
 			virtual std::shared_ptr<Expressions::ExpressionsPackage> getExpressions_Package() const = 0;
-			virtual std::shared_ptr<OclCS::OclCSPackage> getOclCS_Package() const = 0;
 			virtual std::shared_ptr<Types::TypesPackage> getTypes_Package() const = 0;
-			virtual std::shared_ptr<Utilities::UtilitiesPackage> getUtilities_Package() const = 0;
 			virtual std::shared_ptr<Values::ValuesPackage> getValues_Package() const = 0;
 			
 

@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,11 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -39,8 +43,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/OclExpression.hpp"
 
@@ -73,12 +75,6 @@ CollectionRangeImpl::~CollectionRangeImpl()
 #endif
 }
 
-//Additional constructor for the containments back reference
-CollectionRangeImpl::CollectionRangeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:CollectionRangeImpl()
-{
-	m_eContainer = par_eContainer;
-}
 
 
 CollectionRangeImpl::CollectionRangeImpl(const CollectionRangeImpl & obj):CollectionRangeImpl()
@@ -101,7 +97,6 @@ CollectionRangeImpl& CollectionRangeImpl::operator=(const CollectionRangeImpl & 
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -110,8 +105,6 @@ CollectionRangeImpl& CollectionRangeImpl::operator=(const CollectionRangeImpl & 
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
 
 
@@ -205,21 +198,6 @@ void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpressio
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> CollectionRangeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -234,10 +212,6 @@ void CollectionRangeImpl::setThisCollectionRangePtr(std::weak_ptr<CollectionRang
 }
 std::shared_ptr<ecore::EObject> CollectionRangeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
 	return nullptr;
 }
 
@@ -249,9 +223,9 @@ Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //1813
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //1810
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLast())); //1814
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLast())); //1811
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }
@@ -260,9 +234,9 @@ bool CollectionRangeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //1813
+			return getFirst() != nullptr; //1810
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			return getLast() != nullptr; //1814
+			return getLast() != nullptr; //1811
 	}
 	return CollectionLiteralPartImpl::internalEIsSet(featureID);
 }
@@ -275,7 +249,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _first = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setFirst(_first); //1813
+			setFirst(_first); //1810
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
@@ -283,7 +257,7 @@ bool CollectionRangeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _last = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setLast(_last); //1814
+			setLast(_last); //1811
 			return true;
 		}
 	}
@@ -392,9 +366,6 @@ void CollectionRangeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

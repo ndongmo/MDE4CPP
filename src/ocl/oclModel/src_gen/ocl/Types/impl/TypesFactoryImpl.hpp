@@ -48,31 +48,21 @@ namespace ocl::Types
 			//Creator functions
 			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType(const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::AnyType> createAnyType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::ANYTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::BagType> createBagType(const int metaElementID = TypesPackage::BAGTYPE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::BagType> createBagType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::BAGTYPE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::BagType> createBagType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::BAGTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType(const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::CollectionType> createCollectionType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::COLLECTIONTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType(const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::InvalidType> createInvalidType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::INVALIDTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType(const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::MessageType> createMessageType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::MESSAGETYPE_CLASS) const ;
 			 
@@ -80,37 +70,25 @@ namespace ocl::Types
 			 
 			 virtual std::shared_ptr<ocl::Types::OrderedSetType> createOrderedSetType(const int metaElementID = TypesPackage::ORDEREDSETTYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::OrderedSetType> createOrderedSetType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::ORDEREDSETTYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::OrderedSetType> createOrderedSetType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::ORDEREDSETTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::SequenceType> createSequenceType(const int metaElementID = TypesPackage::SEQUENCETYPE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::SequenceType> createSequenceType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::SEQUENCETYPE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::SequenceType> createSequenceType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::SEQUENCETYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::SetType> createSetType(const int metaElementID = TypesPackage::SETTYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::SetType> createSetType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::SETTYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::SetType> createSetType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::SETTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType(const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::TemplateParameterType> createTemplateParameterType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::TEMPLATEPARAMETERTYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType(const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::TupleType> createTupleType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::TUPLETYPE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType(const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Types::VoidType> createVoidType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = TypesPackage::VOIDTYPE_CLASS) const ;
 			 

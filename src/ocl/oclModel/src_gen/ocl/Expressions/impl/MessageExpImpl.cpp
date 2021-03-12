@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,13 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "uml/CallOperationAction.hpp"
@@ -43,8 +49,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 
@@ -101,25 +105,18 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_app
 }
 
 //Additional constructor for the containments back reference
-MessageExpImpl::MessageExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:MessageExpImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :MessageExpImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -134,10 +131,10 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange >
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -205,7 +202,6 @@ MessageExpImpl& MessageExpImpl::operator=(const MessageExpImpl & obj)
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -220,8 +216,6 @@ MessageExpImpl& MessageExpImpl::operator=(const MessageExpImpl & obj)
 	m_argument.reset(new Bag<ocl::Expressions::OclExpression>(*(obj.getArgument().get())));
 
 	m_calledOperation  = obj.getCalledOperation();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -360,21 +354,6 @@ void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> 
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> MessageExpImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -390,11 +369,6 @@ void MessageExpImpl::setThisMessageExpPtr(std::weak_ptr<MessageExp> thisMessageE
 std::shared_ptr<ecore::EObject> MessageExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -468,14 +442,14 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4826
+			return eAny(tempList); //4823
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCalledOperation())); //4827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCalledOperation())); //4824
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSentSignal())); //4828
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSentSignal())); //4825
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //4825
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //4822
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,13 +458,13 @@ bool MessageExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //4826
+			return getArgument() != nullptr; //4823
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return getCalledOperation() != nullptr; //4827
+			return getCalledOperation() != nullptr; //4824
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return getSentSignal() != nullptr; //4828
+			return getSentSignal() != nullptr; //4825
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //4825
+			return getTarget() != nullptr; //4822
 	}
 	return OclExpressionImpl::internalEIsSet(featureID);
 }
@@ -539,7 +513,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallOperationAction> _calledOperation = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCalledOperation(_calledOperation); //4827
+			setCalledOperation(_calledOperation); //4824
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
@@ -547,7 +521,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::SendSignalAction> _sentSignal = std::dynamic_pointer_cast<uml::SendSignalAction>(_temp);
-			setSentSignal(_sentSignal); //4828
+			setSentSignal(_sentSignal); //4825
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
@@ -555,7 +529,7 @@ bool MessageExpImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _target = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setTarget(_target); //4825
+			setTarget(_target); //4822
 			return true;
 		}
 	}
@@ -706,9 +680,6 @@ void MessageExpImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

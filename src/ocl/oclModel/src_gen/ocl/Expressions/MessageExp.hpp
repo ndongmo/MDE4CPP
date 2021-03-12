@@ -67,11 +67,6 @@ namespace ecore
 	class EGenericType;
 }
 
-namespace ecore 
-{
-	class EObject;
-}
-
 namespace ocl::Expressions 
 {
 	class ExpressionInOcl;
@@ -197,7 +192,6 @@ namespace ocl::Expressions
 			// Union Getter
 			//*********************************
 			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

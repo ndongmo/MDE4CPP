@@ -30,6 +30,10 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+
+
+
 #include "ecore/EClassifier.hpp"
 
 //Factories an Package includes

@@ -3,7 +3,7 @@
 #include <ecore/EEnum.hpp>
 #include <ecore/EClass.hpp>
 #include <ecore/EParameter.hpp>
-#include <ecore/EcorePackage.hpp>
+#include <ecore/ecorePackage.hpp>
 #include <ecore/ETypeParameter.hpp>
 #include <abstractDataTypes/Bag.hpp>
 #include <abstractDataTypes/Subset.hpp>
@@ -12,7 +12,7 @@
 #include <uml/Object.hpp>
 #include <uml/ValueSpecification.hpp>
 
-#include <ecore/EcoreFactory.hpp>
+#include <ecore/ecoreFactory.hpp>
 #include <ecore/EPackage.hpp>
 #include <ecore/EEnum.hpp>
 #include <ecore/EClass.hpp>
@@ -371,7 +371,7 @@ bool OclReflection::getResult(std::shared_ptr<OclExpression> source)
 
 std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr<uml::Package> upackage)
 {
-    std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+    std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
     std::shared_ptr<ecore::EPackage> epackage = factory->createEPackage(upackage->getMetaElementID());
     epackage->setName(upackage->getName());
 
@@ -410,10 +410,10 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
             {
                 std::shared_ptr<ecore::EStructuralFeature> prop = nullptr;
                 if((*it_attribute)->getAssociation() == nullptr) {
-                    prop = ecore::EcoreFactory::eInstance()->createEAttribute_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
+                    prop = ecore::ecoreFactory::eInstance()->createEAttribute_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
                 }
                 else {
-                    prop = ecore::EcoreFactory::eInstance()->createEReference_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
+                    prop = ecore::ecoreFactory::eInstance()->createEReference_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
                 }
                 std::string name = (*it_attribute)->getName();
                 std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_attribute)->getType());
@@ -429,7 +429,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
             for (Bag<uml::Operation>::const_iterator it_operation = uml_operations->begin();
                  it_operation != endIt_operation; ++it_operation)
             {
-                std::shared_ptr<ecore::EOperation> op = ecore::EcoreFactory::eInstance()->createEOperation_in_EContainingClass(eclass, (*it_operation)->getMetaElementID());
+                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_in_EContainingClass(eclass, (*it_operation)->getMetaElementID());
                 std::string name = (*it_operation)->getName();
                 std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_operation)->getType());
                 op->setName(name);
@@ -439,7 +439,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
                 //std::cout << name << std::endl;
                 for(size_t i = 0; i < (*it_operation)->getOwnedParameter()->size(); i++) {
                     std::shared_ptr<uml::Parameter> p = (*it_operation)->getOwnedParameter()->at(i);
-                    std::shared_ptr<ecore::EParameter> param = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(op, p->getMetaElementID());
+                    std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(op, p->getMetaElementID());
                     std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, p->getType());
                     param->setEType(propType);
                     param->setName(p->getName());
@@ -457,7 +457,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
                 for (Bag<uml::EnumerationLiteral>::const_iterator it_literal = uliteral->begin();
                      it_literal != endIt_literal; ++it_literal)
                 {
-                    std::shared_ptr<ecore::EEnumLiteral> literal = ecore::EcoreFactory::eInstance()->createEEnumLiteral_in_EEnum(eenum, (*it_literal)->getMetaElementID());
+                    std::shared_ptr<ecore::EEnumLiteral> literal = ecore::ecoreFactory::eInstance()->createEEnumLiteral_in_EEnum(eenum, (*it_literal)->getMetaElementID());
                     literal->setName((*it_literal)->getName());
                     //std::cout << (*it_literal)->getName() << std::endl;
                 }
@@ -509,19 +509,19 @@ std::shared_ptr<ecore::EClassifier> OclReflection::createClassifier(std::shared_
         return propType;
     }
     else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean()->getName()){
-        propType = ::types::TypesPackage::eInstance()->getBoolean_Class();
+        propType = ::types::typesPackage::eInstance()->getBoolean_Class();
     }
     else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer()->getName()){
-        propType = ::types::TypesPackage::eInstance()->getInteger_Class();
+        propType = ::types::typesPackage::eInstance()->getInteger_Class();
     }
     else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real()->getName()){
-        propType = ::types::TypesPackage::eInstance()->getReal_Class();
+        propType = ::types::typesPackage::eInstance()->getReal_Class();
     }
     else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String()->getName()){
-        propType = ::types::TypesPackage::eInstance()->getString_Class();
+        propType = ::types::typesPackage::eInstance()->getString_Class();
     }
     else if(name == PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural()->getName()){
-        propType = ::types::TypesPackage::eInstance()->getUnlimitedNatural_Class();
+        propType = ::types::typesPackage::eInstance()->getUnlimitedNatural_Class();
     }
     return propType;
 }

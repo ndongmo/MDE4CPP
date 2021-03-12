@@ -8,15 +8,15 @@
 #include <pluginFramework/MDE4CPPPlugin.hpp>
 #include <pluginFramework/EcoreModelPlugin.hpp>
 
-#include <uml/UmlFactory.hpp>
-#include <uml/UmlPackage.hpp>
+#include <uml/umlFactory.hpp>
+#include <uml/umlPackage.hpp>
 #include <uml/Package.hpp>
 #include <uml/PackageableElement.hpp>
 
-#include <ecore/EcoreFactory.hpp>
+#include <ecore/ecoreFactory.hpp>
 #include <ecore/EClass.hpp>
 #include <ecore/EPackage.hpp>
-#include <ecore/EcorePackage.hpp>
+#include <ecore/ecorePackage.hpp>
 #include <ecore/EClassifier.hpp>
 
 using namespace Utilities;
@@ -90,7 +90,7 @@ std::shared_ptr<Variable> Environment::lookupPathName(std::vector<std::string>& 
 {
     if(names.size() > 0) {
         std::shared_ptr<Variable> var = lookupPathName(names[0]);
-        if(var != nullptr && var->getEType()->getClassifierID() == ecore::EcorePackage::EPACKAGE_CLASS && names.size() > 1) {
+        if(var != nullptr && var->getEType()->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS && names.size() > 1) {
             std::shared_ptr<ocl::Values::ObjectValue> value = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(var->getValue());
             std::shared_ptr<ecore::EPackage> package = std::dynamic_pointer_cast<ecore::EPackage>(value->getValue());
             names.erase(names.begin());
@@ -112,7 +112,7 @@ std::shared_ptr<Variable> Environment::lookupPathName(const std::string& name)
     for(auto&e : m_namedElements) {
         std::shared_ptr<Variable> var = e.second->getReferredElement();
 
-        if(var->getEType()->getClassifierID() == ecore::EcorePackage::EPACKAGE_CLASS) {
+        if(var->getEType()->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS) {
             std::shared_ptr<ocl::Values::ObjectValue> value = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(var->getValue());
             std::shared_ptr<ecore::EPackage> package = std::dynamic_pointer_cast<ecore::EPackage>(value->getValue());
             std::shared_ptr<ecore::EClassifier> eclass = package->getEClassifier(name);
@@ -132,7 +132,7 @@ std::shared_ptr<Variable> Environment::lookupPathName(const std::string& name)
                 return varPack;
             }
         }
-        else if(var->getEType()->getClassifierID() == uml::UmlPackage::PACKAGE_CLASS) {
+        else if(var->getEType()->getClassifierID() == uml::umlPackage::PACKAGE_CLASS) {
             std::shared_ptr<ocl::Values::ObjectValue> value = std::dynamic_pointer_cast<ocl::Values::ObjectValue>(var->getValue());
             std::shared_ptr<uml::Package> package = std::dynamic_pointer_cast<uml::Package>(value->getValue());
             std::shared_ptr<uml::PackageableElement> eclass = nullptr;
@@ -216,18 +216,18 @@ std::string Environment::generateName()
 std::shared_ptr<ecore::EClass> Environment::getMetaClass(std::shared_ptr<ecore::EClassifier> type)
 {
     if(m_level == Level::M2 ||
-            type->getClassifierID() == ecore::EcorePackage::EPACKAGE_CLASS ||
-            type->getClassifierID() == ecore::EcorePackage::EOPERATION_CLASS ||
-            type->getClassifierID() == ecore::EcorePackage::EATTRIBUTE_CLASS ||
-            type->getClassifierID() == ecore::EcorePackage::EREFERENCE_CLASS ||
-            type->getClassifierID() == ecore::EcorePackage::EENUM_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::MODEL_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::PACKAGE_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::CLASS_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::OPERATION_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::PROPERTY_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::ASSOCIATION_CLASS ||
-            type->getClassifierID() == uml::UmlPackage::ENUMERATION_CLASS )
+            type->getClassifierID() == ecore::ecorePackage::EPACKAGE_CLASS ||
+            type->getClassifierID() == ecore::ecorePackage::EOPERATION_CLASS ||
+            type->getClassifierID() == ecore::ecorePackage::EATTRIBUTE_CLASS ||
+            type->getClassifierID() == ecore::ecorePackage::EREFERENCE_CLASS ||
+            type->getClassifierID() == ecore::ecorePackage::EENUM_CLASS ||
+            type->getClassifierID() == uml::umlPackage::MODEL_CLASS ||
+            type->getClassifierID() == uml::umlPackage::PACKAGE_CLASS ||
+            type->getClassifierID() == uml::umlPackage::CLASS_CLASS ||
+            type->getClassifierID() == uml::umlPackage::OPERATION_CLASS ||
+            type->getClassifierID() == uml::umlPackage::PROPERTY_CLASS ||
+            type->getClassifierID() == uml::umlPackage::ASSOCIATION_CLASS ||
+            type->getClassifierID() == uml::umlPackage::ENUMERATION_CLASS )
     {
         return std::dynamic_pointer_cast<ecore::EClass>(type);
     }
@@ -263,7 +263,7 @@ std::shared_ptr<ecore::EObject> Environment::createNewObject(std::shared_ptr<eco
             obj = meta_model->create(e_class->getName());
         }
         else {
-            obj = uml::UmlFactory::eInstance()->create(e_class->getName());
+            obj = uml::umlFactory::eInstance()->create(e_class->getName());
         }
     }
     return obj;

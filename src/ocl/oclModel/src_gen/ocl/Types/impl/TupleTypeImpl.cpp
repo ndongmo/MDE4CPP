@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +31,15 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EDataType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -76,13 +79,6 @@ TupleTypeImpl::~TupleTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:TupleTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :TupleTypeImpl()
 {
@@ -112,14 +108,11 @@ TupleTypeImpl& TupleTypeImpl::operator=(const TupleTypeImpl & obj)
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 	m_instance  = obj.getInstance();
@@ -205,21 +198,6 @@ std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() cons
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> TupleTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -234,11 +212,6 @@ void TupleTypeImpl::setThisTupleTypePtr(std::weak_ptr<TupleType> thisTupleTypePt
 }
 std::shared_ptr<ecore::EObject> TupleTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -254,7 +227,7 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //8812
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //889
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -265,7 +238,7 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8813
+			return eAny(tempList); //8810
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -275,9 +248,9 @@ bool TupleTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //8812
+			return getInstance() != nullptr; //889
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
-			return getParts() != nullptr; //8813
+			return getParts() != nullptr; //8810
 	}
 	return ecore::EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -290,7 +263,7 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Values::TupleValue> _instance = std::dynamic_pointer_cast<ocl::Values::TupleValue>(_temp);
-			setInstance(_instance); //8812
+			setInstance(_instance); //889
 			return true;
 		}
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
@@ -439,9 +412,6 @@ void TupleTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

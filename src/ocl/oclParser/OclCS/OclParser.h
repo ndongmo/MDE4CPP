@@ -1,5 +1,8 @@
 
-// Generated from OclParser.g4 by ANTLR 4.7
+  #include "CSTNode.h"
+
+
+// Generated from OclParser.g4 by ANTLR 4.9
 
 #pragma once
 
@@ -54,7 +57,7 @@ public:
     RuleParametersCS = 61
   };
 
-  OclParser(antlr4::TokenStream *input);
+  explicit OclParser(antlr4::TokenStream *input);
   ~OclParser();
 
   virtual std::string getGrammarFileName() const override;
@@ -127,7 +130,7 @@ public:
   class OperationCSContext;
   class ParametersCSContext; 
 
-  class  ExpressionInOclCSContext : public antlr4::ParserRuleContext {
+  class  ExpressionInOclCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     ExpressionInOclCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -142,7 +145,7 @@ public:
 
   ExpressionInOclCSContext* expressionInOclCS();
 
-  class  OclExpressionCSContext : public antlr4::ParserRuleContext {
+  class  OclExpressionCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OclExpressionCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -150,11 +153,18 @@ public:
     OperationCallExpCS_BContext *operationCallExpCS_B();
     PropertyCallExpCS_BContext *propertyCallExpCS_B();
     AssociationClassCallExpCS_BContext *associationClassCallExpCS_B();
+    antlr4::tree::TerminalNode *LPAREN();
+    std::vector<OclExpressionCSContext *> oclExpressionCS();
+    OclExpressionCSContext* oclExpressionCS(size_t i);
+    antlr4::tree::TerminalNode *RPAREN();
     VariableExpCSContext *variableExpCS();
     LiteralExpCSContext *literalExpCS();
     LetExpCSContext *letExpCS();
     IfExpCSContext *ifExpCS();
-    OclExpressionCSContext *oclExpressionCS();
+    antlr4::tree::TerminalNode *STAR();
+    antlr4::tree::TerminalNode *SLASH();
+    antlr4::tree::TerminalNode *PLUS();
+    antlr4::tree::TerminalNode *MINUS();
     OperationCallExpCS_AContext *operationCallExpCS_A();
     PropertyCallExpCS_AContext *propertyCallExpCS_A();
     AssociationClassCallExpCS_AContext *associationClassCallExpCS_A();
@@ -172,7 +182,7 @@ public:
 
   OclExpressionCSContext* oclExpressionCS();
   OclExpressionCSContext* oclExpressionCS(int precedence);
-  class  VariableExpCSContext : public antlr4::ParserRuleContext {
+  class  VariableExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     VariableExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -188,7 +198,7 @@ public:
 
   VariableExpCSContext* variableExpCS();
 
-  class  SimpleNameCSContext : public antlr4::ParserRuleContext {
+  class  SimpleNameCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     SimpleNameCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -203,7 +213,7 @@ public:
 
   SimpleNameCSContext* simpleNameCS();
 
-  class  RestrictedKeywordCSContext : public antlr4::ParserRuleContext {
+  class  RestrictedKeywordCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     RestrictedKeywordCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -221,7 +231,7 @@ public:
 
   RestrictedKeywordCSContext* restrictedKeywordCS();
 
-  class  UnreservedSimpleNameCSContext : public antlr4::ParserRuleContext {
+  class  UnreservedSimpleNameCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     UnreservedSimpleNameCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -237,7 +247,7 @@ public:
 
   UnreservedSimpleNameCSContext* unreservedSimpleNameCS();
 
-  class  PathNameCSContext : public antlr4::ParserRuleContext {
+  class  PathNameCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PathNameCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -255,7 +265,7 @@ public:
 
   PathNameCSContext* pathNameCS();
   PathNameCSContext* pathNameCS(int precedence);
-  class  LiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  LiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     LiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -274,7 +284,7 @@ public:
 
   LiteralExpCSContext* literalExpCS();
 
-  class  EnumLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  EnumLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     EnumLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -291,7 +301,7 @@ public:
 
   EnumLiteralExpCSContext* enumLiteralExpCS();
 
-  class  CollectionLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  CollectionLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -309,7 +319,7 @@ public:
 
   CollectionLiteralExpCSContext* collectionLiteralExpCS();
 
-  class  CollectionTypeIdentifierCSContext : public antlr4::ParserRuleContext {
+  class  CollectionTypeIdentifierCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionTypeIdentifierCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -328,7 +338,7 @@ public:
 
   CollectionTypeIdentifierCSContext* collectionTypeIdentifierCS();
 
-  class  CollectionLiteralPartsCSContext : public antlr4::ParserRuleContext {
+  class  CollectionLiteralPartsCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionLiteralPartsCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -345,7 +355,7 @@ public:
 
   CollectionLiteralPartsCSContext* collectionLiteralPartsCS();
 
-  class  CollectionLiteralPartCSContext : public antlr4::ParserRuleContext {
+  class  CollectionLiteralPartCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionLiteralPartCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -361,7 +371,7 @@ public:
 
   CollectionLiteralPartCSContext* collectionLiteralPartCS();
 
-  class  CollectionRangeCSContext : public antlr4::ParserRuleContext {
+  class  CollectionRangeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionRangeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -378,7 +388,7 @@ public:
 
   CollectionRangeCSContext* collectionRangeCS();
 
-  class  PrefixedExpContext : public antlr4::ParserRuleContext {
+  class  PrefixedExpContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PrefixedExpContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -394,7 +404,7 @@ public:
 
   PrefixedExpContext* prefixedExp();
 
-  class  InfixedExpCSContext : public antlr4::ParserRuleContext {
+  class  InfixedExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     InfixedExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -410,7 +420,7 @@ public:
 
   InfixedExpCSContext* infixedExpCS();
 
-  class  PrimitiveLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  PrimitiveLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PrimitiveLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -431,7 +441,7 @@ public:
 
   PrimitiveLiteralExpCSContext* primitiveLiteralExpCS();
 
-  class  TupleLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  TupleLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     TupleLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -449,7 +459,7 @@ public:
 
   TupleLiteralExpCSContext* tupleLiteralExpCS();
 
-  class  UnlimitedNaturalLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  UnlimitedNaturalLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     UnlimitedNaturalLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -465,7 +475,7 @@ public:
 
   UnlimitedNaturalLiteralExpCSContext* unlimitedNaturalLiteralExpCS();
 
-  class  IntegerLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  IntegerLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     IntegerLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -480,7 +490,7 @@ public:
 
   IntegerLiteralExpCSContext* integerLiteralExpCS();
 
-  class  RealLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  RealLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     RealLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -495,7 +505,7 @@ public:
 
   RealLiteralExpCSContext* realLiteralExpCS();
 
-  class  StringLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  StringLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     StringLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -510,7 +520,7 @@ public:
 
   StringLiteralExpCSContext* stringLiteralExpCS();
 
-  class  BooleanLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  BooleanLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     BooleanLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -525,7 +535,7 @@ public:
 
   BooleanLiteralExpCSContext* booleanLiteralExpCS();
 
-  class  TypeLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  TypeLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     TypeLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -540,7 +550,7 @@ public:
 
   TypeLiteralExpCSContext* typeLiteralExpCS();
 
-  class  IteratorExpCSContext : public antlr4::ParserRuleContext {
+  class  IteratorExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     IteratorExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -567,7 +577,7 @@ public:
 
   IteratorExpCSContext* iteratorExpCS();
 
-  class  IterateExpCSContext : public antlr4::ParserRuleContext {
+  class  IterateExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     IterateExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -590,7 +600,7 @@ public:
 
   IterateExpCSContext* iterateExpCS();
 
-  class  VariableDeclarationCSContext : public antlr4::ParserRuleContext {
+  class  VariableDeclarationCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     VariableDeclarationCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -609,7 +619,7 @@ public:
 
   VariableDeclarationCSContext* variableDeclarationCS();
 
-  class  TypeCSContext : public antlr4::ParserRuleContext {
+  class  TypeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     TypeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -628,7 +638,7 @@ public:
 
   TypeCSContext* typeCS();
 
-  class  PrimitiveTypeCSContext : public antlr4::ParserRuleContext {
+  class  PrimitiveTypeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PrimitiveTypeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -647,7 +657,7 @@ public:
 
   PrimitiveTypeCSContext* primitiveTypeCS();
 
-  class  OclTypeCSContext : public antlr4::ParserRuleContext {
+  class  OclTypeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OclTypeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -665,7 +675,7 @@ public:
 
   OclTypeCSContext* oclTypeCS();
 
-  class  CollectionTypeCSContext : public antlr4::ParserRuleContext {
+  class  CollectionTypeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     CollectionTypeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -683,7 +693,7 @@ public:
 
   CollectionTypeCSContext* collectionTypeCS();
 
-  class  TupleTypeCSContext : public antlr4::ParserRuleContext {
+  class  TupleTypeCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     TupleTypeCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -701,7 +711,7 @@ public:
 
   TupleTypeCSContext* tupleTypeCS();
 
-  class  VariableDeclarationListCSContext : public antlr4::ParserRuleContext {
+  class  VariableDeclarationListCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     VariableDeclarationListCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -718,13 +728,12 @@ public:
 
   VariableDeclarationListCSContext* variableDeclarationListCS();
 
-  class  OperationCallExpCS_AContext : public antlr4::ParserRuleContext {
+  class  OperationCallExpCS_AContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OperationCallExpCS_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    SimpleNameCSContext *simpleNameCS();
-    OclExpressionCSContext *oclExpressionCS();
     antlr4::tree::TerminalNode *RARROW();
+    SimpleNameCSContext *simpleNameCS();
     antlr4::tree::TerminalNode *LPAREN();
     antlr4::tree::TerminalNode *RPAREN();
     ArgumentsCSContext *argumentsCS();
@@ -742,7 +751,7 @@ public:
 
   OperationCallExpCS_AContext* operationCallExpCS_A();
 
-  class  OperationCallExpCS_BContext : public antlr4::ParserRuleContext {
+  class  OperationCallExpCS_BContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OperationCallExpCS_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -752,7 +761,6 @@ public:
     ArgumentsCSContext *argumentsCS();
     IsMarkedPreCSContext *isMarkedPreCS();
     PathNameCSContext *pathNameCS();
-    OclExpressionCSContext *oclExpressionCS();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -763,7 +771,7 @@ public:
 
   OperationCallExpCS_BContext* operationCallExpCS_B();
 
-  class  PropertyCallExpCS_AContext : public antlr4::ParserRuleContext {
+  class  PropertyCallExpCS_AContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PropertyCallExpCS_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -782,13 +790,12 @@ public:
 
   PropertyCallExpCS_AContext* propertyCallExpCS_A();
 
-  class  PropertyCallExpCS_BContext : public antlr4::ParserRuleContext {
+  class  PropertyCallExpCS_BContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PropertyCallExpCS_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     SimpleNameCSContext *simpleNameCS();
     IsMarkedPreCSContext *isMarkedPreCS();
-    PathNameCSContext *pathNameCS();
 
     virtual void enterRule(antlr4::tree::ParseTreeListener *listener) override;
     virtual void exitRule(antlr4::tree::ParseTreeListener *listener) override;
@@ -799,7 +806,7 @@ public:
 
   PropertyCallExpCS_BContext* propertyCallExpCS_B();
 
-  class  AssociationClassCallExpCS_AContext : public antlr4::ParserRuleContext {
+  class  AssociationClassCallExpCS_AContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     AssociationClassCallExpCS_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -819,7 +826,7 @@ public:
 
   AssociationClassCallExpCS_AContext* associationClassCallExpCS_A();
 
-  class  AssociationClassCallExpCS_BContext : public antlr4::ParserRuleContext {
+  class  AssociationClassCallExpCS_BContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     AssociationClassCallExpCS_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -838,7 +845,7 @@ public:
 
   AssociationClassCallExpCS_BContext* associationClassCallExpCS_B();
 
-  class  IsMarkedPreCSContext : public antlr4::ParserRuleContext {
+  class  IsMarkedPreCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     IsMarkedPreCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -854,7 +861,7 @@ public:
 
   IsMarkedPreCSContext* isMarkedPreCS();
 
-  class  ArgumentsCSContext : public antlr4::ParserRuleContext {
+  class  ArgumentsCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     ArgumentsCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -871,7 +878,7 @@ public:
 
   ArgumentsCSContext* argumentsCS();
 
-  class  LetExpCSContext : public antlr4::ParserRuleContext {
+  class  LetExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     LetExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -888,7 +895,7 @@ public:
 
   LetExpCSContext* letExpCS();
 
-  class  LetExpSubCSContext : public antlr4::ParserRuleContext {
+  class  LetExpSubCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     LetExpSubCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -907,7 +914,7 @@ public:
 
   LetExpSubCSContext* letExpSubCS();
 
-  class  OclMessageExpCSContext : public antlr4::ParserRuleContext {
+  class  OclMessageExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OclMessageExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -927,7 +934,7 @@ public:
 
   OclMessageExpCSContext* oclMessageExpCS();
 
-  class  OclMessageArgumentsCSContext : public antlr4::ParserRuleContext {
+  class  OclMessageArgumentsCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OclMessageArgumentsCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -944,7 +951,7 @@ public:
 
   OclMessageArgumentsCSContext* oclMessageArgumentsCS();
 
-  class  OclMessageArgCSContext : public antlr4::ParserRuleContext {
+  class  OclMessageArgCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OclMessageArgCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -962,7 +969,7 @@ public:
 
   OclMessageArgCSContext* oclMessageArgCS();
 
-  class  IfExpCSContext : public antlr4::ParserRuleContext {
+  class  IfExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     IfExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -982,7 +989,7 @@ public:
 
   IfExpCSContext* ifExpCS();
 
-  class  NullLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  NullLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     NullLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -997,7 +1004,7 @@ public:
 
   NullLiteralExpCSContext* nullLiteralExpCS();
 
-  class  InvalidLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  InvalidLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     InvalidLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1012,7 +1019,7 @@ public:
 
   InvalidLiteralExpCSContext* invalidLiteralExpCS();
 
-  class  UnaryLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  UnaryLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     UnaryLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1028,14 +1035,10 @@ public:
 
   UnaryLiteralExpCSContext* unaryLiteralExpCS();
 
-  class  BinaryLiteralExpCSContext : public antlr4::ParserRuleContext {
+  class  BinaryLiteralExpCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     BinaryLiteralExpCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *STAR();
-    antlr4::tree::TerminalNode *SLASH();
-    antlr4::tree::TerminalNode *PLUS();
-    antlr4::tree::TerminalNode *MINUS();
     antlr4::tree::TerminalNode *LT();
     antlr4::tree::TerminalNode *LTE();
     antlr4::tree::TerminalNode *GTE();
@@ -1055,7 +1058,7 @@ public:
 
   BinaryLiteralExpCSContext* binaryLiteralExpCS();
 
-  class  PackageDeclarationCSContext : public antlr4::ParserRuleContext {
+  class  PackageDeclarationCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PackageDeclarationCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1074,7 +1077,7 @@ public:
 
   PackageDeclarationCSContext* packageDeclarationCS();
 
-  class  ContextDeclarationCSContext : public antlr4::ParserRuleContext {
+  class  ContextDeclarationCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     ContextDeclarationCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1091,7 +1094,7 @@ public:
 
   ContextDeclarationCSContext* contextDeclarationCS();
 
-  class  ClassifierContextDeclCSContext : public antlr4::ParserRuleContext {
+  class  ClassifierContextDeclCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     ClassifierContextDeclCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1110,7 +1113,7 @@ public:
 
   ClassifierContextDeclCSContext* classifierContextDeclCS();
 
-  class  OperationContextDeclCSContext : public antlr4::ParserRuleContext {
+  class  OperationContextDeclCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OperationContextDeclCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1127,7 +1130,7 @@ public:
 
   OperationContextDeclCSContext* operationContextDeclCS();
 
-  class  PropertyContextDeclCSContext : public antlr4::ParserRuleContext {
+  class  PropertyContextDeclCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PropertyContextDeclCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1148,7 +1151,7 @@ public:
 
   PropertyContextDeclCSContext* propertyContextDeclCS();
 
-  class  DefExpressionCSContext : public antlr4::ParserRuleContext {
+  class  DefExpressionCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     DefExpressionCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1166,7 +1169,7 @@ public:
 
   DefExpressionCSContext* defExpressionCS();
 
-  class  InvOrDefCSContext : public antlr4::ParserRuleContext {
+  class  InvOrDefCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     InvOrDefCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1187,7 +1190,7 @@ public:
 
   InvOrDefCSContext* invOrDefCS();
 
-  class  InitOrDerValueCSContext : public antlr4::ParserRuleContext {
+  class  InitOrDerValueCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     InitOrDerValueCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1206,7 +1209,7 @@ public:
 
   InitOrDerValueCSContext* initOrDerValueCS();
 
-  class  PrePostOrBodyDeclCSContext : public antlr4::ParserRuleContext {
+  class  PrePostOrBodyDeclCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     PrePostOrBodyDeclCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1227,7 +1230,7 @@ public:
 
   PrePostOrBodyDeclCSContext* prePostOrBodyDeclCS();
 
-  class  OperationCSContext : public antlr4::ParserRuleContext {
+  class  OperationCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     OperationCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -1249,7 +1252,7 @@ public:
 
   OperationCSContext* operationCS();
 
-  class  ParametersCSContext : public antlr4::ParserRuleContext {
+  class  ParametersCSContext : public antlr4::ParserRuleContext, public CSTNode {
   public:
     ParametersCSContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;

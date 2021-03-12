@@ -63,11 +63,6 @@ namespace ecore
 
 namespace ecore 
 {
-	class EObject;
-}
-
-namespace ecore 
-{
 	class ETypedElement;
 }
 
@@ -128,10 +123,6 @@ namespace ocl::Expressions
 			//Additional constructors for the containments back reference
 
 			OclExpression(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement);
-
-			//Additional constructors for the containments back reference
-
-			OclExpression(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
 
@@ -289,7 +280,6 @@ namespace ocl::Expressions
 			// Union Getter
 			//*********************************
 			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

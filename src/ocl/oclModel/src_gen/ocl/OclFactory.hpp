@@ -108,11 +108,6 @@ namespace ocl::Expressions
 	class IterateExp;
 }
 
-namespace ecore 
-{
-	class EObject;
-}
-
 namespace ocl::Expressions 
 {
 	class IfExp;
@@ -183,7 +178,6 @@ namespace ocl::Expressions
 	class ExpressionInOcl;
 }
 
-
 namespace ocl::Types 
 {
 	class AnyType;
@@ -202,14 +196,8 @@ namespace ocl::Types
 
 namespace ecore 
 {
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
-
 
 namespace ocl::Values 
 {

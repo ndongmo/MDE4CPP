@@ -10,5 +10,5 @@ task generateOcl(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	
 	modelFilePath = file('.' + File.separator + 'ocl.ecore')
 
-	relatedModels = ['ecore', 'ecore', 'fUML', 'types', 'uml']
+	relatedModels = ['ecore', 'fUML', 'types', 'uml']
 }

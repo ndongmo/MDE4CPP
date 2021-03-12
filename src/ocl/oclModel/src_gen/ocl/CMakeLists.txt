@@ -64,18 +64,6 @@ SET(SOURCE_FILES
 	Evaluations/impl/EvaluationsPackageImpl.cpp
 	Evaluations/impl/EvaluationsPackageImpl_Creation.cpp
 	Evaluations/impl/EvaluationsPackageImpl_Initialization.cpp
-	OclCS/OclCSFactory.cpp
-	OclCS/impl/OclCSFactoryImpl.cpp
-	OclCS/OclCSPackage.cpp
-	OclCS/impl/OclCSPackageImpl.cpp
-	OclCS/impl/OclCSPackageImpl_Creation.cpp
-	OclCS/impl/OclCSPackageImpl_Initialization.cpp
-	Utilities/UtilitiesFactory.cpp
-	Utilities/impl/UtilitiesFactoryImpl.cpp
-	Utilities/UtilitiesPackage.cpp
-	Utilities/impl/UtilitiesPackageImpl.cpp
-	Utilities/impl/UtilitiesPackageImpl_Creation.cpp
-	Utilities/impl/UtilitiesPackageImpl_Initialization.cpp
 	
 # Package plugin
 	impl/oclPluginImpl.cpp
@@ -198,13 +186,11 @@ IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(FUML_DEBUG fUMLd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(FUML_RELEASE fUML.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
@@ -214,13 +200,11 @@ IF(UNIX AND NOT APPLE)
 ELSEIF(APPLE)
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
-		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(FUML_DEBUG fUMLd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_DEBUG typesd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(FUML_RELEASE fUML.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(TYPES_RELEASE types.dylib ${MDE4CPP_HOME}/application/bin)
@@ -230,13 +214,11 @@ ELSEIF(APPLE)
 ELSE()
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(FUML_DEBUG fUMLd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		
 	ELSE()
-		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(FUML_RELEASE fUML ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
@@ -251,14 +233,12 @@ SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 		debug ${ECORE_DEBUG}
-		debug ${ECORE_DEBUG}
 		debug ${FUML_DEBUG}
 		debug ${TYPES_DEBUG}
 		debug ${UML_DEBUG}
 	)
 ELSE()
 	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-		optimized ${ECORE_RELEASE}
 		optimized ${ECORE_RELEASE}
 		optimized ${FUML_RELEASE}
 		optimized ${TYPES_RELEASE}

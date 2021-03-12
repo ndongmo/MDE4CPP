@@ -75,8 +75,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::AssociationClassCallExp> createAssociationClassCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::AssociationClassCallExp> createAssociationClassCallExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::AssociationClassCallExp> createAssociationClassCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::AssociationClassCallExp> createAssociationClassCallExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_CLASS) const ;
@@ -101,8 +99,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::BooleanLiteralExp> createBooleanLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::BOOLEANLITERALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::BooleanLiteralExp> createBooleanLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::BOOLEANLITERALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::BooleanLiteralExp> createBooleanLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::BOOLEANLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::BooleanLiteralExp> createBooleanLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::BOOLEANLITERALEXP_CLASS) const ;
@@ -124,14 +120,10 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::BooleanLiteralExp> createBooleanLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression, const int metaElementID = ExpressionsPackage::BOOLEANLITERALEXP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::CollectionItem> createCollectionItem(const int metaElementID = ExpressionsPackage::COLLECTIONITEM_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::CollectionItem> createCollectionItem_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::COLLECTIONITEM_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::CollectionLiteralExp> createCollectionLiteralExp(const int metaElementID = ExpressionsPackage::COLLECTIONLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::CollectionLiteralExp> createCollectionLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::COLLECTIONLITERALEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::CollectionLiteralExp> createCollectionLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::COLLECTIONLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::CollectionLiteralExp> createCollectionLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::COLLECTIONLITERALEXP_CLASS) const ;
 			 //Add containing object
@@ -154,14 +146,10 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::CollectionLiteralExp> createCollectionLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression, const int metaElementID = ExpressionsPackage::COLLECTIONLITERALEXP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::CollectionRange> createCollectionRange(const int metaElementID = ExpressionsPackage::COLLECTIONRANGE_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::CollectionRange> createCollectionRange_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::COLLECTIONRANGE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> createEnumLiteralExp(const int metaElementID = ExpressionsPackage::ENUMLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> createEnumLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::ENUMLITERALEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> createEnumLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::ENUMLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> createEnumLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::ENUMLITERALEXP_CLASS) const ;
 			 //Add containing object
@@ -184,14 +172,10 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::EnumLiteralExp> createEnumLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression, const int metaElementID = ExpressionsPackage::ENUMLITERALEXP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> createExpressionInOcl(const int metaElementID = ExpressionsPackage::EXPRESSIONINOCL_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::ExpressionInOcl> createExpressionInOcl_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::EXPRESSIONINOCL_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::IfExp> createIfExp(const int metaElementID = ExpressionsPackage::IFEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IfExp> createIfExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::IFEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::IfExp> createIfExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::IFEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IfExp> createIfExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::IFEXP_CLASS) const ;
 			 //Add containing object
@@ -217,8 +201,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InfixedExp> createInfixedExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::INFIXEDEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::InfixedExp> createInfixedExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::INFIXEDEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InfixedExp> createInfixedExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::INFIXEDEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InfixedExp> createInfixedExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::INFIXEDEXP_CLASS) const ;
@@ -242,8 +224,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::IntegerLiteralExp> createIntegerLiteralExp(const int metaElementID = ExpressionsPackage::INTEGERLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IntegerLiteralExp> createIntegerLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::INTEGERLITERALEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::IntegerLiteralExp> createIntegerLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::INTEGERLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IntegerLiteralExp> createIntegerLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::INTEGERLITERALEXP_CLASS) const ;
 			 //Add containing object
@@ -269,8 +249,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InvalidLiteralExp> createInvalidLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::INVALIDLITERALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::InvalidLiteralExp> createInvalidLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::INVALIDLITERALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InvalidLiteralExp> createInvalidLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::INVALIDLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::InvalidLiteralExp> createInvalidLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::INVALIDLITERALEXP_CLASS) const ;
@@ -294,8 +272,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::IterateExp> createIterateExp(const int metaElementID = ExpressionsPackage::ITERATEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IterateExp> createIterateExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::ITERATEEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::IterateExp> createIterateExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::ITERATEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IterateExp> createIterateExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::ITERATEEXP_CLASS) const ;
 			 //Add containing object
@@ -321,8 +297,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IteratorExp> createIteratorExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::ITERATOREXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::IteratorExp> createIteratorExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::ITERATOREXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IteratorExp> createIteratorExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::ITERATOREXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::IteratorExp> createIteratorExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::ITERATOREXP_CLASS) const ;
@@ -346,8 +320,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::LetExp> createLetExp(const int metaElementID = ExpressionsPackage::LETEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::LetExp> createLetExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::LETEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::LetExp> createLetExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::LETEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::LetExp> createLetExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::LETEXP_CLASS) const ;
 			 //Add containing object
@@ -373,8 +345,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::MessageExp> createMessageExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::MESSAGEEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::MessageExp> createMessageExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::MESSAGEEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::MessageExp> createMessageExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::MESSAGEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::MessageExp> createMessageExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::MESSAGEEXP_CLASS) const ;
@@ -398,8 +368,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::NullLiteralExp> createNullLiteralExp(const int metaElementID = ExpressionsPackage::NULLLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::NullLiteralExp> createNullLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::NULLLITERALEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::NullLiteralExp> createNullLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::NULLLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::NullLiteralExp> createNullLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::NULLLITERALEXP_CLASS) const ;
 			 //Add containing object
@@ -425,8 +393,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::OperationCallExp> createOperationCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::OPERATIONCALLEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::OperationCallExp> createOperationCallExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::OPERATIONCALLEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::OperationCallExp> createOperationCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::OPERATIONCALLEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::OperationCallExp> createOperationCallExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::OPERATIONCALLEXP_CLASS) const ;
@@ -450,8 +416,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::PropertyCallExp> createPropertyCallExp(const int metaElementID = ExpressionsPackage::PROPERTYCALLEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::PropertyCallExp> createPropertyCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::PROPERTYCALLEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::PropertyCallExp> createPropertyCallExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::PROPERTYCALLEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::PropertyCallExp> createPropertyCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::PROPERTYCALLEXP_CLASS) const ;
 			 //Add containing object
@@ -477,8 +441,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::RealLiteralExp> createRealLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::REALLITERALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::RealLiteralExp> createRealLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::REALLITERALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::RealLiteralExp> createRealLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::REALLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::RealLiteralExp> createRealLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::REALLITERALEXP_CLASS) const ;
@@ -502,8 +464,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::StateExp> createStateExp(const int metaElementID = ExpressionsPackage::STATEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::StateExp> createStateExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::STATEEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::StateExp> createStateExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::STATEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::StateExp> createStateExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::STATEEXP_CLASS) const ;
 			 //Add containing object
@@ -529,8 +489,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::StringLiteralExp> createStringLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::STRINGLITERALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::StringLiteralExp> createStringLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::STRINGLITERALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::StringLiteralExp> createStringLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::STRINGLITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::StringLiteralExp> createStringLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::STRINGLITERALEXP_CLASS) const ;
@@ -555,8 +513,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralExp> createTupleLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::TUPLELITERALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralExp> createTupleLiteralExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::TUPLELITERALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralExp> createTupleLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::TUPLELITERALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralExp> createTupleLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::TUPLELITERALEXP_CLASS) const ;
@@ -578,14 +534,10 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralExp> createTupleLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression, const int metaElementID = ExpressionsPackage::TUPLELITERALEXP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralPart> createTupleLiteralPart(const int metaElementID = ExpressionsPackage::TUPLELITERALPART_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::TupleLiteralPart> createTupleLiteralPart_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::TUPLELITERALPART_CLASS) const ;
 			 
 			 virtual std::shared_ptr<ocl::Expressions::TypeExp> createTypeExp(const int metaElementID = ExpressionsPackage::TYPEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::TypeExp> createTypeExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::TYPEEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::TypeExp> createTypeExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::TYPEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::TypeExp> createTypeExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::TYPEEXP_CLASS) const ;
 			 //Add containing object
@@ -611,8 +563,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> createUnlimitedNaturalExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> createUnlimitedNaturalExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> createUnlimitedNaturalExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> createUnlimitedNaturalExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange > par_firstOwner, const int metaElementID = ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS) const ;
@@ -636,8 +586,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> createUnspecifiedValueExp(const int metaElementID = ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> createUnspecifiedValueExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> createUnspecifiedValueExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> createUnspecifiedValueExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS) const ;
 			 //Add containing object
@@ -663,8 +611,6 @@ namespace ocl::Expressions
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::Variable> createVariable_in_BaseExp(std::weak_ptr<ocl::Expressions::IterateExp > par_baseExp, const int metaElementID = ExpressionsPackage::VARIABLE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::Variable> createVariable_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::VARIABLE_CLASS) const ;
-			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::Variable> createVariable_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp > par_loopExp, const int metaElementID = ExpressionsPackage::VARIABLE_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::Variable> createVariable_in_ResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_resultOwner, const int metaElementID = ExpressionsPackage::VARIABLE_CLASS) const ;
@@ -676,8 +622,6 @@ namespace ocl::Expressions
 			 virtual std::shared_ptr<ocl::Expressions::VariableExp> createVariableExp(const int metaElementID = ExpressionsPackage::VARIABLEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::VariableExp> createVariableExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement, const int metaElementID = ExpressionsPackage::VARIABLEEXP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<ocl::Expressions::VariableExp> createVariableExp_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = ExpressionsPackage::VARIABLEEXP_CLASS) const ;
 			 //Add containing object
 			 virtual std::shared_ptr<ocl::Expressions::VariableExp> createVariableExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp > par_elseOwner, const int metaElementID = ExpressionsPackage::VARIABLEEXP_CLASS) const ;
 			 //Add containing object

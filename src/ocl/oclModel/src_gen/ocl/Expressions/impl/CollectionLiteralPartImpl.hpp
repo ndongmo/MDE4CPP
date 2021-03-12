@@ -32,10 +32,6 @@ namespace ocl::Expressions
 			virtual std::shared_ptr<CollectionLiteralPart> getThisCollectionLiteralPartPtr() const;
 			virtual void setThisCollectionLiteralPartPtr(std::weak_ptr<CollectionLiteralPart> thisCollectionLiteralPartPtr);
 
-			//Additional constructors for the containments back reference
-			CollectionLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
 
 
 		public:
@@ -60,8 +56,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			
-			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
+			 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

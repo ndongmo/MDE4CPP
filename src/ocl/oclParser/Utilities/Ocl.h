@@ -8,20 +8,6 @@
 #ifndef OCL4CPP_H
 #define OCL4CPP_H
 
-#if defined(_MSC_VER) || defined(WIN64) || defined(_WIN64) || defined(__WIN64__) || defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-#  define Q_DECL_EXPORT __declspec(dllexport)
-#  define Q_DECL_IMPORT __declspec(dllimport)
-#else
-#  define Q_DECL_EXPORT     __attribute__((visibility("default")))
-#  define Q_DECL_IMPORT     __attribute__((visibility("default")))
-#endif
-
-#if defined(OCL4CPP_LIBRARY)
-#  define OCL4CPP_EXPORT Q_DECL_EXPORT
-#else
-#  define OCL4CPP_EXPORT Q_DECL_IMPORT
-#endif
-
 #include <ecore/EPackage.hpp>
 #include <uml/Package.hpp>
 #include <uml/Classifier.hpp>
@@ -59,7 +45,7 @@ class Environment;
  * \brief The OCL Parser/Interpreter provides an implementation of the Object Constraint Language 2.3 specification.
  *	It offers OCL constraint and query parsing and evaluation, model-based validation.
  */
-class OCL4CPP_EXPORT Ocl
+class Ocl
 {
     friend OclParserErrorListener;
     friend OclLexerErrorListener;

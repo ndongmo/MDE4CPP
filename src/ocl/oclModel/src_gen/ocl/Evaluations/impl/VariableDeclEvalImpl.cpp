@@ -30,6 +30,11 @@
 
 #include <exception> // used in Persistence
 
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+
+
+
 #include "ocl/Evaluations/OclExpEval.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"

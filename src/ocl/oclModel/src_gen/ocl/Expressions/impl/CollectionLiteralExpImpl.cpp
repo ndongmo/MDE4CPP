@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,12 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+
+
+
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
@@ -43,8 +48,6 @@
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ocl/Expressions/ExpressionInOcl.hpp"
 
@@ -99,25 +102,18 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
 }
 
 //Additional constructor for the containments back reference
-CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:CollectionLiteralExpImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
 :CollectionLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -132,10 +128,10 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
 {
 	switch(reference_id)
 	{	
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -204,7 +200,6 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 	m_kind = obj.getKind();
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -214,8 +209,6 @@ CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLi
 	//copy references with no containment (soft copy)
 	
 	m_appliedElement  = obj.getAppliedElement();
-
-	m_eContainer  = obj.getEContainer();
 
 	m_eType  = obj.getEType();
 
@@ -325,21 +318,6 @@ std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralE
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> CollectionLiteralExpImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -355,11 +333,6 @@ void CollectionLiteralExpImpl::setThisCollectionLiteralExpPtr(std::weak_ptr<Coll
 std::shared_ptr<ecore::EObject> CollectionLiteralExpImpl::eContainer() const
 {
 	if(auto wp = m_appliedElement.lock())
-	{
-		return wp;
-	}
-
-	if(auto wp = m_eContainer.lock())
 	{
 		return wp;
 	}
@@ -424,7 +397,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return eAny(getKind()); //1425
+			return eAny(getKind()); //1422
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -435,7 +408,7 @@ Any CollectionLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1426
+			return eAny(tempList); //1423
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -445,9 +418,9 @@ bool CollectionLiteralExpImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_KIND:
-			return m_kind != CollectionKind::COLLECTION;; //1425
+			return m_kind != CollectionKind::COLLECTION;; //1422
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
-			return getPart() != nullptr; //1426
+			return getPart() != nullptr; //1423
 	}
 	return LiteralExpImpl::internalEIsSet(featureID);
 }
@@ -459,7 +432,7 @@ bool CollectionLiteralExpImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			ocl::Expressions::CollectionKind _kind = newValue->get<ocl::Expressions::CollectionKind>();
-			setKind(_kind); //1425
+			setKind(_kind); //1422
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONLITERALEXP_ATTRIBUTE_PART:
@@ -624,9 +597,6 @@ void CollectionLiteralExpImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

@@ -1,7 +1,7 @@
 #ifndef OCLANALYSERERRORLISTENER_H
 #define OCLANALYSERERRORLISTENER_H
 
-#include "Utilities/Ocl.h"
+#include "../Utilities/Ocl.h"
 
 using namespace Utilities;
 

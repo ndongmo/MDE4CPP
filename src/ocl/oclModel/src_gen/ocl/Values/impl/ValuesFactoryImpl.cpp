@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 #include "ocl/Values/impl/BagTypeValueImpl.hpp"
 #include "ocl/Values/impl/CollectionValueImpl.hpp"
 #include "ocl/Values/impl/ElementImpl.hpp"
@@ -19,6 +20,10 @@
 #include "ocl/Values/impl/TupleValueImpl.hpp"
 #include "ocl/Values/impl/UndefinedValueImpl.hpp"
 
+#include "ocl/Types/TypesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 using namespace ocl::Values;

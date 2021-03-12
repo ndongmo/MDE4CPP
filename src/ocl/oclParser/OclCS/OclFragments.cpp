@@ -1,5 +1,5 @@
 
-// Generated from OclFragments.g4 by ANTLR 4.7
+// Generated from OclFragments.g4 by ANTLR 4.9
 
 
 #include "OclFragments.h"
@@ -61,32 +61,28 @@ atn::ATN OclFragments::_atn;
 std::vector<uint16_t> OclFragments::_serializedATN;
 
 std::vector<std::string> OclFragments::_ruleNames = {
-  u8"Bol", u8"Ws", u8"Hws", u8"Vws", u8"DocComment", u8"BlockComment", u8"LineComment", 
-  u8"LineCommentExt", u8"EscSeq", u8"EscAny", u8"UnicodeEsc", u8"OctalEscape", 
-  u8"HexNumeral", u8"OctalNumeral", u8"DecimalNumeral", u8"BinaryNumeral", 
-  u8"HexDigits", u8"DecDigits", u8"OctalDigits", u8"BinaryDigits", u8"HexDigit", 
-  u8"DecDigit", u8"OctalDigit", u8"BinaryDigit", u8"BoolLiteral", u8"CharLiteral", 
-  u8"SQuoteLiteral", u8"DQuoteLiteral", u8"USQuoteLiteral", u8"DecimalFloatingPointLiteral", 
-  u8"ExponentPart", u8"FloatTypeSuffix", u8"HexadecimalFloatingPointLiteral", 
-  u8"HexSignificand", u8"BinaryExponent", u8"NameChar", u8"NameStartChar", 
-  u8"JavaLetter", u8"JavaLetterOrDigit", u8"If", u8"Then", u8"Else", u8"EndIf", 
-  u8"In", u8"Let", u8"Iterate", u8"Self", u8"Tuple", u8"NullExp", u8"Invalid", 
-  u8"Not", u8"Implies", u8"KeyOr", u8"KeyAnd", u8"Xor", u8"Package", u8"EndPackage", 
-  u8"Context", u8"Static", u8"Def", u8"Inv", u8"Body", u8"Post", u8"Pre", 
-  u8"Init", u8"Derive", u8"Boolean", u8"Byte", u8"Short", u8"Int", u8"Long", 
-  u8"Char", u8"Float", u8"Double", u8"True", u8"False", u8"Collection", 
-  u8"Bag", u8"OrderedSet", u8"Sequence", u8"Set", u8"OclBoolean", u8"OclInteger", 
-  u8"OclReal", u8"OclString", u8"OclUnlimitedNat", u8"OclAny", u8"OclInvalid", 
-  u8"OclMessage", u8"OclVoid", u8"OclState", u8"Esc", u8"Colon", u8"DColon", 
-  u8"SQuote", u8"DQuote", u8"BQuote", u8"LParen", u8"RParen", u8"LBrace", 
-  u8"RBrace", u8"LBrack", u8"RBrack", u8"RArrow", u8"Lt", u8"Gt", u8"REqual", 
-  u8"Lte", u8"Gte", u8"Equal", u8"InEqual", u8"NotEqual", u8"Question", 
-  u8"Bang", u8"Star", u8"Slash", u8"Percent", u8"Caret", u8"Plus", u8"Minus", 
-  u8"PlusAssign", u8"MinusAssign", u8"MulAssign", u8"DivAssign", u8"AndAssign", 
-  u8"OrAssign", u8"XOrAssign", u8"ModAssign", u8"Underscore", u8"Pipe", 
-  u8"Amp", u8"And", u8"Or", u8"Inc", u8"Dec", u8"LShift", u8"RShift", u8"Dollar", 
-  u8"Comma", u8"Semi", u8"Dot", u8"Range", u8"Ellipsis", u8"At", u8"Pound", 
-  u8"Tilde", u8"Hat", u8"DHat"
+  "Bol", "Ws", "Hws", "Vws", "DocComment", "BlockComment", "LineComment", 
+  "LineCommentExt", "EscSeq", "EscAny", "UnicodeEsc", "OctalEscape", "HexNumeral", 
+  "OctalNumeral", "DecimalNumeral", "BinaryNumeral", "HexDigits", "DecDigits", 
+  "OctalDigits", "BinaryDigits", "HexDigit", "DecDigit", "OctalDigit", "BinaryDigit", 
+  "BoolLiteral", "CharLiteral", "SQuoteLiteral", "DQuoteLiteral", "USQuoteLiteral", 
+  "DecimalFloatingPointLiteral", "ExponentPart", "FloatTypeSuffix", "HexadecimalFloatingPointLiteral", 
+  "HexSignificand", "BinaryExponent", "NameChar", "NameStartChar", "JavaLetter", 
+  "JavaLetterOrDigit", "If", "Then", "Else", "EndIf", "In", "Let", "Iterate", 
+  "Self", "Tuple", "NullExp", "Invalid", "Not", "Implies", "KeyOr", "KeyAnd", 
+  "Xor", "Package", "EndPackage", "Context", "Static", "Def", "Inv", "Body", 
+  "Post", "Pre", "Init", "Derive", "Boolean", "Byte", "Short", "Int", "Long", 
+  "Char", "Float", "Double", "True", "False", "Collection", "Bag", "OrderedSet", 
+  "Sequence", "Set", "OclBoolean", "OclInteger", "OclReal", "OclString", 
+  "OclUnlimitedNat", "OclAny", "OclInvalid", "OclMessage", "OclVoid", "OclState", 
+  "Esc", "Colon", "DColon", "SQuote", "DQuote", "BQuote", "LParen", "RParen", 
+  "LBrace", "RBrace", "LBrack", "RBrack", "RArrow", "Lt", "Gt", "REqual", 
+  "Lte", "Gte", "Equal", "InEqual", "NotEqual", "Question", "Bang", "Star", 
+  "Slash", "Percent", "Caret", "Plus", "Minus", "PlusAssign", "MinusAssign", 
+  "MulAssign", "DivAssign", "AndAssign", "OrAssign", "XOrAssign", "ModAssign", 
+  "Underscore", "Pipe", "Amp", "And", "Or", "Inc", "Dec", "LShift", "RShift", 
+  "Dollar", "Comma", "Semi", "Dot", "Range", "Ellipsis", "At", "Pound", 
+  "Tilde", "Hat", "DHat"
 };
 
 std::vector<std::string> OclFragments::_channelNames = {
@@ -94,7 +90,7 @@ std::vector<std::string> OclFragments::_channelNames = {
 };
 
 std::vector<std::string> OclFragments::_modeNames = {
-  u8"DEFAULT_MODE"
+  "DEFAULT_MODE"
 };
 
 std::vector<std::string> OclFragments::_literalNames = {

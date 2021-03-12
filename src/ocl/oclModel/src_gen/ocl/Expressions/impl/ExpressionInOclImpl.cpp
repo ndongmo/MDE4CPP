@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,13 +31,16 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
+
+
+
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
 
 #include "ecore/EGenericType.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/ETypedElement.hpp"
 
@@ -75,12 +77,6 @@ ExpressionInOclImpl::~ExpressionInOclImpl()
 #endif
 }
 
-//Additional constructor for the containments back reference
-ExpressionInOclImpl::ExpressionInOclImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:ExpressionInOclImpl()
-{
-	m_eContainer = par_eContainer;
-}
 
 
 ExpressionInOclImpl::ExpressionInOclImpl(const ExpressionInOclImpl & obj):ExpressionInOclImpl()
@@ -103,7 +99,6 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
@@ -112,8 +107,6 @@ ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & 
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
 
 
@@ -261,21 +254,6 @@ void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Va
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> ExpressionInOclImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -290,10 +268,6 @@ void ExpressionInOclImpl::setThisExpressionInOclPtr(std::weak_ptr<ExpressionInOc
 }
 std::shared_ptr<ecore::EObject> ExpressionInOclImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
 	return nullptr;
 }
 
@@ -305,9 +279,9 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyExpression())); //2713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyExpression())); //2710
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContextVariable())); //2714
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContextVariable())); //2711
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -318,10 +292,10 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2716
+			return eAny(tempList); //2713
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResultVariable())); //2715
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResultVariable())); //2712
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -330,13 +304,13 @@ bool ExpressionInOclImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return getBodyExpression() != nullptr; //2713
+			return getBodyExpression() != nullptr; //2710
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return getContextVariable() != nullptr; //2714
+			return getContextVariable() != nullptr; //2711
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
-			return getParameterVariable() != nullptr; //2716
+			return getParameterVariable() != nullptr; //2713
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return getResultVariable() != nullptr; //2715
+			return getResultVariable() != nullptr; //2712
 	}
 	return ecore::ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -349,7 +323,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression = std::dynamic_pointer_cast<ocl::Expressions::OclExpression>(_temp);
-			setBodyExpression(_bodyExpression); //2713
+			setBodyExpression(_bodyExpression); //2710
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
@@ -357,7 +331,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _contextVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setContextVariable(_contextVariable); //2714
+			setContextVariable(_contextVariable); //2711
 			return true;
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
@@ -401,7 +375,7 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ocl::Expressions::Variable> _resultVariable = std::dynamic_pointer_cast<ocl::Expressions::Variable>(_temp);
-			setResultVariable(_resultVariable); //2715
+			setResultVariable(_resultVariable); //2712
 			return true;
 		}
 	}
@@ -544,9 +518,6 @@ void ExpressionInOclImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

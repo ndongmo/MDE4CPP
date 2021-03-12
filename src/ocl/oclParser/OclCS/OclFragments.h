@@ -1,5 +1,5 @@
 
-// Generated from OclFragments.g4 by ANTLR 4.7
+// Generated from OclFragments.g4 by ANTLR 4.9
 
 #pragma once
 
@@ -12,7 +12,7 @@ namespace OclCS {
 
 class  OclFragments : public antlr4::Lexer {
 public:
-  OclFragments(antlr4::CharStream *input);
+  explicit OclFragments(antlr4::CharStream *input);
   ~OclFragments();
 
   virtual std::string getGrammarFileName() const override;

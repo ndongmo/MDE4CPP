@@ -1,5 +1,5 @@
 
-// Generated from OclLexer.g4 by ANTLR 4.7
+// Generated from OclLexer.g4 by ANTLR 4.9
 
 #pragma once
 
@@ -29,7 +29,7 @@ public:
     NOT = 75, PIPE = 76, ID = 77, WS = 78, ERRCHAR = 79
   };
 
-  OclLexer(antlr4::CharStream *input);
+  explicit OclLexer(antlr4::CharStream *input);
   ~OclLexer();
 
   virtual std::string getGrammarFileName() const override;

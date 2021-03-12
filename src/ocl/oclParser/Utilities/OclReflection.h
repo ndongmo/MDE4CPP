@@ -16,8 +16,8 @@
 #include <abstractDataTypes/Bag.hpp>
 #include <types/TypesPackage.hpp>
 
-#include <uml/UmlFactory.hpp>
-#include <uml/UmlPackage.hpp>
+#include <uml/umlFactory.hpp>
+#include <uml/umlPackage.hpp>
 #include <uml/Property.hpp>
 #include <uml/Model.hpp>
 #include <uml/Package.hpp>

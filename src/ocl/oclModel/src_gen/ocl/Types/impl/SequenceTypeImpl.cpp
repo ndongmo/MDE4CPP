@@ -18,8 +18,7 @@
 #include <iostream>
 #include <sstream>
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,6 +31,11 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
+
+
+
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -39,8 +43,6 @@
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
-
-#include "ecore/EObject.hpp"
 
 #include "ecore/EPackage.hpp"
 
@@ -76,13 +78,6 @@ SequenceTypeImpl::~SequenceTypeImpl()
 }
 
 //Additional constructor for the containments back reference
-SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-:SequenceTypeImpl()
-{
-	m_eContainer = par_eContainer;
-}
-
-//Additional constructor for the containments back reference
 SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 :SequenceTypeImpl()
 {
@@ -112,14 +107,11 @@ SequenceTypeImpl& SequenceTypeImpl::operator=(const SequenceTypeImpl & obj)
 	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
 	//copy references with no containment (soft copy)
 	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
 	m_instance  = obj.getInstance();
@@ -175,21 +167,6 @@ std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<ecore::EObject>> SequenceTypeImpl::getEContens() const
-{
-	if(m_eContens == nullptr)
-	{
-		/*Union*/
-		m_eContens.reset(new Union<ecore::EObject>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
-		#endif
-		
-		
-	}
-	return m_eContens;
-}
-
 
 
 
@@ -204,11 +181,6 @@ void SequenceTypeImpl::setThisSequenceTypePtr(std::weak_ptr<SequenceType> thisSe
 }
 std::shared_ptr<ecore::EObject> SequenceTypeImpl::eContainer() const
 {
-	if(auto wp = m_eContainer.lock())
-	{
-		return wp;
-	}
-
 	if(auto wp = m_ePackage.lock())
 	{
 		return wp;
@@ -295,9 +267,6 @@ void SequenceTypeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	ecore::EModelElementImpl::saveContent(saveHandler);
 	
 	ecore::EObjectImpl::saveContent(saveHandler);
-	
-	ecore::EObjectImpl::saveContent(saveHandler);
-	
 	
 	
 	

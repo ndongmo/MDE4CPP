@@ -45,6 +45,11 @@
 
 #include <exception> // used in Persistence
 
+#include "ecore/EcoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
+
+
+
 #include "ecore/EObject.hpp"
 
 #include "ocl/Values/LocalSnapshot.hpp"
