@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OperationCallExpEvalImpl :virtual public ModelPropertyCallExpEvalImpl, virtual public OperationCallExpEval 
+	class OperationCallExpEvalImpl : virtual public ModelPropertyCallExpEvalImpl, virtual public OperationCallExpEval 
 	{
 		public: 
 			OperationCallExpEvalImpl(const OperationCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OperationCallExpEvalImpl& operator=(OperationCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OperationCallExpEvalImpl& operator=(OperationCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,17 +51,16 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getArguments() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredOperation() const ;
 			
-			/*!
-			 */
-			virtual void setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation_referredOperation) ;
+			
+			virtual void setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation) ;
+			
 							
 			
 			//*********************************

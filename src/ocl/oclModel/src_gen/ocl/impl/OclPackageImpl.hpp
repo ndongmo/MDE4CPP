@@ -7,10 +7,10 @@
 #ifndef OCLPACKAGEIMPL_HPP
 #define OCLPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
-#include "ocl/OclPackage.hpp" 
+#include "ocl/oclPackage.hpp" 
 
 
 namespace ocl 
@@ -48,22 +48,22 @@ namespace ocl
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace ocl
 {
-	class OclPackageImpl : public ecore::EPackageImpl ,virtual public OclPackage
+	class oclPackageImpl : public ecore::EPackageImpl ,virtual public oclPackage
 	{
 		private:    
-			OclPackageImpl(OclPackageImpl const&) = delete;
-			OclPackageImpl& operator=(OclPackageImpl const&) = delete;
+			oclPackageImpl(oclPackageImpl const&) = delete;
+			oclPackageImpl& operator=(oclPackageImpl const&) = delete;
 
 		protected:
-			OclPackageImpl();
+			oclPackageImpl();
 
 		public:
-			virtual ~OclPackageImpl();
+			virtual ~oclPackageImpl();
 
 
 			
@@ -83,10 +83,10 @@ namespace ocl
 			
 			
 
-			friend class OclPackage;
+			friend class oclPackage;
 
 			static bool isInited;
-			static OclPackage* create();
+			static oclPackage* create();
 			bool isInitialized = false;
  			bool isCreated = false;
 
@@ -97,7 +97,7 @@ namespace ocl
 			void initializePackageContents();
 
 		private:
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializePackageEDataTypes();
 

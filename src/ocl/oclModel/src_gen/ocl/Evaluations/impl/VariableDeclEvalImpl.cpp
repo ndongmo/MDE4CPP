@@ -30,11 +30,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Evaluations/OclExpEval.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
@@ -43,11 +38,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -58,23 +50,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 VariableDeclEvalImpl::VariableDeclEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 VariableDeclEvalImpl::~VariableDeclEvalImpl()
@@ -86,8 +65,19 @@ VariableDeclEvalImpl::~VariableDeclEvalImpl()
 
 
 
-
 VariableDeclEvalImpl::VariableDeclEvalImpl(const VariableDeclEvalImpl & obj):VariableDeclEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  VariableDeclEvalImpl::copy() const
+{
+	std::shared_ptr<VariableDeclEvalImpl> element(new VariableDeclEvalImpl(*this));
+	element->setThisVariableDeclEvalPtr(element);
+	return element;
+}
+
+VariableDeclEvalImpl& VariableDeclEvalImpl::operator=(const VariableDeclEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -104,13 +94,8 @@ VariableDeclEvalImpl::VariableDeclEvalImpl(const VariableDeclEvalImpl & obj):Var
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  VariableDeclEvalImpl::copy() const
-{
-	std::shared_ptr<VariableDeclEvalImpl> element(new VariableDeclEvalImpl(*this));
-	element->setThisVariableDeclEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
@@ -129,29 +114,42 @@ std::shared_ptr<ecore::EClass> VariableDeclEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference initExp
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > VariableDeclEvalImpl::getInitExp() const
 {
 //assert(m_initExp);
     return m_initExp;
 }
+
 void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp)
 {
     m_initExp = _initExp;
 }
 
+
+
+/*
+Getter & Setter for reference name
+*/
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > VariableDeclEvalImpl::getName() const
 {
 //assert(m_name);
     return m_name;
 }
+
 void VariableDeclEvalImpl::setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name)
 {
     m_name = _name;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<VariableDeclEval> VariableDeclEvalImpl::getThisVariableDeclEvalPtr() const
@@ -228,7 +226,7 @@ void VariableDeclEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

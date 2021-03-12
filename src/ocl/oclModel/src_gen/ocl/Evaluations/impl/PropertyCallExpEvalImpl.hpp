@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class PropertyCallExpEvalImpl :virtual public OclExpEvalImpl, virtual public PropertyCallExpEval 
+	class PropertyCallExpEvalImpl : virtual public OclExpEvalImpl, virtual public PropertyCallExpEval 
 	{
 		public: 
 			PropertyCallExpEvalImpl(const PropertyCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PropertyCallExpEvalImpl& operator=(PropertyCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PropertyCallExpEvalImpl& operator=(PropertyCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getSource() const ;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<ocl::Evaluations::OclExpEval> _source_source) ;
+			
+			virtual void setSource(std::shared_ptr<ocl::Evaluations::OclExpEval> _source) ;
+			
 							
 			
 			//*********************************

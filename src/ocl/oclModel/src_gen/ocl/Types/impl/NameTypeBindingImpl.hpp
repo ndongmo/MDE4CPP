@@ -15,20 +15,18 @@
 
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Types 
 {
-	class NameTypeBindingImpl :virtual public ecore::EObjectImpl,
+	class NameTypeBindingImpl : virtual public ecore::EModelElementImpl,
 virtual public NameTypeBinding 
 	{
 		public: 
 			NameTypeBindingImpl(const NameTypeBindingImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			NameTypeBindingImpl& operator=(NameTypeBindingImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			NameTypeBindingImpl& operator=(NameTypeBindingImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -50,26 +48,22 @@ virtual public NameTypeBinding
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getType() const ;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<ecore::EClassifier> _type_type) ;
+			
+			virtual void setType(std::shared_ptr<ecore::EClassifier> _type) ;
+			
 							
 			
 			//*********************************

@@ -30,15 +30,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -57,15 +48,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -76,27 +60,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 LetExpEvalImpl::LetExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LetExpEvalImpl::~LetExpEvalImpl()
@@ -108,8 +75,19 @@ LetExpEvalImpl::~LetExpEvalImpl()
 
 
 
-
 LetExpEvalImpl::LetExpEvalImpl(const LetExpEvalImpl & obj):LetExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LetExpEvalImpl::copy() const
+{
+	std::shared_ptr<LetExpEvalImpl> element(new LetExpEvalImpl(*this));
+	element->setThisLetExpEvalPtr(element);
+	return element;
+}
+
+LetExpEvalImpl& LetExpEvalImpl::operator=(const LetExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +118,8 @@ LetExpEvalImpl::LetExpEvalImpl(const LetExpEvalImpl & obj):LetExpEvalImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LetExpEvalImpl::copy() const
-{
-	std::shared_ptr<LetExpEvalImpl> element(new LetExpEvalImpl(*this));
-	element->setThisLetExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
@@ -165,39 +138,58 @@ std::shared_ptr<ecore::EClass> LetExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference in
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > LetExpEvalImpl::getIn() const
 {
 //assert(m_in);
     return m_in;
 }
+
 void LetExpEvalImpl::setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in)
 {
     m_in = _in;
 }
 
+
+
+/*
+Getter & Setter for reference initExpression
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > LetExpEvalImpl::getInitExpression() const
 {
 
     return m_initExpression;
 }
+
 void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
 {
     m_initExpression = _initExpression;
 }
 
+
+
+/*
+Getter & Setter for reference variable
+*/
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > LetExpEvalImpl::getVariable() const
 {
 //assert(m_variable);
     return m_variable;
 }
+
 void LetExpEvalImpl::setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable)
 {
     m_variable = _variable;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LetExpEval> LetExpEvalImpl::getThisLetExpEvalPtr() const
@@ -287,7 +279,7 @@ void LetExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

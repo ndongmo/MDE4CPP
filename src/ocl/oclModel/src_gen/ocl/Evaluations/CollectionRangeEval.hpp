@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class CollectionRangeEval:virtual public CollectionLiteralPartEval
 	{
 		public:
  			CollectionRangeEval(const CollectionRangeEval &) {}
-			CollectionRangeEval& operator=(CollectionRangeEval const&) = delete;
 
 		protected:
 			CollectionRangeEval(){}
@@ -99,20 +97,18 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getFirst() const = 0;
 			
-			/*!
-			 */
-			virtual void setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first_first) = 0;
-			/*!
-			 */
+			
+			virtual void setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getLast() const = 0;
 			
-			/*!
-			 */
-			virtual void setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last_last) = 0;
+			
+			virtual void setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last) = 0;
+			
 			
 
 		protected:
@@ -124,13 +120,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_first;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_last;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_first;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_last;
 
 		public:
 			//*********************************

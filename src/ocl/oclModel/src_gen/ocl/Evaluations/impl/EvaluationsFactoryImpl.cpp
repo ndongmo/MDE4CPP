@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Evaluations/impl/AssociationClassCallExpEvalImpl.hpp"
 #include "ocl/Evaluations/impl/AssociationEndCallExpEvalImpl.hpp"
 #include "ocl/Evaluations/impl/AttributeCallExpEvalImpl.hpp"
@@ -42,13 +41,6 @@
 #include "ocl/Evaluations/impl/VariableDeclEvalImpl.hpp"
 #include "ocl/Evaluations/impl/VariableExpEvalImpl.hpp"
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
 
 
 using namespace ocl::Evaluations;

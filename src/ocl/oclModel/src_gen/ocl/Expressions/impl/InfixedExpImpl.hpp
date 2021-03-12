@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class InfixedExpImpl :virtual public OclExpressionImpl, virtual public InfixedExp 
+	class InfixedExpImpl : virtual public OclExpressionImpl, virtual public InfixedExp 
 	{
 		public: 
 			InfixedExpImpl(const InfixedExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InfixedExpImpl& operator=(InfixedExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InfixedExpImpl& operator=(InfixedExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getSource() const ;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source_source) ;
+			
+			virtual void setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

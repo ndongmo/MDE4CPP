@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class CallExpImpl :virtual public OclExpressionImpl, virtual public CallExp 
+	class CallExpImpl : virtual public OclExpressionImpl, virtual public CallExp 
 	{
 		public: 
 			CallExpImpl(const CallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CallExpImpl& operator=(CallExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CallExpImpl& operator=(CallExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getSource() const ;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source_source) ;
+			
+			virtual void setSource(std::shared_ptr<ocl::Expressions::OclExpression> _source) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

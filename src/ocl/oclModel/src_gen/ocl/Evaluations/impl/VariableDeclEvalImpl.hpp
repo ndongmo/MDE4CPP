@@ -15,20 +15,18 @@
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class VariableDeclEvalImpl :virtual public ecore::EObjectImpl,
+	class VariableDeclEvalImpl : virtual public ecore::EModelElementImpl,
 virtual public VariableDeclEval 
 	{
 		public: 
 			VariableDeclEvalImpl(const VariableDeclEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			VariableDeclEvalImpl& operator=(VariableDeclEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			VariableDeclEvalImpl& operator=(VariableDeclEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -55,20 +53,18 @@ virtual public VariableDeclEval
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getInitExp() const ;
 			
-			/*!
-			 */
-			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp_initExp) ;
-			/*!
-			 */
+			
+			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getName() const ;
 			
-			/*!
-			 */
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name_name) ;
+			
+			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name) ;
+			
 							
 			
 			//*********************************

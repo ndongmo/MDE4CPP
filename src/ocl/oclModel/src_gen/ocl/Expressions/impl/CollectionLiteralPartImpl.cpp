@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -50,10 +46,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,17 +58,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 CollectionLiteralPartImpl::CollectionLiteralPartImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionLiteralPartImpl::~CollectionLiteralPartImpl()
@@ -84,17 +71,27 @@ CollectionLiteralPartImpl::~CollectionLiteralPartImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CollectionLiteralPartImpl::CollectionLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:CollectionLiteralPartImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+CollectionLiteralPartImpl::CollectionLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:CollectionLiteralPartImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 CollectionLiteralPartImpl::CollectionLiteralPartImpl(const CollectionLiteralPartImpl & obj):CollectionLiteralPartImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionLiteralPartImpl::copy() const
+{
+	std::shared_ptr<CollectionLiteralPartImpl> element(new CollectionLiteralPartImpl(*this));
+	element->setThisCollectionLiteralPartPtr(element);
+	return element;
+}
+
+CollectionLiteralPartImpl& CollectionLiteralPartImpl::operator=(const CollectionLiteralPartImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -134,13 +131,8 @@ CollectionLiteralPartImpl::CollectionLiteralPartImpl(const CollectionLiteralPart
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CollectionLiteralPartImpl::copy() const
-{
-	std::shared_ptr<CollectionLiteralPartImpl> element(new CollectionLiteralPartImpl(*this));
-	element->setThisCollectionLiteralPartPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
@@ -165,8 +157,20 @@ std::shared_ptr<ecore::EClass> CollectionLiteralPartImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> CollectionLiteralPartImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<CollectionLiteralPart> CollectionLiteralPartImpl::getThisCollectionLiteralPartPtr() const
@@ -224,7 +228,7 @@ void CollectionLiteralPartImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

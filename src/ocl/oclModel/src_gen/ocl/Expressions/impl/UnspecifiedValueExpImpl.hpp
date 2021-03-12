@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class UnspecifiedValueExpImpl :virtual public OclExpressionImpl, virtual public UnspecifiedValueExp 
+	class UnspecifiedValueExpImpl : virtual public OclExpressionImpl, virtual public UnspecifiedValueExp 
 	{
 		public: 
 			UnspecifiedValueExpImpl(const UnspecifiedValueExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			UnspecifiedValueExpImpl& operator=(UnspecifiedValueExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			UnspecifiedValueExpImpl& operator=(UnspecifiedValueExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -103,8 +101,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

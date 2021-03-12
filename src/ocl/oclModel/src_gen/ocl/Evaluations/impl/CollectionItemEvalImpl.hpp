@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class CollectionItemEvalImpl :virtual public CollectionLiteralPartEvalImpl, virtual public CollectionItemEval 
+	class CollectionItemEvalImpl : virtual public CollectionLiteralPartEvalImpl, virtual public CollectionItemEval 
 	{
 		public: 
 			CollectionItemEvalImpl(const CollectionItemEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionItemEvalImpl& operator=(CollectionItemEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionItemEvalImpl& operator=(CollectionItemEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getItem() const ;
 			
-			/*!
-			 */
-			virtual void setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item_item) ;
+			
+			virtual void setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item) ;
+			
 							
 			
 			//*********************************

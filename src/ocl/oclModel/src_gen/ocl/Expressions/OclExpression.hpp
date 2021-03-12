@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class OclExpression:virtual public ecore::ETypedElement
 	{
 		public:
  			OclExpression(const OclExpression &) {}
-			OclExpression& operator=(OclExpression const&) = delete;
 
 		protected:
 			OclExpression(){}
@@ -189,90 +187,78 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ocl::Expressions::CallExp > getAppliedElement() const = 0;
 			
-			/*!
-			 */
-			virtual void setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> _appliedElement_appliedElement) = 0;
-			/*!
-			 */
+			
+			virtual void setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> _appliedElement) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::IfExp > getElseOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setElseOwner(std::shared_ptr<ocl::Expressions::IfExp> _elseOwner_elseOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setElseOwner(std::shared_ptr<ocl::Expressions::IfExp> _elseOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange > getFirstOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setFirstOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _firstOwner_firstOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setFirstOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _firstOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::IfExp > getIfOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setIfOwner(std::shared_ptr<ocl::Expressions::IfExp> _ifOwner_ifOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setIfOwner(std::shared_ptr<ocl::Expressions::IfExp> _ifOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::Variable > getInitializedElement() const = 0;
 			
-			/*!
-			 */
-			virtual void setInitializedElement(std::shared_ptr<ocl::Expressions::Variable> _initializedElement_initializedElement) = 0;
-			/*!
-			 */
+			
+			virtual void setInitializedElement(std::shared_ptr<ocl::Expressions::Variable> _initializedElement) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getInstance() const = 0;
 			
-			/*!
-			 */
-			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance_instance) = 0;
-			/*!
-			 */
+			
+			virtual void setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::CollectionRange > getLastOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setLastOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _lastOwner_lastOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setLastOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _lastOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::LoopExp > getLoopBodyOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setLoopBodyOwner(std::shared_ptr<ocl::Expressions::LoopExp> _loopBodyOwner_loopBodyOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setLoopBodyOwner(std::shared_ptr<ocl::Expressions::LoopExp> _loopBodyOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::OperationCallExp > getParentCall() const = 0;
 			
-			/*!
-			 */
-			virtual void setParentCall(std::shared_ptr<ocl::Expressions::OperationCallExp> _parentCall_parentCall) = 0;
-			/*!
-			 */
+			
+			virtual void setParentCall(std::shared_ptr<ocl::Expressions::OperationCallExp> _parentCall) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::NavigationCallExp > getParentNav() const = 0;
 			
-			/*!
-			 */
-			virtual void setParentNav(std::shared_ptr<ocl::Expressions::NavigationCallExp> _parentNav_parentNav) = 0;
-			/*!
-			 */
+			
+			virtual void setParentNav(std::shared_ptr<ocl::Expressions::NavigationCallExp> _parentNav) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::IfExp > getThenOwner() const = 0;
 			
-			/*!
-			 */
-			virtual void setThenOwner(std::shared_ptr<ocl::Expressions::IfExp> _thenOwner_thenOwner) = 0;
-			/*!
-			 */
+			
+			virtual void setThenOwner(std::shared_ptr<ocl::Expressions::IfExp> _thenOwner) = 0;
+			
+			
 			virtual std::weak_ptr<ocl::Expressions::ExpressionInOcl > getTopExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setTopExpression(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _topExpression_topExpression) = 0;
+			
+			virtual void setTopExpression(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _topExpression) = 0;
+			
 			
 
 		protected:
@@ -284,50 +270,25 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::CallExp > m_appliedElement;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::IfExp > m_elseOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::CollectionRange > m_firstOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::IfExp > m_ifOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::Variable > m_initializedElement;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_instance;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::CollectionRange > m_lastOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::LoopExp > m_loopBodyOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::OperationCallExp > m_parentCall;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::NavigationCallExp > m_parentNav;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::IfExp > m_thenOwner;
-			/*!
-			 */
-			std::weak_ptr<ocl::Expressions::ExpressionInOcl > m_topExpression;
 			
+			std::weak_ptr<ocl::Expressions::CallExp > m_appliedElement;
+			std::weak_ptr<ocl::Expressions::IfExp > m_elseOwner;
+			std::weak_ptr<ocl::Expressions::CollectionRange > m_firstOwner;
+			std::weak_ptr<ocl::Expressions::IfExp > m_ifOwner;
+			std::weak_ptr<ocl::Expressions::Variable > m_initializedElement;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_instance;
+			std::weak_ptr<ocl::Expressions::CollectionRange > m_lastOwner;
+			std::weak_ptr<ocl::Expressions::LoopExp > m_loopBodyOwner;
+			std::weak_ptr<ocl::Expressions::OperationCallExp > m_parentCall;
+			std::weak_ptr<ocl::Expressions::NavigationCallExp > m_parentNav;
+			std::weak_ptr<ocl::Expressions::IfExp > m_thenOwner;
+			std::weak_ptr<ocl::Expressions::ExpressionInOcl > m_topExpression;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

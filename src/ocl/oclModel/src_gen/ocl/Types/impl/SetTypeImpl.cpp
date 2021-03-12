@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -55,11 +50,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,17 +62,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 SetTypeImpl::SetTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SetTypeImpl::~SetTypeImpl()
@@ -90,25 +75,34 @@ SetTypeImpl::~SetTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SetTypeImpl::SetTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:SetTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			SetTypeImpl::SetTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:SetTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			SetTypeImpl::SetTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:SetTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+SetTypeImpl::SetTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:SetTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 SetTypeImpl::SetTypeImpl(const SetTypeImpl & obj):SetTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SetTypeImpl::copy() const
+{
+	std::shared_ptr<SetTypeImpl> element(new SetTypeImpl(*this));
+	element->setThisSetTypePtr(element);
+	return element;
+}
+
+SetTypeImpl& SetTypeImpl::operator=(const SetTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -157,13 +151,8 @@ SetTypeImpl::SetTypeImpl(const SetTypeImpl & obj):SetTypeImpl()
 		std::cout << "Copying the Subset: " << "m_elementType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SetTypeImpl::copy() const
-{
-	std::shared_ptr<SetTypeImpl> element(new SetTypeImpl(*this));
-	element->setThisSetTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SetTypeImpl::eStaticClass() const
@@ -188,8 +177,20 @@ std::shared_ptr<ecore::EClass> SetTypeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> SetTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<SetType> SetTypeImpl::getThisSetTypePtr() const
@@ -252,7 +253,7 @@ void SetTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

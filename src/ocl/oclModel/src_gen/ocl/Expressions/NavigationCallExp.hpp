@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -126,13 +126,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class NavigationCallExp:virtual public FeatureCallExp
 	{
 		public:
  			NavigationCallExp(const NavigationCallExp &) {}
-			NavigationCallExp& operator=(NavigationCallExp const&) = delete;
 
 		protected:
 			NavigationCallExp(){}
@@ -155,16 +153,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EAttribute > getNavigationSource() const = 0;
 			
-			/*!
-			 */
-			virtual void setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource_navigationSource) = 0;
-			/*!
-			 */
+			
+			virtual void setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getQualifier() const = 0;
+			
 			
 			
 
@@ -177,20 +174,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EAttribute > m_navigationSource;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_qualifier;
 			
+			std::shared_ptr<ecore::EAttribute > m_navigationSource;
+			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_qualifier;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

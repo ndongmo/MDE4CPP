@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class LetExpEvalImpl :virtual public OclExpEvalImpl, virtual public LetExpEval 
+	class LetExpEvalImpl : virtual public OclExpEvalImpl, virtual public LetExpEval 
 	{
 		public: 
 			LetExpEvalImpl(const LetExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LetExpEvalImpl& operator=(LetExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LetExpEvalImpl& operator=(LetExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,27 +51,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getIn() const ;
 			
-			/*!
-			 */
-			virtual void setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in_in) ;
-			/*!
-			 */
+			
+			virtual void setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getInitExpression() const ;
 			
-			/*!
-			 */
-			virtual void setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression_initExpression) ;
-			/*!
-			 */
+			
+			virtual void setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getVariable() const ;
 			
-			/*!
-			 */
-			virtual void setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable_variable) ;
+			
+			virtual void setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable) ;
+			
 							
 			
 			//*********************************

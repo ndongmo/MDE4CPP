@@ -13,17 +13,17 @@
 #include "ecore/EReference.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 
 using namespace ocl::Expressions;
@@ -47,10 +47,10 @@ void ExpressionsPackageImpl::initializePackageContents()
 	m_callExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
 	m_collectionItem_Class->getESuperTypes()->push_back(getCollectionLiteralPart_Class());
 	m_collectionLiteralExp_Class->getESuperTypes()->push_back(getLiteralExp_Class());
-	m_collectionLiteralPart_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getETypedElement_Class());
+	m_collectionLiteralPart_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	m_collectionRange_Class->getESuperTypes()->push_back(getCollectionLiteralPart_Class());
 	m_enumLiteralExp_Class->getESuperTypes()->push_back(getLiteralExp_Class());
-	m_expressionInOcl_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getETypedElement_Class());
+	m_expressionInOcl_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	m_featureCallExp_Class->getESuperTypes()->push_back(getCallExp_Class());
 	m_ifExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
 	m_infixedExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
@@ -65,7 +65,7 @@ void ExpressionsPackageImpl::initializePackageContents()
 	m_navigationCallExp_Class->getESuperTypes()->push_back(getFeatureCallExp_Class());
 	m_nullLiteralExp_Class->getESuperTypes()->push_back(getPrimitiveLiteralExp_Class());
 	m_numericLiteralExp_Class->getESuperTypes()->push_back(getPrimitiveLiteralExp_Class());
-	m_oclExpression_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getETypedElement_Class());
+	m_oclExpression_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	m_operationCallExp_Class->getESuperTypes()->push_back(getFeatureCallExp_Class());
 	m_primitiveLiteralExp_Class->getESuperTypes()->push_back(getLiteralExp_Class());
 	m_propertyCallExp_Class->getESuperTypes()->push_back(getNavigationCallExp_Class());
@@ -73,11 +73,11 @@ void ExpressionsPackageImpl::initializePackageContents()
 	m_stateExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
 	m_stringLiteralExp_Class->getESuperTypes()->push_back(getPrimitiveLiteralExp_Class());
 	m_tupleLiteralExp_Class->getESuperTypes()->push_back(getLiteralExp_Class());
-	m_tupleLiteralPart_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getETypedElement_Class());
+	m_tupleLiteralPart_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	m_typeExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
 	m_unlimitedNaturalExp_Class->getESuperTypes()->push_back(getNumericLiteralExp_Class());
 	m_unspecifiedValueExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
-	m_variable_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getETypedElement_Class());
+	m_variable_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getETypedElement_Class());
 	m_variableExp_Class->getESuperTypes()->push_back(getOclExpression_Class());
 	
 
@@ -132,7 +132,7 @@ void ExpressionsPackageImpl::initializeAssociationClassCallExpContent()
 	
 	
 	m_associationClassCallExp_Attribute_referredAssociationClass->setName("referredAssociationClass");
-	m_associationClassCallExp_Attribute_referredAssociationClass->setEType(ecore::EcorePackage::eInstance()->getEReference_Class());
+	m_associationClassCallExp_Attribute_referredAssociationClass->setEType(ecore::ecorePackage::eInstance()->getEReference_Class());
 	m_associationClassCallExp_Attribute_referredAssociationClass->setLowerBound(0);
 	m_associationClassCallExp_Attribute_referredAssociationClass->setUpperBound(1);
 	m_associationClassCallExp_Attribute_referredAssociationClass->setTransient(false);
@@ -165,7 +165,7 @@ void ExpressionsPackageImpl::initializeBooleanLiteralExpContent()
 	
 	m_booleanLiteralExp_Attribute_booleanSymbol = getBooleanLiteralExp_Attribute_booleanSymbol();
 	m_booleanLiteralExp_Attribute_booleanSymbol->setName("booleanSymbol");
-	m_booleanLiteralExp_Attribute_booleanSymbol->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_booleanLiteralExp_Attribute_booleanSymbol->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_booleanLiteralExp_Attribute_booleanSymbol->setLowerBound(0);
 	m_booleanLiteralExp_Attribute_booleanSymbol->setUpperBound(1);
 	m_booleanLiteralExp_Attribute_booleanSymbol->setTransient(false);
@@ -390,7 +390,7 @@ void ExpressionsPackageImpl::initializeEnumLiteralExpContent()
 	
 	
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setName("referredEnumLiteral");
-	m_enumLiteralExp_Attribute_referredEnumLiteral->setEType(uml::UmlPackage::eInstance()->getEnumerationLiteral_Class());
+	m_enumLiteralExp_Attribute_referredEnumLiteral->setEType(uml::umlPackage::eInstance()->getEnumerationLiteral_Class());
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setLowerBound(0);
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setUpperBound(1);
 	m_enumLiteralExp_Attribute_referredEnumLiteral->setTransient(false);
@@ -534,7 +534,7 @@ void ExpressionsPackageImpl::initializeFeatureCallExpContent()
 	
 	m_featureCallExp_Attribute_isPre = getFeatureCallExp_Attribute_isPre();
 	m_featureCallExp_Attribute_isPre->setName("isPre");
-	m_featureCallExp_Attribute_isPre->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_featureCallExp_Attribute_isPre->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_featureCallExp_Attribute_isPre->setLowerBound(0);
 	m_featureCallExp_Attribute_isPre->setUpperBound(1);
 	m_featureCallExp_Attribute_isPre->setTransient(false);
@@ -684,7 +684,7 @@ void ExpressionsPackageImpl::initializeIntegerLiteralExpContent()
 	
 	m_integerLiteralExp_Attribute_integerSymbol = getIntegerLiteralExp_Attribute_integerSymbol();
 	m_integerLiteralExp_Attribute_integerSymbol->setName("integerSymbol");
-	m_integerLiteralExp_Attribute_integerSymbol->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_integerLiteralExp_Attribute_integerSymbol->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_integerLiteralExp_Attribute_integerSymbol->setLowerBound(0);
 	m_integerLiteralExp_Attribute_integerSymbol->setUpperBound(1);
 	m_integerLiteralExp_Attribute_integerSymbol->setTransient(false);
@@ -922,7 +922,7 @@ void ExpressionsPackageImpl::initializeMessageExpContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_messageExp_Attribute_calledOperation->setName("calledOperation");
-	m_messageExp_Attribute_calledOperation->setEType(uml::UmlPackage::eInstance()->getCallOperationAction_Class());
+	m_messageExp_Attribute_calledOperation->setEType(uml::umlPackage::eInstance()->getCallOperationAction_Class());
 	m_messageExp_Attribute_calledOperation->setLowerBound(0);
 	m_messageExp_Attribute_calledOperation->setUpperBound(1);
 	m_messageExp_Attribute_calledOperation->setTransient(false);
@@ -944,7 +944,7 @@ void ExpressionsPackageImpl::initializeMessageExpContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_messageExp_Attribute_sentSignal->setName("sentSignal");
-	m_messageExp_Attribute_sentSignal->setEType(uml::UmlPackage::eInstance()->getSendSignalAction_Class());
+	m_messageExp_Attribute_sentSignal->setEType(uml::umlPackage::eInstance()->getSendSignalAction_Class());
 	m_messageExp_Attribute_sentSignal->setLowerBound(0);
 	m_messageExp_Attribute_sentSignal->setUpperBound(1);
 	m_messageExp_Attribute_sentSignal->setTransient(false);
@@ -999,7 +999,7 @@ void ExpressionsPackageImpl::initializeNavigationCallExpContent()
 	
 	
 	m_navigationCallExp_Attribute_navigationSource->setName("navigationSource");
-	m_navigationCallExp_Attribute_navigationSource->setEType(ecore::EcorePackage::eInstance()->getEAttribute_Class());
+	m_navigationCallExp_Attribute_navigationSource->setEType(ecore::ecorePackage::eInstance()->getEAttribute_Class());
 	m_navigationCallExp_Attribute_navigationSource->setLowerBound(0);
 	m_navigationCallExp_Attribute_navigationSource->setUpperBound(1);
 	m_navigationCallExp_Attribute_navigationSource->setTransient(false);
@@ -1415,7 +1415,7 @@ void ExpressionsPackageImpl::initializeOperationCallExpContent()
 	    }
 	}
 	m_operationCallExp_Attribute_referredOperation->setName("referredOperation");
-	m_operationCallExp_Attribute_referredOperation->setEType(ecore::EcorePackage::eInstance()->getEOperation_Class());
+	m_operationCallExp_Attribute_referredOperation->setEType(ecore::ecorePackage::eInstance()->getEOperation_Class());
 	m_operationCallExp_Attribute_referredOperation->setLowerBound(0);
 	m_operationCallExp_Attribute_referredOperation->setUpperBound(1);
 	m_operationCallExp_Attribute_referredOperation->setTransient(false);
@@ -1448,7 +1448,7 @@ void ExpressionsPackageImpl::initializePrimitiveLiteralExpContent()
 	
 	m_primitiveLiteralExp_Attribute_symbol = getPrimitiveLiteralExp_Attribute_symbol();
 	m_primitiveLiteralExp_Attribute_symbol->setName("symbol");
-	m_primitiveLiteralExp_Attribute_symbol->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_primitiveLiteralExp_Attribute_symbol->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_primitiveLiteralExp_Attribute_symbol->setLowerBound(0);
 	m_primitiveLiteralExp_Attribute_symbol->setUpperBound(1);
 	m_primitiveLiteralExp_Attribute_symbol->setTransient(false);
@@ -1479,7 +1479,7 @@ void ExpressionsPackageImpl::initializePropertyCallExpContent()
 	
 	
 	m_propertyCallExp_Attribute_referredProperty->setName("referredProperty");
-	m_propertyCallExp_Attribute_referredProperty->setEType(ecore::EcorePackage::eInstance()->getEAttribute_Class());
+	m_propertyCallExp_Attribute_referredProperty->setEType(ecore::ecorePackage::eInstance()->getEAttribute_Class());
 	m_propertyCallExp_Attribute_referredProperty->setLowerBound(0);
 	m_propertyCallExp_Attribute_referredProperty->setUpperBound(1);
 	m_propertyCallExp_Attribute_referredProperty->setTransient(false);
@@ -1512,7 +1512,7 @@ void ExpressionsPackageImpl::initializeRealLiteralExpContent()
 	
 	m_realLiteralExp_Attribute_realSymbol = getRealLiteralExp_Attribute_realSymbol();
 	m_realLiteralExp_Attribute_realSymbol->setName("realSymbol");
-	m_realLiteralExp_Attribute_realSymbol->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_realLiteralExp_Attribute_realSymbol->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_realLiteralExp_Attribute_realSymbol->setLowerBound(0);
 	m_realLiteralExp_Attribute_realSymbol->setUpperBound(1);
 	m_realLiteralExp_Attribute_realSymbol->setTransient(false);
@@ -1543,7 +1543,7 @@ void ExpressionsPackageImpl::initializeStateExpContent()
 	
 	
 	m_stateExp_Attribute_referredState->setName("referredState");
-	m_stateExp_Attribute_referredState->setEType(uml::UmlPackage::eInstance()->getState_Class());
+	m_stateExp_Attribute_referredState->setEType(uml::umlPackage::eInstance()->getState_Class());
 	m_stateExp_Attribute_referredState->setLowerBound(0);
 	m_stateExp_Attribute_referredState->setUpperBound(1);
 	m_stateExp_Attribute_referredState->setTransient(false);
@@ -1576,7 +1576,7 @@ void ExpressionsPackageImpl::initializeStringLiteralExpContent()
 	
 	m_stringLiteralExp_Attribute_stringSymbol = getStringLiteralExp_Attribute_stringSymbol();
 	m_stringLiteralExp_Attribute_stringSymbol->setName("stringSymbol");
-	m_stringLiteralExp_Attribute_stringSymbol->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_stringLiteralExp_Attribute_stringSymbol->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_stringLiteralExp_Attribute_stringSymbol->setLowerBound(0);
 	m_stringLiteralExp_Attribute_stringSymbol->setUpperBound(1);
 	m_stringLiteralExp_Attribute_stringSymbol->setTransient(false);
@@ -1640,7 +1640,7 @@ void ExpressionsPackageImpl::initializeTupleLiteralPartContent()
 	
 	
 	m_tupleLiteralPart_Attribute_attribute->setName("attribute");
-	m_tupleLiteralPart_Attribute_attribute->setEType(ecore::EcorePackage::eInstance()->getEAttribute_Class());
+	m_tupleLiteralPart_Attribute_attribute->setEType(ecore::ecorePackage::eInstance()->getEAttribute_Class());
 	m_tupleLiteralPart_Attribute_attribute->setLowerBound(0);
 	m_tupleLiteralPart_Attribute_attribute->setUpperBound(1);
 	m_tupleLiteralPart_Attribute_attribute->setTransient(false);
@@ -1673,7 +1673,7 @@ void ExpressionsPackageImpl::initializeTypeExpContent()
 	
 	
 	m_typeExp_Attribute_referredType->setName("referredType");
-	m_typeExp_Attribute_referredType->setEType(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_typeExp_Attribute_referredType->setEType(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_typeExp_Attribute_referredType->setLowerBound(0);
 	m_typeExp_Attribute_referredType->setUpperBound(1);
 	m_typeExp_Attribute_referredType->setTransient(false);
@@ -1706,7 +1706,7 @@ void ExpressionsPackageImpl::initializeUnlimitedNaturalExpContent()
 	
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = getUnlimitedNaturalExp_Attribute_unlimitedNaturalSymbol();
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setName("unlimitedNaturalSymbol");
-	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setEType(types::TypesPackage::eInstance()->getUnlimitedNatural_Class());
+	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setLowerBound(0);
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setUpperBound(1);
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol->setTransient(false);
@@ -1848,7 +1848,7 @@ void ExpressionsPackageImpl::initializeVariableContent()
 	    }
 	}
 	m_variable_Attribute_representedParameter->setName("representedParameter");
-	m_variable_Attribute_representedParameter->setEType(ecore::EcorePackage::eInstance()->getEParameter_Class());
+	m_variable_Attribute_representedParameter->setEType(ecore::ecorePackage::eInstance()->getEParameter_Class());
 	m_variable_Attribute_representedParameter->setLowerBound(0);
 	m_variable_Attribute_representedParameter->setUpperBound(1);
 	m_variable_Attribute_representedParameter->setTransient(false);

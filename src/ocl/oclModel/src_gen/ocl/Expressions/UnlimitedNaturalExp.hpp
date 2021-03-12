@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class UnlimitedNaturalExp:virtual public NumericLiteralExp
 	{
 		public:
  			UnlimitedNaturalExp(const UnlimitedNaturalExp &) {}
-			UnlimitedNaturalExp& operator=(UnlimitedNaturalExp const&) = delete;
 
 		protected:
 			UnlimitedNaturalExp(){}
@@ -140,14 +138,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getUnlimitedNaturalSymbol() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUnlimitedNaturalSymbol (int _unlimitedNaturalSymbol)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -158,8 +153,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			int m_unlimitedNaturalSymbol = 0;
 			
 			
@@ -172,8 +166,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

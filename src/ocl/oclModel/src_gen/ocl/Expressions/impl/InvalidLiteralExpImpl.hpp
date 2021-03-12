@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class InvalidLiteralExpImpl :virtual public LiteralExpImpl, virtual public InvalidLiteralExp 
+	class InvalidLiteralExpImpl : virtual public LiteralExpImpl, virtual public InvalidLiteralExp 
 	{
 		public: 
 			InvalidLiteralExpImpl(const InvalidLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InvalidLiteralExpImpl& operator=(InvalidLiteralExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InvalidLiteralExpImpl& operator=(InvalidLiteralExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -103,8 +101,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

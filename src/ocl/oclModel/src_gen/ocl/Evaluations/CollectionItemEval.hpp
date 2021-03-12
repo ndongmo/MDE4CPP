@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class CollectionItemEval:virtual public CollectionLiteralPartEval
 	{
 		public:
  			CollectionItemEval(const CollectionItemEval &) {}
-			CollectionItemEval& operator=(CollectionItemEval const&) = delete;
 
 		protected:
 			CollectionItemEval(){}
@@ -99,13 +97,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getItem() const = 0;
 			
-			/*!
-			 */
-			virtual void setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item_item) = 0;
+			
+			virtual void setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item) = 0;
+			
 			
 
 		protected:
@@ -117,10 +114,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_item;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_item;
 
 		public:
 			//*********************************

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -45,19 +45,17 @@ namespace ecore
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
-	class NameTypeBinding : virtual public ecore::EObject 
+	
+	class NameTypeBinding : virtual public ecore::EModelElement
 
 	{
 		public:
  			NameTypeBinding(const NameTypeBinding &) {}
-			NameTypeBinding& operator=(NameTypeBinding const&) = delete;
 
 		protected:
 			NameTypeBinding(){}
@@ -76,43 +74,36 @@ namespace ocl::Types
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getType() const = 0;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<ecore::EClassifier> _type_type) = 0;
+			
+			virtual void setType(std::shared_ptr<ecore::EClassifier> _type) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EClassifier > m_type;
 			
+			std::shared_ptr<ecore::EClassifier > m_type;
 
 		public:
 			//*********************************

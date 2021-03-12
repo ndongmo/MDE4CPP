@@ -30,10 +30,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "ocl/Evaluations/OclExpEval.hpp"
@@ -42,10 +38,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -56,23 +50,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 ExpressionInOclEvalImpl::ExpressionInOclEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpressionInOclEvalImpl::~ExpressionInOclEvalImpl()
@@ -84,8 +65,19 @@ ExpressionInOclEvalImpl::~ExpressionInOclEvalImpl()
 
 
 
-
 ExpressionInOclEvalImpl::ExpressionInOclEvalImpl(const ExpressionInOclEvalImpl & obj):ExpressionInOclEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpressionInOclEvalImpl::copy() const
+{
+	std::shared_ptr<ExpressionInOclEvalImpl> element(new ExpressionInOclEvalImpl(*this));
+	element->setThisExpressionInOclEvalPtr(element);
+	return element;
+}
+
+ExpressionInOclEvalImpl& ExpressionInOclEvalImpl::operator=(const ExpressionInOclEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -102,13 +94,8 @@ ExpressionInOclEvalImpl::ExpressionInOclEvalImpl(const ExpressionInOclEvalImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpressionInOclEvalImpl::copy() const
-{
-	std::shared_ptr<ExpressionInOclEvalImpl> element(new ExpressionInOclEvalImpl(*this));
-	element->setThisExpressionInOclEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpressionInOclEvalImpl::eStaticClass() const
@@ -127,29 +114,42 @@ std::shared_ptr<ecore::EClass> ExpressionInOclEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference context
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > ExpressionInOclEvalImpl::getContext() const
 {
 //assert(m_context);
     return m_context;
 }
+
 void ExpressionInOclEvalImpl::setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context)
 {
     m_context = _context;
 }
 
+
+
+/*
+Getter & Setter for reference environment
+*/
 std::shared_ptr<ocl::Evaluations::EvalEnvironment > ExpressionInOclEvalImpl::getEnvironment() const
 {
 
     return m_environment;
 }
+
 void ExpressionInOclEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
 {
     m_environment = _environment;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExpressionInOclEval> ExpressionInOclEvalImpl::getThisExpressionInOclEvalPtr() const
@@ -226,7 +226,7 @@ void ExpressionInOclEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

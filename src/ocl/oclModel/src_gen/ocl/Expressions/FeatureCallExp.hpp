@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class FeatureCallExp:virtual public CallExp
 	{
 		public:
  			FeatureCallExp(const FeatureCallExp &) {}
-			FeatureCallExp& operator=(FeatureCallExp const&) = delete;
 
 		protected:
 			FeatureCallExp(){}
@@ -140,14 +138,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsPre() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPre (bool _isPre)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -158,8 +153,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_isPre = false;
 			
 			
@@ -172,8 +166,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

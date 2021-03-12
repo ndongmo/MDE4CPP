@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class LetExpImpl :virtual public OclExpressionImpl, virtual public LetExp 
+	class LetExpImpl : virtual public OclExpressionImpl, virtual public LetExp 
 	{
 		public: 
 			LetExpImpl(const LetExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LetExpImpl& operator=(LetExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LetExpImpl& operator=(LetExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,27 +96,24 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getIn() const ;
 			
-			/*!
-			 */
-			virtual void setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in_in) ;
-			/*!
-			 */
+			
+			virtual void setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getVariable() const ;
 			
-			/*!
-			 */
-			virtual void setVariable(std::shared_ptr<ocl::Expressions::Variable> _variable_variable) ;
+			
+			virtual void setVariable(std::shared_ptr<ocl::Expressions::Variable> _variable) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

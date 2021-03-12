@@ -31,18 +31,14 @@
 
 #include <exception> // used in Persistence
 
-
-
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -53,17 +49,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 UndefinedValueImpl::UndefinedValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 UndefinedValueImpl::~UndefinedValueImpl()
@@ -75,8 +64,19 @@ UndefinedValueImpl::~UndefinedValueImpl()
 
 
 
-
 UndefinedValueImpl::UndefinedValueImpl(const UndefinedValueImpl & obj):UndefinedValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  UndefinedValueImpl::copy() const
+{
+	std::shared_ptr<UndefinedValueImpl> element(new UndefinedValueImpl(*this));
+	element->setThisUndefinedValuePtr(element);
+	return element;
+}
+
+UndefinedValueImpl& UndefinedValueImpl::operator=(const UndefinedValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +89,8 @@ UndefinedValueImpl::UndefinedValueImpl(const UndefinedValueImpl & obj):Undefined
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  UndefinedValueImpl::copy() const
-{
-	std::shared_ptr<UndefinedValueImpl> element(new UndefinedValueImpl(*this));
-	element->setThisUndefinedValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> UndefinedValueImpl::eStaticClass() const
@@ -134,6 +129,7 @@ std::string UndefinedValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<UndefinedValue> UndefinedValueImpl::getThisUndefinedValuePtr() const
@@ -187,7 +183,7 @@ void UndefinedValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

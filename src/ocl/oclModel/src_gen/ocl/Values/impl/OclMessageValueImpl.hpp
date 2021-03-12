@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class OclMessageValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public OclMessageValue 
+	class OclMessageValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public OclMessageValue 
 	{
 		public: 
 			OclMessageValueImpl(const OclMessageValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OclMessageValueImpl& operator=(OclMessageValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OclMessageValueImpl& operator=(OclMessageValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,8 +41,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -52,68 +49,53 @@ namespace ocl::Values
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsAsyncOperation() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsAsyncOperation (bool _isAsyncOperation); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsSignal() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsSignal (bool _isSignal); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsSyncOperation() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsSyncOperation (bool _isSyncOperation); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getArguments() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Values::OclMessageValue > getReturnMessage() const ;
 			
-			/*!
-			 */
-			virtual void setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage_returnMessage) ;
-			/*!
-			 */
+			
+			virtual void setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage) ;
+			
+			
 			virtual std::shared_ptr<ocl::Values::ObjectValue > getSource() const ;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<ocl::Values::ObjectValue> _source_source) ;
-			/*!
-			 */
+			
+			virtual void setSource(std::shared_ptr<ocl::Values::ObjectValue> _source) ;
+			
+			
 			virtual std::shared_ptr<ocl::Values::ObjectValue > getTarget() const ;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target_target) ;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target) ;
+			
 							
 			
 			//*********************************

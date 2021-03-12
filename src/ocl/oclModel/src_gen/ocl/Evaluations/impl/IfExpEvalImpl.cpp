@@ -30,14 +30,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -54,14 +46,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,27 +58,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 IfExpEvalImpl::IfExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IfExpEvalImpl::~IfExpEvalImpl()
@@ -104,8 +73,19 @@ IfExpEvalImpl::~IfExpEvalImpl()
 
 
 
-
 IfExpEvalImpl::IfExpEvalImpl(const IfExpEvalImpl & obj):IfExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IfExpEvalImpl::copy() const
+{
+	std::shared_ptr<IfExpEvalImpl> element(new IfExpEvalImpl(*this));
+	element->setThisIfExpEvalPtr(element);
+	return element;
+}
+
+IfExpEvalImpl& IfExpEvalImpl::operator=(const IfExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -136,13 +116,8 @@ IfExpEvalImpl::IfExpEvalImpl(const IfExpEvalImpl & obj):IfExpEvalImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  IfExpEvalImpl::copy() const
-{
-	std::shared_ptr<IfExpEvalImpl> element(new IfExpEvalImpl(*this));
-	element->setThisIfExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IfExpEvalImpl::eStaticClass() const
@@ -161,39 +136,58 @@ std::shared_ptr<ecore::EClass> IfExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference condition
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > IfExpEvalImpl::getCondition() const
 {
 //assert(m_condition);
     return m_condition;
 }
+
 void IfExpEvalImpl::setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition)
 {
     m_condition = _condition;
 }
 
+
+
+/*
+Getter & Setter for reference elseExpression
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > IfExpEvalImpl::getElseExpression() const
 {
 //assert(m_elseExpression);
     return m_elseExpression;
 }
+
 void IfExpEvalImpl::setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression)
 {
     m_elseExpression = _elseExpression;
 }
 
+
+
+/*
+Getter & Setter for reference thenExpression
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > IfExpEvalImpl::getThenExpression() const
 {
 //assert(m_thenExpression);
     return m_thenExpression;
 }
+
 void IfExpEvalImpl::setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression)
 {
     m_thenExpression = _thenExpression;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<IfExpEval> IfExpEvalImpl::getThisIfExpEvalPtr() const
@@ -283,7 +277,7 @@ void IfExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -31,14 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "ocl/Evaluations/LiteralExpEval.hpp"
@@ -57,14 +49,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,22 +61,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 TupleLiteralExpEvalImpl::TupleLiteralExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_tuplePart.reset(new Bag<ocl::Evaluations::VariableDeclEval>());
-	
-	
-
-	//Init references
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TupleLiteralExpEvalImpl::~TupleLiteralExpEvalImpl()
@@ -102,8 +76,19 @@ TupleLiteralExpEvalImpl::~TupleLiteralExpEvalImpl()
 
 
 
-
 TupleLiteralExpEvalImpl::TupleLiteralExpEvalImpl(const TupleLiteralExpEvalImpl & obj):TupleLiteralExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TupleLiteralExpEvalImpl::copy() const
+{
+	std::shared_ptr<TupleLiteralExpEvalImpl> element(new TupleLiteralExpEvalImpl(*this));
+	element->setThisTupleLiteralExpEvalPtr(element);
+	return element;
+}
+
+TupleLiteralExpEvalImpl& TupleLiteralExpEvalImpl::operator=(const TupleLiteralExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -131,13 +116,8 @@ TupleLiteralExpEvalImpl::TupleLiteralExpEvalImpl(const TupleLiteralExpEvalImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  TupleLiteralExpEvalImpl::copy() const
-{
-	std::shared_ptr<TupleLiteralExpEvalImpl> element(new TupleLiteralExpEvalImpl(*this));
-	element->setThisTupleLiteralExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
@@ -156,16 +136,29 @@ std::shared_ptr<ecore::EClass> TupleLiteralExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference tuplePart
+*/
 std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> TupleLiteralExpEvalImpl::getTuplePart() const
 {
+	if(m_tuplePart == nullptr)
+	{
+		m_tuplePart.reset(new Bag<ocl::Evaluations::VariableDeclEval>());
+		
+		
+	}
 
     return m_tuplePart;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<TupleLiteralExpEval> TupleLiteralExpEvalImpl::getThisTupleLiteralExpEvalPtr() const
@@ -269,7 +262,7 @@ void TupleLiteralExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

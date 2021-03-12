@@ -30,20 +30,14 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EClassifier.hpp"
 
 //Factories an Package includes
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -54,19 +48,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 NameTypeBindingImpl::NameTypeBindingImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NameTypeBindingImpl::~NameTypeBindingImpl()
@@ -78,8 +63,19 @@ NameTypeBindingImpl::~NameTypeBindingImpl()
 
 
 
-
 NameTypeBindingImpl::NameTypeBindingImpl(const NameTypeBindingImpl & obj):NameTypeBindingImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NameTypeBindingImpl::copy() const
+{
+	std::shared_ptr<NameTypeBindingImpl> element(new NameTypeBindingImpl(*this));
+	element->setThisNameTypeBindingPtr(element);
+	return element;
+}
+
+NameTypeBindingImpl& NameTypeBindingImpl::operator=(const NameTypeBindingImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -95,13 +91,8 @@ NameTypeBindingImpl::NameTypeBindingImpl(const NameTypeBindingImpl & obj):NameTy
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  NameTypeBindingImpl::copy() const
-{
-	std::shared_ptr<NameTypeBindingImpl> element(new NameTypeBindingImpl(*this));
-	element->setThisNameTypeBindingPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
@@ -112,15 +103,20 @@ std::shared_ptr<ecore::EClass> NameTypeBindingImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute name
+*/
+std::string NameTypeBindingImpl::getName() const 
+{
+	return m_name;
+}
+
 void NameTypeBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
-std::string NameTypeBindingImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -129,19 +125,26 @@ std::string NameTypeBindingImpl::getName() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<ecore::EClassifier > NameTypeBindingImpl::getType() const
 {
 
     return m_type;
 }
+
 void NameTypeBindingImpl::setType(std::shared_ptr<ecore::EClassifier> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<NameTypeBinding> NameTypeBindingImpl::getThisNameTypeBindingPtr() const
@@ -217,7 +220,7 @@ void NameTypeBindingImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

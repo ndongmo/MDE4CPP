@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class TemplateParameterTypeImpl :virtual public ecore::EClassifierImpl, virtual public TemplateParameterType 
+	class TemplateParameterTypeImpl : virtual public ecore::EClassifierImpl, virtual public TemplateParameterType 
 	{
 		public: 
 			TemplateParameterTypeImpl(const TemplateParameterTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TemplateParameterTypeImpl& operator=(TemplateParameterTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TemplateParameterTypeImpl& operator=(TemplateParameterTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -56,14 +54,11 @@ namespace ocl::Types
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getSpecification() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSpecification (std::string _specification); 
-			
 			
 			
 			//*********************************
@@ -74,8 +69,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

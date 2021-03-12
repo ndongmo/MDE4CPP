@@ -1,17 +1,17 @@
-#include "ocl/OclFactory.hpp"
-#include "ocl/impl/OclFactoryImpl.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/impl/oclFactoryImpl.hpp"
 
 using namespace ocl;
 				 
 //static initialisation
-std::shared_ptr<OclFactory> OclFactory::instance;
+std::shared_ptr<oclFactory> oclFactory::instance;
 
-std::shared_ptr<OclFactory> OclFactory::eInstance()
+std::shared_ptr<oclFactory> oclFactory::eInstance()
 {
 	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance.reset(OclFactoryImpl::create());
+		instance.reset(oclFactoryImpl::create());
 	}	
 	return instance;
 }

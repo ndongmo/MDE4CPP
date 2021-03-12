@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class AttributeCallExpEvalImpl :virtual public ModelPropertyCallExpEvalImpl, virtual public AttributeCallExpEval 
+	class AttributeCallExpEvalImpl : virtual public ModelPropertyCallExpEvalImpl, virtual public AttributeCallExpEval 
 	{
 		public: 
 			AttributeCallExpEvalImpl(const AttributeCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AttributeCallExpEvalImpl& operator=(AttributeCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AttributeCallExpEvalImpl& operator=(AttributeCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredAttribute() const ;
 			
-			/*!
-			 */
-			virtual void setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute_referredAttribute) ;
+			
+			virtual void setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute) ;
+			
 							
 			
 			//*********************************

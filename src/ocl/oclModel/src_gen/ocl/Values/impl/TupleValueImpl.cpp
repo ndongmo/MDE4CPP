@@ -31,11 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
-
-
-
 #include "ocl/Values/NameValueBinding.hpp"
 
 #include "ocl/Values/StaticValue.hpp"
@@ -48,11 +43,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,26 +55,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 TupleValueImpl::TupleValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_elements.reset(new Bag<ocl::Values::NameValueBinding>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TupleValueImpl::~TupleValueImpl()
@@ -94,8 +70,19 @@ TupleValueImpl::~TupleValueImpl()
 
 
 
-
 TupleValueImpl::TupleValueImpl(const TupleValueImpl & obj):TupleValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TupleValueImpl::copy() const
+{
+	std::shared_ptr<TupleValueImpl> element(new TupleValueImpl(*this));
+	element->setThisTupleValuePtr(element);
+	return element;
+}
+
+TupleValueImpl& TupleValueImpl::operator=(const TupleValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -113,13 +100,8 @@ TupleValueImpl::TupleValueImpl(const TupleValueImpl & obj):TupleValueImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  TupleValueImpl::copy() const
-{
-	std::shared_ptr<TupleValueImpl> element(new TupleValueImpl(*this));
-	element->setThisTupleValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TupleValueImpl::eStaticClass() const
@@ -182,26 +164,45 @@ return result;
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference elements
+*/
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> TupleValueImpl::getElements() const
 {
+	if(m_elements == nullptr)
+	{
+		m_elements.reset(new Bag<ocl::Values::NameValueBinding>());
+		
+		
+	}
 
     return m_elements;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference model
+*/
 std::shared_ptr<ocl::Types::TupleType > TupleValueImpl::getModel() const
 {
 
     return m_model;
 }
+
 void TupleValueImpl::setModel(std::shared_ptr<ocl::Types::TupleType> _model)
 {
     m_model = _model;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<TupleValue> TupleValueImpl::getThisTupleValuePtr() const
@@ -317,7 +318,7 @@ void TupleValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

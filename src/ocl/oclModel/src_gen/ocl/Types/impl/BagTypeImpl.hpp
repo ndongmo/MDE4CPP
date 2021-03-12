@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class BagTypeImpl :virtual public CollectionTypeImpl, virtual public BagType 
+	class BagTypeImpl : virtual public CollectionTypeImpl, virtual public BagType 
 	{
 		public: 
 			BagTypeImpl(const BagTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BagTypeImpl& operator=(BagTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BagTypeImpl& operator=(BagTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -66,8 +64,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

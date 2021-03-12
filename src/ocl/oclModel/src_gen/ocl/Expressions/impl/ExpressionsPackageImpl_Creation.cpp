@@ -1,7 +1,7 @@
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -16,11 +16,11 @@
 #include "ecore/EReference.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace ocl::Expressions;
@@ -33,7 +33,7 @@ void ExpressionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createAssociationClassCallExpContent(package, factory);
 	createBooleanLiteralExpContent(package, factory);
@@ -77,7 +77,7 @@ void ExpressionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 
 }
 
-void ExpressionsPackageImpl::createAssociationClassCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createAssociationClassCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_associationClassCallExp_Class = factory->createEClass_in_EPackage(package, ASSOCIATIONCLASSCALLEXP_CLASS);
 	
@@ -86,7 +86,7 @@ void ExpressionsPackageImpl::createAssociationClassCallExpContent(std::shared_pt
 	
 }
 
-void ExpressionsPackageImpl::createBooleanLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createBooleanLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanLiteralExp_Class = factory->createEClass_in_EPackage(package, BOOLEANLITERALEXP_CLASS);
 	m_booleanLiteralExp_Attribute_booleanSymbol = factory->createEAttribute_in_EContainingClass(m_booleanLiteralExp_Class, BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL);
@@ -95,7 +95,7 @@ void ExpressionsPackageImpl::createBooleanLiteralExpContent(std::shared_ptr<ecor
 	
 }
 
-void ExpressionsPackageImpl::createCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_callExp_Class = factory->createEClass_in_EPackage(package, CALLEXP_CLASS);
 	
@@ -104,7 +104,7 @@ void ExpressionsPackageImpl::createCallExpContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ExpressionsPackageImpl::createCollectionItemContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createCollectionItemContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionItem_Class = factory->createEClass_in_EPackage(package, COLLECTIONITEM_CLASS);
 	
@@ -113,7 +113,7 @@ void ExpressionsPackageImpl::createCollectionItemContent(std::shared_ptr<ecore::
 	
 }
 
-void ExpressionsPackageImpl::createCollectionLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createCollectionLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionLiteralExp_Class = factory->createEClass_in_EPackage(package, COLLECTIONLITERALEXP_CLASS);
 	m_collectionLiteralExp_Attribute_kind = factory->createEAttribute_in_EContainingClass(m_collectionLiteralExp_Class, COLLECTIONLITERALEXP_ATTRIBUTE_KIND);
@@ -123,7 +123,7 @@ void ExpressionsPackageImpl::createCollectionLiteralExpContent(std::shared_ptr<e
 	
 }
 
-void ExpressionsPackageImpl::createCollectionLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createCollectionLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionLiteralPart_Class = factory->createEClass_in_EPackage(package, COLLECTIONLITERALPART_CLASS);
 	
@@ -131,7 +131,7 @@ void ExpressionsPackageImpl::createCollectionLiteralPartContent(std::shared_ptr<
 	
 }
 
-void ExpressionsPackageImpl::createCollectionRangeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createCollectionRangeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionRange_Class = factory->createEClass_in_EPackage(package, COLLECTIONRANGE_CLASS);
 	
@@ -141,7 +141,7 @@ void ExpressionsPackageImpl::createCollectionRangeContent(std::shared_ptr<ecore:
 	
 }
 
-void ExpressionsPackageImpl::createEnumLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createEnumLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_enumLiteralExp_Class = factory->createEClass_in_EPackage(package, ENUMLITERALEXP_CLASS);
 	
@@ -150,7 +150,7 @@ void ExpressionsPackageImpl::createEnumLiteralExpContent(std::shared_ptr<ecore::
 	
 }
 
-void ExpressionsPackageImpl::createExpressionInOclContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createExpressionInOclContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expressionInOcl_Class = factory->createEClass_in_EPackage(package, EXPRESSIONINOCL_CLASS);
 	
@@ -162,7 +162,7 @@ void ExpressionsPackageImpl::createExpressionInOclContent(std::shared_ptr<ecore:
 	
 }
 
-void ExpressionsPackageImpl::createFeatureCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createFeatureCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_featureCallExp_Class = factory->createEClass_in_EPackage(package, FEATURECALLEXP_CLASS);
 	m_featureCallExp_Attribute_isPre = factory->createEAttribute_in_EContainingClass(m_featureCallExp_Class, FEATURECALLEXP_ATTRIBUTE_ISPRE);
@@ -171,7 +171,7 @@ void ExpressionsPackageImpl::createFeatureCallExpContent(std::shared_ptr<ecore::
 	
 }
 
-void ExpressionsPackageImpl::createIfExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createIfExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_ifExp_Class = factory->createEClass_in_EPackage(package, IFEXP_CLASS);
 	
@@ -182,7 +182,7 @@ void ExpressionsPackageImpl::createIfExpContent(std::shared_ptr<ecore::EPackage>
 	
 }
 
-void ExpressionsPackageImpl::createInfixedExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createInfixedExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_infixedExp_Class = factory->createEClass_in_EPackage(package, INFIXEDEXP_CLASS);
 	
@@ -191,7 +191,7 @@ void ExpressionsPackageImpl::createInfixedExpContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ExpressionsPackageImpl::createIntegerLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createIntegerLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerLiteralExp_Class = factory->createEClass_in_EPackage(package, INTEGERLITERALEXP_CLASS);
 	m_integerLiteralExp_Attribute_integerSymbol = factory->createEAttribute_in_EContainingClass(m_integerLiteralExp_Class, INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL);
@@ -200,7 +200,7 @@ void ExpressionsPackageImpl::createIntegerLiteralExpContent(std::shared_ptr<ecor
 	
 }
 
-void ExpressionsPackageImpl::createInvalidLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createInvalidLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_invalidLiteralExp_Class = factory->createEClass_in_EPackage(package, INVALIDLITERALEXP_CLASS);
 	
@@ -208,7 +208,7 @@ void ExpressionsPackageImpl::createInvalidLiteralExpContent(std::shared_ptr<ecor
 	
 }
 
-void ExpressionsPackageImpl::createIterateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createIterateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_iterateExp_Class = factory->createEClass_in_EPackage(package, ITERATEEXP_CLASS);
 	
@@ -217,7 +217,7 @@ void ExpressionsPackageImpl::createIterateExpContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ExpressionsPackageImpl::createIteratorExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createIteratorExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_iteratorExp_Class = factory->createEClass_in_EPackage(package, ITERATOREXP_CLASS);
 	
@@ -225,7 +225,7 @@ void ExpressionsPackageImpl::createIteratorExpContent(std::shared_ptr<ecore::EPa
 	
 }
 
-void ExpressionsPackageImpl::createLetExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createLetExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_letExp_Class = factory->createEClass_in_EPackage(package, LETEXP_CLASS);
 	
@@ -235,7 +235,7 @@ void ExpressionsPackageImpl::createLetExpContent(std::shared_ptr<ecore::EPackage
 	
 }
 
-void ExpressionsPackageImpl::createLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalExp_Class = factory->createEClass_in_EPackage(package, LITERALEXP_CLASS);
 	
@@ -243,7 +243,7 @@ void ExpressionsPackageImpl::createLiteralExpContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ExpressionsPackageImpl::createLoopExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createLoopExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_loopExp_Class = factory->createEClass_in_EPackage(package, LOOPEXP_CLASS);
 	
@@ -253,7 +253,7 @@ void ExpressionsPackageImpl::createLoopExpContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ExpressionsPackageImpl::createMessageExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createMessageExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_messageExp_Class = factory->createEClass_in_EPackage(package, MESSAGEEXP_CLASS);
 	
@@ -265,7 +265,7 @@ void ExpressionsPackageImpl::createMessageExpContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ExpressionsPackageImpl::createNavigationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createNavigationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_navigationCallExp_Class = factory->createEClass_in_EPackage(package, NAVIGATIONCALLEXP_CLASS);
 	
@@ -275,7 +275,7 @@ void ExpressionsPackageImpl::createNavigationCallExpContent(std::shared_ptr<ecor
 	
 }
 
-void ExpressionsPackageImpl::createNullLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createNullLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_nullLiteralExp_Class = factory->createEClass_in_EPackage(package, NULLLITERALEXP_CLASS);
 	
@@ -283,7 +283,7 @@ void ExpressionsPackageImpl::createNullLiteralExpContent(std::shared_ptr<ecore::
 	
 }
 
-void ExpressionsPackageImpl::createNumericLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createNumericLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_numericLiteralExp_Class = factory->createEClass_in_EPackage(package, NUMERICLITERALEXP_CLASS);
 	
@@ -291,7 +291,7 @@ void ExpressionsPackageImpl::createNumericLiteralExpContent(std::shared_ptr<ecor
 	
 }
 
-void ExpressionsPackageImpl::createOclExpressionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createOclExpressionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclExpression_Class = factory->createEClass_in_EPackage(package, OCLEXPRESSION_CLASS);
 	
@@ -311,7 +311,7 @@ void ExpressionsPackageImpl::createOclExpressionContent(std::shared_ptr<ecore::E
 	
 }
 
-void ExpressionsPackageImpl::createOperationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createOperationCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_operationCallExp_Class = factory->createEClass_in_EPackage(package, OPERATIONCALLEXP_CLASS);
 	
@@ -321,7 +321,7 @@ void ExpressionsPackageImpl::createOperationCallExpContent(std::shared_ptr<ecore
 	
 }
 
-void ExpressionsPackageImpl::createPrimitiveLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createPrimitiveLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_primitiveLiteralExp_Class = factory->createEClass_in_EPackage(package, PRIMITIVELITERALEXP_CLASS);
 	m_primitiveLiteralExp_Attribute_symbol = factory->createEAttribute_in_EContainingClass(m_primitiveLiteralExp_Class, PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL);
@@ -330,7 +330,7 @@ void ExpressionsPackageImpl::createPrimitiveLiteralExpContent(std::shared_ptr<ec
 	
 }
 
-void ExpressionsPackageImpl::createPropertyCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createPropertyCallExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_propertyCallExp_Class = factory->createEClass_in_EPackage(package, PROPERTYCALLEXP_CLASS);
 	
@@ -339,7 +339,7 @@ void ExpressionsPackageImpl::createPropertyCallExpContent(std::shared_ptr<ecore:
 	
 }
 
-void ExpressionsPackageImpl::createRealLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createRealLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realLiteralExp_Class = factory->createEClass_in_EPackage(package, REALLITERALEXP_CLASS);
 	m_realLiteralExp_Attribute_realSymbol = factory->createEAttribute_in_EContainingClass(m_realLiteralExp_Class, REALLITERALEXP_ATTRIBUTE_REALSYMBOL);
@@ -348,7 +348,7 @@ void ExpressionsPackageImpl::createRealLiteralExpContent(std::shared_ptr<ecore::
 	
 }
 
-void ExpressionsPackageImpl::createStateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createStateExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stateExp_Class = factory->createEClass_in_EPackage(package, STATEEXP_CLASS);
 	
@@ -357,7 +357,7 @@ void ExpressionsPackageImpl::createStateExpContent(std::shared_ptr<ecore::EPacka
 	
 }
 
-void ExpressionsPackageImpl::createStringLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createStringLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringLiteralExp_Class = factory->createEClass_in_EPackage(package, STRINGLITERALEXP_CLASS);
 	m_stringLiteralExp_Attribute_stringSymbol = factory->createEAttribute_in_EContainingClass(m_stringLiteralExp_Class, STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL);
@@ -366,7 +366,7 @@ void ExpressionsPackageImpl::createStringLiteralExpContent(std::shared_ptr<ecore
 	
 }
 
-void ExpressionsPackageImpl::createTupleLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createTupleLiteralExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tupleLiteralExp_Class = factory->createEClass_in_EPackage(package, TUPLELITERALEXP_CLASS);
 	
@@ -375,7 +375,7 @@ void ExpressionsPackageImpl::createTupleLiteralExpContent(std::shared_ptr<ecore:
 	
 }
 
-void ExpressionsPackageImpl::createTupleLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createTupleLiteralPartContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tupleLiteralPart_Class = factory->createEClass_in_EPackage(package, TUPLELITERALPART_CLASS);
 	
@@ -384,7 +384,7 @@ void ExpressionsPackageImpl::createTupleLiteralPartContent(std::shared_ptr<ecore
 	
 }
 
-void ExpressionsPackageImpl::createTypeExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createTypeExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_typeExp_Class = factory->createEClass_in_EPackage(package, TYPEEXP_CLASS);
 	
@@ -393,7 +393,7 @@ void ExpressionsPackageImpl::createTypeExpContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ExpressionsPackageImpl::createUnlimitedNaturalExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createUnlimitedNaturalExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalExp_Class = factory->createEClass_in_EPackage(package, UNLIMITEDNATURALEXP_CLASS);
 	m_unlimitedNaturalExp_Attribute_unlimitedNaturalSymbol = factory->createEAttribute_in_EContainingClass(m_unlimitedNaturalExp_Class, UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL);
@@ -402,7 +402,7 @@ void ExpressionsPackageImpl::createUnlimitedNaturalExpContent(std::shared_ptr<ec
 	
 }
 
-void ExpressionsPackageImpl::createUnspecifiedValueExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createUnspecifiedValueExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unspecifiedValueExp_Class = factory->createEClass_in_EPackage(package, UNSPECIFIEDVALUEEXP_CLASS);
 	
@@ -410,7 +410,7 @@ void ExpressionsPackageImpl::createUnspecifiedValueExpContent(std::shared_ptr<ec
 	
 }
 
-void ExpressionsPackageImpl::createVariableContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createVariableContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variable_Class = factory->createEClass_in_EPackage(package, VARIABLE_CLASS);
 	
@@ -427,7 +427,7 @@ void ExpressionsPackageImpl::createVariableContent(std::shared_ptr<ecore::EPacka
 	
 }
 
-void ExpressionsPackageImpl::createVariableExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createVariableExpContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variableExp_Class = factory->createEClass_in_EPackage(package, VARIABLEEXP_CLASS);
 	
@@ -436,7 +436,7 @@ void ExpressionsPackageImpl::createVariableExpContent(std::shared_ptr<ecore::EPa
 	
 }
 
-void ExpressionsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ExpressionsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionKind_Class = factory->createEEnum_in_EPackage(package, COLLECTIONKIND_CLASS);
 	

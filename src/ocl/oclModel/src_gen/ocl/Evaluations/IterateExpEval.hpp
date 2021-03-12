@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -90,13 +90,11 @@ namespace ocl::Evaluations
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class IterateExpEval:virtual public LoopExpEval
 	{
 		public:
  			IterateExpEval(const IterateExpEval &) {}
-			IterateExpEval& operator=(IterateExpEval const&) = delete;
 
 		protected:
 			IterateExpEval(){}
@@ -119,13 +117,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval > getResult() const = 0;
 			
-			/*!
-			 */
-			virtual void setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result_result) = 0;
+			
+			virtual void setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result) = 0;
+			
 			
 
 		protected:
@@ -137,10 +134,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::VariableDeclEval > m_result;
 			
+			std::shared_ptr<ocl::Evaluations::VariableDeclEval > m_result;
 
 		public:
 			//*********************************

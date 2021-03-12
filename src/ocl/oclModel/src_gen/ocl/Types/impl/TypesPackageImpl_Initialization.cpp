@@ -15,15 +15,15 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
 #include "ocl/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 
 using namespace ocl::Types;
@@ -42,17 +42,17 @@ void TypesPackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	m_anyType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_anyType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_bagType_Class->getESuperTypes()->push_back(getCollectionType_Class());
-	m_collectionType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEDataType_Class());
-	m_invalidType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEClassifier_Class());
-	m_messageType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_collectionType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEDataType_Class());
+	m_invalidType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEClassifier_Class());
+	m_messageType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_orderedSetType_Class->getESuperTypes()->push_back(getCollectionType_Class());
 	m_sequenceType_Class->getESuperTypes()->push_back(getCollectionType_Class());
 	m_setType_Class->getESuperTypes()->push_back(getCollectionType_Class());
-	m_templateParameterType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEClassifier_Class());
-	m_tupleType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEDataType_Class());
-	m_voidType_Class->getESuperTypes()->push_back(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_templateParameterType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEClassifier_Class());
+	m_tupleType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEDataType_Class());
+	m_voidType_Class->getESuperTypes()->push_back(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	
 
  	// Initialize classes and features; add operations and parameters
@@ -81,7 +81,7 @@ void TypesPackageImpl::initializeAnyTypeContent()
 	
 	
 	m_anyType_Attribute_object->setName("object");
-	m_anyType_Attribute_object->setEType(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_anyType_Attribute_object->setEType(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_anyType_Attribute_object->setLowerBound(0);
 	m_anyType_Attribute_object->setUpperBound(1);
 	m_anyType_Attribute_object->setTransient(false);
@@ -125,7 +125,7 @@ void TypesPackageImpl::initializeCollectionTypeContent()
 	
 	
 	m_collectionType_Attribute_elementType->setName("elementType");
-	m_collectionType_Attribute_elementType->setEType(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_collectionType_Attribute_elementType->setEType(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_collectionType_Attribute_elementType->setLowerBound(1);
 	m_collectionType_Attribute_elementType->setUpperBound(1);
 	m_collectionType_Attribute_elementType->setTransient(false);
@@ -172,7 +172,7 @@ void TypesPackageImpl::initializeCollectionTypeContent()
 	    }
 	}
 	
-	m_collectionType_Operation_kindOf_CollectionType->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_collectionType_Operation_kindOf_CollectionType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_collectionType_Operation_kindOf_CollectionType->setName("kindOf");
 	m_collectionType_Operation_kindOf_CollectionType->setLowerBound(1);
 	m_collectionType_Operation_kindOf_CollectionType->setUpperBound(1);
@@ -180,7 +180,7 @@ void TypesPackageImpl::initializeCollectionTypeContent()
 	m_collectionType_Operation_kindOf_CollectionType->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionType_Operation_kindOf_CollectionType);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionType_Operation_kindOf_CollectionType);
 		parameter->setName("coll");
 		parameter->setEType(getCollectionType_Class());
 		parameter->setLowerBound(0);
@@ -211,7 +211,7 @@ void TypesPackageImpl::initializeMessageTypeContent()
 	
 	
 	m_messageType_Attribute_referredOperation->setName("referredOperation");
-	m_messageType_Attribute_referredOperation->setEType(ecore::EcorePackage::eInstance()->getEOperation_Class());
+	m_messageType_Attribute_referredOperation->setEType(ecore::ecorePackage::eInstance()->getEOperation_Class());
 	m_messageType_Attribute_referredOperation->setLowerBound(0);
 	m_messageType_Attribute_referredOperation->setUpperBound(1);
 	m_messageType_Attribute_referredOperation->setTransient(false);
@@ -233,7 +233,7 @@ void TypesPackageImpl::initializeMessageTypeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_messageType_Attribute_referredSignal->setName("referredSignal");
-	m_messageType_Attribute_referredSignal->setEType(uml::UmlPackage::eInstance()->getSignal_Class());
+	m_messageType_Attribute_referredSignal->setEType(uml::umlPackage::eInstance()->getSignal_Class());
 	m_messageType_Attribute_referredSignal->setLowerBound(0);
 	m_messageType_Attribute_referredSignal->setUpperBound(1);
 	m_messageType_Attribute_referredSignal->setTransient(false);
@@ -266,7 +266,7 @@ void TypesPackageImpl::initializeNameTypeBindingContent()
 	
 	m_nameTypeBinding_Attribute_name = getNameTypeBinding_Attribute_name();
 	m_nameTypeBinding_Attribute_name->setName("name");
-	m_nameTypeBinding_Attribute_name->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_nameTypeBinding_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_nameTypeBinding_Attribute_name->setLowerBound(0);
 	m_nameTypeBinding_Attribute_name->setUpperBound(1);
 	m_nameTypeBinding_Attribute_name->setTransient(false);
@@ -286,7 +286,7 @@ void TypesPackageImpl::initializeNameTypeBindingContent()
 	}
 	
 	m_nameTypeBinding_Attribute_type->setName("type");
-	m_nameTypeBinding_Attribute_type->setEType(ecore::EcorePackage::eInstance()->getEClassifier_Class());
+	m_nameTypeBinding_Attribute_type->setEType(ecore::ecorePackage::eInstance()->getEClassifier_Class());
 	m_nameTypeBinding_Attribute_type->setLowerBound(0);
 	m_nameTypeBinding_Attribute_type->setUpperBound(1);
 	m_nameTypeBinding_Attribute_type->setTransient(false);
@@ -352,7 +352,7 @@ void TypesPackageImpl::initializeTemplateParameterTypeContent()
 	
 	m_templateParameterType_Attribute_specification = getTemplateParameterType_Attribute_specification();
 	m_templateParameterType_Attribute_specification->setName("specification");
-	m_templateParameterType_Attribute_specification->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_templateParameterType_Attribute_specification->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_templateParameterType_Attribute_specification->setLowerBound(0);
 	m_templateParameterType_Attribute_specification->setUpperBound(1);
 	m_templateParameterType_Attribute_specification->setTransient(false);

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -45,19 +45,17 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
-	class NameValueBinding : virtual public ecore::EObject 
+	
+	class NameValueBinding : virtual public ecore::EModelElement
 
 	{
 		public:
  			NameValueBinding(const NameValueBinding &) {}
-			NameValueBinding& operator=(NameValueBinding const&) = delete;
 
 		protected:
 			NameValueBinding(){}
@@ -76,43 +74,36 @@ namespace ocl::Values
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) = 0;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 			
+			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 
 		public:
 			//*********************************

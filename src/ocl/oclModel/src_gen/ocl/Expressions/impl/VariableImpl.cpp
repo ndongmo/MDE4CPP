@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -66,12 +60,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -82,51 +72,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 VariableImpl::VariableImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 VariableImpl::~VariableImpl()
@@ -136,30 +85,26 @@ VariableImpl::~VariableImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::IterateExp > par_baseExp)
+:VariableImpl()
+{
+	m_baseExp = par_baseExp;
+}
 
 //Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::IterateExp > par_baseExp)
-			:VariableImpl()
-			{
-			    m_baseExp = par_baseExp;
-			}
-
-
-//Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:VariableImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+VariableImpl::VariableImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:VariableImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopExp)
-			:VariableImpl()
-			{
-			    m_loopExp = par_loopExp;
-			}
-
+VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopExp)
+:VariableImpl()
+{
+	m_loopExp = par_loopExp;
+}
 
 //Additional constructor for the containments back reference
 VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_ExpressionInOcl, const int reference_id)
@@ -167,13 +112,13 @@ VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
+	case oclPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
 		m_resultOwner = par_ExpressionInOcl;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
+	case oclPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
 		m_selfOwner = par_ExpressionInOcl;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
+	case oclPackage::VARIABLE_ATTRIBUTE_VAROWNER:
 		m_varOwner = par_ExpressionInOcl;
 		 return;
 	default:
@@ -183,14 +128,21 @@ VariableImpl::VariableImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par
 }
 
 
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-
 
 
 VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
+{
+	std::shared_ptr<VariableImpl> element(new VariableImpl(*this));
+	element->setThisVariablePtr(element);
+	return element;
+}
+
+VariableImpl& VariableImpl::operator=(const VariableImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -254,13 +206,8 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
-{
-	std::shared_ptr<VariableImpl> element(new VariableImpl(*this));
-	element->setThisVariablePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
@@ -279,103 +226,169 @@ std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference baseExp
+*/
 std::weak_ptr<ocl::Expressions::IterateExp > VariableImpl::getBaseExp() const
 {
 
     return m_baseExp;
 }
+
 void VariableImpl::setBaseExp(std::shared_ptr<ocl::Expressions::IterateExp> _baseExp)
 {
     m_baseExp = _baseExp;
 }
 
+
+
+/*
+Getter & Setter for reference initExpression
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > VariableImpl::getInitExpression() const
 {
 
     return m_initExpression;
 }
+
 void VariableImpl::setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression> _initExpression)
 {
     m_initExpression = _initExpression;
 }
 
+
+
+/*
+Getter & Setter for reference loopExp
+*/
 std::weak_ptr<ocl::Expressions::LoopExp > VariableImpl::getLoopExp() const
 {
 
     return m_loopExp;
 }
+
 void VariableImpl::setLoopExp(std::shared_ptr<ocl::Expressions::LoopExp> _loopExp)
 {
     m_loopExp = _loopExp;
 }
 
+
+
+/*
+Getter & Setter for reference referringExp
+*/
 std::shared_ptr<ocl::Expressions::VariableExp > VariableImpl::getReferringExp() const
 {
 
     return m_referringExp;
 }
+
 void VariableImpl::setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp> _referringExp)
 {
     m_referringExp = _referringExp;
 }
 
+
+
+/*
+Getter & Setter for reference representedParameter
+*/
 std::shared_ptr<ecore::EParameter > VariableImpl::getRepresentedParameter() const
 {
 
     return m_representedParameter;
 }
+
 void VariableImpl::setRepresentedParameter(std::shared_ptr<ecore::EParameter> _representedParameter)
 {
     m_representedParameter = _representedParameter;
 }
 
+
+
+/*
+Getter & Setter for reference resultOwner
+*/
 std::weak_ptr<ocl::Expressions::ExpressionInOcl > VariableImpl::getResultOwner() const
 {
 
     return m_resultOwner;
 }
+
 void VariableImpl::setResultOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _resultOwner)
 {
     m_resultOwner = _resultOwner;
 }
 
+
+
+/*
+Getter & Setter for reference selfOwner
+*/
 std::weak_ptr<ocl::Expressions::ExpressionInOcl > VariableImpl::getSelfOwner() const
 {
 
     return m_selfOwner;
 }
+
 void VariableImpl::setSelfOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _selfOwner)
 {
     m_selfOwner = _selfOwner;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > VariableImpl::getValue() const
 {
 
     return m_value;
 }
+
 void VariableImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
 
+
+
+/*
+Getter & Setter for reference varOwner
+*/
 std::weak_ptr<ocl::Expressions::ExpressionInOcl > VariableImpl::getVarOwner() const
 {
 
     return m_varOwner;
 }
+
 void VariableImpl::setVarOwner(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _varOwner)
 {
     m_varOwner = _varOwner;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> VariableImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const
@@ -566,7 +579,7 @@ void VariableImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

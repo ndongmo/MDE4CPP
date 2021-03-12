@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class TupleLiteralExpEvalImpl :virtual public LiteralExpEvalImpl, virtual public TupleLiteralExpEval 
+	class TupleLiteralExpEvalImpl : virtual public LiteralExpEvalImpl, virtual public TupleLiteralExpEval 
 	{
 		public: 
 			TupleLiteralExpEvalImpl(const TupleLiteralExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TupleLiteralExpEvalImpl& operator=(TupleLiteralExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TupleLiteralExpEvalImpl& operator=(TupleLiteralExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,9 +51,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> getTuplePart() const ;
+			
 			
 							
 			

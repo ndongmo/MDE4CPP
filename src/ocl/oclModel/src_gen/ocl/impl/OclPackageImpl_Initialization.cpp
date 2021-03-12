@@ -1,4 +1,4 @@
-#include "ocl/impl/OclPackageImpl.hpp"
+#include "ocl/impl/oclPackageImpl.hpp"
 
 #include <cassert>
 
@@ -18,7 +18,7 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
@@ -33,16 +33,16 @@
 
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 
 using namespace ocl;
 
-void OclPackageImpl::initializePackageContents()
+void oclPackageImpl::initializePackageContents()
 {
 	if (isInitialized)
 	{
@@ -71,7 +71,7 @@ void OclPackageImpl::initializePackageContents()
 }
 
 
-void OclPackageImpl::initializePackageEDataTypes()
+void oclPackageImpl::initializePackageEDataTypes()
 {
 	
 }

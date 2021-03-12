@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class ObjectValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public ObjectValue 
+	class ObjectValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public ObjectValue 
 	{
 		public: 
 			ObjectValueImpl(const ObjectValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ObjectValueImpl& operator=(ObjectValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ObjectValueImpl& operator=(ObjectValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,12 +41,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -61,17 +57,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> getHistory() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::EObject > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<ecore::EObject> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<ecore::EObject> _value) ;
+			
 							
 			
 			//*********************************

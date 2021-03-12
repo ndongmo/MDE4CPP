@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -50,10 +46,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,17 +58,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 InvalidTypeImpl::InvalidTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InvalidTypeImpl::~InvalidTypeImpl()
@@ -84,25 +71,34 @@ InvalidTypeImpl::~InvalidTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:InvalidTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:InvalidTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:InvalidTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+InvalidTypeImpl::InvalidTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:InvalidTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 InvalidTypeImpl::InvalidTypeImpl(const InvalidTypeImpl & obj):InvalidTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InvalidTypeImpl::copy() const
+{
+	std::shared_ptr<InvalidTypeImpl> element(new InvalidTypeImpl(*this));
+	element->setThisInvalidTypePtr(element);
+	return element;
+}
+
+InvalidTypeImpl& InvalidTypeImpl::operator=(const InvalidTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -141,13 +137,8 @@ InvalidTypeImpl::InvalidTypeImpl(const InvalidTypeImpl & obj):InvalidTypeImpl()
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InvalidTypeImpl::copy() const
-{
-	std::shared_ptr<InvalidTypeImpl> element(new InvalidTypeImpl(*this));
-	element->setThisInvalidTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
@@ -172,8 +163,20 @@ std::shared_ptr<ecore::EClass> InvalidTypeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> InvalidTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<InvalidType> InvalidTypeImpl::getThisInvalidTypePtr() const
@@ -236,7 +239,7 @@ void InvalidTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

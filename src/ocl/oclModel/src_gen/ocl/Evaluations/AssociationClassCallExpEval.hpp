@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -85,13 +85,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class AssociationClassCallExpEval:virtual public NavigationCallExpEval
 	{
 		public:
  			AssociationClassCallExpEval(const AssociationClassCallExpEval &) {}
-			AssociationClassCallExpEval& operator=(AssociationClassCallExpEval const&) = delete;
 
 		protected:
 			AssociationClassCallExpEval(){}
@@ -114,13 +112,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredAssociationClass() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredAssociationClass(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass_referredAssociationClass) = 0;
+			
+			virtual void setReferredAssociationClass(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass) = 0;
+			
 			
 
 		protected:
@@ -132,10 +129,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredAssociationClass;
 			
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredAssociationClass;
 
 		public:
 			//*********************************

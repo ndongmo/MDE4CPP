@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -80,13 +80,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class LetExpEval:virtual public OclExpEval
 	{
 		public:
  			LetExpEval(const LetExpEval &) {}
-			LetExpEval& operator=(LetExpEval const&) = delete;
 
 		protected:
 			LetExpEval(){}
@@ -109,27 +107,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getIn() const = 0;
 			
-			/*!
-			 */
-			virtual void setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in_in) = 0;
-			/*!
-			 */
+			
+			virtual void setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getInitExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression_initExpression) = 0;
-			/*!
-			 */
+			
+			virtual void setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable_variable) = 0;
+			
+			virtual void setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable) = 0;
+			
 			
 
 		protected:
@@ -141,16 +136,10 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_in;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_initExpression;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_variable;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_in;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_initExpression;
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_variable;
 
 		public:
 			//*********************************

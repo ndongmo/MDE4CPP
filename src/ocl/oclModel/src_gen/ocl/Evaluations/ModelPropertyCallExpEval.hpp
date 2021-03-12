@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -80,13 +80,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class ModelPropertyCallExpEval:virtual public PropertyCallExpEval
 	{
 		public:
  			ModelPropertyCallExpEval(const ModelPropertyCallExpEval &) {}
-			ModelPropertyCallExpEval& operator=(ModelPropertyCallExpEval const&) = delete;
 
 		protected:
 			ModelPropertyCallExpEval(){}
@@ -101,8 +99,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool atPre() = 0;
 			
 			

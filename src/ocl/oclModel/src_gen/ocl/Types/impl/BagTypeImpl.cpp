@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -55,11 +50,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,17 +62,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 BagTypeImpl::BagTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BagTypeImpl::~BagTypeImpl()
@@ -90,25 +75,34 @@ BagTypeImpl::~BagTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+BagTypeImpl::BagTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:BagTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			BagTypeImpl::BagTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:BagTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			BagTypeImpl::BagTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:BagTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+BagTypeImpl::BagTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:BagTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 BagTypeImpl::BagTypeImpl(const BagTypeImpl & obj):BagTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BagTypeImpl::copy() const
+{
+	std::shared_ptr<BagTypeImpl> element(new BagTypeImpl(*this));
+	element->setThisBagTypePtr(element);
+	return element;
+}
+
+BagTypeImpl& BagTypeImpl::operator=(const BagTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -157,13 +151,8 @@ BagTypeImpl::BagTypeImpl(const BagTypeImpl & obj):BagTypeImpl()
 		std::cout << "Copying the Subset: " << "m_elementType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  BagTypeImpl::copy() const
-{
-	std::shared_ptr<BagTypeImpl> element(new BagTypeImpl(*this));
-	element->setThisBagTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BagTypeImpl::eStaticClass() const
@@ -188,8 +177,20 @@ std::shared_ptr<ecore::EClass> BagTypeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> BagTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<BagType> BagTypeImpl::getThisBagTypePtr() const
@@ -252,7 +253,7 @@ void BagTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

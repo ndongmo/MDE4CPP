@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -75,13 +75,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class CollectionRange:virtual public CollectionLiteralPart
 	{
 		public:
  			CollectionRange(const CollectionRange &) {}
-			CollectionRange& operator=(CollectionRange const&) = delete;
 
 		protected:
 			CollectionRange(){}
@@ -104,20 +102,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getFirst() const = 0;
 			
-			/*!
-			 */
-			virtual void setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first_first) = 0;
-			/*!
-			 */
+			
+			virtual void setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getLast() const = 0;
 			
-			/*!
-			 */
-			virtual void setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last_last) = 0;
+			
+			virtual void setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last) = 0;
+			
 			
 
 		protected:
@@ -129,20 +125,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_first;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_last;
 			
+			std::shared_ptr<ocl::Expressions::OclExpression > m_first;
+			std::shared_ptr<ocl::Expressions::OclExpression > m_last;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

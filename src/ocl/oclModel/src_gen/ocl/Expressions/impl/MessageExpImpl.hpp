@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class MessageExpImpl :virtual public OclExpressionImpl, virtual public MessageExp 
+	class MessageExpImpl : virtual public OclExpressionImpl, virtual public MessageExp 
 	{
 		public: 
 			MessageExpImpl(const MessageExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			MessageExpImpl& operator=(MessageExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			MessageExpImpl& operator=(MessageExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,38 +96,34 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getArgument() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<uml::CallOperationAction > getCalledOperation() const ;
 			
-			/*!
-			 */
-			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation_calledOperation) ;
-			/*!
-			 */
+			
+			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation) ;
+			
+			
 			virtual std::shared_ptr<uml::SendSignalAction > getSentSignal() const ;
 			
-			/*!
-			 */
-			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal_sentSignal) ;
-			/*!
-			 */
+			
+			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getTarget() const ;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target_target) ;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

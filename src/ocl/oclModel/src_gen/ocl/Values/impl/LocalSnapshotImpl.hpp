@@ -15,20 +15,18 @@
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	class LocalSnapshotImpl :virtual public ecore::EObjectImpl,
+	class LocalSnapshotImpl : virtual public ecore::EModelElementImpl,
 virtual public LocalSnapshot 
 	{
 		public: 
 			LocalSnapshotImpl(const LocalSnapshotImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LocalSnapshotImpl& operator=(LocalSnapshotImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LocalSnapshotImpl& operator=(LocalSnapshotImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -50,53 +48,45 @@ virtual public LocalSnapshot
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsPost() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPost (bool _isPost); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsPre() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPre (bool _isPre); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getInputQ() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getOutputQ() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot > getPred() const ;
 			
-			/*!
-			 */
-			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred_pred) ;
-			/*!
-			 */
+			
+			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred) ;
+			
+			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot > getSucc() const ;
 			
-			/*!
-			 */
-			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ_succ) ;
+			
+			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ) ;
+			
 							
 			
 			//*********************************

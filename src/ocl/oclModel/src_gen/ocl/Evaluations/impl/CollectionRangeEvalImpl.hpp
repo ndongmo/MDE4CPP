@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class CollectionRangeEvalImpl :virtual public CollectionLiteralPartEvalImpl, virtual public CollectionRangeEval 
+	class CollectionRangeEvalImpl : virtual public CollectionLiteralPartEvalImpl, virtual public CollectionRangeEval 
 	{
 		public: 
 			CollectionRangeEvalImpl(const CollectionRangeEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionRangeEvalImpl& operator=(CollectionRangeEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionRangeEvalImpl& operator=(CollectionRangeEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,20 +51,18 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getFirst() const ;
 			
-			/*!
-			 */
-			virtual void setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first_first) ;
-			/*!
-			 */
+			
+			virtual void setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getLast() const ;
 			
-			/*!
-			 */
-			virtual void setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last_last) ;
+			
+			virtual void setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last) ;
+			
 							
 			
 			//*********************************

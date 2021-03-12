@@ -45,11 +45,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ecore/EObject.hpp"
 
 #include "ocl/Values/LocalSnapshot.hpp"
@@ -60,11 +55,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,26 +67,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 ObjectValueImpl::ObjectValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_history.reset(new Bag<ocl::Values::LocalSnapshot>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectValueImpl::~ObjectValueImpl()
@@ -106,8 +82,19 @@ ObjectValueImpl::~ObjectValueImpl()
 
 
 
-
 ObjectValueImpl::ObjectValueImpl(const ObjectValueImpl & obj):ObjectValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectValueImpl::copy() const
+{
+	std::shared_ptr<ObjectValueImpl> element(new ObjectValueImpl(*this));
+	element->setThisObjectValuePtr(element);
+	return element;
+}
+
+ObjectValueImpl& ObjectValueImpl::operator=(const ObjectValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -125,13 +112,8 @@ ObjectValueImpl::ObjectValueImpl(const ObjectValueImpl & obj):ObjectValueImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ObjectValueImpl::copy() const
-{
-	std::shared_ptr<ObjectValueImpl> element(new ObjectValueImpl(*this));
-	element->setThisObjectValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectValueImpl::eStaticClass() const
@@ -255,26 +237,45 @@ std::string ObjectValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference history
+*/
 std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> ObjectValueImpl::getHistory() const
 {
+	if(m_history == nullptr)
+	{
+		m_history.reset(new Bag<ocl::Values::LocalSnapshot>());
+		
+		
+	}
 
     return m_history;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<ecore::EObject > ObjectValueImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void ObjectValueImpl::setValue(std::shared_ptr<ecore::EObject> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ObjectValue> ObjectValueImpl::getThisObjectValuePtr() const
@@ -390,7 +391,7 @@ void ObjectValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

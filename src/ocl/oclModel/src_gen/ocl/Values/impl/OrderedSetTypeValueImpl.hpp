@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class OrderedSetTypeValueImpl :virtual public CollectionValueImpl, virtual public OrderedSetTypeValue 
+	class OrderedSetTypeValueImpl : virtual public CollectionValueImpl, virtual public OrderedSetTypeValue 
 	{
 		public: 
 			OrderedSetTypeValueImpl(const OrderedSetTypeValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OrderedSetTypeValueImpl& operator=(OrderedSetTypeValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OrderedSetTypeValueImpl& operator=(OrderedSetTypeValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,8 +41,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
 			

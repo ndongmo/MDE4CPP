@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class BagTypeValueImpl :virtual public CollectionValueImpl, virtual public BagTypeValue 
+	class BagTypeValueImpl : virtual public CollectionValueImpl, virtual public BagTypeValue 
 	{
 		public: 
 			BagTypeValueImpl(const BagTypeValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BagTypeValueImpl& operator=(BagTypeValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BagTypeValueImpl& operator=(BagTypeValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,8 +41,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
 			

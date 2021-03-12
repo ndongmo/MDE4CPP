@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class OclMessageArgEval:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			OclMessageArgEval(const OclMessageArgEval &) {}
-			OclMessageArgEval& operator=(OclMessageArgEval const&) = delete;
 
 		protected:
 			OclMessageArgEval(){}
@@ -99,27 +97,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression_expression) = 0;
-			/*!
-			 */
+			
+			virtual void setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval > getUnspecified() const = 0;
 			
-			/*!
-			 */
-			virtual void setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified_unspecified) = 0;
-			/*!
-			 */
+			
+			virtual void setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable_variable) = 0;
+			
+			virtual void setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable) = 0;
+			
 			
 
 		protected:
@@ -131,16 +126,10 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_expression;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval > m_unspecified;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_variable;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_expression;
+			std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval > m_unspecified;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_variable;
 
 		public:
 			//*********************************

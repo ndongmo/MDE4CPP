@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class UnlimitedNaturalExpImpl :virtual public NumericLiteralExpImpl, virtual public UnlimitedNaturalExp 
+	class UnlimitedNaturalExpImpl : virtual public NumericLiteralExpImpl, virtual public UnlimitedNaturalExp 
 	{
 		public: 
 			UnlimitedNaturalExpImpl(const UnlimitedNaturalExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			UnlimitedNaturalExpImpl& operator=(UnlimitedNaturalExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			UnlimitedNaturalExpImpl& operator=(UnlimitedNaturalExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -93,14 +91,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getUnlimitedNaturalSymbol() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUnlimitedNaturalSymbol (int _unlimitedNaturalSymbol); 
-			
 			
 			
 			//*********************************
@@ -111,8 +106,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

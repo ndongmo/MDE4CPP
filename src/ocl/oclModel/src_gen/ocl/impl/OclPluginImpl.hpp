@@ -7,15 +7,15 @@
 #ifndef OCLPLUGINIMPL_HPP
 #define OCLPLUGINIMPL_HPP
 
-#include "ocl/OclPlugin.hpp"
+#include "ocl/oclPlugin.hpp"
 
 namespace ocl 
 {
-	class OclPluginImpl : virtual public OclPlugin 
+	class oclPluginImpl : virtual public oclPlugin 
 	{
 		public:
-			OclPluginImpl();
-			virtual ~OclPluginImpl();
+			oclPluginImpl();
+			virtual ~oclPluginImpl();
 		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();

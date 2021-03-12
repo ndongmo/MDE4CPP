@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -50,13 +50,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class OclVoidValue:virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			OclVoidValue(const OclVoidValue &) {}
-			OclVoidValue& operator=(OclVoidValue const&) = delete;
 
 		protected:
 			OclVoidValue(){}
@@ -71,12 +69,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			

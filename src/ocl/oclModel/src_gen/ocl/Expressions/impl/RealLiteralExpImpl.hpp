@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class RealLiteralExpImpl :virtual public NumericLiteralExpImpl, virtual public RealLiteralExp 
+	class RealLiteralExpImpl : virtual public NumericLiteralExpImpl, virtual public RealLiteralExp 
 	{
 		public: 
 			RealLiteralExpImpl(const RealLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RealLiteralExpImpl& operator=(RealLiteralExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RealLiteralExpImpl& operator=(RealLiteralExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -93,14 +91,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getRealSymbol() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setRealSymbol (int _realSymbol); 
-			
 			
 			
 			//*********************************
@@ -111,8 +106,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

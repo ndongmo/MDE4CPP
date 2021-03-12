@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class CollectionValueImpl :virtual public StaticValueImpl, virtual public CollectionValue 
+	class CollectionValueImpl : virtual public StaticValueImpl, virtual public CollectionValue 
 	{
 		public: 
 			CollectionValueImpl(const CollectionValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionValueImpl& operator=(CollectionValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionValueImpl& operator=(CollectionValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,20 +41,16 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool find(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -69,17 +63,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Types::CollectionType > getModel() const ;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType> _model_model) ;
+			
+			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType> _model) ;
+			
 							
 			
 			//*********************************

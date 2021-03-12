@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -57,11 +52,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,23 +64,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 CollectionTypeImpl::CollectionTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionTypeImpl::~CollectionTypeImpl()
@@ -98,25 +77,34 @@ CollectionTypeImpl::~CollectionTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:CollectionTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:CollectionTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:CollectionTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+CollectionTypeImpl::CollectionTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:CollectionTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 CollectionTypeImpl::CollectionTypeImpl(const CollectionTypeImpl & obj):CollectionTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionTypeImpl::copy() const
+{
+	std::shared_ptr<CollectionTypeImpl> element(new CollectionTypeImpl(*this));
+	element->setThisCollectionTypePtr(element);
+	return element;
+}
+
+CollectionTypeImpl& CollectionTypeImpl::operator=(const CollectionTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -166,13 +154,8 @@ CollectionTypeImpl::CollectionTypeImpl(const CollectionTypeImpl & obj):Collectio
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CollectionTypeImpl::copy() const
-{
-	std::shared_ptr<CollectionTypeImpl> element(new CollectionTypeImpl(*this));
-	element->setThisCollectionTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionTypeImpl::eStaticClass() const
@@ -205,33 +188,57 @@ bool CollectionTypeImpl::kindOf(std::shared_ptr<ocl::Types::CollectionType>  col
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference elementType
+*/
 std::shared_ptr<ecore::EClassifier > CollectionTypeImpl::getElementType() const
 {
 //assert(m_elementType);
     return m_elementType;
 }
+
 void CollectionTypeImpl::setElementType(std::shared_ptr<ecore::EClassifier> _elementType)
 {
     m_elementType = _elementType;
 }
 
+
+
+/*
+Getter & Setter for reference instance
+*/
 std::shared_ptr<ocl::Values::CollectionValue > CollectionTypeImpl::getInstance() const
 {
 
     return m_instance;
 }
+
 void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance)
 {
     m_instance = _instance;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> CollectionTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<CollectionType> CollectionTypeImpl::getThisCollectionTypePtr() const
@@ -318,7 +325,7 @@ void CollectionTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -365,7 +372,7 @@ void CollectionTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EClassifier> elementType = std::dynamic_pointer_cast<ecore::EClassifier>(ecore::EcoreFactory::eInstance()->create(typeName));
+			std::shared_ptr<ecore::EClassifier> elementType = std::dynamic_pointer_cast<ecore::EClassifier>(ecore::ecoreFactory::eInstance()->create(typeName));
 			if (elementType != nullptr)
 			{
 				this->setElementType(elementType);
@@ -447,7 +454,7 @@ void CollectionTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<ecore::EClassifier > elementType = this->getElementType();
 		if (elementType != nullptr)
 		{
-			saveHandler->addReference(elementType, "elementType", elementType->eClass() != ecore::EcorePackage::eInstance()->getEClassifier_Class());
+			saveHandler->addReference(elementType, "elementType", elementType->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
 		}
 	}
 	catch (std::exception& e)

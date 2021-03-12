@@ -31,14 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
@@ -57,14 +49,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,17 +61,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 BooleanLiteralExpEvalImpl::BooleanLiteralExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BooleanLiteralExpEvalImpl::~BooleanLiteralExpEvalImpl()
@@ -97,8 +76,19 @@ BooleanLiteralExpEvalImpl::~BooleanLiteralExpEvalImpl()
 
 
 
-
 BooleanLiteralExpEvalImpl::BooleanLiteralExpEvalImpl(const BooleanLiteralExpEvalImpl & obj):BooleanLiteralExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BooleanLiteralExpEvalImpl::copy() const
+{
+	std::shared_ptr<BooleanLiteralExpEvalImpl> element(new BooleanLiteralExpEvalImpl(*this));
+	element->setThisBooleanLiteralExpEvalPtr(element);
+	return element;
+}
+
+BooleanLiteralExpEvalImpl& BooleanLiteralExpEvalImpl::operator=(const BooleanLiteralExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +113,8 @@ BooleanLiteralExpEvalImpl::BooleanLiteralExpEvalImpl(const BooleanLiteralExpEval
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  BooleanLiteralExpEvalImpl::copy() const
-{
-	std::shared_ptr<BooleanLiteralExpEvalImpl> element(new BooleanLiteralExpEvalImpl(*this));
-	element->setThisBooleanLiteralExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BooleanLiteralExpEvalImpl::eStaticClass() const
@@ -152,6 +137,7 @@ std::shared_ptr<ecore::EClass> BooleanLiteralExpEvalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<BooleanLiteralExpEval> BooleanLiteralExpEvalImpl::getThisBooleanLiteralExpEvalPtr() const
@@ -179,7 +165,7 @@ Any BooleanLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 	}
 	Any result;
 	result = fUML::Semantics::Values::LiteralBooleanEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
+	if (!result->isEmpty())
 	{
 		return result;
 	}
@@ -227,7 +213,7 @@ void BooleanLiteralExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

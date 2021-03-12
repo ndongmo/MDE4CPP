@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Values/NameValueBinding.hpp"
 
 #include "ocl/Values/ObjectValue.hpp"
@@ -48,10 +44,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -62,37 +56,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 OclMessageValueImpl::OclMessageValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_arguments.reset(new Bag<ocl::Values::NameValueBinding>());
-	
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OclMessageValueImpl::~OclMessageValueImpl()
@@ -104,8 +71,19 @@ OclMessageValueImpl::~OclMessageValueImpl()
 
 
 
-
 OclMessageValueImpl::OclMessageValueImpl(const OclMessageValueImpl & obj):OclMessageValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OclMessageValueImpl::copy() const
+{
+	std::shared_ptr<OclMessageValueImpl> element(new OclMessageValueImpl(*this));
+	element->setThisOclMessageValuePtr(element);
+	return element;
+}
+
+OclMessageValueImpl& OclMessageValueImpl::operator=(const OclMessageValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -131,13 +109,8 @@ OclMessageValueImpl::OclMessageValueImpl(const OclMessageValueImpl & obj):OclMes
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  OclMessageValueImpl::copy() const
-{
-	std::shared_ptr<OclMessageValueImpl> element(new OclMessageValueImpl(*this));
-	element->setThisOclMessageValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OclMessageValueImpl::eStaticClass() const
@@ -148,14 +121,27 @@ std::shared_ptr<ecore::EClass> OclMessageValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isAsyncOperation
+*/
+bool OclMessageValueImpl::getIsAsyncOperation() const 
+{
+	return m_isAsyncOperation;
+}
+
 void OclMessageValueImpl::setIsAsyncOperation(bool _isAsyncOperation)
 {
 	m_isAsyncOperation = _isAsyncOperation;
 } 
 
-bool OclMessageValueImpl::getIsAsyncOperation() const 
+
+
+/*
+Getter & Setter for attribute isSignal
+*/
+bool OclMessageValueImpl::getIsSignal() const 
 {
-	return m_isAsyncOperation;
+	return m_isSignal;
 }
 
 void OclMessageValueImpl::setIsSignal(bool _isSignal)
@@ -163,9 +149,14 @@ void OclMessageValueImpl::setIsSignal(bool _isSignal)
 	m_isSignal = _isSignal;
 } 
 
-bool OclMessageValueImpl::getIsSignal() const 
+
+
+/*
+Getter & Setter for attribute isSyncOperation
+*/
+bool OclMessageValueImpl::getIsSyncOperation() const 
 {
-	return m_isSignal;
+	return m_isSyncOperation;
 }
 
 void OclMessageValueImpl::setIsSyncOperation(bool _isSyncOperation)
@@ -173,9 +164,14 @@ void OclMessageValueImpl::setIsSyncOperation(bool _isSyncOperation)
 	m_isSyncOperation = _isSyncOperation;
 } 
 
-bool OclMessageValueImpl::getIsSyncOperation() const 
+
+
+/*
+Getter & Setter for attribute name
+*/
+std::string OclMessageValueImpl::getName() const 
 {
-	return m_isSyncOperation;
+	return m_name;
 }
 
 void OclMessageValueImpl::setName(std::string _name)
@@ -183,10 +179,7 @@ void OclMessageValueImpl::setName(std::string _name)
 	m_name = _name;
 } 
 
-std::string OclMessageValueImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -202,46 +195,77 @@ std::string OclMessageValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference arguments
+*/
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> OclMessageValueImpl::getArguments() const
 {
+	if(m_arguments == nullptr)
+	{
+		m_arguments.reset(new Bag<ocl::Values::NameValueBinding>());
+		
+		
+	}
 
     return m_arguments;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference returnMessage
+*/
 std::shared_ptr<ocl::Values::OclMessageValue > OclMessageValueImpl::getReturnMessage() const
 {
 
     return m_returnMessage;
 }
+
 void OclMessageValueImpl::setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage)
 {
     m_returnMessage = _returnMessage;
 }
 
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<ocl::Values::ObjectValue > OclMessageValueImpl::getSource() const
 {
 
     return m_source;
 }
+
 void OclMessageValueImpl::setSource(std::shared_ptr<ocl::Values::ObjectValue> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<ocl::Values::ObjectValue > OclMessageValueImpl::getTarget() const
 {
 
     return m_target;
 }
+
 void OclMessageValueImpl::setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target)
 {
     m_target = _target;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<OclMessageValue> OclMessageValueImpl::getThisOclMessageValuePtr() const
@@ -425,7 +449,7 @@ void OclMessageValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

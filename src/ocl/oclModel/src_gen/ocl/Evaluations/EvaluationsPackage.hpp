@@ -68,8 +68,7 @@ namespace ocl::Evaluations
 	The Metamodel Package for the Evaluations metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class EvaluationsPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -87,7 +86,7 @@ namespace ocl::Evaluations
 
 			// Begin Class AssociationClassCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int ASSOCIATIONCLASSCALLEXPEVAL_CLASS = 3;
+			static const unsigned long ASSOCIATIONCLASSCALLEXPEVAL_CLASS = 96616882;
 			static const unsigned int ASSOCIATIONCLASSCALLEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ASSOCIATIONCLASSCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -106,7 +105,7 @@ namespace ocl::Evaluations
 
 			// Begin Class AssociationEndCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int ASSOCIATIONENDCALLEXPEVAL_CLASS = 4;
+			static const unsigned long ASSOCIATIONENDCALLEXPEVAL_CLASS = 528258550;
 			static const unsigned int ASSOCIATIONENDCALLEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ASSOCIATIONENDCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -125,7 +124,7 @@ namespace ocl::Evaluations
 
 			// Begin Class AttributeCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int ATTRIBUTECALLEXPEVAL_CLASS = 5;
+			static const unsigned long ATTRIBUTECALLEXPEVAL_CLASS = 738179271;
 			static const unsigned int ATTRIBUTECALLEXPEVAL_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int ATTRIBUTECALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -144,7 +143,7 @@ namespace ocl::Evaluations
 
 			// Begin Class BooleanLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int BOOLEANLITERALEXPEVAL_CLASS = 9;
+			static const unsigned long BOOLEANLITERALEXPEVAL_CLASS = 888886148;
 			static const unsigned int BOOLEANLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int BOOLEANLITERALEXPEVAL_CLASS_OPERATION_COUNT = 5;
 			
@@ -161,7 +160,7 @@ namespace ocl::Evaluations
 
 			// Begin Class CollectionItemEval
 			//Class and Feature IDs 
-			static const unsigned int COLLECTIONITEMEVAL_CLASS = 12;
+			static const unsigned long COLLECTIONITEMEVAL_CLASS = 531962577;
 			static const unsigned int COLLECTIONITEMEVAL_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int COLLECTIONITEMEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -180,7 +179,7 @@ namespace ocl::Evaluations
 
 			// Begin Class CollectionLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int COLLECTIONLITERALEXPEVAL_CLASS = 15;
+			static const unsigned long COLLECTIONLITERALEXPEVAL_CLASS = 838178519;
 			static const unsigned int COLLECTIONLITERALEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int COLLECTIONLITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -199,7 +198,7 @@ namespace ocl::Evaluations
 
 			// Begin Class CollectionLiteralPartEval
 			//Class and Feature IDs 
-			static const unsigned int COLLECTIONLITERALPARTEVAL_CLASS = 17;
+			static const unsigned long COLLECTIONLITERALPARTEVAL_CLASS = 357481470;
 			static const unsigned int COLLECTIONLITERALPARTEVAL_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int COLLECTIONLITERALPARTEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -218,7 +217,7 @@ namespace ocl::Evaluations
 
 			// Begin Class CollectionRangeEval
 			//Class and Feature IDs 
-			static const unsigned int COLLECTIONRANGEEVAL_CLASS = 19;
+			static const unsigned long COLLECTIONRANGEEVAL_CLASS = 481413085;
 			static const unsigned int COLLECTIONRANGEEVAL_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int COLLECTIONRANGEEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -239,7 +238,7 @@ namespace ocl::Evaluations
 
 			// Begin Class EnumLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int ENUMLITERALEXPEVAL_CLASS = 24;
+			static const unsigned long ENUMLITERALEXPEVAL_CLASS = 395704758;
 			static const unsigned int ENUMLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int ENUMLITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -256,7 +255,7 @@ namespace ocl::Evaluations
 
 			// Begin Class EvalEnvironment
 			//Class and Feature IDs 
-			static const unsigned int EVALENVIRONMENT_CLASS = 25;
+			static const unsigned long EVALENVIRONMENT_CLASS = 1468930881;
 			static const unsigned int EVALENVIRONMENT_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int EVALENVIRONMENT_CLASS_OPERATION_COUNT = 5;
 			
@@ -285,7 +284,7 @@ namespace ocl::Evaluations
 
 			// Begin Class EvalNameSpace
 			//Class and Feature IDs 
-			static const unsigned int EVALNAMESPACE_CLASS = 26;
+			static const unsigned long EVALNAMESPACE_CLASS = 228902947;
 			static const unsigned int EVALNAMESPACE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EVALNAMESPACE_CLASS_OPERATION_COUNT = 3;
 			
@@ -302,7 +301,7 @@ namespace ocl::Evaluations
 
 			// Begin Class ExpressionInOclEval
 			//Class and Feature IDs 
-			static const unsigned int EXPRESSIONINOCLEVAL_CLASS = 28;
+			static const unsigned long EXPRESSIONINOCLEVAL_CLASS = 1910871737;
 			static const unsigned int EXPRESSIONINOCLEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXPRESSIONINOCLEVAL_CLASS_OPERATION_COUNT = 0;
 			
@@ -323,7 +322,7 @@ namespace ocl::Evaluations
 
 			// Begin Class IfExpEval
 			//Class and Feature IDs 
-			static const unsigned int IFEXPEVAL_CLASS = 31;
+			static const unsigned long IFEXPEVAL_CLASS = 506440572;
 			static const unsigned int IFEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int IFEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -346,7 +345,7 @@ namespace ocl::Evaluations
 
 			// Begin Class IntegerLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int INTEGERLITERALEXPEVAL_CLASS = 34;
+			static const unsigned long INTEGERLITERALEXPEVAL_CLASS = 937125875;
 			static const unsigned int INTEGERLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int INTEGERLITERALEXPEVAL_CLASS_OPERATION_COUNT = 5;
 			
@@ -363,7 +362,7 @@ namespace ocl::Evaluations
 
 			// Begin Class IterateExpEval
 			//Class and Feature IDs 
-			static const unsigned int ITERATEEXPEVAL_CLASS = 38;
+			static const unsigned long ITERATEEXPEVAL_CLASS = 1462447109;
 			static const unsigned int ITERATEEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ITERATEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -382,7 +381,7 @@ namespace ocl::Evaluations
 
 			// Begin Class IteratorExpEval
 			//Class and Feature IDs 
-			static const unsigned int ITERATOREXPEVAL_CLASS = 40;
+			static const unsigned long ITERATOREXPEVAL_CLASS = 907082345;
 			static const unsigned int ITERATOREXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int ITERATOREXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -399,7 +398,7 @@ namespace ocl::Evaluations
 
 			// Begin Class LetExpEval
 			//Class and Feature IDs 
-			static const unsigned int LETEXPEVAL_CLASS = 42;
+			static const unsigned long LETEXPEVAL_CLASS = 302955328;
 			static const unsigned int LETEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int LETEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -422,7 +421,7 @@ namespace ocl::Evaluations
 
 			// Begin Class LiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int LITERALEXPEVAL_CLASS = 44;
+			static const unsigned long LITERALEXPEVAL_CLASS = 520640664;
 			static const unsigned int LITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int LITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -439,7 +438,7 @@ namespace ocl::Evaluations
 
 			// Begin Class LoopExpEval
 			//Class and Feature IDs 
-			static const unsigned int LOOPEXPEVAL_CLASS = 47;
+			static const unsigned long LOOPEXPEVAL_CLASS = 2027710795;
 			static const unsigned int LOOPEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int LOOPEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -460,7 +459,7 @@ namespace ocl::Evaluations
 
 			// Begin Class ModelPropertyCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int MODELPROPERTYCALLEXPEVAL_CLASS = 50;
+			static const unsigned long MODELPROPERTYCALLEXPEVAL_CLASS = 952179936;
 			static const unsigned int MODELPROPERTYCALLEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int MODELPROPERTYCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -479,7 +478,7 @@ namespace ocl::Evaluations
 
 			// Begin Class NavigationCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int NAVIGATIONCALLEXPEVAL_CLASS = 54;
+			static const unsigned long NAVIGATIONCALLEXPEVAL_CLASS = 1496212673;
 			static const unsigned int NAVIGATIONCALLEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int NAVIGATIONCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -500,7 +499,7 @@ namespace ocl::Evaluations
 
 			// Begin Class NumericLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int NUMERICLITERALEXPEVAL_CLASS = 57;
+			static const unsigned long NUMERICLITERALEXPEVAL_CLASS = 1683283489;
 			static const unsigned int NUMERICLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int NUMERICLITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -517,7 +516,7 @@ namespace ocl::Evaluations
 
 			// Begin Class OclExpEval
 			//Class and Feature IDs 
-			static const unsigned int OCLEXPEVAL_CLASS = 59;
+			static const unsigned long OCLEXPEVAL_CLASS = 731240084;
 			static const unsigned int OCLEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int OCLEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -542,7 +541,7 @@ namespace ocl::Evaluations
 
 			// Begin Class OclMessageArgEval
 			//Class and Feature IDs 
-			static const unsigned int OCLMESSAGEARGEVAL_CLASS = 61;
+			static const unsigned long OCLMESSAGEARGEVAL_CLASS = 1513124741;
 			static const unsigned int OCLMESSAGEARGEVAL_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int OCLMESSAGEARGEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -565,7 +564,7 @@ namespace ocl::Evaluations
 
 			// Begin Class OclMessageExpEval
 			//Class and Feature IDs 
-			static const unsigned int OCLMESSAGEEXPEVAL_CLASS = 62;
+			static const unsigned long OCLMESSAGEEXPEVAL_CLASS = 67948642;
 			static const unsigned int OCLMESSAGEEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int OCLMESSAGEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			static const int OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME = 6208;
@@ -588,7 +587,7 @@ namespace ocl::Evaluations
 
 			// Begin Class OperationCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int OPERATIONCALLEXPEVAL_CLASS = 66;
+			static const unsigned long OPERATIONCALLEXPEVAL_CLASS = 1550289763;
 			static const unsigned int OPERATIONCALLEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int OPERATIONCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
@@ -609,7 +608,7 @@ namespace ocl::Evaluations
 
 			// Begin Class PrimitiveLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int PRIMITIVELITERALEXPEVAL_CLASS = 70;
+			static const unsigned long PRIMITIVELITERALEXPEVAL_CLASS = 2064904225;
 			static const unsigned int PRIMITIVELITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int PRIMITIVELITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -626,7 +625,7 @@ namespace ocl::Evaluations
 
 			// Begin Class PropertyCallExpEval
 			//Class and Feature IDs 
-			static const unsigned int PROPERTYCALLEXPEVAL_CLASS = 72;
+			static const unsigned long PROPERTYCALLEXPEVAL_CLASS = 1055543809;
 			static const unsigned int PROPERTYCALLEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int PROPERTYCALLEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -645,7 +644,7 @@ namespace ocl::Evaluations
 
 			// Begin Class RealLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int REALLITERALEXPEVAL_CLASS = 74;
+			static const unsigned long REALLITERALEXPEVAL_CLASS = 1116784610;
 			static const unsigned int REALLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int REALLITERALEXPEVAL_CLASS_OPERATION_COUNT = 5;
 			
@@ -662,7 +661,7 @@ namespace ocl::Evaluations
 
 			// Begin Class StringLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int STRINGLITERALEXPEVAL_CLASS = 82;
+			static const unsigned long STRINGLITERALEXPEVAL_CLASS = 608295728;
 			static const unsigned int STRINGLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int STRINGLITERALEXPEVAL_CLASS_OPERATION_COUNT = 5;
 			
@@ -679,7 +678,7 @@ namespace ocl::Evaluations
 
 			// Begin Class TupleLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int TUPLELITERALEXPEVAL_CLASS = 85;
+			static const unsigned long TUPLELITERALEXPEVAL_CLASS = 1343806720;
 			static const unsigned int TUPLELITERALEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int TUPLELITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -698,7 +697,7 @@ namespace ocl::Evaluations
 
 			// Begin Class TupleLiteralExpPartEval
 			//Class and Feature IDs 
-			static const unsigned int TUPLELITERALEXPPARTEVAL_CLASS = 86;
+			static const unsigned long TUPLELITERALEXPPARTEVAL_CLASS = 1391982024;
 			static const unsigned int TUPLELITERALEXPPARTEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int TUPLELITERALEXPPARTEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -715,7 +714,7 @@ namespace ocl::Evaluations
 
 			// Begin Class UnlimitedNaturalLiteralExpEval
 			//Class and Feature IDs 
-			static const unsigned int UNLIMITEDNATURALLITERALEXPEVAL_CLASS = 93;
+			static const unsigned long UNLIMITEDNATURALLITERALEXPEVAL_CLASS = 1733278569;
 			static const unsigned int UNLIMITEDNATURALLITERALEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int UNLIMITEDNATURALLITERALEXPEVAL_CLASS_OPERATION_COUNT = 5;
 			
@@ -732,7 +731,7 @@ namespace ocl::Evaluations
 
 			// Begin Class UnspecifiedValueExpEval
 			//Class and Feature IDs 
-			static const unsigned int UNSPECIFIEDVALUEEXPEVAL_CLASS = 95;
+			static const unsigned long UNSPECIFIEDVALUEEXPEVAL_CLASS = 55905302;
 			static const unsigned int UNSPECIFIEDVALUEEXPEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int UNSPECIFIEDVALUEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
@@ -749,7 +748,7 @@ namespace ocl::Evaluations
 
 			// Begin Class VariableDeclEval
 			//Class and Feature IDs 
-			static const unsigned int VARIABLEDECLEVAL_CLASS = 97;
+			static const unsigned long VARIABLEDECLEVAL_CLASS = 1333409127;
 			static const unsigned int VARIABLEDECLEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int VARIABLEDECLEVAL_CLASS_OPERATION_COUNT = 0;
 			
@@ -770,7 +769,7 @@ namespace ocl::Evaluations
 
 			// Begin Class VariableExpEval
 			//Class and Feature IDs 
-			static const unsigned int VARIABLEEXPEVAL_CLASS = 99;
+			static const unsigned long VARIABLEEXPEVAL_CLASS = 317258607;
 			static const unsigned int VARIABLEEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int VARIABLEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			

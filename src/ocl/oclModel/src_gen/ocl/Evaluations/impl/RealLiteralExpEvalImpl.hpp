@@ -20,14 +20,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class RealLiteralExpEvalImpl :virtual public fUML::Semantics::Values::LiteralRealEvaluationImpl, virtual public NumericLiteralExpEvalImpl, virtual public RealLiteralExpEval 
+	class RealLiteralExpEvalImpl : virtual public fUML::Semantics::Values::LiteralRealEvaluationImpl, virtual public NumericLiteralExpEvalImpl, virtual public RealLiteralExpEval 
 	{
 		public: 
 			RealLiteralExpEvalImpl(const RealLiteralExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RealLiteralExpEvalImpl& operator=(RealLiteralExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RealLiteralExpEvalImpl& operator=(RealLiteralExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;

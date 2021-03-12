@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -70,12 +64,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,17 +76,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 BooleanLiteralExpImpl::BooleanLiteralExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BooleanLiteralExpImpl::~BooleanLiteralExpImpl()
@@ -106,22 +89,19 @@ BooleanLiteralExpImpl::~BooleanLiteralExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:BooleanLiteralExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:BooleanLiteralExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:BooleanLiteralExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:BooleanLiteralExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -129,13 +109,13 @@ BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfE
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -144,17 +124,16 @@ BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfE
    
 }
 
-
 //Additional constructor for the containments back reference
 BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :BooleanLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -165,56 +144,56 @@ BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::Col
 
 
 //Additional constructor for the containments back reference
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:BooleanLiteralExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:BooleanLiteralExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:BooleanLiteralExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:BooleanLiteralExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:BooleanLiteralExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:BooleanLiteralExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:BooleanLiteralExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:BooleanLiteralExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:BooleanLiteralExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+BooleanLiteralExpImpl::BooleanLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:BooleanLiteralExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 BooleanLiteralExpImpl::BooleanLiteralExpImpl(const BooleanLiteralExpImpl & obj):BooleanLiteralExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BooleanLiteralExpImpl::copy() const
+{
+	std::shared_ptr<BooleanLiteralExpImpl> element(new BooleanLiteralExpImpl(*this));
+	element->setThisBooleanLiteralExpPtr(element);
+	return element;
+}
+
+BooleanLiteralExpImpl& BooleanLiteralExpImpl::operator=(const BooleanLiteralExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -280,13 +259,8 @@ BooleanLiteralExpImpl::BooleanLiteralExpImpl(const BooleanLiteralExpImpl & obj):
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  BooleanLiteralExpImpl::copy() const
-{
-	std::shared_ptr<BooleanLiteralExpImpl> element(new BooleanLiteralExpImpl(*this));
-	element->setThisBooleanLiteralExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BooleanLiteralExpImpl::eStaticClass() const
@@ -297,15 +271,20 @@ std::shared_ptr<ecore::EClass> BooleanLiteralExpImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute booleanSymbol
+*/
+bool BooleanLiteralExpImpl::getBooleanSymbol() const 
+{
+	return m_booleanSymbol;
+}
+
 void BooleanLiteralExpImpl::setBooleanSymbol(bool _booleanSymbol)
 {
 	m_booleanSymbol = _booleanSymbol;
 } 
 
-bool BooleanLiteralExpImpl::getBooleanSymbol() const 
-{
-	return m_booleanSymbol;
-}
+
 
 //*********************************
 // Operations
@@ -320,8 +299,20 @@ bool BooleanLiteralExpImpl::getBooleanSymbol() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> BooleanLiteralExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<BooleanLiteralExp> BooleanLiteralExpImpl::getThisBooleanLiteralExpPtr() const
@@ -445,7 +436,7 @@ void BooleanLiteralExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

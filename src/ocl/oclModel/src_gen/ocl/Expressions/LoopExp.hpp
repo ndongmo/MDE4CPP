@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -116,13 +116,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class LoopExp:virtual public CallExp
 	{
 		public:
  			LoopExp(const LoopExp &) {}
-			LoopExp& operator=(LoopExp const&) = delete;
 
 		protected:
 			LoopExp(){}
@@ -145,16 +143,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getBody() const = 0;
 			
-			/*!
-			 */
-			virtual void setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body_body) = 0;
-			/*!
-			 */
+			
+			virtual void setBody(std::shared_ptr<ocl::Expressions::OclExpression> _body) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getIterator() const = 0;
+			
 			
 			
 
@@ -167,20 +164,15 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_body;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Expressions::Variable>> m_iterator;
 			
+			std::shared_ptr<ocl::Expressions::OclExpression > m_body;
+			mutable std::shared_ptr<Bag<ocl::Expressions::Variable>> m_iterator;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

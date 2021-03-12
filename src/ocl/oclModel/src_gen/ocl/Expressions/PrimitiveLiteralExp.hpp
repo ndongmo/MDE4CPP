@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class PrimitiveLiteralExp:virtual public LiteralExp
 	{
 		public:
  			PrimitiveLiteralExp(const PrimitiveLiteralExp &) {}
-			PrimitiveLiteralExp& operator=(PrimitiveLiteralExp const&) = delete;
 
 		protected:
 			PrimitiveLiteralExp(){}
@@ -140,14 +138,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getSymbol() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSymbol (std::string _symbol)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -158,8 +153,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_symbol = "";
 			
 			
@@ -172,8 +166,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

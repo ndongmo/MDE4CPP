@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -70,12 +64,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,17 +76,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 InvalidLiteralExpImpl::InvalidLiteralExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InvalidLiteralExpImpl::~InvalidLiteralExpImpl()
@@ -106,22 +89,19 @@ InvalidLiteralExpImpl::~InvalidLiteralExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:InvalidLiteralExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:InvalidLiteralExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:InvalidLiteralExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:InvalidLiteralExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -129,13 +109,13 @@ InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfE
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -144,17 +124,16 @@ InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfE
    
 }
 
-
 //Additional constructor for the containments back reference
 InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :InvalidLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -165,56 +144,56 @@ InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::Col
 
 
 //Additional constructor for the containments back reference
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:InvalidLiteralExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:InvalidLiteralExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:InvalidLiteralExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:InvalidLiteralExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:InvalidLiteralExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:InvalidLiteralExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:InvalidLiteralExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:InvalidLiteralExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:InvalidLiteralExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+InvalidLiteralExpImpl::InvalidLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:InvalidLiteralExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 InvalidLiteralExpImpl::InvalidLiteralExpImpl(const InvalidLiteralExpImpl & obj):InvalidLiteralExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InvalidLiteralExpImpl::copy() const
+{
+	std::shared_ptr<InvalidLiteralExpImpl> element(new InvalidLiteralExpImpl(*this));
+	element->setThisInvalidLiteralExpPtr(element);
+	return element;
+}
+
+InvalidLiteralExpImpl& InvalidLiteralExpImpl::operator=(const InvalidLiteralExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -278,13 +257,8 @@ InvalidLiteralExpImpl::InvalidLiteralExpImpl(const InvalidLiteralExpImpl & obj):
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InvalidLiteralExpImpl::copy() const
-{
-	std::shared_ptr<InvalidLiteralExpImpl> element(new InvalidLiteralExpImpl(*this));
-	element->setThisInvalidLiteralExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
@@ -309,8 +283,20 @@ std::shared_ptr<ecore::EClass> InvalidLiteralExpImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> InvalidLiteralExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<InvalidLiteralExp> InvalidLiteralExpImpl::getThisInvalidLiteralExpPtr() const
@@ -423,7 +409,7 @@ void InvalidLiteralExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

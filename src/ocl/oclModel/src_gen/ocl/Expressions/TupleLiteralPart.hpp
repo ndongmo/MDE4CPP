@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -75,13 +75,11 @@ namespace ecore
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class TupleLiteralPart:virtual public ecore::ETypedElement
 	{
 		public:
  			TupleLiteralPart(const TupleLiteralPart &) {}
-			TupleLiteralPart& operator=(TupleLiteralPart const&) = delete;
 
 		protected:
 			TupleLiteralPart(){}
@@ -104,13 +102,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EAttribute > getAttribute() const = 0;
 			
-			/*!
-			 */
-			virtual void setAttribute(std::shared_ptr<ecore::EAttribute> _attribute_attribute) = 0;
+			
+			virtual void setAttribute(std::shared_ptr<ecore::EAttribute> _attribute) = 0;
+			
 			
 
 		protected:
@@ -122,17 +119,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EAttribute > m_attribute;
 			
+			std::shared_ptr<ecore::EAttribute > m_attribute;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

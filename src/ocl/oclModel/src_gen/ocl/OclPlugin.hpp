@@ -11,7 +11,7 @@
 
 namespace ocl
 {
-	class OclPlugin : virtual public EcoreModelPlugin
+	class oclPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
@@ -27,8 +27,8 @@ namespace ocl
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
 	
 		protected:
-			OclPlugin(){};
-			virtual ~OclPlugin(){};
+			oclPlugin(){};
+			virtual ~oclPlugin(){};
 	
 		private:
 			static std::shared_ptr<MDE4CPPPlugin> instance;

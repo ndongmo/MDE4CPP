@@ -31,11 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -48,11 +43,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,17 +55,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 BagTypeValueImpl::BagTypeValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BagTypeValueImpl::~BagTypeValueImpl()
@@ -85,8 +70,19 @@ BagTypeValueImpl::~BagTypeValueImpl()
 
 
 
-
 BagTypeValueImpl::BagTypeValueImpl(const BagTypeValueImpl & obj):BagTypeValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BagTypeValueImpl::copy() const
+{
+	std::shared_ptr<BagTypeValueImpl> element(new BagTypeValueImpl(*this));
+	element->setThisBagTypeValuePtr(element);
+	return element;
+}
+
+BagTypeValueImpl& BagTypeValueImpl::operator=(const BagTypeValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -104,13 +100,8 @@ BagTypeValueImpl::BagTypeValueImpl(const BagTypeValueImpl & obj):BagTypeValueImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  BagTypeValueImpl::copy() const
-{
-	std::shared_ptr<BagTypeValueImpl> element(new BagTypeValueImpl(*this));
-	element->setThisBagTypeValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BagTypeValueImpl::eStaticClass() const
@@ -145,6 +136,7 @@ return true;
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<BagTypeValue> BagTypeValueImpl::getThisBagTypeValuePtr() const
@@ -198,7 +190,7 @@ void BagTypeValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

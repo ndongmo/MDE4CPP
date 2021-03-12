@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class AssociationEndCallExpEvalImpl :virtual public NavigationCallExpEvalImpl, virtual public AssociationEndCallExpEval 
+	class AssociationEndCallExpEvalImpl : virtual public NavigationCallExpEvalImpl, virtual public AssociationEndCallExpEval 
 	{
 		public: 
 			AssociationEndCallExpEvalImpl(const AssociationEndCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AssociationEndCallExpEvalImpl& operator=(AssociationEndCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AssociationEndCallExpEvalImpl& operator=(AssociationEndCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredAssociationEnd() const ;
 			
-			/*!
-			 */
-			virtual void setReferredAssociationEnd(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd_referredAssociationEnd) ;
+			
+			virtual void setReferredAssociationEnd(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd) ;
+			
 							
 			
 			//*********************************

@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Values/NameValueBinding.hpp"
 
 #include "fUML/Semantics/Values/Value.hpp"
@@ -44,10 +40,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -58,22 +52,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 EvalEnvironmentImpl::EvalEnvironmentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_bindings.reset(new Bag<ocl::Values::NameValueBinding>());
-	
-	
-
-	//Init references
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EvalEnvironmentImpl::~EvalEnvironmentImpl()
@@ -85,8 +67,19 @@ EvalEnvironmentImpl::~EvalEnvironmentImpl()
 
 
 
-
 EvalEnvironmentImpl::EvalEnvironmentImpl(const EvalEnvironmentImpl & obj):EvalEnvironmentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EvalEnvironmentImpl::copy() const
+{
+	std::shared_ptr<EvalEnvironmentImpl> element(new EvalEnvironmentImpl(*this));
+	element->setThisEvalEnvironmentPtr(element);
+	return element;
+}
+
+EvalEnvironmentImpl& EvalEnvironmentImpl::operator=(const EvalEnvironmentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -102,13 +95,8 @@ EvalEnvironmentImpl::EvalEnvironmentImpl(const EvalEnvironmentImpl & obj):EvalEn
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EvalEnvironmentImpl::copy() const
-{
-	std::shared_ptr<EvalEnvironmentImpl> element(new EvalEnvironmentImpl(*this));
-	element->setThisEvalEnvironmentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EvalEnvironmentImpl::eStaticClass() const
@@ -190,16 +178,29 @@ if(nvb != nullptr)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bindings
+*/
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> EvalEnvironmentImpl::getBindings() const
 {
+	if(m_bindings == nullptr)
+	{
+		m_bindings.reset(new Bag<ocl::Values::NameValueBinding>());
+		
+		
+	}
 
     return m_bindings;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EvalEnvironment> EvalEnvironmentImpl::getThisEvalEnvironmentPtr() const
@@ -302,7 +303,7 @@ void EvalEnvironmentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

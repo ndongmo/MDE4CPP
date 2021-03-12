@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
@@ -72,12 +66,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -88,22 +78,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 CollectionLiteralExpImpl::CollectionLiteralExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_part.reset(new Bag<ocl::Expressions::CollectionLiteralPart>());
-	
-	
-
-	//Init references
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionLiteralExpImpl::~CollectionLiteralExpImpl()
@@ -113,22 +91,19 @@ CollectionLiteralExpImpl::~CollectionLiteralExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:CollectionLiteralExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:CollectionLiteralExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:CollectionLiteralExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:CollectionLiteralExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -136,13 +111,13 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -151,17 +126,16 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
    
 }
 
-
 //Additional constructor for the containments back reference
 CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :CollectionLiteralExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -172,56 +146,56 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expression
 
 
 //Additional constructor for the containments back reference
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:CollectionLiteralExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:CollectionLiteralExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:CollectionLiteralExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:CollectionLiteralExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:CollectionLiteralExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:CollectionLiteralExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:CollectionLiteralExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:CollectionLiteralExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:CollectionLiteralExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+CollectionLiteralExpImpl::CollectionLiteralExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:CollectionLiteralExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 CollectionLiteralExpImpl::CollectionLiteralExpImpl(const CollectionLiteralExpImpl & obj):CollectionLiteralExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionLiteralExpImpl::copy() const
+{
+	std::shared_ptr<CollectionLiteralExpImpl> element(new CollectionLiteralExpImpl(*this));
+	element->setThisCollectionLiteralExpPtr(element);
+	return element;
+}
+
+CollectionLiteralExpImpl& CollectionLiteralExpImpl::operator=(const CollectionLiteralExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -295,14 +269,8 @@ CollectionLiteralExpImpl::CollectionLiteralExpImpl(const CollectionLiteralExpImp
 	#endif
 
 	
-	
-}
 
-std::shared_ptr<ecore::EObject>  CollectionLiteralExpImpl::copy() const
-{
-	std::shared_ptr<CollectionLiteralExpImpl> element(new CollectionLiteralExpImpl(*this));
-	element->setThisCollectionLiteralExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
@@ -313,15 +281,20 @@ std::shared_ptr<ecore::EClass> CollectionLiteralExpImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute kind
+*/
+ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const 
+{
+	return m_kind;
+}
+
 void CollectionLiteralExpImpl::setKind(ocl::Expressions::CollectionKind _kind)
 {
 	m_kind = _kind;
 } 
 
-ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const 
-{
-	return m_kind;
-}
+
 
 //*********************************
 // Operations
@@ -330,11 +303,23 @@ ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference part
+*/
 std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralExpImpl::getPart() const
 {
+	if(m_part == nullptr)
+	{
+		m_part.reset(new Bag<ocl::Expressions::CollectionLiteralPart>());
+		
+		
+	}
 
     return m_part;
 }
+
+
+
 
 
 //*********************************
@@ -342,8 +327,20 @@ std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> CollectionLiteralE
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> CollectionLiteralExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<CollectionLiteralExp> CollectionLiteralExpImpl::getThisCollectionLiteralExpPtr() const
@@ -517,7 +514,7 @@ void CollectionLiteralExpImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

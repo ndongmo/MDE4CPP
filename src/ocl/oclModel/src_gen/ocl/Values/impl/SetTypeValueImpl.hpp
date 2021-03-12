@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class SetTypeValueImpl :virtual public CollectionValueImpl, virtual public SetTypeValue 
+	class SetTypeValueImpl : virtual public CollectionValueImpl, virtual public SetTypeValue 
 	{
 		public: 
 			SetTypeValueImpl(const SetTypeValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SetTypeValueImpl& operator=(SetTypeValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SetTypeValueImpl& operator=(SetTypeValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,8 +41,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
 			

@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class PropertyCallExpImpl :virtual public NavigationCallExpImpl, virtual public PropertyCallExp 
+	class PropertyCallExpImpl : virtual public NavigationCallExpImpl, virtual public PropertyCallExp 
 	{
 		public: 
 			PropertyCallExpImpl(const PropertyCallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PropertyCallExpImpl& operator=(PropertyCallExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PropertyCallExpImpl& operator=(PropertyCallExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EAttribute > getReferredProperty() const ;
 			
-			/*!
-			 */
-			virtual void setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty_referredProperty) ;
+			
+			virtual void setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

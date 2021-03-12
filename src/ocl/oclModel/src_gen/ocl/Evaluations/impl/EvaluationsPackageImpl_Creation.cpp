@@ -1,7 +1,7 @@
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,10 +18,10 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
 //include subpackages 
  
 using namespace ocl::Evaluations;
@@ -34,7 +34,7 @@ void EvaluationsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createAssociationClassCallExpEvalContent(package, factory);
 	createAssociationEndCallExpEvalContent(package, factory);
@@ -77,7 +77,7 @@ void EvaluationsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPacka
 
 }
 
-void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_associationClassCallExpEval_Class = factory->createEClass_in_EPackage(package, ASSOCIATIONCLASSCALLEXPEVAL_CLASS);
 	
@@ -86,7 +86,7 @@ void EvaluationsPackageImpl::createAssociationClassCallExpEvalContent(std::share
 	
 }
 
-void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_associationEndCallExpEval_Class = factory->createEClass_in_EPackage(package, ASSOCIATIONENDCALLEXPEVAL_CLASS);
 	
@@ -95,7 +95,7 @@ void EvaluationsPackageImpl::createAssociationEndCallExpEvalContent(std::shared_
 	
 }
 
-void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_attributeCallExpEval_Class = factory->createEClass_in_EPackage(package, ATTRIBUTECALLEXPEVAL_CLASS);
 	
@@ -104,7 +104,7 @@ void EvaluationsPackageImpl::createAttributeCallExpEvalContent(std::shared_ptr<e
 	
 }
 
-void EvaluationsPackageImpl::createBooleanLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createBooleanLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanLiteralExpEval_Class = factory->createEClass_in_EPackage(package, BOOLEANLITERALEXPEVAL_CLASS);
 	
@@ -112,7 +112,7 @@ void EvaluationsPackageImpl::createBooleanLiteralExpEvalContent(std::shared_ptr<
 	
 }
 
-void EvaluationsPackageImpl::createCollectionItemEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createCollectionItemEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionItemEval_Class = factory->createEClass_in_EPackage(package, COLLECTIONITEMEVAL_CLASS);
 	
@@ -121,7 +121,7 @@ void EvaluationsPackageImpl::createCollectionItemEvalContent(std::shared_ptr<eco
 	
 }
 
-void EvaluationsPackageImpl::createCollectionLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createCollectionLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionLiteralExpEval_Class = factory->createEClass_in_EPackage(package, COLLECTIONLITERALEXPEVAL_CLASS);
 	
@@ -130,7 +130,7 @@ void EvaluationsPackageImpl::createCollectionLiteralExpEvalContent(std::shared_p
 	
 }
 
-void EvaluationsPackageImpl::createCollectionLiteralPartEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createCollectionLiteralPartEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionLiteralPartEval_Class = factory->createEClass_in_EPackage(package, COLLECTIONLITERALPARTEVAL_CLASS);
 	
@@ -139,7 +139,7 @@ void EvaluationsPackageImpl::createCollectionLiteralPartEvalContent(std::shared_
 	
 }
 
-void EvaluationsPackageImpl::createCollectionRangeEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createCollectionRangeEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionRangeEval_Class = factory->createEClass_in_EPackage(package, COLLECTIONRANGEEVAL_CLASS);
 	
@@ -149,7 +149,7 @@ void EvaluationsPackageImpl::createCollectionRangeEvalContent(std::shared_ptr<ec
 	
 }
 
-void EvaluationsPackageImpl::createEnumLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createEnumLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_enumLiteralExpEval_Class = factory->createEClass_in_EPackage(package, ENUMLITERALEXPEVAL_CLASS);
 	
@@ -157,7 +157,7 @@ void EvaluationsPackageImpl::createEnumLiteralExpEvalContent(std::shared_ptr<eco
 	
 }
 
-void EvaluationsPackageImpl::createEvalEnvironmentContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createEvalEnvironmentContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_evalEnvironment_Class = factory->createEClass_in_EPackage(package, EVALENVIRONMENT_CLASS);
 	
@@ -171,7 +171,7 @@ void EvaluationsPackageImpl::createEvalEnvironmentContent(std::shared_ptr<ecore:
 	
 }
 
-void EvaluationsPackageImpl::createEvalNameSpaceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createEvalNameSpaceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_evalNameSpace_Class = factory->createEClass_in_EPackage(package, EVALNAMESPACE_CLASS);
 	
@@ -179,7 +179,7 @@ void EvaluationsPackageImpl::createEvalNameSpaceContent(std::shared_ptr<ecore::E
 	
 }
 
-void EvaluationsPackageImpl::createExpressionInOclEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createExpressionInOclEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expressionInOclEval_Class = factory->createEClass_in_EPackage(package, EXPRESSIONINOCLEVAL_CLASS);
 	
@@ -189,7 +189,7 @@ void EvaluationsPackageImpl::createExpressionInOclEvalContent(std::shared_ptr<ec
 	
 }
 
-void EvaluationsPackageImpl::createIfExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createIfExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_ifExpEval_Class = factory->createEClass_in_EPackage(package, IFEXPEVAL_CLASS);
 	
@@ -200,7 +200,7 @@ void EvaluationsPackageImpl::createIfExpEvalContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void EvaluationsPackageImpl::createIntegerLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createIntegerLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerLiteralExpEval_Class = factory->createEClass_in_EPackage(package, INTEGERLITERALEXPEVAL_CLASS);
 	
@@ -208,7 +208,7 @@ void EvaluationsPackageImpl::createIntegerLiteralExpEvalContent(std::shared_ptr<
 	
 }
 
-void EvaluationsPackageImpl::createIterateExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createIterateExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_iterateExpEval_Class = factory->createEClass_in_EPackage(package, ITERATEEXPEVAL_CLASS);
 	
@@ -217,7 +217,7 @@ void EvaluationsPackageImpl::createIterateExpEvalContent(std::shared_ptr<ecore::
 	
 }
 
-void EvaluationsPackageImpl::createIteratorExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createIteratorExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_iteratorExpEval_Class = factory->createEClass_in_EPackage(package, ITERATOREXPEVAL_CLASS);
 	
@@ -225,7 +225,7 @@ void EvaluationsPackageImpl::createIteratorExpEvalContent(std::shared_ptr<ecore:
 	
 }
 
-void EvaluationsPackageImpl::createLetExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createLetExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_letExpEval_Class = factory->createEClass_in_EPackage(package, LETEXPEVAL_CLASS);
 	
@@ -236,7 +236,7 @@ void EvaluationsPackageImpl::createLetExpEvalContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void EvaluationsPackageImpl::createLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalExpEval_Class = factory->createEClass_in_EPackage(package, LITERALEXPEVAL_CLASS);
 	
@@ -244,7 +244,7 @@ void EvaluationsPackageImpl::createLiteralExpEvalContent(std::shared_ptr<ecore::
 	
 }
 
-void EvaluationsPackageImpl::createLoopExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createLoopExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_loopExpEval_Class = factory->createEClass_in_EPackage(package, LOOPEXPEVAL_CLASS);
 	
@@ -254,7 +254,7 @@ void EvaluationsPackageImpl::createLoopExpEvalContent(std::shared_ptr<ecore::EPa
 	
 }
 
-void EvaluationsPackageImpl::createModelPropertyCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createModelPropertyCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_modelPropertyCallExpEval_Class = factory->createEClass_in_EPackage(package, MODELPROPERTYCALLEXPEVAL_CLASS);
 	
@@ -263,7 +263,7 @@ void EvaluationsPackageImpl::createModelPropertyCallExpEvalContent(std::shared_p
 	
 }
 
-void EvaluationsPackageImpl::createNavigationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createNavigationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_navigationCallExpEval_Class = factory->createEClass_in_EPackage(package, NAVIGATIONCALLEXPEVAL_CLASS);
 	
@@ -273,7 +273,7 @@ void EvaluationsPackageImpl::createNavigationCallExpEvalContent(std::shared_ptr<
 	
 }
 
-void EvaluationsPackageImpl::createNumericLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createNumericLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_numericLiteralExpEval_Class = factory->createEClass_in_EPackage(package, NUMERICLITERALEXPEVAL_CLASS);
 	
@@ -281,7 +281,7 @@ void EvaluationsPackageImpl::createNumericLiteralExpEvalContent(std::shared_ptr<
 	
 }
 
-void EvaluationsPackageImpl::createOclExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createOclExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclExpEval_Class = factory->createEClass_in_EPackage(package, OCLEXPEVAL_CLASS);
 	
@@ -293,7 +293,7 @@ void EvaluationsPackageImpl::createOclExpEvalContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void EvaluationsPackageImpl::createOclMessageArgEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createOclMessageArgEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclMessageArgEval_Class = factory->createEClass_in_EPackage(package, OCLMESSAGEARGEVAL_CLASS);
 	
@@ -304,7 +304,7 @@ void EvaluationsPackageImpl::createOclMessageArgEvalContent(std::shared_ptr<ecor
 	
 }
 
-void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclMessageExpEval_Class = factory->createEClass_in_EPackage(package, OCLMESSAGEEXPEVAL_CLASS);
 	m_oclMessageExpEval_Attribute_name = factory->createEAttribute_in_EContainingClass(m_oclMessageExpEval_Class, OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME);
@@ -315,7 +315,7 @@ void EvaluationsPackageImpl::createOclMessageExpEvalContent(std::shared_ptr<ecor
 	
 }
 
-void EvaluationsPackageImpl::createOperationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createOperationCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_operationCallExpEval_Class = factory->createEClass_in_EPackage(package, OPERATIONCALLEXPEVAL_CLASS);
 	
@@ -325,7 +325,7 @@ void EvaluationsPackageImpl::createOperationCallExpEvalContent(std::shared_ptr<e
 	
 }
 
-void EvaluationsPackageImpl::createPrimitiveLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createPrimitiveLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_primitiveLiteralExpEval_Class = factory->createEClass_in_EPackage(package, PRIMITIVELITERALEXPEVAL_CLASS);
 	
@@ -333,7 +333,7 @@ void EvaluationsPackageImpl::createPrimitiveLiteralExpEvalContent(std::shared_pt
 	
 }
 
-void EvaluationsPackageImpl::createPropertyCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createPropertyCallExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_propertyCallExpEval_Class = factory->createEClass_in_EPackage(package, PROPERTYCALLEXPEVAL_CLASS);
 	
@@ -342,7 +342,7 @@ void EvaluationsPackageImpl::createPropertyCallExpEvalContent(std::shared_ptr<ec
 	
 }
 
-void EvaluationsPackageImpl::createRealLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createRealLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realLiteralExpEval_Class = factory->createEClass_in_EPackage(package, REALLITERALEXPEVAL_CLASS);
 	
@@ -350,7 +350,7 @@ void EvaluationsPackageImpl::createRealLiteralExpEvalContent(std::shared_ptr<eco
 	
 }
 
-void EvaluationsPackageImpl::createStringLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createStringLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringLiteralExpEval_Class = factory->createEClass_in_EPackage(package, STRINGLITERALEXPEVAL_CLASS);
 	
@@ -358,7 +358,7 @@ void EvaluationsPackageImpl::createStringLiteralExpEvalContent(std::shared_ptr<e
 	
 }
 
-void EvaluationsPackageImpl::createTupleLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createTupleLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tupleLiteralExpEval_Class = factory->createEClass_in_EPackage(package, TUPLELITERALEXPEVAL_CLASS);
 	
@@ -367,7 +367,7 @@ void EvaluationsPackageImpl::createTupleLiteralExpEvalContent(std::shared_ptr<ec
 	
 }
 
-void EvaluationsPackageImpl::createTupleLiteralExpPartEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createTupleLiteralExpPartEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tupleLiteralExpPartEval_Class = factory->createEClass_in_EPackage(package, TUPLELITERALEXPPARTEVAL_CLASS);
 	
@@ -375,7 +375,7 @@ void EvaluationsPackageImpl::createTupleLiteralExpPartEvalContent(std::shared_pt
 	
 }
 
-void EvaluationsPackageImpl::createUnlimitedNaturalLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createUnlimitedNaturalLiteralExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalLiteralExpEval_Class = factory->createEClass_in_EPackage(package, UNLIMITEDNATURALLITERALEXPEVAL_CLASS);
 	
@@ -383,7 +383,7 @@ void EvaluationsPackageImpl::createUnlimitedNaturalLiteralExpEvalContent(std::sh
 	
 }
 
-void EvaluationsPackageImpl::createUnspecifiedValueExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createUnspecifiedValueExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unspecifiedValueExpEval_Class = factory->createEClass_in_EPackage(package, UNSPECIFIEDVALUEEXPEVAL_CLASS);
 	
@@ -391,7 +391,7 @@ void EvaluationsPackageImpl::createUnspecifiedValueExpEvalContent(std::shared_pt
 	
 }
 
-void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variableDeclEval_Class = factory->createEClass_in_EPackage(package, VARIABLEDECLEVAL_CLASS);
 	
@@ -401,7 +401,7 @@ void EvaluationsPackageImpl::createVariableDeclEvalContent(std::shared_ptr<ecore
 	
 }
 
-void EvaluationsPackageImpl::createVariableExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createVariableExpEvalContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_variableExpEval_Class = factory->createEClass_in_EPackage(package, VARIABLEEXPEVAL_CLASS);
 	
@@ -410,7 +410,7 @@ void EvaluationsPackageImpl::createVariableExpEvalContent(std::shared_ptr<ecore:
 	
 }
 
-void EvaluationsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void EvaluationsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

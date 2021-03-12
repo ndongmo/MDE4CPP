@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -53,11 +48,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,19 +60,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 CollectionItemImpl::CollectionItemImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionItemImpl::~CollectionItemImpl()
@@ -90,17 +73,27 @@ CollectionItemImpl::~CollectionItemImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CollectionItemImpl::CollectionItemImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:CollectionItemImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+CollectionItemImpl::CollectionItemImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:CollectionItemImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 CollectionItemImpl::CollectionItemImpl(const CollectionItemImpl & obj):CollectionItemImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionItemImpl::copy() const
+{
+	std::shared_ptr<CollectionItemImpl> element(new CollectionItemImpl(*this));
+	element->setThisCollectionItemPtr(element);
+	return element;
+}
+
+CollectionItemImpl& CollectionItemImpl::operator=(const CollectionItemImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -148,13 +141,8 @@ CollectionItemImpl::CollectionItemImpl(const CollectionItemImpl & obj):Collectio
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CollectionItemImpl::copy() const
-{
-	std::shared_ptr<CollectionItemImpl> element(new CollectionItemImpl(*this));
-	element->setThisCollectionItemPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
@@ -173,23 +161,41 @@ std::shared_ptr<ecore::EClass> CollectionItemImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference item
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > CollectionItemImpl::getItem() const
 {
 //assert(m_item);
     return m_item;
 }
+
 void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item)
 {
     m_item = _item;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> CollectionItemImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<CollectionItem> CollectionItemImpl::getThisCollectionItemPtr() const
@@ -259,7 +265,7 @@ void CollectionItemImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

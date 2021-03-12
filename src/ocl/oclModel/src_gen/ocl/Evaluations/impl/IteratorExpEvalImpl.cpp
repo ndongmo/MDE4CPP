@@ -31,15 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -60,15 +51,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -79,17 +63,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 IteratorExpEvalImpl::IteratorExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IteratorExpEvalImpl::~IteratorExpEvalImpl()
@@ -101,8 +78,19 @@ IteratorExpEvalImpl::~IteratorExpEvalImpl()
 
 
 
-
 IteratorExpEvalImpl::IteratorExpEvalImpl(const IteratorExpEvalImpl & obj):IteratorExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IteratorExpEvalImpl::copy() const
+{
+	std::shared_ptr<IteratorExpEvalImpl> element(new IteratorExpEvalImpl(*this));
+	element->setThisIteratorExpEvalPtr(element);
+	return element;
+}
+
+IteratorExpEvalImpl& IteratorExpEvalImpl::operator=(const IteratorExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +123,8 @@ IteratorExpEvalImpl::IteratorExpEvalImpl(const IteratorExpEvalImpl & obj):Iterat
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  IteratorExpEvalImpl::copy() const
-{
-	std::shared_ptr<IteratorExpEvalImpl> element(new IteratorExpEvalImpl(*this));
-	element->setThisIteratorExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IteratorExpEvalImpl::eStaticClass() const
@@ -164,6 +147,7 @@ std::shared_ptr<ecore::EClass> IteratorExpEvalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<IteratorExpEval> IteratorExpEvalImpl::getThisIteratorExpEvalPtr() const
@@ -217,7 +201,7 @@ void IteratorExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

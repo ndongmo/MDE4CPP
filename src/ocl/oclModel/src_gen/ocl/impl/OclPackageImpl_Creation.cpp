@@ -1,7 +1,7 @@
-#include "ocl/impl/OclPackageImpl.hpp"
+#include "ocl/impl/oclPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -21,11 +21,11 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
@@ -41,7 +41,7 @@
  
 using namespace ocl;
 
-void OclPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
+void oclPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
 {
 	if (isCreated) 
 	{
@@ -49,7 +49,7 @@ void OclPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 
 	createPackageEDataTypes(package, factory);
@@ -69,7 +69,7 @@ void OclPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 }
 
 
-void OclPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void oclPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

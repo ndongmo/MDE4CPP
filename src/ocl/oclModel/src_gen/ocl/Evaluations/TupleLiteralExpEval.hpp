@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -81,13 +81,11 @@ namespace ocl::Evaluations
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class TupleLiteralExpEval:virtual public LiteralExpEval
 	{
 		public:
  			TupleLiteralExpEval(const TupleLiteralExpEval &) {}
-			TupleLiteralExpEval& operator=(TupleLiteralExpEval const&) = delete;
 
 		protected:
 			TupleLiteralExpEval(){}
@@ -110,9 +108,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> getTuplePart() const = 0;
+			
 			
 			
 
@@ -125,10 +123,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> m_tuplePart;
 			
+			mutable std::shared_ptr<Bag<ocl::Evaluations::VariableDeclEval>> m_tuplePart;
 
 		public:
 			//*********************************

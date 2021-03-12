@@ -7,7 +7,7 @@
 #ifndef OCL_OCLCSPACKAGEIMPL_HPP
 #define OCL_OCLCSPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "ocl/OclCS/OclCSPackage.hpp" 
@@ -19,7 +19,7 @@ namespace ocl::OclCS
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace ocl::OclCS
@@ -62,7 +62,7 @@ namespace ocl::OclCS
 			void initializePackageContents();
 
 		private:
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializePackageEDataTypes();
 

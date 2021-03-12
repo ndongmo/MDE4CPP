@@ -15,16 +15,16 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
 #include "ocl/Types/TypesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
 
 
 using namespace ocl::Values;
@@ -84,7 +84,7 @@ void ValuesPackageImpl::initializeBagTypeValueContent()
 	
 	
 	
-	m_bagTypeValue_Operation_addValue_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_bagTypeValue_Operation_addValue_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_bagTypeValue_Operation_addValue_Value->setName("addValue");
 	m_bagTypeValue_Operation_addValue_Value->setLowerBound(0);
 	m_bagTypeValue_Operation_addValue_Value->setUpperBound(1);
@@ -92,7 +92,7 @@ void ValuesPackageImpl::initializeBagTypeValueContent()
 	m_bagTypeValue_Operation_addValue_Value->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_bagTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_bagTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -159,7 +159,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	    }
 	}
 	
-	m_collectionValue_Operation_addValue_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_collectionValue_Operation_addValue_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_collectionValue_Operation_addValue_Value->setName("addValue");
 	m_collectionValue_Operation_addValue_Value->setLowerBound(0);
 	m_collectionValue_Operation_addValue_Value->setUpperBound(1);
@@ -167,7 +167,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_addValue_Value->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -176,7 +176,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_collectionValue_Operation_equals_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_collectionValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_collectionValue_Operation_equals_Value->setName("equals");
 	m_collectionValue_Operation_equals_Value->setLowerBound(1);
 	m_collectionValue_Operation_equals_Value->setUpperBound(1);
@@ -184,7 +184,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_equals_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -193,7 +193,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_collectionValue_Operation_find_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_collectionValue_Operation_find_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_collectionValue_Operation_find_Value->setName("find");
 	m_collectionValue_Operation_find_Value->setLowerBound(1);
 	m_collectionValue_Operation_find_Value->setUpperBound(1);
@@ -201,7 +201,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_find_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_find_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_find_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -210,7 +210,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_collectionValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_collectionValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_collectionValue_Operation_toString->setName("toString");
 	m_collectionValue_Operation_toString->setLowerBound(1);
 	m_collectionValue_Operation_toString->setUpperBound(1);
@@ -229,7 +229,7 @@ void ValuesPackageImpl::initializeElementContent()
 	
 	m_element_Attribute_indexNr = getElement_Attribute_indexNr();
 	m_element_Attribute_indexNr->setName("indexNr");
-	m_element_Attribute_indexNr->setEType(types::TypesPackage::eInstance()->getInteger_Class());
+	m_element_Attribute_indexNr->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_element_Attribute_indexNr->setLowerBound(0);
 	m_element_Attribute_indexNr->setUpperBound(1);
 	m_element_Attribute_indexNr->setTransient(false);
@@ -282,7 +282,7 @@ void ValuesPackageImpl::initializeLocalSnapshotContent()
 	
 	m_localSnapshot_Attribute_isPost = getLocalSnapshot_Attribute_isPost();
 	m_localSnapshot_Attribute_isPost->setName("isPost");
-	m_localSnapshot_Attribute_isPost->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_localSnapshot_Attribute_isPost->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_localSnapshot_Attribute_isPost->setLowerBound(0);
 	m_localSnapshot_Attribute_isPost->setUpperBound(1);
 	m_localSnapshot_Attribute_isPost->setTransient(false);
@@ -302,7 +302,7 @@ void ValuesPackageImpl::initializeLocalSnapshotContent()
 	}
 	m_localSnapshot_Attribute_isPre = getLocalSnapshot_Attribute_isPre();
 	m_localSnapshot_Attribute_isPre->setName("isPre");
-	m_localSnapshot_Attribute_isPre->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_localSnapshot_Attribute_isPre->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_localSnapshot_Attribute_isPre->setLowerBound(0);
 	m_localSnapshot_Attribute_isPre->setUpperBound(1);
 	m_localSnapshot_Attribute_isPre->setTransient(false);
@@ -449,7 +449,7 @@ void ValuesPackageImpl::initializeNameValueBindingContent()
 	
 	m_nameValueBinding_Attribute_name = getNameValueBinding_Attribute_name();
 	m_nameValueBinding_Attribute_name->setName("name");
-	m_nameValueBinding_Attribute_name->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_nameValueBinding_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_nameValueBinding_Attribute_name->setLowerBound(0);
 	m_nameValueBinding_Attribute_name->setUpperBound(1);
 	m_nameValueBinding_Attribute_name->setTransient(false);
@@ -524,7 +524,7 @@ void ValuesPackageImpl::initializeObjectValueContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_objectValue_Attribute_value->setName("value");
-	m_objectValue_Attribute_value->setEType(ecore::EcorePackage::eInstance()->getEObject_Class());
+	m_objectValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_objectValue_Attribute_value->setLowerBound(1);
 	m_objectValue_Attribute_value->setUpperBound(1);
 	m_objectValue_Attribute_value->setTransient(false);
@@ -546,7 +546,7 @@ void ValuesPackageImpl::initializeObjectValueContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_objectValue_Operation_equals_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_objectValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectValue_Operation_equals_Value->setName("equals");
 	m_objectValue_Operation_equals_Value->setLowerBound(1);
 	m_objectValue_Operation_equals_Value->setUpperBound(1);
@@ -554,7 +554,7 @@ void ValuesPackageImpl::initializeObjectValueContent()
 	m_objectValue_Operation_equals_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_objectValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -563,7 +563,7 @@ void ValuesPackageImpl::initializeObjectValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_objectValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_objectValue_Operation_toString->setName("toString");
 	m_objectValue_Operation_toString->setLowerBound(1);
 	m_objectValue_Operation_toString->setUpperBound(1);
@@ -582,7 +582,7 @@ void ValuesPackageImpl::initializeOclMessageValueContent()
 	
 	m_oclMessageValue_Attribute_isAsyncOperation = getOclMessageValue_Attribute_isAsyncOperation();
 	m_oclMessageValue_Attribute_isAsyncOperation->setName("isAsyncOperation");
-	m_oclMessageValue_Attribute_isAsyncOperation->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_oclMessageValue_Attribute_isAsyncOperation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_oclMessageValue_Attribute_isAsyncOperation->setLowerBound(0);
 	m_oclMessageValue_Attribute_isAsyncOperation->setUpperBound(1);
 	m_oclMessageValue_Attribute_isAsyncOperation->setTransient(false);
@@ -602,7 +602,7 @@ void ValuesPackageImpl::initializeOclMessageValueContent()
 	}
 	m_oclMessageValue_Attribute_isSignal = getOclMessageValue_Attribute_isSignal();
 	m_oclMessageValue_Attribute_isSignal->setName("isSignal");
-	m_oclMessageValue_Attribute_isSignal->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_oclMessageValue_Attribute_isSignal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_oclMessageValue_Attribute_isSignal->setLowerBound(0);
 	m_oclMessageValue_Attribute_isSignal->setUpperBound(1);
 	m_oclMessageValue_Attribute_isSignal->setTransient(false);
@@ -622,7 +622,7 @@ void ValuesPackageImpl::initializeOclMessageValueContent()
 	}
 	m_oclMessageValue_Attribute_isSyncOperation = getOclMessageValue_Attribute_isSyncOperation();
 	m_oclMessageValue_Attribute_isSyncOperation->setName("isSyncOperation");
-	m_oclMessageValue_Attribute_isSyncOperation->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_oclMessageValue_Attribute_isSyncOperation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_oclMessageValue_Attribute_isSyncOperation->setLowerBound(0);
 	m_oclMessageValue_Attribute_isSyncOperation->setUpperBound(1);
 	m_oclMessageValue_Attribute_isSyncOperation->setTransient(false);
@@ -642,7 +642,7 @@ void ValuesPackageImpl::initializeOclMessageValueContent()
 	}
 	m_oclMessageValue_Attribute_name = getOclMessageValue_Attribute_name();
 	m_oclMessageValue_Attribute_name->setName("name");
-	m_oclMessageValue_Attribute_name->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_oclMessageValue_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_oclMessageValue_Attribute_name->setLowerBound(0);
 	m_oclMessageValue_Attribute_name->setUpperBound(1);
 	m_oclMessageValue_Attribute_name->setTransient(false);
@@ -750,7 +750,7 @@ void ValuesPackageImpl::initializeOclMessageValueContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_oclMessageValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_oclMessageValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_oclMessageValue_Operation_toString->setName("toString");
 	m_oclMessageValue_Operation_toString->setLowerBound(1);
 	m_oclMessageValue_Operation_toString->setUpperBound(1);
@@ -769,7 +769,7 @@ void ValuesPackageImpl::initializeOclVoidValueContent()
 	
 	
 	
-	m_oclVoidValue_Operation_equals_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_oclVoidValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_oclVoidValue_Operation_equals_Value->setName("equals");
 	m_oclVoidValue_Operation_equals_Value->setLowerBound(1);
 	m_oclVoidValue_Operation_equals_Value->setUpperBound(1);
@@ -777,7 +777,7 @@ void ValuesPackageImpl::initializeOclVoidValueContent()
 	m_oclVoidValue_Operation_equals_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_oclVoidValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_oclVoidValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -786,7 +786,7 @@ void ValuesPackageImpl::initializeOclVoidValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_oclVoidValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_oclVoidValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_oclVoidValue_Operation_toString->setName("toString");
 	m_oclVoidValue_Operation_toString->setLowerBound(1);
 	m_oclVoidValue_Operation_toString->setUpperBound(1);
@@ -805,7 +805,7 @@ void ValuesPackageImpl::initializeOrderedSetTypeValueContent()
 	
 	
 	
-	m_orderedSetTypeValue_Operation_addValue_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_orderedSetTypeValue_Operation_addValue_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_orderedSetTypeValue_Operation_addValue_Value->setName("addValue");
 	m_orderedSetTypeValue_Operation_addValue_Value->setLowerBound(0);
 	m_orderedSetTypeValue_Operation_addValue_Value->setUpperBound(1);
@@ -813,7 +813,7 @@ void ValuesPackageImpl::initializeOrderedSetTypeValueContent()
 	m_orderedSetTypeValue_Operation_addValue_Value->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_orderedSetTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_orderedSetTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -833,7 +833,7 @@ void ValuesPackageImpl::initializeSequenceTypeValueContent()
 	
 	
 	
-	m_sequenceTypeValue_Operation_addValue_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_sequenceTypeValue_Operation_addValue_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_sequenceTypeValue_Operation_addValue_Value->setName("addValue");
 	m_sequenceTypeValue_Operation_addValue_Value->setLowerBound(0);
 	m_sequenceTypeValue_Operation_addValue_Value->setUpperBound(1);
@@ -841,7 +841,7 @@ void ValuesPackageImpl::initializeSequenceTypeValueContent()
 	m_sequenceTypeValue_Operation_addValue_Value->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_sequenceTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sequenceTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -861,7 +861,7 @@ void ValuesPackageImpl::initializeSetTypeValueContent()
 	
 	
 	
-	m_setTypeValue_Operation_addValue_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_setTypeValue_Operation_addValue_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_setTypeValue_Operation_addValue_Value->setName("addValue");
 	m_setTypeValue_Operation_addValue_Value->setLowerBound(0);
 	m_setTypeValue_Operation_addValue_Value->setUpperBound(1);
@@ -869,7 +869,7 @@ void ValuesPackageImpl::initializeSetTypeValueContent()
 	m_setTypeValue_Operation_addValue_Value->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_setTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_setTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -947,7 +947,7 @@ void ValuesPackageImpl::initializeTupleValueContent()
 	    }
 	}
 	
-	m_tupleValue_Operation_equals_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_tupleValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_tupleValue_Operation_equals_Value->setName("equals");
 	m_tupleValue_Operation_equals_Value->setLowerBound(1);
 	m_tupleValue_Operation_equals_Value->setUpperBound(1);
@@ -955,7 +955,7 @@ void ValuesPackageImpl::initializeTupleValueContent()
 	m_tupleValue_Operation_equals_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_tupleValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_tupleValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -964,7 +964,7 @@ void ValuesPackageImpl::initializeTupleValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_tupleValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_tupleValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_tupleValue_Operation_toString->setName("toString");
 	m_tupleValue_Operation_toString->setLowerBound(1);
 	m_tupleValue_Operation_toString->setUpperBound(1);
@@ -983,7 +983,7 @@ void ValuesPackageImpl::initializeUndefinedValueContent()
 	
 	
 	
-	m_undefinedValue_Operation_equals_Value->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_undefinedValue_Operation_equals_Value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_undefinedValue_Operation_equals_Value->setName("equals");
 	m_undefinedValue_Operation_equals_Value->setLowerBound(1);
 	m_undefinedValue_Operation_equals_Value->setUpperBound(1);
@@ -991,7 +991,7 @@ void ValuesPackageImpl::initializeUndefinedValueContent()
 	m_undefinedValue_Operation_equals_Value->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_undefinedValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_undefinedValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -1000,7 +1000,7 @@ void ValuesPackageImpl::initializeUndefinedValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_undefinedValue_Operation_toString->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_undefinedValue_Operation_toString->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_undefinedValue_Operation_toString->setName("toString");
 	m_undefinedValue_Operation_toString->setLowerBound(1);
 	m_undefinedValue_Operation_toString->setUpperBound(1);

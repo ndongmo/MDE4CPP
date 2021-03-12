@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -50,13 +50,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class StaticValue:virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			StaticValue(const StaticValue &) {}
-			StaticValue& operator=(StaticValue const&) = delete;
 
 		protected:
 			StaticValue(){}

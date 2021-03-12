@@ -11,10 +11,11 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 namespace ocl 
 {
-	class OclPackage;
+	class oclPackage;
 }
 namespace ocl::Evaluations 
 {
@@ -232,19 +233,19 @@ namespace ocl::Values
 
 namespace ocl 
 {
-	class OclFactory : virtual public ecore::EFactory 
+	class oclFactory : virtual public ecore::EFactory 
 	{
 		private:    
-			OclFactory(OclFactory const&) = delete;
-			OclFactory& operator=(OclFactory const&) = delete;
+			oclFactory(oclFactory const&) = delete;
+			oclFactory& operator=(oclFactory const&) = delete;
 		protected:
-			OclFactory(){}
+			oclFactory(){}
 		
 			//Singleton Instance and Getter
 			private:
-				static std::shared_ptr<OclFactory> instance;
+				static std::shared_ptr<oclFactory> instance;
 			public:
-				static std::shared_ptr<OclFactory> eInstance();
+				static std::shared_ptr<oclFactory> eInstance();
 		
 			//Creator functions
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const = 0;

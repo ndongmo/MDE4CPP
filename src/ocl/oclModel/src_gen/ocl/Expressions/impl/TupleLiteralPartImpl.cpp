@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EAttribute.hpp"
@@ -52,10 +48,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -66,19 +60,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 TupleLiteralPartImpl::TupleLiteralPartImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TupleLiteralPartImpl::~TupleLiteralPartImpl()
@@ -88,17 +73,27 @@ TupleLiteralPartImpl::~TupleLiteralPartImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			TupleLiteralPartImpl::TupleLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:TupleLiteralPartImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+TupleLiteralPartImpl::TupleLiteralPartImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:TupleLiteralPartImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 TupleLiteralPartImpl::TupleLiteralPartImpl(const TupleLiteralPartImpl & obj):TupleLiteralPartImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TupleLiteralPartImpl::copy() const
+{
+	std::shared_ptr<TupleLiteralPartImpl> element(new TupleLiteralPartImpl(*this));
+	element->setThisTupleLiteralPartPtr(element);
+	return element;
+}
+
+TupleLiteralPartImpl& TupleLiteralPartImpl::operator=(const TupleLiteralPartImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -146,13 +141,8 @@ TupleLiteralPartImpl::TupleLiteralPartImpl(const TupleLiteralPartImpl & obj):Tup
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TupleLiteralPartImpl::copy() const
-{
-	std::shared_ptr<TupleLiteralPartImpl> element(new TupleLiteralPartImpl(*this));
-	element->setThisTupleLiteralPartPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
@@ -171,23 +161,41 @@ std::shared_ptr<ecore::EClass> TupleLiteralPartImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference attribute
+*/
 std::shared_ptr<ecore::EAttribute > TupleLiteralPartImpl::getAttribute() const
 {
 
     return m_attribute;
 }
+
 void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attribute)
 {
     m_attribute = _attribute;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> TupleLiteralPartImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<TupleLiteralPart> TupleLiteralPartImpl::getThisTupleLiteralPartPtr() const
@@ -257,7 +265,7 @@ void TupleLiteralPartImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -284,7 +292,7 @@ void TupleLiteralPartImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "EAttribute";
 			}
-			std::shared_ptr<ecore::EAttribute> attribute = std::dynamic_pointer_cast<ecore::EAttribute>(ecore::EcoreFactory::eInstance()->create(typeName));
+			std::shared_ptr<ecore::EAttribute> attribute = std::dynamic_pointer_cast<ecore::EAttribute>(ecore::ecoreFactory::eInstance()->create(typeName));
 			if (attribute != nullptr)
 			{
 				this->setAttribute(attribute);
@@ -346,7 +354,7 @@ void TupleLiteralPartImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<ecore::EAttribute > attribute = this->getAttribute();
 		if (attribute != nullptr)
 		{
-			saveHandler->addReference(attribute, "attribute", attribute->eClass() != ecore::EcorePackage::eInstance()->getEAttribute_Class());
+			saveHandler->addReference(attribute, "attribute", attribute->eClass() != ecore::ecorePackage::eInstance()->getEAttribute_Class());
 		}
 	}
 	catch (std::exception& e)

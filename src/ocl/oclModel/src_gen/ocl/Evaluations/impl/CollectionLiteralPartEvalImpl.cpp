@@ -31,12 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "fUML/Semantics/Values/Evaluation.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -49,12 +43,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -65,19 +55,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 CollectionLiteralPartEvalImpl::CollectionLiteralPartEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionLiteralPartEvalImpl::~CollectionLiteralPartEvalImpl()
@@ -89,8 +70,19 @@ CollectionLiteralPartEvalImpl::~CollectionLiteralPartEvalImpl()
 
 
 
-
 CollectionLiteralPartEvalImpl::CollectionLiteralPartEvalImpl(const CollectionLiteralPartEvalImpl & obj):CollectionLiteralPartEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionLiteralPartEvalImpl::copy() const
+{
+	std::shared_ptr<CollectionLiteralPartEvalImpl> element(new CollectionLiteralPartEvalImpl(*this));
+	element->setThisCollectionLiteralPartEvalPtr(element);
+	return element;
+}
+
+CollectionLiteralPartEvalImpl& CollectionLiteralPartEvalImpl::operator=(const CollectionLiteralPartEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -109,13 +101,8 @@ CollectionLiteralPartEvalImpl::CollectionLiteralPartEvalImpl(const CollectionLit
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CollectionLiteralPartEvalImpl::copy() const
-{
-	std::shared_ptr<CollectionLiteralPartEvalImpl> element(new CollectionLiteralPartEvalImpl(*this));
-	element->setThisCollectionLiteralPartEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() const
@@ -134,19 +121,26 @@ std::shared_ptr<ecore::EClass> CollectionLiteralPartEvalImpl::eStaticClass() con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference element
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > CollectionLiteralPartEvalImpl::getElement() const
 {
 //assert(m_element);
     return m_element;
 }
+
 void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element)
 {
     m_element = _element;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CollectionLiteralPartEval> CollectionLiteralPartEvalImpl::getThisCollectionLiteralPartEvalPtr() const
@@ -212,7 +206,7 @@ void CollectionLiteralPartEvalImpl::load(std::shared_ptr<persistence::interfaces
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

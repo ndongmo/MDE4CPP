@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class VoidTypeImpl :virtual public ecore::EClassifierImpl, virtual public VoidType 
+	class VoidTypeImpl : virtual public ecore::EClassifierImpl, virtual public VoidType 
 	{
 		public: 
 			VoidTypeImpl(const VoidTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			VoidTypeImpl& operator=(VoidTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			VoidTypeImpl& operator=(VoidTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -66,8 +64,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

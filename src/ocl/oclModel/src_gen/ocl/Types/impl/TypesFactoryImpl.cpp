@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Types/impl/AnyTypeImpl.hpp"
 #include "ocl/Types/impl/BagTypeImpl.hpp"
 #include "ocl/Types/impl/CollectionTypeImpl.hpp"
@@ -20,10 +19,6 @@
 
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "uml/UmlPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 
 
 using namespace ocl::Types;
@@ -76,13 +71,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//AnyType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createAnyType_in_EContainer(castedContainer,metaElementID);
 					}
 					//AnyType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createAnyType_in_EPackage(castedContainer,metaElementID);
@@ -103,13 +98,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//BagType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createBagType_in_EContainer(castedContainer,metaElementID);
 					}
 					//BagType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createBagType_in_EPackage(castedContainer,metaElementID);
@@ -130,13 +125,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//CollectionType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createCollectionType_in_EContainer(castedContainer,metaElementID);
 					}
 					//CollectionType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createCollectionType_in_EPackage(castedContainer,metaElementID);
@@ -157,13 +152,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//InvalidType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createInvalidType_in_EContainer(castedContainer,metaElementID);
 					}
 					//InvalidType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createInvalidType_in_EPackage(castedContainer,metaElementID);
@@ -184,13 +179,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//MessageType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createMessageType_in_EContainer(castedContainer,metaElementID);
 					}
 					//MessageType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createMessageType_in_EPackage(castedContainer,metaElementID);
@@ -216,13 +211,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//OrderedSetType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createOrderedSetType_in_EContainer(castedContainer,metaElementID);
 					}
 					//OrderedSetType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createOrderedSetType_in_EPackage(castedContainer,metaElementID);
@@ -243,13 +238,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//SequenceType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createSequenceType_in_EContainer(castedContainer,metaElementID);
 					}
 					//SequenceType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createSequenceType_in_EPackage(castedContainer,metaElementID);
@@ -270,13 +265,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//SetType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createSetType_in_EContainer(castedContainer,metaElementID);
 					}
 					//SetType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createSetType_in_EPackage(castedContainer,metaElementID);
@@ -297,13 +292,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//TemplateParameterType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createTemplateParameterType_in_EContainer(castedContainer,metaElementID);
 					}
 					//TemplateParameterType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createTemplateParameterType_in_EPackage(castedContainer,metaElementID);
@@ -324,13 +319,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//TupleType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createTupleType_in_EContainer(castedContainer,metaElementID);
 					}
 					//TupleType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createTupleType_in_EPackage(castedContainer,metaElementID);
@@ -351,13 +346,13 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const int metaElementID
 				switch(referenceID)
 				{
 					//VoidType has eContainer as a containment
-					case  ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+					case  TypesPackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EObject>(container);
 						return this->createVoidType_in_EContainer(castedContainer,metaElementID);
 					}
 					//VoidType has ePackage as a containment
-					case  ecore::EcorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
+					case  TypesPackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ecore::EPackage>(container);
 						return this->createVoidType_in_EPackage(castedContainer,metaElementID);

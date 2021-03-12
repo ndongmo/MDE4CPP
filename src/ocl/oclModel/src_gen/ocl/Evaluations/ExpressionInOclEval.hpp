@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -50,19 +50,17 @@ namespace ocl::Evaluations
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
-	class ExpressionInOclEval : virtual public ecore::EObject 
+	
+	class ExpressionInOclEval : virtual public ecore::EModelElement
 
 	{
 		public:
  			ExpressionInOclEval(const ExpressionInOclEval &) {}
-			ExpressionInOclEval& operator=(ExpressionInOclEval const&) = delete;
 
 		protected:
 			ExpressionInOclEval(){}
@@ -85,20 +83,18 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getContext() const = 0;
 			
-			/*!
-			 */
-			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context_context) = 0;
-			/*!
-			 */
+			
+			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getEnvironment() const = 0;
 			
-			/*!
-			 */
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment_environment) = 0;
+			
+			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment) = 0;
+			
 			
 
 		protected:
@@ -110,13 +106,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_context;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_environment;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_context;
+			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_environment;
 
 		public:
 			//*********************************

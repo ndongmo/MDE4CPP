@@ -15,20 +15,18 @@
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	class NameValueBindingImpl :virtual public ecore::EObjectImpl,
+	class NameValueBindingImpl : virtual public ecore::EModelElementImpl,
 virtual public NameValueBinding 
 	{
 		public: 
 			NameValueBindingImpl(const NameValueBindingImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			NameValueBindingImpl& operator=(NameValueBindingImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			NameValueBindingImpl& operator=(NameValueBindingImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -50,26 +48,22 @@ virtual public NameValueBinding
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) ;
+			
 							
 			
 			//*********************************

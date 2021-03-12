@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace ecore
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class VoidType:virtual public ecore::EClassifier
 	{
 		public:
  			VoidType(const VoidType &) {}
-			VoidType& operator=(VoidType const&) = delete;
 
 		protected:
 			VoidType(){}
@@ -116,8 +114,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class CollectionLiteralExpEvalImpl :virtual public LiteralExpEvalImpl, virtual public CollectionLiteralExpEval 
+	class CollectionLiteralExpEvalImpl : virtual public LiteralExpEvalImpl, virtual public CollectionLiteralExpEval 
 	{
 		public: 
 			CollectionLiteralExpEvalImpl(const CollectionLiteralExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionLiteralExpEvalImpl& operator=(CollectionLiteralExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionLiteralExpEvalImpl& operator=(CollectionLiteralExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,9 +51,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::CollectionLiteralPartEval>> getParts() const ;
+			
 			
 							
 			

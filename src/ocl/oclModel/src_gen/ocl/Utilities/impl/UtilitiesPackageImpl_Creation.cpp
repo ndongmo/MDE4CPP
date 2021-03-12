@@ -1,7 +1,7 @@
 #include "ocl/Utilities/impl/UtilitiesPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -21,7 +21,7 @@ void UtilitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 
 	createPackageEDataTypes(package, factory);
@@ -29,7 +29,7 @@ void UtilitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage
 }
 
 
-void UtilitiesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void UtilitiesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

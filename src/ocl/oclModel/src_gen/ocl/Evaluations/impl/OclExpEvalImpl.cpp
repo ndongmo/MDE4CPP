@@ -31,14 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -55,14 +47,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -73,31 +59,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 OclExpEvalImpl::OclExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OclExpEvalImpl::~OclExpEvalImpl()
@@ -109,8 +74,19 @@ OclExpEvalImpl::~OclExpEvalImpl()
 
 
 
-
 OclExpEvalImpl::OclExpEvalImpl(const OclExpEvalImpl & obj):OclExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OclExpEvalImpl::copy() const
+{
+	std::shared_ptr<OclExpEvalImpl> element(new OclExpEvalImpl(*this));
+	element->setThisOclExpEvalPtr(element);
+	return element;
+}
+
+OclExpEvalImpl& OclExpEvalImpl::operator=(const OclExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +111,8 @@ OclExpEvalImpl::OclExpEvalImpl(const OclExpEvalImpl & obj):OclExpEvalImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  OclExpEvalImpl::copy() const
-{
-	std::shared_ptr<OclExpEvalImpl> element(new OclExpEvalImpl(*this));
-	element->setThisOclExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
@@ -160,49 +131,74 @@ std::shared_ptr<ecore::EClass> OclExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference beforeEnvironment
+*/
 std::shared_ptr<ocl::Evaluations::EvalEnvironment > OclExpEvalImpl::getBeforeEnvironment() const
 {
 
     return m_beforeEnvironment;
 }
+
 void OclExpEvalImpl::setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment)
 {
     m_beforeEnvironment = _beforeEnvironment;
 }
 
+
+
+/*
+Getter & Setter for reference environment
+*/
 std::shared_ptr<ocl::Evaluations::EvalEnvironment > OclExpEvalImpl::getEnvironment() const
 {
 //assert(m_environment);
     return m_environment;
 }
+
 void OclExpEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
 {
     m_environment = _environment;
 }
 
+
+
+/*
+Getter & Setter for reference model
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > OclExpEvalImpl::getModel() const
 {
 //assert(m_model);
     return m_model;
 }
+
 void OclExpEvalImpl::setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model)
 {
     m_model = _model;
 }
 
+
+
+/*
+Getter & Setter for reference resultValue
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > OclExpEvalImpl::getResultValue() const
 {
 //assert(m_resultValue);
     return m_resultValue;
 }
+
 void OclExpEvalImpl::setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue)
 {
     m_resultValue = _resultValue;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<OclExpEval> OclExpEvalImpl::getThisOclExpEvalPtr() const
@@ -304,7 +300,7 @@ void OclExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

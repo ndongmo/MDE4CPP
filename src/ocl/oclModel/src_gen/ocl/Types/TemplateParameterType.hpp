@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace ecore
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class TemplateParameterType:virtual public ecore::EClassifier
 	{
 		public:
  			TemplateParameterType(const TemplateParameterType &) {}
-			TemplateParameterType& operator=(TemplateParameterType const&) = delete;
 
 		protected:
 			TemplateParameterType(){}
@@ -95,14 +93,11 @@ namespace ocl::Types
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getSpecification() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSpecification (std::string _specification)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -113,8 +108,7 @@ namespace ocl::Types
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_specification = "";
 			
 			
@@ -127,8 +121,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -66,13 +66,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class OclMessageValue:virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			OclMessageValue(const OclMessageValue &) {}
-			OclMessageValue& operator=(OclMessageValue const&) = delete;
 
 		protected:
 			OclMessageValue(){}
@@ -87,111 +85,83 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsAsyncOperation() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsAsyncOperation (bool _isAsyncOperation)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsSignal() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsSignal (bool _isSignal)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsSyncOperation() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsSyncOperation (bool _isSyncOperation)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getArguments() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Values::OclMessageValue > getReturnMessage() const = 0;
 			
-			/*!
-			 */
-			virtual void setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage_returnMessage) = 0;
-			/*!
-			 */
+			
+			virtual void setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Values::ObjectValue > getSource() const = 0;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<ocl::Values::ObjectValue> _source_source) = 0;
-			/*!
-			 */
+			
+			virtual void setSource(std::shared_ptr<ocl::Values::ObjectValue> _source) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Values::ObjectValue > getTarget() const = 0;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target_target) = 0;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_isAsyncOperation = false;
-			/*!
-			 */ 
+			 
 			bool m_isSignal = false;
-			/*!
-			 */ 
+			 
 			bool m_isSyncOperation = false;
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_arguments;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::OclMessageValue > m_returnMessage;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::ObjectValue > m_source;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::ObjectValue > m_target;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_arguments;
+			std::shared_ptr<ocl::Values::OclMessageValue > m_returnMessage;
+			std::shared_ptr<ocl::Values::ObjectValue > m_source;
+			std::shared_ptr<ocl::Values::ObjectValue > m_target;
 
 		public:
 			//*********************************

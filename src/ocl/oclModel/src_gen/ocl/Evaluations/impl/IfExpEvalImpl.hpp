@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class IfExpEvalImpl :virtual public OclExpEvalImpl, virtual public IfExpEval 
+	class IfExpEvalImpl : virtual public OclExpEvalImpl, virtual public IfExpEval 
 	{
 		public: 
 			IfExpEvalImpl(const IfExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			IfExpEvalImpl& operator=(IfExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			IfExpEvalImpl& operator=(IfExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,27 +51,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getCondition() const ;
 			
-			/*!
-			 */
-			virtual void setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition_condition) ;
-			/*!
-			 */
+			
+			virtual void setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getElseExpression() const ;
 			
-			/*!
-			 */
-			virtual void setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression_elseExpression) ;
-			/*!
-			 */
+			
+			virtual void setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getThenExpression() const ;
 			
-			/*!
-			 */
-			virtual void setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression_thenExpression) ;
+			
+			virtual void setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression) ;
+			
 							
 			
 			//*********************************

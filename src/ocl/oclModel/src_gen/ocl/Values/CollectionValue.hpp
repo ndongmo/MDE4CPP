@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -66,13 +66,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class CollectionValue:virtual public StaticValue
 	{
 		public:
  			CollectionValue(const CollectionValue &) {}
-			CollectionValue& operator=(CollectionValue const&) = delete;
 
 		protected:
 			CollectionValue(){}
@@ -87,20 +85,16 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool find(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
@@ -111,17 +105,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::Element>> getElements() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Types::CollectionType > getModel() const = 0;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType> _model_model) = 0;
+			
+			virtual void setModel(std::shared_ptr<ocl::Types::CollectionType> _model) = 0;
+			
 			
 
 		protected:
@@ -133,13 +126,9 @@ namespace ocl::Values
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::Element>> m_elements;
-			/*!
-			 */
-			std::shared_ptr<ocl::Types::CollectionType > m_model;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::Element>> m_elements;
+			std::shared_ptr<ocl::Types::CollectionType > m_model;
 
 		public:
 			//*********************************

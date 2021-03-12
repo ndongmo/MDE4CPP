@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -60,13 +60,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class EvalNameSpace:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			EvalNameSpace(const EvalNameSpace &) {}
-			EvalNameSpace& operator=(EvalNameSpace const&) = delete;
 
 		protected:
 			EvalNameSpace(){}

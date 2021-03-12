@@ -1,7 +1,7 @@
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,10 +18,10 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
 //include subpackages 
  
 using namespace ocl::Values;
@@ -34,7 +34,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createBagTypeValueContent(package, factory);
 	createCollectionValueContent(package, factory);
@@ -55,7 +55,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 }
 
-void ValuesPackageImpl::createBagTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createBagTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_bagTypeValue_Class = factory->createEClass_in_EPackage(package, BAGTYPEVALUE_CLASS);
 	
@@ -64,7 +64,7 @@ void ValuesPackageImpl::createBagTypeValueContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ValuesPackageImpl::createCollectionValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createCollectionValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_collectionValue_Class = factory->createEClass_in_EPackage(package, COLLECTIONVALUE_CLASS);
 	
@@ -78,7 +78,7 @@ void ValuesPackageImpl::createCollectionValueContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ValuesPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_element_Class = factory->createEClass_in_EPackage(package, ELEMENT_CLASS);
 	m_element_Attribute_indexNr = factory->createEAttribute_in_EContainingClass(m_element_Class, ELEMENT_ATTRIBUTE_INDEXNR);
@@ -88,7 +88,7 @@ void ValuesPackageImpl::createElementContent(std::shared_ptr<ecore::EPackage> pa
 	
 }
 
-void ValuesPackageImpl::createLocalSnapshotContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLocalSnapshotContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_localSnapshot_Class = factory->createEClass_in_EPackage(package, LOCALSNAPSHOT_CLASS);
 	m_localSnapshot_Attribute_isPost = factory->createEAttribute_in_EContainingClass(m_localSnapshot_Class, LOCALSNAPSHOT_ATTRIBUTE_ISPOST);
@@ -103,7 +103,7 @@ void ValuesPackageImpl::createLocalSnapshotContent(std::shared_ptr<ecore::EPacka
 	
 }
 
-void ValuesPackageImpl::createNameValueBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createNameValueBindingContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_nameValueBinding_Class = factory->createEClass_in_EPackage(package, NAMEVALUEBINDING_CLASS);
 	m_nameValueBinding_Attribute_name = factory->createEAttribute_in_EContainingClass(m_nameValueBinding_Class, NAMEVALUEBINDING_ATTRIBUTE_NAME);
@@ -113,7 +113,7 @@ void ValuesPackageImpl::createNameValueBindingContent(std::shared_ptr<ecore::EPa
 	
 }
 
-void ValuesPackageImpl::createObjectValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createObjectValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectValue_Class = factory->createEClass_in_EPackage(package, OBJECTVALUE_CLASS);
 	
@@ -125,7 +125,7 @@ void ValuesPackageImpl::createObjectValueContent(std::shared_ptr<ecore::EPackage
 	
 }
 
-void ValuesPackageImpl::createOclMessageValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createOclMessageValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclMessageValue_Class = factory->createEClass_in_EPackage(package, OCLMESSAGEVALUE_CLASS);
 	m_oclMessageValue_Attribute_isAsyncOperation = factory->createEAttribute_in_EContainingClass(m_oclMessageValue_Class, OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION);
@@ -142,7 +142,7 @@ void ValuesPackageImpl::createOclMessageValueContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ValuesPackageImpl::createOclVoidValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createOclVoidValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_oclVoidValue_Class = factory->createEClass_in_EPackage(package, OCLVOIDVALUE_CLASS);
 	
@@ -152,7 +152,7 @@ void ValuesPackageImpl::createOclVoidValueContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ValuesPackageImpl::createOrderedSetTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createOrderedSetTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_orderedSetTypeValue_Class = factory->createEClass_in_EPackage(package, ORDEREDSETTYPEVALUE_CLASS);
 	
@@ -161,7 +161,7 @@ void ValuesPackageImpl::createOrderedSetTypeValueContent(std::shared_ptr<ecore::
 	
 }
 
-void ValuesPackageImpl::createSequenceTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createSequenceTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_sequenceTypeValue_Class = factory->createEClass_in_EPackage(package, SEQUENCETYPEVALUE_CLASS);
 	
@@ -170,7 +170,7 @@ void ValuesPackageImpl::createSequenceTypeValueContent(std::shared_ptr<ecore::EP
 	
 }
 
-void ValuesPackageImpl::createSetTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createSetTypeValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_setTypeValue_Class = factory->createEClass_in_EPackage(package, SETTYPEVALUE_CLASS);
 	
@@ -179,7 +179,7 @@ void ValuesPackageImpl::createSetTypeValueContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ValuesPackageImpl::createStaticValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createStaticValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_staticValue_Class = factory->createEClass_in_EPackage(package, STATICVALUE_CLASS);
 	
@@ -187,7 +187,7 @@ void ValuesPackageImpl::createStaticValueContent(std::shared_ptr<ecore::EPackage
 	
 }
 
-void ValuesPackageImpl::createTupleValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createTupleValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tupleValue_Class = factory->createEClass_in_EPackage(package, TUPLEVALUE_CLASS);
 	
@@ -199,7 +199,7 @@ void ValuesPackageImpl::createTupleValueContent(std::shared_ptr<ecore::EPackage>
 	
 }
 
-void ValuesPackageImpl::createUndefinedValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createUndefinedValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_undefinedValue_Class = factory->createEClass_in_EPackage(package, UNDEFINEDVALUE_CLASS);
 	
@@ -209,7 +209,7 @@ void ValuesPackageImpl::createUndefinedValueContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

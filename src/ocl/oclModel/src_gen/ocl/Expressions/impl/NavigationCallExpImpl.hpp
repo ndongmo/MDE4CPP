@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class NavigationCallExpImpl :virtual public FeatureCallExpImpl, virtual public NavigationCallExp 
+	class NavigationCallExpImpl : virtual public FeatureCallExpImpl, virtual public NavigationCallExp 
 	{
 		public: 
 			NavigationCallExpImpl(const NavigationCallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			NavigationCallExpImpl& operator=(NavigationCallExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			NavigationCallExpImpl& operator=(NavigationCallExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,24 +96,22 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EAttribute > getNavigationSource() const ;
 			
-			/*!
-			 */
-			virtual void setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource_navigationSource) ;
-			/*!
-			 */
+			
+			virtual void setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource) ;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getQualifier() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

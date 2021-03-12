@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -70,12 +64,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,63 +76,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 OclExpressionImpl::OclExpressionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OclExpressionImpl::~OclExpressionImpl()
@@ -152,22 +89,19 @@ OclExpressionImpl::~OclExpressionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:OclExpressionImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:OclExpressionImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:OclExpressionImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:OclExpressionImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -175,13 +109,13 @@ OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::IfExp > par
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -190,17 +124,16 @@ OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::IfExp > par
    
 }
 
-
 //Additional constructor for the containments back reference
 OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :OclExpressionImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -211,56 +144,56 @@ OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::CollectionR
 
 
 //Additional constructor for the containments back reference
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:OclExpressionImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:OclExpressionImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:OclExpressionImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:OclExpressionImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:OclExpressionImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:OclExpressionImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:OclExpressionImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:OclExpressionImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:OclExpressionImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+OclExpressionImpl::OclExpressionImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:OclExpressionImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 OclExpressionImpl::OclExpressionImpl(const OclExpressionImpl & obj):OclExpressionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OclExpressionImpl::copy() const
+{
+	std::shared_ptr<OclExpressionImpl> element(new OclExpressionImpl(*this));
+	element->setThisOclExpressionPtr(element);
+	return element;
+}
+
+OclExpressionImpl& OclExpressionImpl::operator=(const OclExpressionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -324,13 +257,8 @@ OclExpressionImpl::OclExpressionImpl(const OclExpressionImpl & obj):OclExpressio
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  OclExpressionImpl::copy() const
-{
-	std::shared_ptr<OclExpressionImpl> element(new OclExpressionImpl(*this));
-	element->setThisOclExpressionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
@@ -349,133 +277,217 @@ std::shared_ptr<ecore::EClass> OclExpressionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference appliedElement
+*/
 std::weak_ptr<ocl::Expressions::CallExp > OclExpressionImpl::getAppliedElement() const
 {
 
     return m_appliedElement;
 }
+
 void OclExpressionImpl::setAppliedElement(std::shared_ptr<ocl::Expressions::CallExp> _appliedElement)
 {
     m_appliedElement = _appliedElement;
 }
 
+
+
+/*
+Getter & Setter for reference elseOwner
+*/
 std::weak_ptr<ocl::Expressions::IfExp > OclExpressionImpl::getElseOwner() const
 {
 
     return m_elseOwner;
 }
+
 void OclExpressionImpl::setElseOwner(std::shared_ptr<ocl::Expressions::IfExp> _elseOwner)
 {
     m_elseOwner = _elseOwner;
 }
 
+
+
+/*
+Getter & Setter for reference firstOwner
+*/
 std::weak_ptr<ocl::Expressions::CollectionRange > OclExpressionImpl::getFirstOwner() const
 {
 
     return m_firstOwner;
 }
+
 void OclExpressionImpl::setFirstOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _firstOwner)
 {
     m_firstOwner = _firstOwner;
 }
 
+
+
+/*
+Getter & Setter for reference ifOwner
+*/
 std::weak_ptr<ocl::Expressions::IfExp > OclExpressionImpl::getIfOwner() const
 {
 
     return m_ifOwner;
 }
+
 void OclExpressionImpl::setIfOwner(std::shared_ptr<ocl::Expressions::IfExp> _ifOwner)
 {
     m_ifOwner = _ifOwner;
 }
 
+
+
+/*
+Getter & Setter for reference initializedElement
+*/
 std::weak_ptr<ocl::Expressions::Variable > OclExpressionImpl::getInitializedElement() const
 {
 
     return m_initializedElement;
 }
+
 void OclExpressionImpl::setInitializedElement(std::shared_ptr<ocl::Expressions::Variable> _initializedElement)
 {
     m_initializedElement = _initializedElement;
 }
 
+
+
+/*
+Getter & Setter for reference instance
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > OclExpressionImpl::getInstance() const
 {
 
     return m_instance;
 }
+
 void OclExpressionImpl::setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance)
 {
     m_instance = _instance;
 }
 
+
+
+/*
+Getter & Setter for reference lastOwner
+*/
 std::weak_ptr<ocl::Expressions::CollectionRange > OclExpressionImpl::getLastOwner() const
 {
 
     return m_lastOwner;
 }
+
 void OclExpressionImpl::setLastOwner(std::shared_ptr<ocl::Expressions::CollectionRange> _lastOwner)
 {
     m_lastOwner = _lastOwner;
 }
 
+
+
+/*
+Getter & Setter for reference loopBodyOwner
+*/
 std::weak_ptr<ocl::Expressions::LoopExp > OclExpressionImpl::getLoopBodyOwner() const
 {
 
     return m_loopBodyOwner;
 }
+
 void OclExpressionImpl::setLoopBodyOwner(std::shared_ptr<ocl::Expressions::LoopExp> _loopBodyOwner)
 {
     m_loopBodyOwner = _loopBodyOwner;
 }
 
+
+
+/*
+Getter & Setter for reference parentCall
+*/
 std::weak_ptr<ocl::Expressions::OperationCallExp > OclExpressionImpl::getParentCall() const
 {
 
     return m_parentCall;
 }
+
 void OclExpressionImpl::setParentCall(std::shared_ptr<ocl::Expressions::OperationCallExp> _parentCall)
 {
     m_parentCall = _parentCall;
 }
 
+
+
+/*
+Getter & Setter for reference parentNav
+*/
 std::weak_ptr<ocl::Expressions::NavigationCallExp > OclExpressionImpl::getParentNav() const
 {
 
     return m_parentNav;
 }
+
 void OclExpressionImpl::setParentNav(std::shared_ptr<ocl::Expressions::NavigationCallExp> _parentNav)
 {
     m_parentNav = _parentNav;
 }
 
+
+
+/*
+Getter & Setter for reference thenOwner
+*/
 std::weak_ptr<ocl::Expressions::IfExp > OclExpressionImpl::getThenOwner() const
 {
 
     return m_thenOwner;
 }
+
 void OclExpressionImpl::setThenOwner(std::shared_ptr<ocl::Expressions::IfExp> _thenOwner)
 {
     m_thenOwner = _thenOwner;
 }
 
+
+
+/*
+Getter & Setter for reference topExpression
+*/
 std::weak_ptr<ocl::Expressions::ExpressionInOcl > OclExpressionImpl::getTopExpression() const
 {
 
     return m_topExpression;
 }
+
 void OclExpressionImpl::setTopExpression(std::shared_ptr<ocl::Expressions::ExpressionInOcl> _topExpression)
 {
     m_topExpression = _topExpression;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> OclExpressionImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<OclExpression> OclExpressionImpl::getThisOclExpressionPtr() const
@@ -732,7 +744,7 @@ void OclExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

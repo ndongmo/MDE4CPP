@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OclExpEvalImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclExpEval 
+	class OclExpEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclExpEval 
 	{
 		public: 
 			OclExpEvalImpl(const OclExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OclExpEvalImpl& operator=(OclExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OclExpEvalImpl& operator=(OclExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,34 +51,30 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getBeforeEnvironment() const ;
 			
-			/*!
-			 */
-			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment_beforeEnvironment) ;
-			/*!
-			 */
+			
+			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getEnvironment() const ;
 			
-			/*!
-			 */
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment_environment) ;
-			/*!
-			 */
+			
+			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getModel() const ;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model_model) ;
-			/*!
-			 */
+			
+			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getResultValue() const ;
 			
-			/*!
-			 */
-			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue_resultValue) ;
+			
+			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue) ;
+			
 							
 			
 			//*********************************

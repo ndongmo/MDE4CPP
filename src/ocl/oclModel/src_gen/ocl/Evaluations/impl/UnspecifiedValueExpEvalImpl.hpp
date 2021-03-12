@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class UnspecifiedValueExpEvalImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public UnspecifiedValueExpEval 
+	class UnspecifiedValueExpEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public UnspecifiedValueExpEval 
 	{
 		public: 
 			UnspecifiedValueExpEvalImpl(const UnspecifiedValueExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			UnspecifiedValueExpEvalImpl& operator=(UnspecifiedValueExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			UnspecifiedValueExpEvalImpl& operator=(UnspecifiedValueExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;

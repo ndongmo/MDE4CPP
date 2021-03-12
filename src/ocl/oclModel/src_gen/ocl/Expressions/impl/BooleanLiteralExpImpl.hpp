@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class BooleanLiteralExpImpl :virtual public PrimitiveLiteralExpImpl, virtual public BooleanLiteralExp 
+	class BooleanLiteralExpImpl : virtual public PrimitiveLiteralExpImpl, virtual public BooleanLiteralExp 
 	{
 		public: 
 			BooleanLiteralExpImpl(const BooleanLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BooleanLiteralExpImpl& operator=(BooleanLiteralExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BooleanLiteralExpImpl& operator=(BooleanLiteralExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -93,14 +91,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getBooleanSymbol() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setBooleanSymbol (bool _booleanSymbol); 
-			
 			
 			
 			//*********************************
@@ -111,8 +106,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

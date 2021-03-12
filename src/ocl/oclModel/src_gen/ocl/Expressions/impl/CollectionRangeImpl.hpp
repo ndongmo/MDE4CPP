@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class CollectionRangeImpl :virtual public CollectionLiteralPartImpl, virtual public CollectionRange 
+	class CollectionRangeImpl : virtual public CollectionLiteralPartImpl, virtual public CollectionRange 
 	{
 		public: 
 			CollectionRangeImpl(const CollectionRangeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionRangeImpl& operator=(CollectionRangeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionRangeImpl& operator=(CollectionRangeImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -57,27 +55,24 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getFirst() const ;
 			
-			/*!
-			 */
-			virtual void setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first_first) ;
-			/*!
-			 */
+			
+			virtual void setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getLast() const ;
 			
-			/*!
-			 */
-			virtual void setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last_last) ;
+			
+			virtual void setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

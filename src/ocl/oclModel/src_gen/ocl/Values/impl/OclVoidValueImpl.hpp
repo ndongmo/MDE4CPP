@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class OclVoidValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public OclVoidValue 
+	class OclVoidValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public OclVoidValue 
 	{
 		public: 
 			OclVoidValueImpl(const OclVoidValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OclVoidValueImpl& operator=(OclVoidValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OclVoidValueImpl& operator=(OclVoidValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,12 +41,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			

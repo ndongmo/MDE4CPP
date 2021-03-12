@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -85,13 +85,11 @@ namespace ecore
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class CollectionType:virtual public ecore::EDataType
 	{
 		public:
  			CollectionType(const CollectionType &) {}
-			CollectionType& operator=(CollectionType const&) = delete;
 
 		protected:
 			CollectionType(){}
@@ -106,8 +104,7 @@ namespace ocl::Types
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool kindOf(std::shared_ptr<ocl::Types::CollectionType>  coll) = 0;
 			
 			
@@ -118,20 +115,18 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getElementType() const = 0;
 			
-			/*!
-			 */
-			virtual void setElementType(std::shared_ptr<ecore::EClassifier> _elementType_elementType) = 0;
-			/*!
-			 */
+			
+			virtual void setElementType(std::shared_ptr<ecore::EClassifier> _elementType) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Values::CollectionValue > getInstance() const = 0;
 			
-			/*!
-			 */
-			virtual void setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance_instance) = 0;
+			
+			virtual void setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance) = 0;
+			
 			
 
 		protected:
@@ -143,20 +138,15 @@ namespace ocl::Types
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EClassifier > m_elementType;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::CollectionValue > m_instance;
 			
+			std::shared_ptr<ecore::EClassifier > m_elementType;
+			std::shared_ptr<ocl::Values::CollectionValue > m_instance;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

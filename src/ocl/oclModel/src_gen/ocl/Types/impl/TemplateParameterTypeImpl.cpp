@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -50,10 +46,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,17 +58,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 TemplateParameterTypeImpl::TemplateParameterTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TemplateParameterTypeImpl::~TemplateParameterTypeImpl()
@@ -84,25 +71,34 @@ TemplateParameterTypeImpl::~TemplateParameterTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:TemplateParameterTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:TemplateParameterTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:TemplateParameterTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+TemplateParameterTypeImpl::TemplateParameterTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:TemplateParameterTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 TemplateParameterTypeImpl::TemplateParameterTypeImpl(const TemplateParameterTypeImpl & obj):TemplateParameterTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TemplateParameterTypeImpl::copy() const
+{
+	std::shared_ptr<TemplateParameterTypeImpl> element(new TemplateParameterTypeImpl(*this));
+	element->setThisTemplateParameterTypePtr(element);
+	return element;
+}
+
+TemplateParameterTypeImpl& TemplateParameterTypeImpl::operator=(const TemplateParameterTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -142,13 +138,8 @@ TemplateParameterTypeImpl::TemplateParameterTypeImpl(const TemplateParameterType
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TemplateParameterTypeImpl::copy() const
-{
-	std::shared_ptr<TemplateParameterTypeImpl> element(new TemplateParameterTypeImpl(*this));
-	element->setThisTemplateParameterTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
@@ -159,15 +150,20 @@ std::shared_ptr<ecore::EClass> TemplateParameterTypeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute specification
+*/
+std::string TemplateParameterTypeImpl::getSpecification() const 
+{
+	return m_specification;
+}
+
 void TemplateParameterTypeImpl::setSpecification(std::string _specification)
 {
 	m_specification = _specification;
 } 
 
-std::string TemplateParameterTypeImpl::getSpecification() const 
-{
-	return m_specification;
-}
+
 
 //*********************************
 // Operations
@@ -182,8 +178,20 @@ std::string TemplateParameterTypeImpl::getSpecification() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> TemplateParameterTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<TemplateParameterType> TemplateParameterTypeImpl::getThisTemplateParameterTypePtr() const
@@ -257,7 +265,7 @@ void TemplateParameterTypeImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

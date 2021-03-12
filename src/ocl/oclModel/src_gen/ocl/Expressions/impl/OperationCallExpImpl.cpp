@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -74,12 +68,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -90,26 +80,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 OperationCallExpImpl::OperationCallExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OperationCallExpImpl::~OperationCallExpImpl()
@@ -119,22 +93,19 @@ OperationCallExpImpl::~OperationCallExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:OperationCallExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:OperationCallExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:OperationCallExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:OperationCallExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -142,13 +113,13 @@ OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -157,17 +128,16 @@ OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::IfExp
    
 }
 
-
 //Additional constructor for the containments back reference
 OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :OperationCallExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -178,56 +148,56 @@ OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::Colle
 
 
 //Additional constructor for the containments back reference
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:OperationCallExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:OperationCallExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:OperationCallExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:OperationCallExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:OperationCallExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:OperationCallExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:OperationCallExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:OperationCallExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:OperationCallExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+OperationCallExpImpl::OperationCallExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:OperationCallExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 OperationCallExpImpl::OperationCallExpImpl(const OperationCallExpImpl & obj):OperationCallExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OperationCallExpImpl::copy() const
+{
+	std::shared_ptr<OperationCallExpImpl> element(new OperationCallExpImpl(*this));
+	element->setThisOperationCallExpPtr(element);
+	return element;
+}
+
+OperationCallExpImpl& OperationCallExpImpl::operator=(const OperationCallExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -310,14 +280,8 @@ OperationCallExpImpl::OperationCallExpImpl(const OperationCallExpImpl & obj):Ope
 	#endif
 
 	
-	
-}
 
-std::shared_ptr<ecore::EObject>  OperationCallExpImpl::copy() const
-{
-	std::shared_ptr<OperationCallExpImpl> element(new OperationCallExpImpl(*this));
-	element->setThisOperationCallExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
@@ -336,30 +300,60 @@ std::shared_ptr<ecore::EClass> OperationCallExpImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference argument
+*/
 std::shared_ptr<Bag<ocl::Expressions::OclExpression>> OperationCallExpImpl::getArgument() const
 {
+	if(m_argument == nullptr)
+	{
+		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
+		
+		
+	}
 
     return m_argument;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference referredOperation
+*/
 std::shared_ptr<ecore::EOperation > OperationCallExpImpl::getReferredOperation() const
 {
 
     return m_referredOperation;
 }
+
 void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
 {
     m_referredOperation = _referredOperation;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> OperationCallExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<OperationCallExp> OperationCallExpImpl::getThisOperationCallExpPtr() const
@@ -534,7 +528,7 @@ void OperationCallExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

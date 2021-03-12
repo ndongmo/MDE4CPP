@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -122,13 +122,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class CollectionLiteralExp:virtual public LiteralExp
 	{
 		public:
  			CollectionLiteralExp(const CollectionLiteralExp &) {}
-			CollectionLiteralExp& operator=(CollectionLiteralExp const&) = delete;
 
 		protected:
 			CollectionLiteralExp(){}
@@ -147,21 +145,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual ocl::Expressions::CollectionKind getKind() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setKind (ocl::Expressions::CollectionKind _kind)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> getPart() const = 0;
+			
 			
 			
 
@@ -169,25 +164,21 @@ namespace ocl::Expressions
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			ocl::Expressions::CollectionKind m_kind = CollectionKind::COLLECTION;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> m_part;
 			
+			mutable std::shared_ptr<Bag<ocl::Expressions::CollectionLiteralPart>> m_part;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class IfExp:virtual public OclExpression
 	{
 		public:
  			IfExp(const IfExp &) {}
-			IfExp& operator=(IfExp const&) = delete;
 
 		protected:
 			IfExp(){}
@@ -144,27 +142,24 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getCondition() const = 0;
 			
-			/*!
-			 */
-			virtual void setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition_condition) = 0;
-			/*!
-			 */
+			
+			virtual void setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getElseExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression_elseExpression) = 0;
-			/*!
-			 */
+			
+			virtual void setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getThenExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression_thenExpression) = 0;
+			
+			virtual void setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression) = 0;
+			
 			
 
 		protected:
@@ -176,23 +171,16 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_condition;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_elseExpression;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_thenExpression;
 			
+			std::shared_ptr<ocl::Expressions::OclExpression > m_condition;
+			std::shared_ptr<ocl::Expressions::OclExpression > m_elseExpression;
+			std::shared_ptr<ocl::Expressions::OclExpression > m_thenExpression;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class TupleLiteralPartImpl :virtual public ecore::ETypedElementImpl, virtual public TupleLiteralPart 
+	class TupleLiteralPartImpl : virtual public ecore::ETypedElementImpl, virtual public TupleLiteralPart 
 	{
 		public: 
 			TupleLiteralPartImpl(const TupleLiteralPartImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TupleLiteralPartImpl& operator=(TupleLiteralPartImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TupleLiteralPartImpl& operator=(TupleLiteralPartImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -57,20 +55,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EAttribute > getAttribute() const ;
 			
-			/*!
-			 */
-			virtual void setAttribute(std::shared_ptr<ecore::EAttribute> _attribute_attribute) ;
+			
+			virtual void setAttribute(std::shared_ptr<ecore::EAttribute> _attribute) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

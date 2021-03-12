@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class ModelPropertyCallExpEvalImpl :virtual public PropertyCallExpEvalImpl, virtual public ModelPropertyCallExpEval 
+	class ModelPropertyCallExpEvalImpl : virtual public PropertyCallExpEvalImpl, virtual public ModelPropertyCallExpEval 
 	{
 		public: 
 			ModelPropertyCallExpEvalImpl(const ModelPropertyCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ModelPropertyCallExpEvalImpl& operator=(ModelPropertyCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ModelPropertyCallExpEvalImpl& operator=(ModelPropertyCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -43,8 +41,7 @@ namespace ocl::Evaluations
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool atPre() ;
 			
 			

@@ -15,20 +15,18 @@
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class EvalEnvironmentImpl :virtual public ecore::EObjectImpl,
+	class EvalEnvironmentImpl : virtual public ecore::EModelElementImpl,
 virtual public EvalEnvironment 
 	{
 		public: 
 			EvalEnvironmentImpl(const EvalEnvironmentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EvalEnvironmentImpl& operator=(EvalEnvironmentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EvalEnvironmentImpl& operator=(EvalEnvironmentImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -45,24 +43,19 @@ virtual public EvalEnvironment
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding>  n) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding> >  nvbs) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding>  n) ;
 			
 			
@@ -75,9 +68,9 @@ virtual public EvalEnvironment
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const ;
+			
 			
 							
 			

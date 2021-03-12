@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -126,13 +126,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class MessageExp:virtual public OclExpression
 	{
 		public:
  			MessageExp(const MessageExp &) {}
-			MessageExp& operator=(MessageExp const&) = delete;
 
 		protected:
 			MessageExp(){}
@@ -155,31 +153,28 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::OclExpression>> getArgument() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<uml::CallOperationAction > getCalledOperation() const = 0;
 			
-			/*!
-			 */
-			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation_calledOperation) = 0;
-			/*!
-			 */
+			
+			virtual void setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation) = 0;
+			
+			
 			virtual std::shared_ptr<uml::SendSignalAction > getSentSignal() const = 0;
 			
-			/*!
-			 */
-			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal_sentSignal) = 0;
-			/*!
-			 */
+			
+			virtual void setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getTarget() const = 0;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target_target) = 0;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target) = 0;
+			
 			
 
 		protected:
@@ -191,26 +186,17 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_argument;
-			/*!
-			 */
-			std::shared_ptr<uml::CallOperationAction > m_calledOperation;
-			/*!
-			 */
-			std::shared_ptr<uml::SendSignalAction > m_sentSignal;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_target;
 			
+			mutable std::shared_ptr<Bag<ocl::Expressions::OclExpression>> m_argument;
+			std::shared_ptr<uml::CallOperationAction > m_calledOperation;
+			std::shared_ptr<uml::SendSignalAction > m_sentSignal;
+			std::shared_ptr<ocl::Expressions::OclExpression > m_target;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

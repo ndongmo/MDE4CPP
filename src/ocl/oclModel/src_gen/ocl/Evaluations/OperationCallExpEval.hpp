@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -86,13 +86,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class OperationCallExpEval:virtual public ModelPropertyCallExpEval
 	{
 		public:
  			OperationCallExpEval(const OperationCallExpEval &) {}
-			OperationCallExpEval& operator=(OperationCallExpEval const&) = delete;
 
 		protected:
 			OperationCallExpEval(){}
@@ -115,17 +113,16 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getArguments() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredOperation() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation_referredOperation) = 0;
+			
+			virtual void setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation) = 0;
+			
 			
 
 		protected:
@@ -137,13 +134,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_arguments;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredOperation;
 			
+			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_arguments;
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredOperation;
 
 		public:
 			//*********************************

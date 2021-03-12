@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OclMessageArgEvalImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclMessageArgEval 
+	class OclMessageArgEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclMessageArgEval 
 	{
 		public: 
 			OclMessageArgEvalImpl(const OclMessageArgEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OclMessageArgEvalImpl& operator=(OclMessageArgEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OclMessageArgEvalImpl& operator=(OclMessageArgEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,27 +51,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getExpression() const ;
 			
-			/*!
-			 */
-			virtual void setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression_expression) ;
-			/*!
-			 */
+			
+			virtual void setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval > getUnspecified() const ;
 			
-			/*!
-			 */
-			virtual void setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified_unspecified) ;
-			/*!
-			 */
+			
+			virtual void setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getVariable() const ;
 			
-			/*!
-			 */
-			virtual void setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable_variable) ;
+			
+			virtual void setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable) ;
+			
 							
 			
 			//*********************************

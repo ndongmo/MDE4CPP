@@ -32,11 +32,6 @@ task compileOcl(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	dependsOn ecore
 	inputs.files(ecore.outputs)
 
-	// dependency to model 'ecore'
-	def ecore = getRootProject().getTasksByName('compileEcore', true)
-	dependsOn ecore
-	inputs.files(ecore.outputs)
-
 	// dependency to model 'fUML'
 	def fUML = getRootProject().getTasksByName('compileFUML', true)
 	dependsOn fUML

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -86,13 +86,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class LoopExpEval:virtual public PropertyCallExpEval
 	{
 		public:
  			LoopExpEval(const LoopExpEval &) {}
-			LoopExpEval& operator=(LoopExpEval const&) = delete;
 
 		protected:
 			LoopExpEval(){}
@@ -115,13 +113,13 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getBodyEvals() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> getIterators() const = 0;
+			
 			
 			
 
@@ -134,13 +132,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_bodyEvals;
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> m_iterators;
 			
+			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_bodyEvals;
+			mutable std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> m_iterators;
 
 		public:
 			//*********************************

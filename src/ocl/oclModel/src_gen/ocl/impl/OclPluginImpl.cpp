@@ -1,58 +1,58 @@
-#include "ocl/impl/OclPluginImpl.hpp"
+#include "ocl/impl/oclPluginImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 using namespace ocl;
 
 //*********************************
 // Constructor / Destructor
 //*********************************
-OclPluginImpl::OclPluginImpl()
+oclPluginImpl::oclPluginImpl()
 {
 }
 
-OclPluginImpl::~OclPluginImpl()
+oclPluginImpl::~oclPluginImpl()
 {
 }
 
 
-std::shared_ptr<ecore::EObject> OclPluginImpl::create(const std::string& name) const
+std::shared_ptr<ecore::EObject> oclPluginImpl::create(const std::string& name) const
 {
-	return OclFactory::eInstance()->create(name);
+	return oclFactory::eInstance()->create(name);
 }
 
-std::shared_ptr<ecore::EObject> OclPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+std::shared_ptr<ecore::EObject> oclPluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
 {
-	return OclFactory::eInstance()->create(name, container, referenceID);
+	return oclFactory::eInstance()->create(name, container, referenceID);
 }
 
-std::shared_ptr<ecore::EFactory> OclPluginImpl::getEFactory()
+std::shared_ptr<ecore::EFactory> oclPluginImpl::getEFactory()
 {
-	return OclFactory::eInstance();
+	return oclFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> OclPluginImpl::getEPackage()
+std::shared_ptr<ecore::EPackage> oclPluginImpl::getEPackage()
 {
-	return OclPackage::eInstance();
+	return oclPackage::eInstance();
 }
 
-std::string OclPluginImpl::eclipseURI()
+std::string oclPluginImpl::eclipseURI()
 {
 	return "";
 }
 
-std::string OclPluginImpl::eNAME()
+std::string oclPluginImpl::eNAME()
 {
 	return "ocl";
 }
 
-std::string OclPluginImpl::eNS_URI()
+std::string oclPluginImpl::eNS_URI()
 {
 	return "http://ocl4cpp/ocl";
 }
 
-std::string OclPluginImpl::eNS_PREFIX()
+std::string oclPluginImpl::eNS_PREFIX()
 {
 	return "ocl";
 }

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -56,19 +56,17 @@ namespace ocl::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
-	class LocalSnapshot : virtual public ecore::EObject 
+	
+	class LocalSnapshot : virtual public ecore::EModelElement
 
 	{
 		public:
  			LocalSnapshot(const LocalSnapshot &) {}
-			LocalSnapshot& operator=(LocalSnapshot const&) = delete;
 
 		protected:
 			LocalSnapshot(){}
@@ -87,85 +85,65 @@ namespace ocl::Values
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsPost() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPost (bool _isPost)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual bool getIsPre() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPre (bool _isPre)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getInputQ() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Values::OclMessageValue>> getOutputQ() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot > getPred() const = 0;
 			
-			/*!
-			 */
-			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred_pred) = 0;
-			/*!
-			 */
+			
+			virtual void setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Values::LocalSnapshot > getSucc() const = 0;
 			
-			/*!
-			 */
-			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ_succ) = 0;
+			
+			virtual void setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_isPost = false;
-			/*!
-			 */ 
+			 
 			bool m_isPre = false;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_inputQ;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_outputQ;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::LocalSnapshot > m_pred;
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::LocalSnapshot > m_succ;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
+			mutable std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_inputQ;
+			mutable std::shared_ptr<Bag<ocl::Values::OclMessageValue>> m_outputQ;
+			std::shared_ptr<ocl::Values::LocalSnapshot > m_pred;
+			std::shared_ptr<ocl::Values::LocalSnapshot > m_succ;
 
 		public:
 			//*********************************

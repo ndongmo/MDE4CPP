@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class TupleTypeImpl :virtual public ecore::EDataTypeImpl, virtual public TupleType 
+	class TupleTypeImpl : virtual public ecore::EDataTypeImpl, virtual public TupleType 
 	{
 		public: 
 			TupleTypeImpl(const TupleTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TupleTypeImpl& operator=(TupleTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TupleTypeImpl& operator=(TupleTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -61,24 +59,22 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Values::TupleValue > getInstance() const ;
 			
-			/*!
-			 */
-			virtual void setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance_instance) ;
-			/*!
-			 */
+			
+			virtual void setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance) ;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> getParts() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

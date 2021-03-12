@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class InvalidLiteralExp:virtual public LiteralExp
 	{
 		public:
  			InvalidLiteralExp(const InvalidLiteralExp &) {}
-			InvalidLiteralExp& operator=(InvalidLiteralExp const&) = delete;
 
 		protected:
 			InvalidLiteralExp(){}
@@ -161,8 +159,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

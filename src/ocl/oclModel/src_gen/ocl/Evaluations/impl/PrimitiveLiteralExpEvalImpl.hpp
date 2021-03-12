@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class PrimitiveLiteralExpEvalImpl :virtual public LiteralExpEvalImpl, virtual public PrimitiveLiteralExpEval 
+	class PrimitiveLiteralExpEvalImpl : virtual public LiteralExpEvalImpl, virtual public PrimitiveLiteralExpEval 
 	{
 		public: 
 			PrimitiveLiteralExpEvalImpl(const PrimitiveLiteralExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PrimitiveLiteralExpEvalImpl& operator=(PrimitiveLiteralExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PrimitiveLiteralExpEvalImpl& operator=(PrimitiveLiteralExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;

@@ -30,20 +30,14 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-
-
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -54,19 +48,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 NameValueBindingImpl::NameValueBindingImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NameValueBindingImpl::~NameValueBindingImpl()
@@ -78,8 +63,19 @@ NameValueBindingImpl::~NameValueBindingImpl()
 
 
 
-
 NameValueBindingImpl::NameValueBindingImpl(const NameValueBindingImpl & obj):NameValueBindingImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NameValueBindingImpl::copy() const
+{
+	std::shared_ptr<NameValueBindingImpl> element(new NameValueBindingImpl(*this));
+	element->setThisNameValueBindingPtr(element);
+	return element;
+}
+
+NameValueBindingImpl& NameValueBindingImpl::operator=(const NameValueBindingImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -95,13 +91,8 @@ NameValueBindingImpl::NameValueBindingImpl(const NameValueBindingImpl & obj):Nam
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  NameValueBindingImpl::copy() const
-{
-	std::shared_ptr<NameValueBindingImpl> element(new NameValueBindingImpl(*this));
-	element->setThisNameValueBindingPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
@@ -112,15 +103,20 @@ std::shared_ptr<ecore::EClass> NameValueBindingImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute name
+*/
+std::string NameValueBindingImpl::getName() const 
+{
+	return m_name;
+}
+
 void NameValueBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
-std::string NameValueBindingImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -129,19 +125,26 @@ std::string NameValueBindingImpl::getName() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > NameValueBindingImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void NameValueBindingImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<NameValueBinding> NameValueBindingImpl::getThisNameValueBindingPtr() const
@@ -217,7 +220,7 @@ void NameValueBindingImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

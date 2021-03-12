@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -61,13 +61,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class ObjectValue:virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			ObjectValue(const ObjectValue &) {}
-			ObjectValue& operator=(ObjectValue const&) = delete;
 
 		protected:
 			ObjectValue(){}
@@ -82,12 +80,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
@@ -98,17 +94,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> getHistory() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::EObject > getValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<ecore::EObject> _value_value) = 0;
+			
+			virtual void setValue(std::shared_ptr<ecore::EObject> _value) = 0;
+			
 			
 
 		protected:
@@ -120,13 +115,9 @@ namespace ocl::Values
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> m_history;
-			/*!
-			 */
-			std::shared_ptr<ecore::EObject > m_value;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::LocalSnapshot>> m_history;
+			std::shared_ptr<ecore::EObject > m_value;
 
 		public:
 			//*********************************

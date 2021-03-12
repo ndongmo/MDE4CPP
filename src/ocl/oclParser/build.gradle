@@ -43,6 +43,12 @@ generateGrammarSource {
 			filter { line -> line.replaceAll(': public ocl::ParserRuleContext', ': public ocl::ParserRuleContext, public CSTNode') }
 		}
 	}
+	doLast {
+		def tmpSource = file(ocl.tmpSourceDir)
+		if(tmpSource.exists()) {
+    		delete tmpSource.absolutePath
+		}
+	}
 }
 
 task generateOclParser() {
@@ -73,6 +79,11 @@ task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def model = getRootProject().getTasksByName('compileOcl', true)
 	dependsOn model
 	inputs.files(model.outputs)
+	
+	// dependency to 'antlr4'
+	def antlr4 = getRootProject().getTasksByName('compileAntlr4', true)
+	dependsOn antlr4
+	inputs.files(antlr4.outputs)
 }
 
 task buildOclParser() {
@@ -89,11 +100,6 @@ task cleanOclParser {
 		if(cmakeFolder.exists()) {
 			delete cmakeFolder.absolutePath
 			println "deleting folder " + cmakeFolder.absolutePath
-		}
-		
-		def tmpSource = file(ocl.tmpSourceDir)
-		if(tmpSource.exists()) {
-    		delete tmpSource.absolutePath
 		}
 	}
 }

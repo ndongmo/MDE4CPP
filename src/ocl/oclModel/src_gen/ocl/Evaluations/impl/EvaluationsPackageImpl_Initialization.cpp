@@ -15,7 +15,7 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
@@ -23,10 +23,10 @@
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
 
 
 using namespace ocl::Evaluations;
@@ -440,7 +440,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_add_NameValueBinding->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_add_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_add_NameValueBinding);
 		parameter->setName("n");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -457,7 +457,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_addAll_NameValueBinding->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_addAll_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_addAll_NameValueBinding);
 		parameter->setName("nvbs");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -474,9 +474,9 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_find_String->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_find_String);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_find_String);
 		parameter->setName("name");
-		parameter->setEType(types::TypesPackage::eInstance()->getString_Class());
+		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -491,9 +491,9 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_getValueOf_EString->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_getValueOf_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_getValueOf_EString);
 		parameter->setName("n");
-		parameter->setEType(ecore::EcorePackage::eInstance()->getEString_Class());
+		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
 		parameter->setUpperBound(1);
 		parameter->setUnique(true);
@@ -508,7 +508,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_replace_NameValueBinding->setOrdered(false);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_replace_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_replace_NameValueBinding);
 		parameter->setName("n");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -869,7 +869,7 @@ void EvaluationsPackageImpl::initializeModelPropertyCallExpEvalContent()
 	
 	
 	
-	m_modelPropertyCallExpEval_Operation_atPre->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_modelPropertyCallExpEval_Operation_atPre->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_modelPropertyCallExpEval_Operation_atPre->setName("atPre");
 	m_modelPropertyCallExpEval_Operation_atPre->setLowerBound(0);
 	m_modelPropertyCallExpEval_Operation_atPre->setUpperBound(1);
@@ -1133,7 +1133,7 @@ void EvaluationsPackageImpl::initializeOclMessageExpEvalContent()
 	
 	m_oclMessageExpEval_Attribute_name = getOclMessageExpEval_Attribute_name();
 	m_oclMessageExpEval_Attribute_name->setName("name");
-	m_oclMessageExpEval_Attribute_name->setEType(types::TypesPackage::eInstance()->getString_Class());
+	m_oclMessageExpEval_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_oclMessageExpEval_Attribute_name->setLowerBound(0);
 	m_oclMessageExpEval_Attribute_name->setUpperBound(1);
 	m_oclMessageExpEval_Attribute_name->setTransient(false);

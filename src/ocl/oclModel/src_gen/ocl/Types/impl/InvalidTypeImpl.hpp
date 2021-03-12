@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class InvalidTypeImpl :virtual public ecore::EClassifierImpl, virtual public InvalidType 
+	class InvalidTypeImpl : virtual public ecore::EClassifierImpl, virtual public InvalidType 
 	{
 		public: 
 			InvalidTypeImpl(const InvalidTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InvalidTypeImpl& operator=(InvalidTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InvalidTypeImpl& operator=(InvalidTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -66,8 +64,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -120,13 +120,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class EnumLiteralExp:virtual public LiteralExp
 	{
 		public:
  			EnumLiteralExp(const EnumLiteralExp &) {}
-			EnumLiteralExp& operator=(EnumLiteralExp const&) = delete;
 
 		protected:
 			EnumLiteralExp(){}
@@ -149,13 +147,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::EnumerationLiteral > getReferredEnumLiteral() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral_referredEnumLiteral) = 0;
+			
+			virtual void setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral) = 0;
+			
 			
 
 		protected:
@@ -167,17 +164,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::EnumerationLiteral > m_referredEnumLiteral;
 			
+			std::shared_ptr<uml::EnumerationLiteral > m_referredEnumLiteral;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

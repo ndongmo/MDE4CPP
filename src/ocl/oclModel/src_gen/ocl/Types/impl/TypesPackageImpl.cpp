@@ -18,10 +18,10 @@
 #include "ocl/Types/TypesFactory.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace ocl::Types;
 

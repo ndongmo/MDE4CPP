@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class CollectionLiteralPartEvalImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CollectionLiteralPartEval 
+	class CollectionLiteralPartEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CollectionLiteralPartEval 
 	{
 		public: 
 			CollectionLiteralPartEvalImpl(const CollectionLiteralPartEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionLiteralPartEvalImpl& operator=(CollectionLiteralPartEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionLiteralPartEvalImpl& operator=(CollectionLiteralPartEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getElement() const ;
 			
-			/*!
-			 */
-			virtual void setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element_element) ;
+			
+			virtual void setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element) ;
+			
 							
 			
 			//*********************************

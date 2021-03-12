@@ -31,15 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -60,15 +51,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -79,29 +63,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 LoopExpEvalImpl::LoopExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_bodyEvals.reset(new Bag<ocl::Evaluations::OclExpEval>());
-	
-	
-
-		m_iterators.reset(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LoopExpEvalImpl::~LoopExpEvalImpl()
@@ -113,8 +78,19 @@ LoopExpEvalImpl::~LoopExpEvalImpl()
 
 
 
-
 LoopExpEvalImpl::LoopExpEvalImpl(const LoopExpEvalImpl & obj):LoopExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LoopExpEvalImpl::copy() const
+{
+	std::shared_ptr<LoopExpEvalImpl> element(new LoopExpEvalImpl(*this));
+	element->setThisLoopExpEvalPtr(element);
+	return element;
+}
+
+LoopExpEvalImpl& LoopExpEvalImpl::operator=(const LoopExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +123,8 @@ LoopExpEvalImpl::LoopExpEvalImpl(const LoopExpEvalImpl & obj):LoopExpEvalImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LoopExpEvalImpl::copy() const
-{
-	std::shared_ptr<LoopExpEvalImpl> element(new LoopExpEvalImpl(*this));
-	element->setThisLoopExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
@@ -172,23 +143,48 @@ std::shared_ptr<ecore::EClass> LoopExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyEvals
+*/
 std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> LoopExpEvalImpl::getBodyEvals() const
 {
+	if(m_bodyEvals == nullptr)
+	{
+		m_bodyEvals.reset(new Bag<ocl::Evaluations::OclExpEval>());
+		
+		
+	}
 //assert(m_bodyEvals);
     return m_bodyEvals;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference iterators
+*/
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::StringValue>> LoopExpEvalImpl::getIterators() const
 {
+	if(m_iterators == nullptr)
+	{
+		m_iterators.reset(new Bag<fUML::Semantics::SimpleClassifiers::StringValue>());
+		
+		
+	}
 //assert(m_iterators);
     return m_iterators;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LoopExpEval> LoopExpEvalImpl::getThisLoopExpEvalPtr() const
@@ -342,7 +338,7 @@ void LoopExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -32,13 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "uml/CallOperationAction.hpp"
@@ -75,13 +68,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "uml/UmlPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -92,34 +80,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 MessageExpImpl::MessageExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
-	
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MessageExpImpl::~MessageExpImpl()
@@ -129,22 +93,19 @@ MessageExpImpl::~MessageExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:MessageExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:MessageExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:MessageExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:MessageExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -152,13 +113,13 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -167,17 +128,16 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp
    
 }
 
-
 //Additional constructor for the containments back reference
 MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :MessageExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -188,56 +148,56 @@ MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange >
 
 
 //Additional constructor for the containments back reference
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:MessageExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:MessageExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:MessageExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:MessageExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:MessageExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:MessageExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:MessageExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:MessageExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:MessageExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+MessageExpImpl::MessageExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:MessageExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 MessageExpImpl::MessageExpImpl(const MessageExpImpl & obj):MessageExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MessageExpImpl::copy() const
+{
+	std::shared_ptr<MessageExpImpl> element(new MessageExpImpl(*this));
+	element->setThisMessageExpPtr(element);
+	return element;
+}
+
+MessageExpImpl& MessageExpImpl::operator=(const MessageExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -310,13 +270,8 @@ MessageExpImpl::MessageExpImpl(const MessageExpImpl & obj):MessageExpImpl()
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  MessageExpImpl::copy() const
-{
-	std::shared_ptr<MessageExpImpl> element(new MessageExpImpl(*this));
-	element->setThisMessageExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
@@ -335,50 +290,92 @@ std::shared_ptr<ecore::EClass> MessageExpImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference argument
+*/
 std::shared_ptr<Bag<ocl::Expressions::OclExpression>> MessageExpImpl::getArgument() const
 {
+	if(m_argument == nullptr)
+	{
+		m_argument.reset(new Bag<ocl::Expressions::OclExpression>());
+		
+		
+	}
 
     return m_argument;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference calledOperation
+*/
 std::shared_ptr<uml::CallOperationAction > MessageExpImpl::getCalledOperation() const
 {
 
     return m_calledOperation;
 }
+
 void MessageExpImpl::setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation)
 {
     m_calledOperation = _calledOperation;
 }
 
+
+
+/*
+Getter & Setter for reference sentSignal
+*/
 std::shared_ptr<uml::SendSignalAction > MessageExpImpl::getSentSignal() const
 {
 
     return m_sentSignal;
 }
+
 void MessageExpImpl::setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal)
 {
     m_sentSignal = _sentSignal;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > MessageExpImpl::getTarget() const
 {
 
     return m_target;
 }
+
 void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> MessageExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<MessageExp> MessageExpImpl::getThisMessageExpPtr() const
@@ -577,7 +574,7 @@ void MessageExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

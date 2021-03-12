@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -81,13 +81,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class ExpressionInOcl:virtual public ecore::ETypedElement
 	{
 		public:
  			ExpressionInOcl(const ExpressionInOcl &) {}
-			ExpressionInOcl& operator=(ExpressionInOcl const&) = delete;
 
 		protected:
 			ExpressionInOcl(){}
@@ -110,31 +108,28 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getBodyExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression_bodyExpression) = 0;
-			/*!
-			 */
+			
+			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getContextVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable_contextVariable) = 0;
-			/*!
-			 */
+			
+			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getResultVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable_resultVariable) = 0;
+			
+			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable) = 0;
+			
 			
 
 		protected:
@@ -146,26 +141,17 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_bodyExpression;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::Variable > m_contextVariable;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Expressions::Variable>> m_parameterVariable;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::Variable > m_resultVariable;
 			
+			std::shared_ptr<ocl::Expressions::OclExpression > m_bodyExpression;
+			std::shared_ptr<ocl::Expressions::Variable > m_contextVariable;
+			mutable std::shared_ptr<Bag<ocl::Expressions::Variable>> m_parameterVariable;
+			std::shared_ptr<ocl::Expressions::Variable > m_resultVariable;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

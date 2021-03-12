@@ -31,11 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/Element.hpp"
@@ -48,11 +43,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,26 +55,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 CollectionValueImpl::CollectionValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_elements.reset(new Bag<ocl::Values::Element>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionValueImpl::~CollectionValueImpl()
@@ -94,8 +70,19 @@ CollectionValueImpl::~CollectionValueImpl()
 
 
 
-
 CollectionValueImpl::CollectionValueImpl(const CollectionValueImpl & obj):CollectionValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionValueImpl::copy() const
+{
+	std::shared_ptr<CollectionValueImpl> element(new CollectionValueImpl(*this));
+	element->setThisCollectionValuePtr(element);
+	return element;
+}
+
+CollectionValueImpl& CollectionValueImpl::operator=(const CollectionValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -113,13 +100,8 @@ CollectionValueImpl::CollectionValueImpl(const CollectionValueImpl & obj):Collec
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CollectionValueImpl::copy() const
-{
-	std::shared_ptr<CollectionValueImpl> element(new CollectionValueImpl(*this));
-	element->setThisCollectionValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionValueImpl::eStaticClass() const
@@ -204,26 +186,45 @@ return result;
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference elements
+*/
 std::shared_ptr<Bag<ocl::Values::Element>> CollectionValueImpl::getElements() const
 {
+	if(m_elements == nullptr)
+	{
+		m_elements.reset(new Bag<ocl::Values::Element>());
+		
+		
+	}
 
     return m_elements;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference model
+*/
 std::shared_ptr<ocl::Types::CollectionType > CollectionValueImpl::getModel() const
 {
 //assert(m_model);
     return m_model;
 }
+
 void CollectionValueImpl::setModel(std::shared_ptr<ocl::Types::CollectionType> _model)
 {
     m_model = _model;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CollectionValue> CollectionValueImpl::getThisCollectionValuePtr() const
@@ -339,7 +340,7 @@ void CollectionValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -31,11 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "fUML/Semantics/Values/Evaluation.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -46,11 +41,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -61,17 +53,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 UnspecifiedValueExpEvalImpl::UnspecifiedValueExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 UnspecifiedValueExpEvalImpl::~UnspecifiedValueExpEvalImpl()
@@ -83,8 +68,19 @@ UnspecifiedValueExpEvalImpl::~UnspecifiedValueExpEvalImpl()
 
 
 
-
 UnspecifiedValueExpEvalImpl::UnspecifiedValueExpEvalImpl(const UnspecifiedValueExpEvalImpl & obj):UnspecifiedValueExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  UnspecifiedValueExpEvalImpl::copy() const
+{
+	std::shared_ptr<UnspecifiedValueExpEvalImpl> element(new UnspecifiedValueExpEvalImpl(*this));
+	element->setThisUnspecifiedValueExpEvalPtr(element);
+	return element;
+}
+
+UnspecifiedValueExpEvalImpl& UnspecifiedValueExpEvalImpl::operator=(const UnspecifiedValueExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -101,13 +97,8 @@ UnspecifiedValueExpEvalImpl::UnspecifiedValueExpEvalImpl(const UnspecifiedValueE
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  UnspecifiedValueExpEvalImpl::copy() const
-{
-	std::shared_ptr<UnspecifiedValueExpEvalImpl> element(new UnspecifiedValueExpEvalImpl(*this));
-	element->setThisUnspecifiedValueExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> UnspecifiedValueExpEvalImpl::eStaticClass() const
@@ -130,6 +121,7 @@ std::shared_ptr<ecore::EClass> UnspecifiedValueExpEvalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<UnspecifiedValueExpEval> UnspecifiedValueExpEvalImpl::getThisUnspecifiedValueExpEvalPtr() const
@@ -183,7 +175,7 @@ void UnspecifiedValueExpEvalImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

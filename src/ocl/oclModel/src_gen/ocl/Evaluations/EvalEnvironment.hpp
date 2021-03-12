@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -51,19 +51,17 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
-	class EvalEnvironment : virtual public ecore::EObject 
+	
+	class EvalEnvironment : virtual public ecore::EModelElement
 
 	{
 		public:
  			EvalEnvironment(const EvalEnvironment &) {}
-			EvalEnvironment& operator=(EvalEnvironment const&) = delete;
 
 		protected:
 			EvalEnvironment(){}
@@ -78,24 +76,19 @@ namespace ocl::Evaluations
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void add(std::shared_ptr<ocl::Values::NameValueBinding>  n) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void addAll(std::shared_ptr<Bag<ocl::Values::NameValueBinding> >  nvbs) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ocl::Values::NameValueBinding> find(std::string name) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValueOf(std::string n) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void replace(std::shared_ptr<ocl::Values::NameValueBinding>  n) = 0;
 			
 			
@@ -106,9 +99,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getBindings() const = 0;
+			
 			
 			
 
@@ -121,10 +114,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_bindings;
 
 		public:
 			//*********************************

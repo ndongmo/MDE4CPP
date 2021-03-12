@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class FeatureCallExpImpl :virtual public CallExpImpl, virtual public FeatureCallExp 
+	class FeatureCallExpImpl : virtual public CallExpImpl, virtual public FeatureCallExp 
 	{
 		public: 
 			FeatureCallExpImpl(const FeatureCallExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FeatureCallExpImpl& operator=(FeatureCallExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FeatureCallExpImpl& operator=(FeatureCallExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -93,14 +91,11 @@ namespace ocl::Expressions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getIsPre() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIsPre (bool _isPre); 
-			
 			
 			
 			//*********************************
@@ -111,8 +106,7 @@ namespace ocl::Expressions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

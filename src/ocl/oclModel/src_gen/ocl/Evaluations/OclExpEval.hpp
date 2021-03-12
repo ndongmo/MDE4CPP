@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -75,13 +75,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class OclExpEval:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			OclExpEval(const OclExpEval &) {}
-			OclExpEval& operator=(OclExpEval const&) = delete;
 
 		protected:
 			OclExpEval(){}
@@ -104,34 +102,30 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getBeforeEnvironment() const = 0;
 			
-			/*!
-			 */
-			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment_beforeEnvironment) = 0;
-			/*!
-			 */
+			
+			virtual void setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getEnvironment() const = 0;
 			
-			/*!
-			 */
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment_environment) = 0;
-			/*!
-			 */
+			
+			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getModel() const = 0;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model_model) = 0;
-			/*!
-			 */
+			
+			virtual void setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getResultValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue_resultValue) = 0;
+			
+			virtual void setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue) = 0;
+			
 			
 
 		protected:
@@ -143,19 +137,11 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_beforeEnvironment;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_environment;
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_model;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Values::Value > m_resultValue;
 			
+			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_beforeEnvironment;
+			std::shared_ptr<ocl::Evaluations::EvalEnvironment > m_environment;
+			std::shared_ptr<ocl::Expressions::OclExpression > m_model;
+			std::shared_ptr<fUML::Semantics::Values::Value > m_resultValue;
 
 		public:
 			//*********************************

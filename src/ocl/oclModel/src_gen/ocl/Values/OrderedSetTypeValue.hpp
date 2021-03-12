@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -65,13 +65,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class OrderedSetTypeValue:virtual public CollectionValue
 	{
 		public:
  			OrderedSetTypeValue(const OrderedSetTypeValue &) {}
-			OrderedSetTypeValue& operator=(OrderedSetTypeValue const&) = delete;
 
 		protected:
 			OrderedSetTypeValue(){}
@@ -86,8 +84,7 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
 			
 			

@@ -18,10 +18,10 @@
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "ocl/OclPackage.hpp"
-#include "types/TypesPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "ocl/oclPackage.hpp"
+#include "types/typesPackage.hpp"
 
 using namespace ocl::Evaluations;
 

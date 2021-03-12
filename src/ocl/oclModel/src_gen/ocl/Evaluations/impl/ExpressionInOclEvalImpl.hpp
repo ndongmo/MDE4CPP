@@ -15,20 +15,18 @@
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	class ExpressionInOclEvalImpl :virtual public ecore::EObjectImpl,
+	class ExpressionInOclEvalImpl : virtual public ecore::EModelElementImpl,
 virtual public ExpressionInOclEval 
 	{
 		public: 
 			ExpressionInOclEvalImpl(const ExpressionInOclEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExpressionInOclEvalImpl& operator=(ExpressionInOclEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExpressionInOclEvalImpl& operator=(ExpressionInOclEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -55,20 +53,18 @@ virtual public ExpressionInOclEval
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getContext() const ;
 			
-			/*!
-			 */
-			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context_context) ;
-			/*!
-			 */
+			
+			virtual void setContext(std::shared_ptr<ocl::Evaluations::OclExpEval> _context) ;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment > getEnvironment() const ;
 			
-			/*!
-			 */
-			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment_environment) ;
+			
+			virtual void setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment) ;
+			
 							
 			
 			//*********************************

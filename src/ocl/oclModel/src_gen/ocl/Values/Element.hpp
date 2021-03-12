@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -45,19 +45,17 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
-	class Element : virtual public ecore::EObject 
+	
+	class Element : virtual public ecore::EModelElement
 
 	{
 		public:
  			Element(const Element &) {}
-			Element& operator=(Element const&) = delete;
 
 		protected:
 			Element(){}
@@ -76,43 +74,36 @@ namespace ocl::Values
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getIndexNr() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIndexNr (int _indexNr)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) = 0;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			int m_indexNr = 0;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 			
+			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 
 		public:
 			//*********************************

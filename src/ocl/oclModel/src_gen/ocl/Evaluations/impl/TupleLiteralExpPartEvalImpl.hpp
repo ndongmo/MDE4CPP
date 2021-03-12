@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class TupleLiteralExpPartEvalImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public TupleLiteralExpPartEval 
+	class TupleLiteralExpPartEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public TupleLiteralExpPartEval 
 	{
 		public: 
 			TupleLiteralExpPartEvalImpl(const TupleLiteralExpPartEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TupleLiteralExpPartEvalImpl& operator=(TupleLiteralExpPartEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TupleLiteralExpPartEvalImpl& operator=(TupleLiteralExpPartEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;

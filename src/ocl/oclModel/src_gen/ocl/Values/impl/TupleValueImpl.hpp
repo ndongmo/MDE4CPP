@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class TupleValueImpl :virtual public StaticValueImpl, virtual public TupleValue 
+	class TupleValueImpl : virtual public StaticValueImpl, virtual public TupleValue 
 	{
 		public: 
 			TupleValueImpl(const TupleValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TupleValueImpl& operator=(TupleValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TupleValueImpl& operator=(TupleValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -43,12 +41,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -61,17 +57,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getElements() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Types::TupleType > getModel() const ;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Types::TupleType> _model_model) ;
+			
+			virtual void setModel(std::shared_ptr<ocl::Types::TupleType> _model) ;
+			
 							
 			
 			//*********************************

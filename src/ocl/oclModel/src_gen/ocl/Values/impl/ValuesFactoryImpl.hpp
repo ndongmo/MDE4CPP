@@ -48,33 +48,33 @@ namespace ocl::Values
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<ocl::Values::BagTypeValue> createBagTypeValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::BagTypeValue> createBagTypeValue(const int metaElementID = ValuesPackage::BAGTYPEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::CollectionValue> createCollectionValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::CollectionValue> createCollectionValue(const int metaElementID = ValuesPackage::COLLECTIONVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::Element> createElement(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::Element> createElement(const int metaElementID = ValuesPackage::ELEMENT_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::LocalSnapshot> createLocalSnapshot(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::LocalSnapshot> createLocalSnapshot(const int metaElementID = ValuesPackage::LOCALSNAPSHOT_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::NameValueBinding> createNameValueBinding(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::NameValueBinding> createNameValueBinding(const int metaElementID = ValuesPackage::NAMEVALUEBINDING_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::ObjectValue> createObjectValue(const int metaElementID = ValuesPackage::OBJECTVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::OclMessageValue> createOclMessageValue(const int metaElementID = ValuesPackage::OCLMESSAGEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::OclVoidValue> createOclVoidValue(const int metaElementID = ValuesPackage::OCLVOIDVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::OrderedSetTypeValue> createOrderedSetTypeValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::OrderedSetTypeValue> createOrderedSetTypeValue(const int metaElementID = ValuesPackage::ORDEREDSETTYPEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::SequenceTypeValue> createSequenceTypeValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::SequenceTypeValue> createSequenceTypeValue(const int metaElementID = ValuesPackage::SEQUENCETYPEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::SetTypeValue> createSetTypeValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::SetTypeValue> createSetTypeValue(const int metaElementID = ValuesPackage::SETTYPEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::StaticValue> createStaticValue(const int metaElementID = ValuesPackage::STATICVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::TupleValue> createTupleValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::TupleValue> createTupleValue(const int metaElementID = ValuesPackage::TUPLEVALUE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ocl::Values::UndefinedValue> createUndefinedValue(const int metaElementID = ValuesPackage::UNDEFINEDVALUE_CLASS) const ;
 			 
 			 
 

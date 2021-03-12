@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OclMessageExpEvalImpl :virtual public OclExpEvalImpl, virtual public OclMessageExpEval 
+	class OclMessageExpEvalImpl : virtual public OclExpEvalImpl, virtual public OclMessageExpEval 
 	{
 		public: 
 			OclMessageExpEvalImpl(const OclMessageExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OclMessageExpEvalImpl& operator=(OclMessageExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OclMessageExpEvalImpl& operator=(OclMessageExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -48,30 +46,26 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> getArguments() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getTarget() const ;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target_target) ;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target) ;
+			
 							
 			
 			//*********************************

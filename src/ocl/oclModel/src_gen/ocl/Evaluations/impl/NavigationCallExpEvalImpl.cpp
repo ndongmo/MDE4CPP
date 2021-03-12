@@ -31,15 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -60,15 +51,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -79,26 +63,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 NavigationCallExpEvalImpl::NavigationCallExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_qualifiers.reset(new Bag<ocl::Evaluations::OclExpEval>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NavigationCallExpEvalImpl::~NavigationCallExpEvalImpl()
@@ -110,8 +78,19 @@ NavigationCallExpEvalImpl::~NavigationCallExpEvalImpl()
 
 
 
-
 NavigationCallExpEvalImpl::NavigationCallExpEvalImpl(const NavigationCallExpEvalImpl & obj):NavigationCallExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NavigationCallExpEvalImpl::copy() const
+{
+	std::shared_ptr<NavigationCallExpEvalImpl> element(new NavigationCallExpEvalImpl(*this));
+	element->setThisNavigationCallExpEvalPtr(element);
+	return element;
+}
+
+NavigationCallExpEvalImpl& NavigationCallExpEvalImpl::operator=(const NavigationCallExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -143,13 +122,8 @@ NavigationCallExpEvalImpl::NavigationCallExpEvalImpl(const NavigationCallExpEval
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  NavigationCallExpEvalImpl::copy() const
-{
-	std::shared_ptr<NavigationCallExpEvalImpl> element(new NavigationCallExpEvalImpl(*this));
-	element->setThisNavigationCallExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
@@ -168,26 +142,45 @@ std::shared_ptr<ecore::EClass> NavigationCallExpEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference navigationSource
+*/
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > NavigationCallExpEvalImpl::getNavigationSource() const
 {
 //assert(m_navigationSource);
     return m_navigationSource;
 }
+
 void NavigationCallExpEvalImpl::setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource)
 {
     m_navigationSource = _navigationSource;
 }
 
+
+
+/*
+Getter & Setter for reference qualifiers
+*/
 std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> NavigationCallExpEvalImpl::getQualifiers() const
 {
+	if(m_qualifiers == nullptr)
+	{
+		m_qualifiers.reset(new Bag<ocl::Evaluations::OclExpEval>());
+		
+		
+	}
 
     return m_qualifiers;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<NavigationCallExpEval> NavigationCallExpEvalImpl::getThisNavigationCallExpEvalPtr() const
@@ -303,7 +296,7 @@ void NavigationCallExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -81,13 +81,11 @@ namespace ocl::Values
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class TupleType:virtual public ecore::EDataType
 	{
 		public:
  			TupleType(const TupleType &) {}
-			TupleType& operator=(TupleType const&) = delete;
 
 		protected:
 			TupleType(){}
@@ -110,16 +108,15 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Values::TupleValue > getInstance() const = 0;
 			
-			/*!
-			 */
-			virtual void setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance_instance) = 0;
-			/*!
-			 */
+			
+			virtual void setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> getParts() const = 0;
+			
 			
 			
 
@@ -132,20 +129,15 @@ namespace ocl::Types
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Values::TupleValue > m_instance;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> m_parts;
 			
+			std::shared_ptr<ocl::Values::TupleValue > m_instance;
+			mutable std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> m_parts;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

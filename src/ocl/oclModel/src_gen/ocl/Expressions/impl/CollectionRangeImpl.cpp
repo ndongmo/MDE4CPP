@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 
 #include "ecore/EAnnotation.hpp"
@@ -53,11 +48,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,23 +60,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 CollectionRangeImpl::CollectionRangeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionRangeImpl::~CollectionRangeImpl()
@@ -94,17 +73,27 @@ CollectionRangeImpl::~CollectionRangeImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CollectionRangeImpl::CollectionRangeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:CollectionRangeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+CollectionRangeImpl::CollectionRangeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:CollectionRangeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 CollectionRangeImpl::CollectionRangeImpl(const CollectionRangeImpl & obj):CollectionRangeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionRangeImpl::copy() const
+{
+	std::shared_ptr<CollectionRangeImpl> element(new CollectionRangeImpl(*this));
+	element->setThisCollectionRangePtr(element);
+	return element;
+}
+
+CollectionRangeImpl& CollectionRangeImpl::operator=(const CollectionRangeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -161,13 +150,8 @@ CollectionRangeImpl::CollectionRangeImpl(const CollectionRangeImpl & obj):Collec
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CollectionRangeImpl::copy() const
-{
-	std::shared_ptr<CollectionRangeImpl> element(new CollectionRangeImpl(*this));
-	element->setThisCollectionRangePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
@@ -186,33 +170,57 @@ std::shared_ptr<ecore::EClass> CollectionRangeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference first
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > CollectionRangeImpl::getFirst() const
 {
 //assert(m_first);
     return m_first;
 }
+
 void CollectionRangeImpl::setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first)
 {
     m_first = _first;
 }
 
+
+
+/*
+Getter & Setter for reference last
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > CollectionRangeImpl::getLast() const
 {
 //assert(m_last);
     return m_last;
 }
+
 void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last)
 {
     m_last = _last;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> CollectionRangeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<CollectionRange> CollectionRangeImpl::getThisCollectionRangePtr() const
@@ -294,7 +302,7 @@ void CollectionRangeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

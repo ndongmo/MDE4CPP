@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class ExpressionInOclImpl :virtual public ecore::ETypedElementImpl, virtual public ExpressionInOcl 
+	class ExpressionInOclImpl : virtual public ecore::ETypedElementImpl, virtual public ExpressionInOcl 
 	{
 		public: 
 			ExpressionInOclImpl(const ExpressionInOclImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExpressionInOclImpl& operator=(ExpressionInOclImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExpressionInOclImpl& operator=(ExpressionInOclImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -57,38 +55,34 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getBodyExpression() const ;
 			
-			/*!
-			 */
-			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression_bodyExpression) ;
-			/*!
-			 */
+			
+			virtual void setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getContextVariable() const ;
 			
-			/*!
-			 */
-			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable_contextVariable) ;
-			/*!
-			 */
+			
+			virtual void setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable) ;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Expressions::Variable>> getParameterVariable() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getResultVariable() const ;
 			
-			/*!
-			 */
-			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable_resultVariable) ;
+			
+			virtual void setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

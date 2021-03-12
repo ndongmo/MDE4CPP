@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -80,13 +80,11 @@ namespace uml
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class MessageType:virtual public ecore::EClassifier
 	{
 		public:
  			MessageType(const MessageType &) {}
-			MessageType& operator=(MessageType const&) = delete;
 
 		protected:
 			MessageType(){}
@@ -109,20 +107,18 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EOperation > getReferredOperation() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation_referredOperation) = 0;
-			/*!
-			 */
+			
+			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation) = 0;
+			
+			
 			virtual std::shared_ptr<uml::Signal > getReferredSignal() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal_referredSignal) = 0;
+			
+			virtual void setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal) = 0;
+			
 			
 
 		protected:
@@ -134,20 +130,15 @@ namespace ocl::Types
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EOperation > m_referredOperation;
-			/*!
-			 */
-			std::shared_ptr<uml::Signal > m_referredSignal;
 			
+			std::shared_ptr<ecore::EOperation > m_referredOperation;
+			std::shared_ptr<uml::Signal > m_referredSignal;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

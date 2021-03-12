@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class IterateExpEvalImpl :virtual public LoopExpEvalImpl, virtual public IterateExpEval 
+	class IterateExpEvalImpl : virtual public LoopExpEvalImpl, virtual public IterateExpEval 
 	{
 		public: 
 			IterateExpEvalImpl(const IterateExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			IterateExpEvalImpl& operator=(IterateExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			IterateExpEvalImpl& operator=(IterateExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval > getResult() const ;
 			
-			/*!
-			 */
-			virtual void setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result_result) ;
+			
+			virtual void setResult(std::shared_ptr<ocl::Evaluations::VariableDeclEval> _result) ;
+			
 							
 			
 			//*********************************

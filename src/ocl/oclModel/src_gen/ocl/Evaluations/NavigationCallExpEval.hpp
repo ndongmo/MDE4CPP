@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -86,13 +86,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class NavigationCallExpEval:virtual public ModelPropertyCallExpEval
 	{
 		public:
  			NavigationCallExpEval(const NavigationCallExpEval &) {}
-			NavigationCallExpEval& operator=(NavigationCallExpEval const&) = delete;
 
 		protected:
 			NavigationCallExpEval(){}
@@ -115,16 +113,15 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getNavigationSource() const = 0;
 			
-			/*!
-			 */
-			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource_navigationSource) = 0;
-			/*!
-			 */
+			
+			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getQualifiers() const = 0;
+			
 			
 			
 
@@ -137,13 +134,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_navigationSource;
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_qualifiers;
 			
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_navigationSource;
+			mutable std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> m_qualifiers;
 
 		public:
 			//*********************************

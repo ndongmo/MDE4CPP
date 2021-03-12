@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -70,12 +64,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,17 +76,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 IteratorExpImpl::IteratorExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IteratorExpImpl::~IteratorExpImpl()
@@ -106,22 +89,19 @@ IteratorExpImpl::~IteratorExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:IteratorExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:IteratorExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:IteratorExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:IteratorExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -129,13 +109,13 @@ IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfE
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -144,17 +124,16 @@ IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfE
    
 }
 
-
 //Additional constructor for the containments back reference
 IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :IteratorExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -165,56 +144,56 @@ IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange
 
 
 //Additional constructor for the containments back reference
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:IteratorExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:IteratorExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:IteratorExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:IteratorExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:IteratorExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:IteratorExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:IteratorExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:IteratorExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:IteratorExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+IteratorExpImpl::IteratorExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:IteratorExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 IteratorExpImpl::IteratorExpImpl(const IteratorExpImpl & obj):IteratorExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IteratorExpImpl::copy() const
+{
+	std::shared_ptr<IteratorExpImpl> element(new IteratorExpImpl(*this));
+	element->setThisIteratorExpPtr(element);
+	return element;
+}
+
+IteratorExpImpl& IteratorExpImpl::operator=(const IteratorExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -300,13 +279,8 @@ IteratorExpImpl::IteratorExpImpl(const IteratorExpImpl & obj):IteratorExpImpl()
 		std::cout << "Copying the Subset: " << "m_source" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  IteratorExpImpl::copy() const
-{
-	std::shared_ptr<IteratorExpImpl> element(new IteratorExpImpl(*this));
-	element->setThisIteratorExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
@@ -331,8 +305,20 @@ std::shared_ptr<ecore::EClass> IteratorExpImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> IteratorExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<IteratorExp> IteratorExpImpl::getThisIteratorExpPtr() const
@@ -445,7 +431,7 @@ void IteratorExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

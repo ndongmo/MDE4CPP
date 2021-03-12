@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class MessageTypeImpl :virtual public ecore::EClassifierImpl, virtual public MessageType 
+	class MessageTypeImpl : virtual public ecore::EClassifierImpl, virtual public MessageType 
 	{
 		public: 
 			MessageTypeImpl(const MessageTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			MessageTypeImpl& operator=(MessageTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			MessageTypeImpl& operator=(MessageTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -61,27 +59,24 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EOperation > getReferredOperation() const ;
 			
-			/*!
-			 */
-			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation_referredOperation) ;
-			/*!
-			 */
+			
+			virtual void setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation) ;
+			
+			
 			virtual std::shared_ptr<uml::Signal > getReferredSignal() const ;
 			
-			/*!
-			 */
-			virtual void setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal_referredSignal) ;
+			
+			virtual void setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

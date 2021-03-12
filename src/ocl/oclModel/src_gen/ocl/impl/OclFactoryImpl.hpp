@@ -9,7 +9,7 @@
 
 #include "ecore/impl/EFactoryImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
+#include "ocl/oclFactory.hpp"
 
 namespace ocl 
 {
@@ -17,19 +17,19 @@ namespace ocl
 
 namespace ocl 
 {
-	class OclFactoryImpl : virtual public ecore::EFactoryImpl , virtual public OclFactory 
+	class oclFactoryImpl : virtual public ecore::EFactoryImpl , virtual public oclFactory 
 	{
 		private:    
-			OclFactoryImpl(OclFactoryImpl const&) = delete;
-			OclFactoryImpl& operator=(OclFactoryImpl const&) = delete;
+			oclFactoryImpl(oclFactoryImpl const&) = delete;
+			oclFactoryImpl& operator=(oclFactoryImpl const&) = delete;
 
 		protected:
-			friend class OclFactory;
+			friend class oclFactory;
 			// Constructor
-			OclFactoryImpl();
+			oclFactoryImpl();
 
 		public:
-			virtual ~OclFactoryImpl();
+			virtual ~oclFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
@@ -38,7 +38,7 @@ namespace ocl
 			 
 
 		private:
-			static OclFactory* create();
+			static oclFactory* create();
             std::map<std::string,int> m_idMap;
 	};
 }

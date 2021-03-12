@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class IfExpImpl :virtual public OclExpressionImpl, virtual public IfExp 
+	class IfExpImpl : virtual public OclExpressionImpl, virtual public IfExp 
 	{
 		public: 
 			IfExpImpl(const IfExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			IfExpImpl& operator=(IfExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			IfExpImpl& operator=(IfExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,34 +96,30 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getCondition() const ;
 			
-			/*!
-			 */
-			virtual void setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition_condition) ;
-			/*!
-			 */
+			
+			virtual void setCondition(std::shared_ptr<ocl::Expressions::OclExpression> _condition) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getElseExpression() const ;
 			
-			/*!
-			 */
-			virtual void setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression_elseExpression) ;
-			/*!
-			 */
+			
+			virtual void setElseExpression(std::shared_ptr<ocl::Expressions::OclExpression> _elseExpression) ;
+			
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getThenExpression() const ;
 			
-			/*!
-			 */
-			virtual void setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression_thenExpression) ;
+			
+			virtual void setThenExpression(std::shared_ptr<ocl::Expressions::OclExpression> _thenExpression) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

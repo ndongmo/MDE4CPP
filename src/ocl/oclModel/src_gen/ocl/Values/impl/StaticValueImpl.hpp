@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Values 
 {
-	class StaticValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public StaticValue 
+	class StaticValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public StaticValue 
 	{
 		public: 
 			StaticValueImpl(const StaticValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			StaticValueImpl& operator=(StaticValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			StaticValueImpl& operator=(StaticValueImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;

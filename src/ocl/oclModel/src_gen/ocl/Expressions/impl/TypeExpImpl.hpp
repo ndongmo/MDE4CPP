@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class TypeExpImpl :virtual public OclExpressionImpl, virtual public TypeExp 
+	class TypeExpImpl : virtual public OclExpressionImpl, virtual public TypeExp 
 	{
 		public: 
 			TypeExpImpl(const TypeExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TypeExpImpl& operator=(TypeExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TypeExpImpl& operator=(TypeExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getReferredType() const ;
 			
-			/*!
-			 */
-			virtual void setReferredType(std::shared_ptr<ecore::EClassifier> _referredType_referredType) ;
+			
+			virtual void setReferredType(std::shared_ptr<ecore::EClassifier> _referredType) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

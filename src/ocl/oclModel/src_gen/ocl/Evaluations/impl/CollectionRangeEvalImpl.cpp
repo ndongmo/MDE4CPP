@@ -30,13 +30,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -51,13 +44,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,23 +56,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 CollectionRangeEvalImpl::CollectionRangeEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollectionRangeEvalImpl::~CollectionRangeEvalImpl()
@@ -96,8 +71,19 @@ CollectionRangeEvalImpl::~CollectionRangeEvalImpl()
 
 
 
-
 CollectionRangeEvalImpl::CollectionRangeEvalImpl(const CollectionRangeEvalImpl & obj):CollectionRangeEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollectionRangeEvalImpl::copy() const
+{
+	std::shared_ptr<CollectionRangeEvalImpl> element(new CollectionRangeEvalImpl(*this));
+	element->setThisCollectionRangeEvalPtr(element);
+	return element;
+}
+
+CollectionRangeEvalImpl& CollectionRangeEvalImpl::operator=(const CollectionRangeEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -120,13 +106,8 @@ CollectionRangeEvalImpl::CollectionRangeEvalImpl(const CollectionRangeEvalImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CollectionRangeEvalImpl::copy() const
-{
-	std::shared_ptr<CollectionRangeEvalImpl> element(new CollectionRangeEvalImpl(*this));
-	element->setThisCollectionRangeEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
@@ -145,29 +126,42 @@ std::shared_ptr<ecore::EClass> CollectionRangeEvalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference first
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > CollectionRangeEvalImpl::getFirst() const
 {
 //assert(m_first);
     return m_first;
 }
+
 void CollectionRangeEvalImpl::setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first)
 {
     m_first = _first;
 }
 
+
+
+/*
+Getter & Setter for reference last
+*/
 std::shared_ptr<ocl::Evaluations::OclExpEval > CollectionRangeEvalImpl::getLast() const
 {
 //assert(m_last);
     return m_last;
 }
+
 void CollectionRangeEvalImpl::setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last)
 {
     m_last = _last;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CollectionRangeEval> CollectionRangeEvalImpl::getThisCollectionRangeEvalPtr() const
@@ -245,7 +239,7 @@ void CollectionRangeEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

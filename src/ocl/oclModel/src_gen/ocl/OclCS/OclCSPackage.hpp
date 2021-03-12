@@ -24,8 +24,7 @@ namespace ocl::OclCS
 	The Metamodel Package for the OclCS metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class OclCSPackage : virtual public ecore::EPackage 
 	{
 		private:    

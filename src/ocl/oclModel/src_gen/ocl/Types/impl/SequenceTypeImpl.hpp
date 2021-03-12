@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class SequenceTypeImpl :virtual public CollectionTypeImpl, virtual public SequenceType 
+	class SequenceTypeImpl : virtual public CollectionTypeImpl, virtual public SequenceType 
 	{
 		public: 
 			SequenceTypeImpl(const SequenceTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SequenceTypeImpl& operator=(SequenceTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SequenceTypeImpl& operator=(SequenceTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -66,8 +64,7 @@ namespace ocl::Types
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

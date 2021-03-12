@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class NavigationCallExpEvalImpl :virtual public ModelPropertyCallExpEvalImpl, virtual public NavigationCallExpEval 
+	class NavigationCallExpEvalImpl : virtual public ModelPropertyCallExpEvalImpl, virtual public NavigationCallExpEval 
 	{
 		public: 
 			NavigationCallExpEvalImpl(const NavigationCallExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			NavigationCallExpEvalImpl& operator=(NavigationCallExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			NavigationCallExpEvalImpl& operator=(NavigationCallExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,16 +51,15 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getNavigationSource() const ;
 			
-			/*!
-			 */
-			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource_navigationSource) ;
-			/*!
-			 */
+			
+			virtual void setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource) ;
+			
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclExpEval>> getQualifiers() const ;
+			
 			
 							
 			

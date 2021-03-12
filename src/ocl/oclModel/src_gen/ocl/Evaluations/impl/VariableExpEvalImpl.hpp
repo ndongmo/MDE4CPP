@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class VariableExpEvalImpl :virtual public OclExpEvalImpl, virtual public VariableExpEval 
+	class VariableExpEvalImpl : virtual public OclExpEvalImpl, virtual public VariableExpEval 
 	{
 		public: 
 			VariableExpEvalImpl(const VariableExpEvalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			VariableExpEvalImpl& operator=(VariableExpEvalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			VariableExpEvalImpl& operator=(VariableExpEvalImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;
@@ -53,13 +51,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredVariable() const ;
 			
-			/*!
-			 */
-			virtual void setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable_referredVariable) ;
+			
+			virtual void setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable) ;
+			
 							
 			
 			//*********************************

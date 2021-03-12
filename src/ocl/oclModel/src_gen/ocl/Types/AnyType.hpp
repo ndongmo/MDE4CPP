@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -70,13 +70,11 @@ namespace ecore
 //*********************************
 namespace ocl::Types 
 {
-	/*!
-	 */
+	
 	class AnyType:virtual public ecore::EClassifier
 	{
 		public:
  			AnyType(const AnyType &) {}
-			AnyType& operator=(AnyType const&) = delete;
 
 		protected:
 			AnyType(){}
@@ -99,13 +97,12 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getObject() const = 0;
 			
-			/*!
-			 */
-			virtual void setObject(std::shared_ptr<ecore::EClassifier> _object_object) = 0;
+			
+			virtual void setObject(std::shared_ptr<ecore::EClassifier> _object) = 0;
+			
 			
 
 		protected:
@@ -117,17 +114,14 @@ namespace ocl::Types
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EClassifier > m_object;
 			
+			std::shared_ptr<ecore::EClassifier > m_object;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

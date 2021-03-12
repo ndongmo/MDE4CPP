@@ -65,16 +65,15 @@ namespace ocl
 	The Metamodel Package for the ocl metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
-	class OclPackage : virtual public ecore::EPackage 
+	
+	class oclPackage : virtual public ecore::EPackage 
 	{
 		private:    
-			OclPackage(OclPackage const&) = delete;
-			OclPackage& operator=(OclPackage const&) = delete;
+			oclPackage(oclPackage const&) = delete;
+			oclPackage& operator=(oclPackage const&) = delete;
 
 		protected:
-			OclPackage(){}
+			oclPackage(){}
 
 		public:
 			//static variables
@@ -95,9 +94,9 @@ namespace ocl
 
 			//Singleton Instance and Getter
 			private:
-				static std::shared_ptr<OclPackage> instance;
+				static std::shared_ptr<oclPackage> instance;
 			public:
-				static std::shared_ptr<OclPackage> eInstance();
+				static std::shared_ptr<oclPackage> eInstance();
 	};
 }
 #endif /* end of include guard: OCLPACKAGE_HPP */

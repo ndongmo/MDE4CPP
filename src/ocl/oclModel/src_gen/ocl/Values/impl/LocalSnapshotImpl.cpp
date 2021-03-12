@@ -31,10 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Values/LocalSnapshot.hpp"
 
 #include "ocl/Values/NameValueBinding.hpp"
@@ -45,10 +41,8 @@
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -59,45 +53,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 LocalSnapshotImpl::LocalSnapshotImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_bindings.reset(new Bag<ocl::Values::NameValueBinding>());
-	
-	
-
-		m_inputQ.reset(new Bag<ocl::Values::OclMessageValue>());
-	
-	
-
-		m_outputQ.reset(new Bag<ocl::Values::OclMessageValue>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-	
-
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LocalSnapshotImpl::~LocalSnapshotImpl()
@@ -109,8 +68,19 @@ LocalSnapshotImpl::~LocalSnapshotImpl()
 
 
 
-
 LocalSnapshotImpl::LocalSnapshotImpl(const LocalSnapshotImpl & obj):LocalSnapshotImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LocalSnapshotImpl::copy() const
+{
+	std::shared_ptr<LocalSnapshotImpl> element(new LocalSnapshotImpl(*this));
+	element->setThisLocalSnapshotPtr(element);
+	return element;
+}
+
+LocalSnapshotImpl& LocalSnapshotImpl::operator=(const LocalSnapshotImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -138,13 +108,8 @@ LocalSnapshotImpl::LocalSnapshotImpl(const LocalSnapshotImpl & obj):LocalSnapsho
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LocalSnapshotImpl::copy() const
-{
-	std::shared_ptr<LocalSnapshotImpl> element(new LocalSnapshotImpl(*this));
-	element->setThisLocalSnapshotPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LocalSnapshotImpl::eStaticClass() const
@@ -155,14 +120,27 @@ std::shared_ptr<ecore::EClass> LocalSnapshotImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isPost
+*/
+bool LocalSnapshotImpl::getIsPost() const 
+{
+	return m_isPost;
+}
+
 void LocalSnapshotImpl::setIsPost(bool _isPost)
 {
 	m_isPost = _isPost;
 } 
 
-bool LocalSnapshotImpl::getIsPost() const 
+
+
+/*
+Getter & Setter for attribute isPre
+*/
+bool LocalSnapshotImpl::getIsPre() const 
 {
-	return m_isPost;
+	return m_isPre;
 }
 
 void LocalSnapshotImpl::setIsPre(bool _isPre)
@@ -170,10 +148,7 @@ void LocalSnapshotImpl::setIsPre(bool _isPre)
 	m_isPre = _isPre;
 } 
 
-bool LocalSnapshotImpl::getIsPre() const 
-{
-	return m_isPre;
-}
+
 
 //*********************************
 // Operations
@@ -182,50 +157,99 @@ bool LocalSnapshotImpl::getIsPre() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bindings
+*/
 std::shared_ptr<Bag<ocl::Values::NameValueBinding>> LocalSnapshotImpl::getBindings() const
 {
+	if(m_bindings == nullptr)
+	{
+		m_bindings.reset(new Bag<ocl::Values::NameValueBinding>());
+		
+		
+	}
 
     return m_bindings;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inputQ
+*/
 std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getInputQ() const
 {
+	if(m_inputQ == nullptr)
+	{
+		m_inputQ.reset(new Bag<ocl::Values::OclMessageValue>());
+		
+		
+	}
 
     return m_inputQ;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outputQ
+*/
 std::shared_ptr<Bag<ocl::Values::OclMessageValue>> LocalSnapshotImpl::getOutputQ() const
 {
+	if(m_outputQ == nullptr)
+	{
+		m_outputQ.reset(new Bag<ocl::Values::OclMessageValue>());
+		
+		
+	}
 
     return m_outputQ;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference pred
+*/
 std::shared_ptr<ocl::Values::LocalSnapshot > LocalSnapshotImpl::getPred() const
 {
 
     return m_pred;
 }
+
 void LocalSnapshotImpl::setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred)
 {
     m_pred = _pred;
 }
 
+
+
+/*
+Getter & Setter for reference succ
+*/
 std::shared_ptr<ocl::Values::LocalSnapshot > LocalSnapshotImpl::getSucc() const
 {
 
     return m_succ;
 }
+
 void LocalSnapshotImpl::setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ)
 {
     m_succ = _succ;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LocalSnapshot> LocalSnapshotImpl::getThisLocalSnapshotPtr() const
@@ -474,7 +498,7 @@ void LocalSnapshotImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

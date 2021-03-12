@@ -30,20 +30,14 @@
 
 #include <exception> // used in Persistence
 
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-
-
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -54,19 +48,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 ElementImpl::ElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ElementImpl::~ElementImpl()
@@ -78,8 +63,19 @@ ElementImpl::~ElementImpl()
 
 
 
-
 ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ElementImpl::copy() const
+{
+	std::shared_ptr<ElementImpl> element(new ElementImpl(*this));
+	element->setThisElementPtr(element);
+	return element;
+}
+
+ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -95,13 +91,8 @@ ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ElementImpl::copy() const
-{
-	std::shared_ptr<ElementImpl> element(new ElementImpl(*this));
-	element->setThisElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
@@ -112,15 +103,20 @@ std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute indexNr
+*/
+int ElementImpl::getIndexNr() const 
+{
+	return m_indexNr;
+}
+
 void ElementImpl::setIndexNr(int _indexNr)
 {
 	m_indexNr = _indexNr;
 } 
 
-int ElementImpl::getIndexNr() const 
-{
-	return m_indexNr;
-}
+
 
 //*********************************
 // Operations
@@ -129,19 +125,26 @@ int ElementImpl::getIndexNr() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > ElementImpl::getValue() const
 {
 
     return m_value;
 }
+
 void ElementImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
@@ -217,7 +220,7 @@ void ElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

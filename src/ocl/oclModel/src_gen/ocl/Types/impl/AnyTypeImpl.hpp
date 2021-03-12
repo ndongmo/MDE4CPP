@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class AnyTypeImpl :virtual public ecore::EClassifierImpl, virtual public AnyType 
+	class AnyTypeImpl : virtual public ecore::EClassifierImpl, virtual public AnyType 
 	{
 		public: 
 			AnyTypeImpl(const AnyTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AnyTypeImpl& operator=(AnyTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AnyTypeImpl& operator=(AnyTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -61,20 +59,18 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getObject() const ;
 			
-			/*!
-			 */
-			virtual void setObject(std::shared_ptr<ecore::EClassifier> _object_object) ;
+			
+			virtual void setObject(std::shared_ptr<ecore::EClassifier> _object) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

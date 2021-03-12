@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -115,13 +115,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class VariableExp:virtual public OclExpression
 	{
 		public:
  			VariableExp(const VariableExp &) {}
-			VariableExp& operator=(VariableExp const&) = delete;
 
 		protected:
 			VariableExp(){}
@@ -144,13 +142,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getReferredVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable_referredVariable) = 0;
+			
+			virtual void setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable) = 0;
+			
 			
 
 		protected:
@@ -162,17 +159,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::Variable > m_referredVariable;
 			
+			std::shared_ptr<ocl::Expressions::Variable > m_referredVariable;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

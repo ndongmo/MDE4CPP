@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -55,11 +50,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,34 +62,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 ExpressionInOclImpl::ExpressionInOclImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
-	
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-	
-
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpressionInOclImpl::~ExpressionInOclImpl()
@@ -107,17 +75,27 @@ ExpressionInOclImpl::~ExpressionInOclImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ExpressionInOclImpl::ExpressionInOclImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:ExpressionInOclImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+ExpressionInOclImpl::ExpressionInOclImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:ExpressionInOclImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 ExpressionInOclImpl::ExpressionInOclImpl(const ExpressionInOclImpl & obj):ExpressionInOclImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpressionInOclImpl::copy() const
+{
+	std::shared_ptr<ExpressionInOclImpl> element(new ExpressionInOclImpl(*this));
+	element->setThisExpressionInOclPtr(element);
+	return element;
+}
+
+ExpressionInOclImpl& ExpressionInOclImpl::operator=(const ExpressionInOclImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -191,16 +169,10 @@ ExpressionInOclImpl::ExpressionInOclImpl(const ExpressionInOclImpl & obj):Expres
 	
 
 	
-	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ExpressionInOclImpl::copy() const
-{
-	std::shared_ptr<ExpressionInOclImpl> element(new ExpressionInOclImpl(*this));
-	element->setThisExpressionInOclPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
@@ -219,50 +191,92 @@ std::shared_ptr<ecore::EClass> ExpressionInOclImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyExpression
+*/
 std::shared_ptr<ocl::Expressions::OclExpression > ExpressionInOclImpl::getBodyExpression() const
 {
 //assert(m_bodyExpression);
     return m_bodyExpression;
 }
+
 void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
 }
 
+
+
+/*
+Getter & Setter for reference contextVariable
+*/
 std::shared_ptr<ocl::Expressions::Variable > ExpressionInOclImpl::getContextVariable() const
 {
 
     return m_contextVariable;
 }
+
 void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable)
 {
     m_contextVariable = _contextVariable;
 }
 
+
+
+/*
+Getter & Setter for reference parameterVariable
+*/
 std::shared_ptr<Bag<ocl::Expressions::Variable>> ExpressionInOclImpl::getParameterVariable() const
 {
+	if(m_parameterVariable == nullptr)
+	{
+		m_parameterVariable.reset(new Bag<ocl::Expressions::Variable>());
+		
+		
+	}
 
     return m_parameterVariable;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference resultVariable
+*/
 std::shared_ptr<ocl::Expressions::Variable > ExpressionInOclImpl::getResultVariable() const
 {
 
     return m_resultVariable;
 }
+
 void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable)
 {
     m_resultVariable = _resultVariable;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> ExpressionInOclImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<ExpressionInOcl> ExpressionInOclImpl::getThisExpressionInOclPtr() const
@@ -406,7 +420,7 @@ void ExpressionInOclImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

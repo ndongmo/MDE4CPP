@@ -15,20 +15,18 @@
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ocl::Values 
 {
-	class ElementImpl :virtual public ecore::EObjectImpl,
+	class ElementImpl : virtual public ecore::EModelElementImpl,
 virtual public Element 
 	{
 		public: 
 			ElementImpl(const ElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ElementImpl& operator=(ElementImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ElementImpl& operator=(ElementImpl const&);
 
 		protected:
 			friend class ocl::Values::ValuesFactoryImpl;
@@ -50,26 +48,22 @@ virtual public Element
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getIndexNr() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setIndexNr (int _indexNr); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) ;
+			
 							
 			
 			//*********************************

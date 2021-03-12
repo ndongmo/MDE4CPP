@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -75,13 +75,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class CollectionItem:virtual public CollectionLiteralPart
 	{
 		public:
  			CollectionItem(const CollectionItem &) {}
-			CollectionItem& operator=(CollectionItem const&) = delete;
 
 		protected:
 			CollectionItem(){}
@@ -104,13 +102,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::OclExpression > getItem() const = 0;
 			
-			/*!
-			 */
-			virtual void setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item_item) = 0;
+			
+			virtual void setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item) = 0;
+			
 			
 
 		protected:
@@ -122,17 +119,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Expressions::OclExpression > m_item;
 			
+			std::shared_ptr<ocl::Expressions::OclExpression > m_item;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

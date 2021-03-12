@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Values/ValuesFactory.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EDataType.hpp"
@@ -56,12 +50,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Values/ValuesPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Types/TypesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,26 +62,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 TupleTypeImpl::TupleTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_parts.reset(new Bag<ocl::Types::NameTypeBinding>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TupleTypeImpl::~TupleTypeImpl()
@@ -101,25 +75,34 @@ TupleTypeImpl::~TupleTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:TupleTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:TupleTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:TupleTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+TupleTypeImpl::TupleTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:TupleTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 TupleTypeImpl::TupleTypeImpl(const TupleTypeImpl & obj):TupleTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TupleTypeImpl::copy() const
+{
+	std::shared_ptr<TupleTypeImpl> element(new TupleTypeImpl(*this));
+	element->setThisTupleTypePtr(element);
+	return element;
+}
+
+TupleTypeImpl& TupleTypeImpl::operator=(const TupleTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -164,13 +147,8 @@ TupleTypeImpl::TupleTypeImpl(const TupleTypeImpl & obj):TupleTypeImpl()
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TupleTypeImpl::copy() const
-{
-	std::shared_ptr<TupleTypeImpl> element(new TupleTypeImpl(*this));
-	element->setThisTupleTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
@@ -189,21 +167,39 @@ std::shared_ptr<ecore::EClass> TupleTypeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference instance
+*/
 std::shared_ptr<ocl::Values::TupleValue > TupleTypeImpl::getInstance() const
 {
 
     return m_instance;
 }
+
 void TupleTypeImpl::setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance)
 {
     m_instance = _instance;
 }
 
+
+
+/*
+Getter & Setter for reference parts
+*/
 std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() const
 {
+	if(m_parts == nullptr)
+	{
+		m_parts.reset(new Bag<ocl::Types::NameTypeBinding>());
+		
+		
+	}
 
     return m_parts;
 }
+
+
+
 
 
 //*********************************
@@ -211,8 +207,20 @@ std::shared_ptr<Bag<ocl::Types::NameTypeBinding>> TupleTypeImpl::getParts() cons
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> TupleTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<TupleType> TupleTypeImpl::getThisTupleTypePtr() const
@@ -337,7 +345,7 @@ void TupleTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

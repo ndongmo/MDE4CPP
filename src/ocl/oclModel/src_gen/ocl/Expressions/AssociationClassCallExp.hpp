@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -125,13 +125,11 @@ namespace ocl::Expressions
 //*********************************
 namespace ocl::Expressions 
 {
-	/*!
-	 */
+	
 	class AssociationClassCallExp:virtual public NavigationCallExp
 	{
 		public:
  			AssociationClassCallExp(const AssociationClassCallExp &) {}
-			AssociationClassCallExp& operator=(AssociationClassCallExp const&) = delete;
 
 		protected:
 			AssociationClassCallExp(){}
@@ -154,13 +152,12 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EReference > getReferredAssociationClass() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredAssociationClass(std::shared_ptr<ecore::EReference> _referredAssociationClass_referredAssociationClass) = 0;
+			
+			virtual void setReferredAssociationClass(std::shared_ptr<ecore::EReference> _referredAssociationClass) = 0;
+			
 			
 
 		protected:
@@ -172,17 +169,14 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EReference > m_referredAssociationClass;
 			
+			std::shared_ptr<ecore::EReference > m_referredAssociationClass;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

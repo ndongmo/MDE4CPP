@@ -32,10 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-
-
-
 #include "ecore/EAnnotation.hpp"
 
 #include "ecore/EClassifier.hpp"
@@ -50,10 +46,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,19 +58,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 AnyTypeImpl::AnyTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AnyTypeImpl::~AnyTypeImpl()
@@ -86,25 +71,34 @@ AnyTypeImpl::~AnyTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:AnyTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:AnyTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:AnyTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+AnyTypeImpl::AnyTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:AnyTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 AnyTypeImpl::AnyTypeImpl(const AnyTypeImpl & obj):AnyTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AnyTypeImpl::copy() const
+{
+	std::shared_ptr<AnyTypeImpl> element(new AnyTypeImpl(*this));
+	element->setThisAnyTypePtr(element);
+	return element;
+}
+
+AnyTypeImpl& AnyTypeImpl::operator=(const AnyTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -151,13 +145,8 @@ AnyTypeImpl::AnyTypeImpl(const AnyTypeImpl & obj):AnyTypeImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  AnyTypeImpl::copy() const
-{
-	std::shared_ptr<AnyTypeImpl> element(new AnyTypeImpl(*this));
-	element->setThisAnyTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AnyTypeImpl::eStaticClass() const
@@ -176,23 +165,41 @@ std::shared_ptr<ecore::EClass> AnyTypeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<ecore::EClassifier > AnyTypeImpl::getObject() const
 {
 
     return m_object;
 }
+
 void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)
 {
     m_object = _object;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> AnyTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<AnyType> AnyTypeImpl::getThisAnyTypePtr() const
@@ -267,7 +274,7 @@ void AnyTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -295,7 +302,7 @@ void AnyTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EClassifier> object = std::dynamic_pointer_cast<ecore::EClassifier>(ecore::EcoreFactory::eInstance()->create(typeName));
+			std::shared_ptr<ecore::EClassifier> object = std::dynamic_pointer_cast<ecore::EClassifier>(ecore::ecoreFactory::eInstance()->create(typeName));
 			if (object != nullptr)
 			{
 				this->setObject(object);
@@ -357,7 +364,7 @@ void AnyTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<ecore::EClassifier > object = this->getObject();
 		if (object != nullptr)
 		{
-			saveHandler->addReference(object, "object", object->eClass() != ecore::EcorePackage::eInstance()->getEClassifier_Class());
+			saveHandler->addReference(object, "object", object->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
 		}
 	}
 	catch (std::exception& e)

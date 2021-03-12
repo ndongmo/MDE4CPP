@@ -31,18 +31,14 @@
 
 #include <exception> // used in Persistence
 
-
-
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -53,17 +49,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 StaticValueImpl::StaticValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StaticValueImpl::~StaticValueImpl()
@@ -75,8 +64,19 @@ StaticValueImpl::~StaticValueImpl()
 
 
 
-
 StaticValueImpl::StaticValueImpl(const StaticValueImpl & obj):StaticValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StaticValueImpl::copy() const
+{
+	std::shared_ptr<StaticValueImpl> element(new StaticValueImpl(*this));
+	element->setThisStaticValuePtr(element);
+	return element;
+}
+
+StaticValueImpl& StaticValueImpl::operator=(const StaticValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +89,8 @@ StaticValueImpl::StaticValueImpl(const StaticValueImpl & obj):StaticValueImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  StaticValueImpl::copy() const
-{
-	std::shared_ptr<StaticValueImpl> element(new StaticValueImpl(*this));
-	element->setThisStaticValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
@@ -118,6 +113,7 @@ std::shared_ptr<ecore::EClass> StaticValueImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<StaticValue> StaticValueImpl::getThisStaticValuePtr() const
@@ -171,7 +167,7 @@ void StaticValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

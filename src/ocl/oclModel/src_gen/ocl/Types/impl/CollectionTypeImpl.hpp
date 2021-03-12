@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Types 
 {
-	class CollectionTypeImpl :virtual public ecore::EDataTypeImpl, virtual public CollectionType 
+	class CollectionTypeImpl : virtual public ecore::EDataTypeImpl, virtual public CollectionType 
 	{
 		public: 
 			CollectionTypeImpl(const CollectionTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollectionTypeImpl& operator=(CollectionTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollectionTypeImpl& operator=(CollectionTypeImpl const&);
 
 		protected:
 			friend class ocl::Types::TypesFactoryImpl;
@@ -51,8 +49,7 @@ namespace ocl::Types
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool kindOf(std::shared_ptr<ocl::Types::CollectionType>  coll) ;
 			
 			
@@ -65,27 +62,24 @@ namespace ocl::Types
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EClassifier > getElementType() const ;
 			
-			/*!
-			 */
-			virtual void setElementType(std::shared_ptr<ecore::EClassifier> _elementType_elementType) ;
-			/*!
-			 */
+			
+			virtual void setElementType(std::shared_ptr<ecore::EClassifier> _elementType) ;
+			
+			
 			virtual std::shared_ptr<ocl::Values::CollectionValue > getInstance() const ;
 			
-			/*!
-			 */
-			virtual void setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance_instance) ;
+			
+			virtual void setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

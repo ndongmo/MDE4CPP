@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -81,13 +81,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class OclMessageExpEval:virtual public OclExpEval
 	{
 		public:
  			OclMessageExpEval(const OclMessageExpEval &) {}
-			OclMessageExpEval& operator=(OclMessageExpEval const&) = delete;
 
 		protected:
 			OclMessageExpEval(){}
@@ -106,50 +104,41 @@ namespace ocl::Evaluations
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> getArguments() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getTarget() const = 0;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target_target) = 0;
+			
+			virtual void setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> m_arguments;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_target;
 			
+			mutable std::shared_ptr<Bag<ocl::Evaluations::OclMessageArgEval>> m_arguments;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_target;
 
 		public:
 			//*********************************

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -66,13 +66,11 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace ocl::Values 
 {
-	/*!
-	 */
+	
 	class TupleValue:virtual public StaticValue
 	{
 		public:
  			TupleValue(const TupleValue &) {}
-			TupleValue& operator=(TupleValue const&) = delete;
 
 		protected:
 			TupleValue(){}
@@ -87,12 +85,10 @@ namespace ocl::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
@@ -103,17 +99,16 @@ namespace ocl::Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ocl::Values::NameValueBinding>> getElements() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ocl::Types::TupleType > getModel() const = 0;
 			
-			/*!
-			 */
-			virtual void setModel(std::shared_ptr<ocl::Types::TupleType> _model_model) = 0;
+			
+			virtual void setModel(std::shared_ptr<ocl::Types::TupleType> _model) = 0;
+			
 			
 
 		protected:
@@ -125,13 +120,9 @@ namespace ocl::Values
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_elements;
-			/*!
-			 */
-			std::shared_ptr<ocl::Types::TupleType > m_model;
 			
+			mutable std::shared_ptr<Bag<ocl::Values::NameValueBinding>> m_elements;
+			std::shared_ptr<ocl::Types::TupleType > m_model;
 
 		public:
 			//*********************************

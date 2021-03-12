@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class EvalNameSpaceImpl :virtual public fUML::Semantics::Values::EvaluationImpl, virtual public EvalNameSpace 
+	class EvalNameSpaceImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public EvalNameSpace 
 	{
 		public: 
 			EvalNameSpaceImpl(const EvalNameSpaceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EvalNameSpaceImpl& operator=(EvalNameSpaceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EvalNameSpaceImpl& operator=(EvalNameSpaceImpl const&);
 
 		protected:
 			friend class ocl::Evaluations::EvaluationsFactoryImpl;

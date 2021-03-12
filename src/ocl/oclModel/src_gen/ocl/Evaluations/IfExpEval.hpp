@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -75,13 +75,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class IfExpEval:virtual public OclExpEval
 	{
 		public:
  			IfExpEval(const IfExpEval &) {}
-			IfExpEval& operator=(IfExpEval const&) = delete;
 
 		protected:
 			IfExpEval(){}
@@ -104,27 +102,24 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getCondition() const = 0;
 			
-			/*!
-			 */
-			virtual void setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition_condition) = 0;
-			/*!
-			 */
+			
+			virtual void setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getElseExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression_elseExpression) = 0;
-			/*!
-			 */
+			
+			virtual void setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression) = 0;
+			
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getThenExpression() const = 0;
 			
-			/*!
-			 */
-			virtual void setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression_thenExpression) = 0;
+			
+			virtual void setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression) = 0;
+			
 			
 
 		protected:
@@ -136,16 +131,10 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_condition;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_elseExpression;
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_thenExpression;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_condition;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_elseExpression;
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_thenExpression;
 
 		public:
 			//*********************************

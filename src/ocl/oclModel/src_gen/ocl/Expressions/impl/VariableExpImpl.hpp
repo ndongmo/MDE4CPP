@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class VariableExpImpl :virtual public OclExpressionImpl, virtual public VariableExp 
+	class VariableExpImpl : virtual public OclExpressionImpl, virtual public VariableExp 
 	{
 		public: 
 			VariableExpImpl(const VariableExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			VariableExpImpl& operator=(VariableExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			VariableExpImpl& operator=(VariableExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Expressions::Variable > getReferredVariable() const ;
 			
-			/*!
-			 */
-			virtual void setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable_referredVariable) ;
+			
+			virtual void setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

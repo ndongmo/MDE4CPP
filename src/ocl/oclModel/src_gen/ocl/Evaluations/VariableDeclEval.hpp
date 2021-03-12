@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -50,19 +50,17 @@ namespace fUML::Semantics::SimpleClassifiers
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
-	class VariableDeclEval : virtual public ecore::EObject 
+	
+	class VariableDeclEval : virtual public ecore::EModelElement
 
 	{
 		public:
  			VariableDeclEval(const VariableDeclEval &) {}
-			VariableDeclEval& operator=(VariableDeclEval const&) = delete;
 
 		protected:
 			VariableDeclEval(){}
@@ -85,20 +83,18 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval > getInitExp() const = 0;
 			
-			/*!
-			 */
-			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp_initExp) = 0;
-			/*!
-			 */
+			
+			virtual void setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getName() const = 0;
 			
-			/*!
-			 */
-			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name_name) = 0;
+			
+			virtual void setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name) = 0;
+			
 			
 
 		protected:
@@ -110,13 +106,9 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ocl::Evaluations::OclExpEval > m_initExp;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_name;
 			
+			std::shared_ptr<ocl::Evaluations::OclExpEval > m_initExp;
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_name;
 
 		public:
 			//*********************************

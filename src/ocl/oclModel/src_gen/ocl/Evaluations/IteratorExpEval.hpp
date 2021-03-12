@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -85,13 +85,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class IteratorExpEval:virtual public LoopExpEval
 	{
 		public:
  			IteratorExpEval(const IteratorExpEval &) {}
-			IteratorExpEval& operator=(IteratorExpEval const&) = delete;
 
 		protected:
 			IteratorExpEval(){}

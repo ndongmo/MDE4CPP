@@ -31,14 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
@@ -57,14 +49,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,17 +61,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 StringLiteralExpEvalImpl::StringLiteralExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StringLiteralExpEvalImpl::~StringLiteralExpEvalImpl()
@@ -97,8 +76,19 @@ StringLiteralExpEvalImpl::~StringLiteralExpEvalImpl()
 
 
 
-
 StringLiteralExpEvalImpl::StringLiteralExpEvalImpl(const StringLiteralExpEvalImpl & obj):StringLiteralExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StringLiteralExpEvalImpl::copy() const
+{
+	std::shared_ptr<StringLiteralExpEvalImpl> element(new StringLiteralExpEvalImpl(*this));
+	element->setThisStringLiteralExpEvalPtr(element);
+	return element;
+}
+
+StringLiteralExpEvalImpl& StringLiteralExpEvalImpl::operator=(const StringLiteralExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +113,8 @@ StringLiteralExpEvalImpl::StringLiteralExpEvalImpl(const StringLiteralExpEvalImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  StringLiteralExpEvalImpl::copy() const
-{
-	std::shared_ptr<StringLiteralExpEvalImpl> element(new StringLiteralExpEvalImpl(*this));
-	element->setThisStringLiteralExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StringLiteralExpEvalImpl::eStaticClass() const
@@ -152,6 +137,7 @@ std::shared_ptr<ecore::EClass> StringLiteralExpEvalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<StringLiteralExpEval> StringLiteralExpEvalImpl::getThisStringLiteralExpEvalPtr() const
@@ -179,7 +165,7 @@ Any StringLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 	}
 	Any result;
 	result = fUML::Semantics::Values::LiteralStringEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
+	if (!result->isEmpty())
 	{
 		return result;
 	}
@@ -227,7 +213,7 @@ void StringLiteralExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

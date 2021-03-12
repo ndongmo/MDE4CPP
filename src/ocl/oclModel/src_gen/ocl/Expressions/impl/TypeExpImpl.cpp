@@ -32,12 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-
-
-
 #include "ocl/Expressions/CallExp.hpp"
 
 #include "ocl/Expressions/CollectionRange.hpp"
@@ -70,12 +64,8 @@
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,19 +76,10 @@ using namespace ocl::Expressions;
 // Constructor / Destructor
 //*********************************
 TypeExpImpl::TypeExpImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TypeExpImpl::~TypeExpImpl()
@@ -108,22 +89,19 @@ TypeExpImpl::~TypeExpImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
+:TypeExpImpl()
+{
+	m_appliedElement = par_appliedElement;
+}
 
 //Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CallExp > par_appliedElement)
-			:TypeExpImpl()
-			{
-			    m_appliedElement = par_appliedElement;
-			}
-
-
-//Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:TypeExpImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:TypeExpImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
 TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, const int reference_id)
@@ -131,13 +109,13 @@ TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, cons
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
 		m_elseOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
 		m_ifOwner = par_IfExp;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
 		m_thenOwner = par_IfExp;
 		 return;
 	default:
@@ -146,17 +124,16 @@ TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::IfExp > par_IfExp, cons
    
 }
 
-
 //Additional constructor for the containments back reference
 TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_CollectionRange, const int reference_id)
 :TypeExpImpl()
 {
 	switch(reference_id)
 	{	
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
 		m_firstOwner = par_CollectionRange;
 		 return;
-	case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
+	case oclPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
 		m_lastOwner = par_CollectionRange;
 		 return;
 	default:
@@ -167,56 +144,56 @@ TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::CollectionRange > par_C
 
 
 //Additional constructor for the containments back reference
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
+:TypeExpImpl()
+{
+	m_initializedElement = par_initializedElement;
+}
 
 
 //Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::Variable > par_initializedElement)
-			:TypeExpImpl()
-			{
-			    m_initializedElement = par_initializedElement;
-			}
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
+:TypeExpImpl()
+{
+	m_loopBodyOwner = par_loopBodyOwner;
+}
+
+//Additional constructor for the containments back reference
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
+:TypeExpImpl()
+{
+	m_parentCall = par_parentCall;
+}
+
+//Additional constructor for the containments back reference
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
+:TypeExpImpl()
+{
+	m_parentNav = par_parentNav;
+}
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::LoopExp > par_loopBodyOwner)
-			:TypeExpImpl()
-			{
-			    m_loopBodyOwner = par_loopBodyOwner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::OperationCallExp > par_parentCall)
-			:TypeExpImpl()
-			{
-			    m_parentCall = par_parentCall;
-			}
-
-
-//Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::NavigationCallExp > par_parentNav)
-			:TypeExpImpl()
-			{
-			    m_parentNav = par_parentNav;
-			}
-
-
-//Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
-			:TypeExpImpl()
-			{
-			    m_topExpression = par_topExpression;
-			}
-
+TypeExpImpl::TypeExpImpl(std::weak_ptr<ocl::Expressions::ExpressionInOcl > par_topExpression)
+:TypeExpImpl()
+{
+	m_topExpression = par_topExpression;
+}
 
 
 TypeExpImpl::TypeExpImpl(const TypeExpImpl & obj):TypeExpImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TypeExpImpl::copy() const
+{
+	std::shared_ptr<TypeExpImpl> element(new TypeExpImpl(*this));
+	element->setThisTypeExpPtr(element);
+	return element;
+}
+
+TypeExpImpl& TypeExpImpl::operator=(const TypeExpImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -282,13 +259,8 @@ TypeExpImpl::TypeExpImpl(const TypeExpImpl & obj):TypeExpImpl()
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TypeExpImpl::copy() const
-{
-	std::shared_ptr<TypeExpImpl> element(new TypeExpImpl(*this));
-	element->setThisTypeExpPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
@@ -307,23 +279,41 @@ std::shared_ptr<ecore::EClass> TypeExpImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference referredType
+*/
 std::shared_ptr<ecore::EClassifier > TypeExpImpl::getReferredType() const
 {
 
     return m_referredType;
 }
+
 void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredType)
 {
     m_referredType = _referredType;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> TypeExpImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<TypeExp> TypeExpImpl::getThisTypeExpPtr() const
@@ -448,7 +438,7 @@ void TypeExpImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

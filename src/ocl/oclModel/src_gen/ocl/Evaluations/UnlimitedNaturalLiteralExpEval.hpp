@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -82,13 +82,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class UnlimitedNaturalLiteralExpEval:virtual public fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation,virtual public NumericLiteralExpEval
 	{
 		public:
  			UnlimitedNaturalLiteralExpEval(const UnlimitedNaturalLiteralExpEval &) {}
-			UnlimitedNaturalLiteralExpEval& operator=(UnlimitedNaturalLiteralExpEval const&) = delete;
 
 		protected:
 			UnlimitedNaturalLiteralExpEval(){}

@@ -1,4 +1,4 @@
-#include "ocl/impl/OclPackageImpl.hpp"
+#include "ocl/impl/oclPackageImpl.hpp"
 
 #include <cassert>
 
@@ -18,14 +18,14 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //metamodel factory
-#include "ocl/OclFactory.hpp"
+#include "ocl/oclFactory.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
 #include "ocl/Expressions/impl/ExpressionsPackageImpl.hpp"
@@ -40,31 +40,31 @@
 
 using namespace ocl;
 
-bool OclPackageImpl::isInited = false;
+bool oclPackageImpl::isInited = false;
 
-OclPackageImpl::OclPackageImpl()
+oclPackageImpl::oclPackageImpl()
 {
-	setEFactoryInstance(std::shared_ptr<ecore::EFactory >( OclFactory::eInstance()));
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory >( oclFactory::eInstance()));
 }
 
-OclPackageImpl::~OclPackageImpl()
+oclPackageImpl::~oclPackageImpl()
 {
 }
 
-OclPackage* OclPackageImpl::create()
+oclPackage* oclPackageImpl::create()
 {
 	if (isInited)
 	{
-		return OclPackage::eInstance().get();
+		return oclPackage::eInstance().get();
 	}
 	isInited = true;
 	 
     // Obtain or create package and create package meta-data objects
-    OclPackageImpl * metaModelPackage = new OclPackageImpl();
+    oclPackageImpl * metaModelPackage = new oclPackageImpl();
     return metaModelPackage;
 }
 
-void OclPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
+void oclPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
 {
     // Initialize created meta-data
 	createPackageContents(package);
@@ -72,27 +72,27 @@ void OclPackageImpl::init(std::shared_ptr<ecore::EPackage> package)
     initializePackageContents();   
 }
 
-std::shared_ptr<Evaluations::EvaluationsPackage> OclPackageImpl::getEvaluations_Package() const
+std::shared_ptr<Evaluations::EvaluationsPackage> oclPackageImpl::getEvaluations_Package() const
 {
 	return Evaluations::EvaluationsPackage::eInstance();
 } 
-std::shared_ptr<Expressions::ExpressionsPackage> OclPackageImpl::getExpressions_Package() const
+std::shared_ptr<Expressions::ExpressionsPackage> oclPackageImpl::getExpressions_Package() const
 {
 	return Expressions::ExpressionsPackage::eInstance();
 } 
-std::shared_ptr<OclCS::OclCSPackage> OclPackageImpl::getOclCS_Package() const
+std::shared_ptr<OclCS::OclCSPackage> oclPackageImpl::getOclCS_Package() const
 {
 	return OclCS::OclCSPackage::eInstance();
 } 
-std::shared_ptr<Types::TypesPackage> OclPackageImpl::getTypes_Package() const
+std::shared_ptr<Types::TypesPackage> oclPackageImpl::getTypes_Package() const
 {
 	return Types::TypesPackage::eInstance();
 } 
-std::shared_ptr<Utilities::UtilitiesPackage> OclPackageImpl::getUtilities_Package() const
+std::shared_ptr<Utilities::UtilitiesPackage> oclPackageImpl::getUtilities_Package() const
 {
 	return Utilities::UtilitiesPackage::eInstance();
 } 
-std::shared_ptr<Values::ValuesPackage> OclPackageImpl::getValues_Package() const
+std::shared_ptr<Values::ValuesPackage> oclPackageImpl::getValues_Package() const
 {
 	return Values::ValuesPackage::eInstance();
 } 

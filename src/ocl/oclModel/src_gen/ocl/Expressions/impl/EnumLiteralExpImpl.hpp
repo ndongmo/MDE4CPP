@@ -19,14 +19,12 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class EnumLiteralExpImpl :virtual public LiteralExpImpl, virtual public EnumLiteralExp 
+	class EnumLiteralExpImpl : virtual public LiteralExpImpl, virtual public EnumLiteralExp 
 	{
 		public: 
 			EnumLiteralExpImpl(const EnumLiteralExpImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EnumLiteralExpImpl& operator=(EnumLiteralExpImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EnumLiteralExpImpl& operator=(EnumLiteralExpImpl const&);
 
 		protected:
 			friend class ocl::Expressions::ExpressionsFactoryImpl;
@@ -98,20 +96,18 @@ namespace ocl::Expressions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::EnumerationLiteral > getReferredEnumLiteral() const ;
 			
-			/*!
-			 */
-			virtual void setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral_referredEnumLiteral) ;
+			
+			virtual void setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

@@ -32,11 +32,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ecore/EcoreFactory.hpp"
-#include "ocl/Values/ValuesFactory.hpp"
-
-
-
 #include "ocl/Types/CollectionType.hpp"
 
 #include "ocl/Values/CollectionValue.hpp"
@@ -55,11 +50,8 @@
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
 #include "ocl/Types/impl/TypesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ecore/EcorePackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,17 +62,10 @@ using namespace ocl::Types;
 // Constructor / Destructor
 //*********************************
 SequenceTypeImpl::SequenceTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SequenceTypeImpl::~SequenceTypeImpl()
@@ -90,25 +75,34 @@ SequenceTypeImpl::~SequenceTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:SequenceTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:SequenceTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:SequenceTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+SequenceTypeImpl::SequenceTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:SequenceTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 SequenceTypeImpl::SequenceTypeImpl(const SequenceTypeImpl & obj):SequenceTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SequenceTypeImpl::copy() const
+{
+	std::shared_ptr<SequenceTypeImpl> element(new SequenceTypeImpl(*this));
+	element->setThisSequenceTypePtr(element);
+	return element;
+}
+
+SequenceTypeImpl& SequenceTypeImpl::operator=(const SequenceTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -157,13 +151,8 @@ SequenceTypeImpl::SequenceTypeImpl(const SequenceTypeImpl & obj):SequenceTypeImp
 		std::cout << "Copying the Subset: " << "m_elementType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SequenceTypeImpl::copy() const
-{
-	std::shared_ptr<SequenceTypeImpl> element(new SequenceTypeImpl(*this));
-	element->setThisSequenceTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
@@ -188,8 +177,20 @@ std::shared_ptr<ecore::EClass> SequenceTypeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> SequenceTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<SequenceType> SequenceTypeImpl::getThisSequenceTypePtr() const
@@ -252,7 +253,7 @@ void SequenceTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

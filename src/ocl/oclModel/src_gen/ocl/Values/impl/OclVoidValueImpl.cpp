@@ -31,18 +31,14 @@
 
 #include <exception> // used in Persistence
 
-
-
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
 #include "ocl/Values/impl/ValuesPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -53,17 +49,10 @@ using namespace ocl::Values;
 // Constructor / Destructor
 //*********************************
 OclVoidValueImpl::OclVoidValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OclVoidValueImpl::~OclVoidValueImpl()
@@ -75,8 +64,19 @@ OclVoidValueImpl::~OclVoidValueImpl()
 
 
 
-
 OclVoidValueImpl::OclVoidValueImpl(const OclVoidValueImpl & obj):OclVoidValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OclVoidValueImpl::copy() const
+{
+	std::shared_ptr<OclVoidValueImpl> element(new OclVoidValueImpl(*this));
+	element->setThisOclVoidValuePtr(element);
+	return element;
+}
+
+OclVoidValueImpl& OclVoidValueImpl::operator=(const OclVoidValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +89,8 @@ OclVoidValueImpl::OclVoidValueImpl(const OclVoidValueImpl & obj):OclVoidValueImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  OclVoidValueImpl::copy() const
-{
-	std::shared_ptr<OclVoidValueImpl> element(new OclVoidValueImpl(*this));
-	element->setThisOclVoidValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OclVoidValueImpl::eStaticClass() const
@@ -134,6 +129,7 @@ std::string OclVoidValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<OclVoidValue> OclVoidValueImpl::getThisOclVoidValuePtr() const
@@ -187,7 +183,7 @@ void OclVoidValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

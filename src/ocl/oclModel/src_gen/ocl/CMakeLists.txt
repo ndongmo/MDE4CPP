@@ -34,12 +34,12 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	OclFactory.cpp
-	impl/OclFactoryImpl.cpp
-	OclPackage.cpp
-	impl/OclPackageImpl.cpp
-	impl/OclPackageImpl_Creation.cpp
-	impl/OclPackageImpl_Initialization.cpp
+	oclFactory.cpp
+	impl/oclFactoryImpl.cpp
+	oclPackage.cpp
+	impl/oclPackageImpl.cpp
+	impl/oclPackageImpl_Creation.cpp
+	impl/oclPackageImpl_Initialization.cpp
 	Expressions/ExpressionsFactory.cpp
 	Expressions/impl/ExpressionsFactoryImpl.cpp
 	Expressions/ExpressionsPackage.cpp
@@ -78,8 +78,8 @@ SET(SOURCE_FILES
 	Utilities/impl/UtilitiesPackageImpl_Initialization.cpp
 	
 # Package plugin
-	impl/OclPluginImpl.cpp
-	OclPlugin.cpp
+	impl/oclPluginImpl.cpp
+	oclPlugin.cpp
 # Package content
 	Types/impl/AnyTypeImpl.cpp
 	Expressions/impl/AssociationClassCallExpImpl.cpp

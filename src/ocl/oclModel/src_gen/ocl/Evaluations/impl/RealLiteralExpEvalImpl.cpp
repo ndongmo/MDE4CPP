@@ -31,14 +31,6 @@
 
 #include <exception> // used in Persistence
 
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
-
-
-
 #include "ocl/Evaluations/EvalEnvironment.hpp"
 
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
@@ -57,14 +49,8 @@
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
 #include "ocl/Evaluations/impl/EvaluationsPackageImpl.hpp"
 
-#include "ocl/OclFactory.hpp"
-#include "ocl/OclPackage.hpp"
-
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "ocl/Expressions/ExpressionsPackage.hpp"
-#include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ocl/oclFactory.hpp"
+#include "ocl/oclPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,17 +61,10 @@ using namespace ocl::Evaluations;
 // Constructor / Destructor
 //*********************************
 RealLiteralExpEvalImpl::RealLiteralExpEvalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RealLiteralExpEvalImpl::~RealLiteralExpEvalImpl()
@@ -97,8 +76,19 @@ RealLiteralExpEvalImpl::~RealLiteralExpEvalImpl()
 
 
 
-
 RealLiteralExpEvalImpl::RealLiteralExpEvalImpl(const RealLiteralExpEvalImpl & obj):RealLiteralExpEvalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RealLiteralExpEvalImpl::copy() const
+{
+	std::shared_ptr<RealLiteralExpEvalImpl> element(new RealLiteralExpEvalImpl(*this));
+	element->setThisRealLiteralExpEvalPtr(element);
+	return element;
+}
+
+RealLiteralExpEvalImpl& RealLiteralExpEvalImpl::operator=(const RealLiteralExpEvalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +113,8 @@ RealLiteralExpEvalImpl::RealLiteralExpEvalImpl(const RealLiteralExpEvalImpl & ob
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  RealLiteralExpEvalImpl::copy() const
-{
-	std::shared_ptr<RealLiteralExpEvalImpl> element(new RealLiteralExpEvalImpl(*this));
-	element->setThisRealLiteralExpEvalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
@@ -152,6 +137,7 @@ std::shared_ptr<ecore::EClass> RealLiteralExpEvalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<RealLiteralExpEval> RealLiteralExpEvalImpl::getThisRealLiteralExpEvalPtr() const
@@ -179,7 +165,7 @@ Any RealLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) con
 	}
 	Any result;
 	result = fUML::Semantics::Values::LiteralRealEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
+	if (!result->isEmpty())
 	{
 		return result;
 	}
@@ -227,7 +213,7 @@ void RealLiteralExpEvalImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get OclFactory
+	// get oclFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

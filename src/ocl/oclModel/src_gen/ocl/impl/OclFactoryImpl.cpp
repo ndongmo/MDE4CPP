@@ -1,10 +1,9 @@
-#include "ocl/impl/OclFactoryImpl.hpp"
+#include "ocl/impl/oclFactoryImpl.hpp"
 
 #include <cassert>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "ocl/OclPackage.hpp"
 
 
 
@@ -14,24 +13,24 @@ using namespace ocl;
 // Constructor / Destructor
 //*********************************
 
-OclFactoryImpl::OclFactoryImpl()
+oclFactoryImpl::oclFactoryImpl()
 {
 }
 
-OclFactoryImpl::~OclFactoryImpl()
+oclFactoryImpl::~oclFactoryImpl()
 {
 }
 
-OclFactory* OclFactoryImpl::create()
+oclFactory* oclFactoryImpl::create()
 {
-	return new OclFactoryImpl();
+	return new oclFactoryImpl();
 }
 
 //*********************************
 // creators
 //*********************************
 
-std::shared_ptr<ecore::EObject> OclFactoryImpl::create(const int metaElementID, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
+std::shared_ptr<ecore::EObject> oclFactoryImpl::create(const int metaElementID, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
 {
 	switch(metaElementID)
 	{
@@ -41,7 +40,7 @@ std::shared_ptr<ecore::EObject> OclFactoryImpl::create(const int metaElementID, 
 	return nullptr;
 }
 
-std::shared_ptr<ecore::EObject> OclFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
+std::shared_ptr<ecore::EObject> oclFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
 {
 	if(_class->isAbstract())
     {
@@ -51,7 +50,7 @@ std::shared_ptr<ecore::EObject> OclFactoryImpl::create(std::shared_ptr<ecore::EC
 	return create(_elementID, container, referenceID);
 }
 
-std::shared_ptr<ecore::EObject> OclFactoryImpl::create(std::string _className, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
+std::shared_ptr<ecore::EObject> oclFactoryImpl::create(std::string _className, std::shared_ptr<ecore::EObject> container /*= nullptr*/, const int referenceID/* = -1*/) const
 {
 	auto iter = m_idMap.find(_className);
 	if(iter != m_idMap.end())

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ocl
 {
-	class OclFactory;
+	class oclFactory;
 }
 
 //Forward Declaration for used types
@@ -80,13 +80,11 @@ namespace uml
 //*********************************
 namespace ocl::Evaluations 
 {
-	/*!
-	 */
+	
 	class VariableExpEval:virtual public OclExpEval
 	{
 		public:
  			VariableExpEval(const VariableExpEval &) {}
-			VariableExpEval& operator=(VariableExpEval const&) = delete;
 
 		protected:
 			VariableExpEval(){}
@@ -109,13 +107,12 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > getReferredVariable() const = 0;
 			
-			/*!
-			 */
-			virtual void setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable_referredVariable) = 0;
+			
+			virtual void setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable) = 0;
+			
 			
 
 		protected:
@@ -127,10 +124,8 @@ namespace ocl::Evaluations
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredVariable;
 			
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue > m_referredVariable;
 
 		public:
 			//*********************************
